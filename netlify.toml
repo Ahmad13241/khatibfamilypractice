@@ -2,6 +2,12 @@
   publish = "dist"
   command = "npm run build"
 
+# The main branch will be deployed automatically
+[context.production]
+  base = "/"
+  publish = "dist"
+  command = "npm run build"
+
 # Handle SPA routing by redirecting all paths to index.html
 [[redirects]]
   from = "/*"

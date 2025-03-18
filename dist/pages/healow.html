@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Production environment -->
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Cache-Control" content="public, max-age=86400">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access the healow Patient Portal for Khatib Family Practice in Bullhead City, AZ. Manage appointments, view records, and communicate with your provider.">
+    <!-- Security headers (CSP handled by server) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    
+    <title>Healow Portal | Khatib Family Practice</title>
+    <link rel="stylesheet" href="../css/main.bundle.css" media="screen">
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../images/favicon/site.webmanifest">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for the healow page */
+        .portal-container {
+            display: block;
+            margin-top: var(--spacing-lg);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .portal-content {
+            width: 100%;
+        }
+        
+        .step-list {
+            list-style: none;
+            padding-left: 0;
+            counter-reset: step-counter;
+            margin: var(--spacing-lg) 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .step-list li {
+            position: relative;
+            padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) 60px;
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .step-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: var(--spacing-md);
+            top: var(--spacing-md);
+            width: 36px;
+            height: 36px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .step-list h4 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+            font-family: var(--heading-font);
+            font-weight: 600;
+        }
+        
+        .step-list p {
+            margin: 0 0 var(--spacing-md);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .step-icon {
+            margin-top: auto;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .step-icon i {
+            font-size: 2rem;
+        }
+        
+        .accordion {
+            margin: var(--spacing-lg) 0 var(--spacing-xl);
+        }
+        
+        .accordion-item {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .accordion-header {
+            background-color: var(--light-color);
+            padding: var(--spacing-md) var(--spacing-lg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+        }
+        
+        .accordion-header:hover {
+            background-color: #e2e8f0;
+        }
+        
+        .accordion-header i {
+            transition: transform 0.3s ease;
+            color: var(--secondary-color);
+        }
+        
+        .accordion-content {
+            padding: 0 var(--spacing-lg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-content {
+            padding: var(--spacing-lg);
+            max-height: 500px;
+        }
+        
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .app-download {
+            margin: var(--spacing-lg) 0;
+            background-color: var(--accent-color);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .app-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .app-btn i {
+            margin-right: var(--spacing-sm);
+            font-size: 1.2rem;
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+            background-color: #3a4a5e;
+            color: var(--white);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0 var(--spacing-xl);
+        }
+        
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-lg);
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .benefit-icon {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .benefit-item h4 {
+            color: var(--primary-color);
+            margin: 0 0 var(--spacing-sm);
+            font-family: var(--heading-font);
+            font-weight: 600;
+        }
+        
+        .benefit-item p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        
+        .portal-cta {
+            margin-top: var(--spacing-xl);
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background-color: var(--light-color);
+            margin: var(--spacing-xl) 0;
+            position: relative;
+        }
+        
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            top: -1px;
+            left: 0;
+        }
+        
+        @media (max-width: 992px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portal-container {
+                padding: 0 var(--spacing-md);
+            }
+            
+            .app-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .portal-cta {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-info-bar">
+            <div class="container">
+                <div class="contact-details">
+                    <a href="tel:9287639009" class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>(928) 763-9009</span>
+                    </a>
+                    <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
+                       target="_blank" rel="noopener" class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
+                    </a>
+                </div>
+                <div class="portal-access">
+                    <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank" rel="noopener">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Patient Portal</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-navigation">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="../index.html" class="practice-logo">
+                        <img src="../images/Logo.png" alt="Khatib Family Practice Logo">
+                        <span class="visually-hidden">Khatib Family Practice</span>
+                    </a>
+                    
+                    <div class="mobile-toggle" aria-label="Toggle navigation menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                    <ul class="nav-menu">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="resources.html" class="nav-link">Patient Resources</a></li>
+                        <li class="nav-item active"><a href="healow.html" class="nav-link">Healow Portal Service</a></li>
+                        <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Patient Portal Section -->
+    <section id="patient-portal" class="resource-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Healow Patient Portal</h2>
+                <p>A convenient digital service we offer to enhance your healthcare experience</p>
+            </div>
+            
+            <div class="portal-container">
+                <div class="portal-content">
+                    <div class="service-intro">
+                        <p>As part of our commitment to modern, accessible healthcare, Khatib Family Practice offers the healow Patient Portal service to all our patients. This secure online platform is included with your care and provides convenient access to your health information and communication with our office.</p>
+                    </div>
+                    
+                    <h3>What is healow?</h3>
+                    <p>healow is a secure, comprehensive patient portal that connects you with our practice. It puts your health information at your fingertips, enabling you to take an active role in managing your healthcare.</p>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-calendar-check"></i></div>
+                            <h4>Schedule Appointments</h4>
+                            <p>Book, reschedule, or cancel appointments online at your convenience, 24/7.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-pills"></i></div>
+                            <h4>Medication Refills</h4>
+                            <p>Request prescription refills directly through the portal without phone calls.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-flask"></i></div>
+                            <h4>View Lab Results</h4>
+                            <p>Access your test results as soon as they become available to your provider.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-comment-medical"></i></div>
+                            <h4>Secure Messaging</h4>
+                            <p>Communicate directly with our office through secure, private messaging.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-file-medical-alt"></i></div>
+                            <h4>Medical Records</h4>
+                            <p>View your medical history, diagnoses, and treatment plans in one secure place.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-bell"></i></div>
+                            <h4>Health Reminders</h4>
+                            <p>Receive alerts for upcoming appointments and preventive care recommendations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <h3>Getting Started with healow</h3>
+                    <p>Follow these simple steps to set up your healow patient portal account:</p>
+                    <ol class="step-list">
+                        <li>
+                            <h4>Download the healow App</h4>
+                            <p>Get the free healow app from the App Store (iPhone) or Google Play (Android) on your mobile device.</p>
+                            <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
+                        </li>
+                        <li>
+                            <h4>Create Your Account</h4>
+                            <p>Enter your first name, last name, and date of birth to begin the account setup process.</p>
+                            <div class="step-icon"><i class="fas fa-user-plus"></i></div>
+                        </li>
+                        <li>
+                            <h4>Find Our Practice</h4>
+                            <p>Search for "Khatib Family Practice" or enter our practice code (DGAEAD) to connect with us.</p>
+                            <div class="step-icon"><i class="fas fa-search"></i></div>
+                        </li>
+                        <li>
+                            <h4>Set Up Security</h4>
+                            <p>Create a secure PIN to protect your health information and ensure only you can access your records.</p>
+                            <div class="step-icon"><i class="fas fa-lock"></i></div>
+                        </li>
+                        <li>
+                            <h4>Start Using healow</h4>
+                            <p>Log in to access all your health information and begin using the portal's convenient features.</p>
+                            <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                        </li>
+                    </ol>
+                    
+                    <div class="app-download">
+                        <h4>Download the healow app now:</h4>
+                        <div class="app-buttons">
+                            <a href="https://apps.apple.com/us/app/healow/id595012291" target="_blank" class="app-btn">
+                                <i class="fab fa-apple"></i> App Store
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.healow.healow&hl=en_US" target="_blank" class="app-btn">
+                                <i class="fab fa-google-play"></i> Google Play
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="portal-faq">
+                        <h3>Frequently Asked Questions</h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Does the healow app cost anything?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>No, the healow app is completely free. We provide this service to our patients to help them access their health records and make better healthcare decisions.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Is my information secure in the healow app?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Yes, your information is completely secure. It is protected with a username and password/PIN number of your choice through SSL encryption.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>How do I set up healow for multiple family members?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>To add another family member to your healow app, you need to log out completely and then select "Begin Now" to add another account. You can then switch between accounts as needed.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>What if I forget my password or PIN?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>If you forget your password or PIN, you can use the "Forgot Password" option on the login screen. You'll receive instructions to reset your credentials via the email address associated with your account.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Can I access healow from my computer?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Yes, you can access the healow patient portal through any web browser by visiting <a href="https://healow.com/apps/jsp/webview/index.jsp" target="_blank">healow.com</a>. The web version offers the same features as the mobile app.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portal-cta">
+                        <a href="https://healow.com/apps/jsp/webview/index.jsp" class="btn btn-primary" target="_blank">Access Patient Portal</a>
+                        <a href="contact.html" class="btn btn-outline">Need Help? Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to take control of your healthcare?</h2>
+                <p>Our healow Patient Portal puts your health information at your fingertips.</p>
+                <div class="cta-buttons">
+                    <a href="https://healow.com/apps/jsp/webview/index.jsp" class="btn btn-primary" target="_blank">Access healow Portal Now</a>
+                    <a href="contact.html" class="btn btn-outline">Contact Us for Assistance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>Khatib Family Practice</h3>
+                    <p>Providing compassionate, comprehensive medical care to adults (21+) in Bullhead City and surrounding communities since 1989.</p>
+                    <div class="contact">
+                        <p><i class="fas fa-phone"></i> (928) 763-9009</p>
+                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="resources.html">Patient Resources</a></li>
+                        <li><a href="healow.html">Healow Portal Service</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section resources">
+                    <h3>Patient Resources</h3>
+                    <ul>
+                        <li><a href="resources.html#new-patients">New Patient Forms (21+)</a></li>
+                        <li><a href="resources.html#insurance">Insurance Information</a></li>
+                        <li><a href="healow.html">healow Patient Portal Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.bundle.js" defer></script>
+</body>
+</html> 

@@ -1,0 +1,574 @@
+/**
+ * Khatib Family Practice Website
+ * Main JavaScript functionality
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Performance logging for page initialization
+    const domLoadTime = Date.now() - performance.timing.navigationStart;
+    // Use a more browser-friendly approach for logging conditionally
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.info(`DOM loaded in ${domLoadTime}ms`);
+    }
+    
+    // Mobile menu toggle - UPDATED for new nav structure
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
+    
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
+            body.classList.toggle('menu-open');
+            
+            // Log mobile menu action
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                const action = navMenu.classList.contains('active') ? 'open' : 'close';
+                window.KLogger.logUserAction('Mobile Menu', { action: action });
+            }
+        });
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (navMenu && navMenu.classList.contains('active') && 
+            !e.target.closest('.nav-menu') && 
+            !e.target.closest('.mobile-toggle')) {
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    });
+    
+    // Handle smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            
+            if (target) {
+                e.preventDefault();
+                
+                window.scrollTo({
+                    top: target.offsetTop - 100, // Offset for fixed header
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (navMenu && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileToggle.classList.remove('active');
+                    body.classList.remove('menu-open');
+                }
+            }
+        });
+    });
+    
+    // Add fixed header class on scroll
+    const header = document.querySelector('header');
+    const headerHeight = header.offsetHeight;
+    
+    // Set the CSS variable for header height
+    document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > headerHeight) {
+            header.classList.add('fixed');
+            document.body.classList.add('has-fixed-header');
+        } else {
+            header.classList.remove('fixed');
+            document.body.classList.remove('has-fixed-header');
+        }
+    });
+
+    // Handle form submissions if form exists
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Log form submission attempt
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                window.KLogger.logUserAction('Form Submission', { 
+                    formId: 'contact-form',
+                    fields: Object.fromEntries(new FormData(contactForm))
+                });
+            }
+            
+            // Normally would submit the form data to a server
+            // For now, just show a success message
+            const formContainer = document.querySelector('.form-container');
+            formContainer.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i><h3>Thank you for your message!</h3><p>We will get back to you shortly.</p></div>';
+            
+            // Log successful form submission
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.info('Contact form submitted successfully');
+            }
+        });
+    }
+
+    // Handle all images for error fallback
+    const images = document.querySelectorAll('img');
+    
+    // Determine base path for assets
+    const getBasePath = () => {
+        // Check if we're in the site root or in a subdirectory
+        const path = window.location.pathname;
+        // If we're in a subdirectory (pages/), we need to go up one level
+        return path.includes('/pages/') ? '../' : '';
+    };
+    
+    // Function to check if an image exists
+    const imageExists = (url) => new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+        });
+    
+    images.forEach(img => {
+        // Add performance tracking for image loading
+        img.addEventListener('load', function() {
+            if (window.KLogger && typeof window.KLogger.logPerformance === 'function') {
+                const loadTime = performance.now() - performance.timing.navigationStart;
+                window.KLogger.logPerformance('Image Loaded', Math.round(loadTime), 'ms');
+            }
+            
+            // Store the original width and height
+            if (!this.dataset.originalWidth) {
+                this.dataset.originalWidth = this.offsetWidth;
+                this.dataset.originalHeight = this.offsetHeight;
+            }
+        });
+        
+        img.addEventListener('error', async function() {
+            // Log image error
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.warn(`Failed to load image: ${this.src}`);
+            }
+            
+            // First try with the base path placeholder
+            const basePath = getBasePath();
+            const placeholderPath = `${basePath}images/placeholder.jpg`;
+            
+            // Check that the placeholder actually exists
+            const placeholderExists = await imageExists(placeholderPath);
+            
+            if (placeholderExists) {
+                this.src = placeholderPath;
+            } else {
+                // If the placeholder doesn't exist, try an absolute path
+                const absolutePathPlaceholder = '/images/placeholder.jpg';
+                this.src = absolutePathPlaceholder;
+            }
+            
+            this.alt = 'Image currently unavailable';
+            this.classList.add('placeholder-fallback');
+            
+            // Log the fallback
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.info(`Image replaced with placeholder: ${this.src}`);
+            }
+        });
+    });
+
+    // Add responsive styles for mobile menu
+    function updateMobileMenuStyles() {
+        if (window.innerWidth <= 768) {
+            if (navMenu && !navMenu.classList.contains('mobile-style')) {
+                navMenu.classList.add('mobile-style');
+                const style = document.createElement('style');
+                style.id = 'mobile-menu-styles';
+                style.innerHTML = `
+                    .nav-menu.mobile-style {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                        background-color: #fff;
+                        flex-direction: column;
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                        padding: 0;
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.3s ease;
+                    }
+                    
+                    .nav-menu.mobile-style.active {
+                        max-height: 300px;
+                        padding: 1rem 0;
+                    }
+                    
+                    .nav-menu.mobile-style li {
+                        margin: 0;
+                        width: 100%;
+                        text-align: center;
+                    }
+                    
+                    .nav-menu.mobile-style li a {
+                        display: block;
+                        padding: 0.75rem;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        } else {
+            const existingStyle = document.getElementById('mobile-menu-styles');
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+            if (navMenu) {
+                navMenu.classList.remove('mobile-style', 'active');
+            }
+            if (mobileToggle) {
+                const icon = mobileToggle.querySelector('i');
+                if (icon && icon.classList.contains('fa-times')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        }
+    }
+
+    // Initialize mobile menu styles
+    updateMobileMenuStyles();
+    
+    // Update on window resize
+    window.addEventListener('resize', function() {
+        updateMobileMenuStyles();
+        // Also update image handling on resize
+        handleImageResize();
+    });
+    
+    // Handle image resizing when window size changes - IMPROVED VERSION
+    function handleImageResize() {
+        // Handle all types of images that need responsive behavior
+        const serviceImages = document.querySelectorAll('.service-img');
+        const doctorImages = document.querySelectorAll('.doctor-img');
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        
+        // Log the resize event for debugging
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.info(`Window resized: ${window.innerWidth}px × ${window.innerHeight}px`);
+            console.info(`Found ${serviceImages.length} service images, ${doctorImages.length} doctor images, ${galleryImages.length} gallery images`);
+        }
+        
+        // Handle service images
+        if (serviceImages.length > 0) {
+            serviceImages.forEach(img => {
+                // Ensure loaded state for proper display
+                if (!img.classList.contains('loaded')) {
+                    img.classList.add('loaded');
+                }
+                
+                // Remove any inline opacity styling that might be causing the disappearing effect
+                if (img.style.opacity !== '1') {
+                    img.style.opacity = '1';
+                }
+                
+                // Get parent container dimensions
+                const container = img.closest('.service-image');
+                if (container) {
+                    // Ensure container has proper dimensions based on viewport width
+                    if (window.innerWidth <= 576) {
+                        container.style.height = '300px';
+                    } else if (window.innerWidth <= 768) {
+                        container.style.height = '250px';
+                    } else {
+                        container.style.height = '400px';
+                    }
+                }
+            });
+        }
+        
+        // Handle doctor images - these need specific handling for doctor profile
+        if (doctorImages.length > 0) {
+            doctorImages.forEach(img => {
+                // Mark as loaded to avoid any fade-in issues
+                if (!img.classList.contains('loaded')) {
+                    img.classList.add('loaded');
+                }
+                
+                // Ensure proper display
+                if (img.style.opacity !== '1') {
+                    img.style.opacity = '1';
+                }
+                
+                // Handle containing element's responsive behavior
+                const container = img.closest('.doctor-image');
+                if (container) {
+                    // Set appropriate height based on viewport
+                    if (window.innerWidth <= 576) {
+                        container.style.height = '350px';
+                    } else if (window.innerWidth <= 992) {
+                        container.style.height = '400px';
+                    } else {
+                        container.style.height = '450px';
+                    }
+                }
+            });
+        }
+        
+        // Handle gallery images with similar approach
+        if (galleryImages.length > 0) {
+            galleryImages.forEach(img => {
+                if (!img.classList.contains('loaded')) {
+                    img.classList.add('loaded');
+                }
+                if (img.style.opacity !== '1') {
+                    img.style.opacity = '1';
+                }
+                
+                // Handle balanced grid layout if present
+                const galleryItem = img.closest('.gallery-item');
+                if (galleryItem && galleryItem.parentElement.classList.contains('balanced-grid')) {
+                    // Set appropriate aspect ratio for balanced grid items
+                    if (window.innerWidth <= 576) {
+                        // Single column on small screens
+                        galleryItem.style.height = '250px';
+                    } else if (galleryItem.classList.contains('feature-image')) {
+                        // Feature images are slightly larger
+                        galleryItem.style.height = '300px';
+                    } else {
+                        // Standard gallery items
+                        galleryItem.style.height = '220px';
+                    }
+                }
+            });
+        }
+    }
+    
+    // Initialize image handling on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Preload important images
+        preloadImages();
+        
+        // Initialize all images with proper attributes
+        initializeAllImages();
+        
+        // Initialize image captions if they exist
+        initializeImageCaptions();
+    });
+    
+    // Initialize image handling on complete page load
+    window.addEventListener('load', function() {
+        // Apply resize handling to ensure correct dimensions
+        handleImageResize();
+        
+        // Mark all successfully loaded images
+        document.querySelectorAll('img').forEach(img => {
+            if (img.complete && img.naturalHeight !== 0) {
+                img.classList.add('loaded');
+                // Ensure proper display
+                img.style.opacity = '1';
+            }
+        });
+    });
+    
+    // Initialize image captions function
+    function initializeImageCaptions() {
+        const captionElements = document.querySelectorAll('.image-caption');
+        if (captionElements.length > 0) {
+            captionElements.forEach(caption => {
+                // Ensure proper initial state
+                caption.style.opacity = '0';
+                
+                // Get parent gallery item
+                const galleryItem = caption.closest('.gallery-item');
+                if (galleryItem) {
+                    // Add hover event listeners if not already handled by CSS
+                    galleryItem.addEventListener('mouseenter', function() {
+                        caption.style.opacity = '1';
+                    });
+                    
+                    galleryItem.addEventListener('mouseleave', function() {
+                        caption.style.opacity = '0';
+                    });
+                }
+            });
+            
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.info(`Initialized ${captionElements.length} image captions`);
+            }
+        }
+    }
+    
+    // Preload important images
+    function preloadImages() {
+        const criticalImages = [
+            // JPEG/JPG versions
+            'family-medicine.jpg',
+            'preventative-care.jpg',
+            'chronic-care.jpg',
+            'outside-office.jpeg',
+            'reception-room.jpeg',
+            'examination-office.jpeg',
+            'dr-khatib-professional.jpg',
+            
+            // WebP versions
+            'family-medicine.webp',
+            'preventative-care.webp',
+            'chronic-care.jpg.webp',
+            'outside-office.webp',
+            'reception-room.webp',
+            'reception-room-2.webp',
+            'courtyard-of-the-building.webp',
+            'examination-office.webp',
+            'dr-khatib-professional.webp',
+            
+            // Placeholder
+            'placeholder.jpg'
+        ];
+        
+        const basePath = getBasePath();
+        
+        // Preload each critical image
+        criticalImages.forEach(img => {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'image';
+            preloadLink.href = `${basePath}images/${img}`;
+            document.head.appendChild(preloadLink);
+            
+            // Log preloading
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.info(`Preloading image: ${preloadLink.href}`);
+            }
+        });
+    }
+    
+    // Consolidated function to initialize all images with consistent behavior
+    function initializeAllImages() {
+        // Target all relevant image types in one pass
+        const allContentImages = document.querySelectorAll('.service-img, .card-img, .doctor-img, .gallery-image');
+        
+        allContentImages.forEach(img => {
+            // Add lazy loading attribute for performance
+            img.setAttribute('loading', 'lazy');
+            
+            // Set consistent transition for all images
+            img.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            
+            // Start with opacity 1 to prevent disappearing
+            img.style.opacity = '1';
+            
+            // Listen for load event to ensure visibility
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+                this.style.opacity = '1';
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.info(`Image loaded successfully: ${this.src}`);
+                }
+            });
+        });
+    }
+    
+    // Add active class to current page in navigation
+    const currentLocation = window.location.pathname;
+    const navItems = document.querySelectorAll('.nav-menu li');
+    
+    navItems.forEach(item => {
+        const link = item.querySelector('a');
+        const href = link.getAttribute('href');
+        
+        if (currentLocation.endsWith(href) || 
+            (href === 'index.html' && (currentLocation === '/' || currentLocation.endsWith('/')))) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
+    // Smooth scroll to anchors for service items
+    const serviceLinks = document.querySelectorAll('.read-more, a[href^="#"]');
+    
+    serviceLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            // Only process internal links
+            if (this.getAttribute('href').indexOf('#') === 0 || 
+                this.getAttribute('href').indexOf('#') > 0) {
+                
+                const targetId = this.getAttribute('href').split('#').pop();
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    event.preventDefault();
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Expandable sections toggle for mobile
+    const expandDetails = document.querySelectorAll('.service-expand details');
+    
+    expandDetails.forEach(detail => {
+        detail.addEventListener('toggle', function() {
+            // Smooth scroll to expanded content if it opens
+            if (this.open) {
+                const rect = this.getBoundingClientRect();
+                const isVisible = (
+                    rect.top >= 0 &&
+                    rect.bottom <= window.innerHeight
+                );
+                
+                // If not fully visible, scroll it into view
+                if (!isVisible) {
+                    this.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Initialize accordion functionality for FAQs
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const accordionItem = this.parentElement;
+            accordionItem.classList.toggle('active');
+            
+            // Log interaction if KLogger is available
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                window.KLogger.logUserAction('FAQ Accordion', { 
+                    action: accordionItem.classList.contains('active') ? 'expand' : 'collapse',
+                    question: this.querySelector('span').textContent
+                });
+            }
+        });
+    });
+    
+    // Feature item hover effect
+    const featureItems = document.querySelectorAll('.feature-item');
+    
+    featureItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // Add event listeners with logging for all navigation links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                window.KLogger.logUserAction('Navigation', { 
+                    linkText: this.textContent.trim(),
+                    href: this.getAttribute('href')
+                });
+            }
+        });
+    });
+}); 

@@ -36,10 +36,13 @@
   },
   "devDependencies": {
     "browser-sync": "^2.29.3",
+    "clean-css": "^5.3.3",
     "concurrently": "^8.2.1",
     "eslint": "^8.49.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-promise": "^7.2.1",
-    "nodemon": "^3.0.1"
+    "glob": "^11.0.1",
+    "nodemon": "^3.0.1",
+    "terser": "^5.39.0"
   }
 }

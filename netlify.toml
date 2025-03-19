@@ -5,14 +5,15 @@
   command = """
     echo "==== Starting Build Process ===="
     npm config set loglevel warn
-    npm install --no-audit --production=false || exit 1
-    echo "==== Base dependencies installed ===="
-    npm list chalk clean-css terser glob || true
-    echo "==== Installing specific dependency versions ===="
-    npm install chalk@4.1.2 clean-css@5.3.3 terser@5.39.0 glob@8.1.0 --no-save || exit 1
-    echo "==== All dependencies installed successfully ===="
-    echo "==== Starting build script ===="
-    node scripts/build.js
+    npm config set legacy-peer-deps true
+    echo "==== Installing all dependencies ===="
+    npm install --no-audit || exit 1
+    echo "==== Ensuring dev dependencies are installed ===="
+    npm install --save-dev chalk@4.1.2 clean-css@5.3.3 terser@5.39.0 glob@8.1.0 || exit 1
+    echo "==== Verifying critical dependencies ===="
+    node -e "try { require('chalk'); require('clean-css'); require('terser'); require('glob'); console.log('✅ All critical dependencies are accessible'); } catch (err) { console.error('❌ Dependency check failed:', err.message); process.exit(1); }"
+    echo "==== Starting build script with explicit NODE_PATH ===="
+    NODE_PATH=$(npm root) node scripts/build.js
   """
   
 [build.environment]

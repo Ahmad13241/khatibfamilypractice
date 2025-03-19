@@ -7,13 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read testimonials from patients of Khatib Family Practice in Bullhead City, AZ. Learn about their experiences with Dr. Nadim Khatib's compassionate family care.">
-    <!-- Security headers (CSP handled by server) -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    
-    
     <title>Patient Testimonials | Khatib Family Practice</title>
     <link rel="stylesheet" href="../css/main.bundle.css" media="screen">
+    <link rel="stylesheet" href="../css/testimonials.css">
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
@@ -26,368 +22,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Additional styles for the testimonials page */
-        .testimonials-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto var(--spacing-xl);
-        }
-        
-        .rating-overview {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-xxl);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .rating-overview-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-xl);
-        }
-        
-        .rating-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .rating-source {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .rating-source i {
-            margin-right: 0.5rem;
-        }
-        
-        .rating-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .rating-total {
-            font-size: 1.4rem;
-            color: var(--light-text);
-            margin-left: 0.5rem;
-        }
-        
-        .rating-stars {
-            color: #f59e0b; /* Amber color for stars */
-            font-size: 1.5rem;
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .rating-count {
-            color: var(--light-text);
-            font-size: 0.95rem;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .rating-metrics {
-            width: 100%;
-            text-align: left;
-            margin-top: var(--spacing-md);
-        }
-        
-        .rating-metric {
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .metric-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-        }
-        
-        .metric-label-text {
-            color: var(--dark-text);
-        }
-        
-        .metric-score {
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-        
-        .metric-bar {
-            height: 8px;
-            background-color: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .metric-fill {
-            height: 100%;
-            background-color: var(--secondary-color);
-            border-radius: 4px;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-xxl);
-        }
-        
-        .testimonial-item {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .testimonial-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-right: var(--spacing-md);
-        }
-        
-        .testimonial-author-info {
-            flex: 1;
-        }
-        
-        .testimonial-author-info .name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--primary-color);
-        }
-        
-        .testimonial-author-info .location {
-            font-size: 0.9rem;
-            color: var(--light-text);
-        }
-        
-        .testimonial-content {
-            position: relative;
-            padding-left: var(--spacing-md);
-            margin-bottom: var(--spacing-md);
-            flex: 1;
-        }
-        
-        .testimonial-content::before {
-            content: '\201C';
-            font-family: Georgia, serif;
-            font-size: 3rem;
-            position: absolute;
-            left: -5px;
-            top: -20px;
-            color: var(--accent-color);
-            opacity: 0.5;
-        }
-        
-        .testimonial-content p {
-            font-style: italic;
-            line-height: 1.6;
-        }
-        
-        .testimonial-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        
-        .testimonial-date {
-            font-size: 0.9rem;
-            color: var(--light-text);
-        }
-        
-        .testimonial-source {
-            margin-top: var(--spacing-sm);
-            font-size: 0.85rem;
-            color: var(--light-text);
-            font-style: italic;
-        }
-        
-        .review-source {
-            font-size: 0.85rem;
-            font-style: italic;
-            display: flex;
-            align-items: center;
-        }
-        
-        .review-source i {
-            color: var(--secondary-color);
-            margin-right: 0.5rem;
-        }
-        
-        .review-source a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            margin-left: 0.25rem;
-        }
-        
-        .review-source a:hover {
-            text-decoration: underline;
-        }
-        
-        .submit-testimonial {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .form-group {
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: var(--spacing-sm);
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e0;
-            border-radius: var(--border-radius);
-            font-family: var(--body-font);
-        }
-        
-        .success-message {
-            background-color: #c6f6d5;
-            color: #2f855a;
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            margin-bottom: var(--spacing-md);
-            display: none;
-        }
-        
-        @media (max-width: 768px) {
-            .rating-overview-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
-            }
-            
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* New styles for review platforms section */
-        .review-platform-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-        
-        .review-platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .platform-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: var(--spacing-md);
-            transition: transform 0.3s ease;
-        }
-        
-        .review-platform-card:hover .platform-icon {
-            transform: scale(1.1);
-        }
-        
-        .review-platforms-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .review-benefits {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            margin-bottom: var(--spacing-xxl);
-            text-align: center;
-        }
-        
-        .benefit-items {
-            list-style-type: none;
-            padding: 0;
-            margin: var(--spacing-md) 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: var(--spacing-md);
-        }
-        
-        .benefit-item {
-            background-color: var(--white);
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: 20px;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s ease;
-        }
-        
-        .benefit-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .benefit-item i {
-            color: var(--secondary-color);
-            margin-right: 5px;
-        }
-        
-        @media (max-width: 768px) {
-            .review-platforms-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .benefit-items {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -441,35 +75,43 @@
         </div>
     </header>
 
-    <!-- Main Content starts here -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="testimonials-intro">
-                <p>At Khatib Family Practice, we value honest feedback from our patients. Below you'll find verified reviews from multiple platforms, reflecting Dr. Khatib's commitment to providing compassionate, comprehensive care to families in Bullhead City and surrounding communities.</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="testimonial-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Patient Testimonials</h1>
+                    <p>At Khatib Family Practice, we value honest feedback from our patients. Below you'll find verified reviews from multiple platforms, reflecting Dr. Khatib's commitment to providing compassionate, comprehensive care to families in Bullhead City and surrounding communities.</p>
+                </div>
             </div>
+        </section>
             
-            <!-- Rating Overview Section -->
-            <section class="rating-overview">
+        <!-- Rating Overview Section -->
+        <section class="rating-overview-section">
+            <div class="container">
                 <div class="section-header">
                     <h2>Dr. Khatib's Ratings</h2>
                     <p>Independent ratings from trusted healthcare platforms</p>
                 </div>
-                <div class="rating-overview-grid">
+                <div class="rating-cards">
+                    <!-- WebMD Rating Card -->
                     <div class="rating-card">
                         <div class="rating-source">
                             <i class="fas fa-hospital"></i> WebMD
                         </div>
-                        <div class="rating-number">
-                            4.5<span class="rating-total">/5</span>
+                        <div class="rating-summary">
+                            <div class="rating-number">
+                                4.5<span class="rating-total">/5</span>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-count">Based on 60 patient ratings</div>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <div class="rating-count">Based on 60 patient ratings</div>
                         <div class="rating-metrics">
                             <div class="rating-metric">
                                 <div class="metric-label">
@@ -500,21 +142,25 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Healthgrades Rating Card -->
                     <div class="rating-card">
                         <div class="rating-source">
                             <i class="fas fa-user-md"></i> Healthgrades
                         </div>
-                        <div class="rating-number">
-                            3.8<span class="rating-total">/5</span>
+                        <div class="rating-summary">
+                            <div class="rating-number">
+                                3.8<span class="rating-total">/5</span>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="rating-count">Based on 64 patient ratings</div>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <div class="rating-count">Based on 64 patient ratings</div>
                         <div class="rating-metrics">
                             <div class="rating-metric">
                                 <div class="metric-label">
@@ -546,31 +192,29 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Testimonials Grid Section -->
-            <section class="testimonials-grid-section">
+            </div>
+        </section>
+        
+        <!-- Testimonials Grid Section -->
+        <section class="testimonials-grid-section">
+            <div class="container">
                 <div class="section-header">
                     <h2>Patient Testimonials</h2>
-                    <p>Read what our patients have to say about their experiences</p>
+                    <p>Read what our satisfied patients have to say about their experiences with Dr. Khatib</p>
                 </div>
                 
                 <div class="testimonials-grid">
                     <!-- WebMD Review 1 -->
-                    <div class="testimonial-item">
+                    <article class="testimonial-card">
                         <div class="testimonial-header">
                             <div class="testimonial-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="testimonial-author-info">
-                                <p class="name">Recent Patient</p>
-                                <p class="location">Bullhead City, AZ</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">Recent Patient</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
                                 </div>
                             </div>
                         </div>
@@ -580,27 +224,23 @@
                         <div class="testimonial-footer">
                             <div class="review-source">
                                 <i class="fas fa-hospital"></i>
-                                Source: <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank">WebMD</a>
+                                Source: <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener">WebMD</a>
                             </div>
                             <span class="testimonial-date">January 2025</span>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- WebMD Review 2 -->
-                    <div class="testimonial-item">
+                    <article class="testimonial-card">
                         <div class="testimonial-header">
                             <div class="testimonial-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="testimonial-author-info">
-                                <p class="name">Returning Patient</p>
-                                <p class="location">Bullhead City, AZ</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">Returning Patient</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
                                 </div>
                             </div>
                         </div>
@@ -610,27 +250,23 @@
                         <div class="testimonial-footer">
                             <div class="review-source">
                                 <i class="fas fa-hospital"></i>
-                                Source: <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank">WebMD</a>
+                                Source: <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener">WebMD</a>
                             </div>
                             <span class="testimonial-date">September 2024</span>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Healthgrades Review 1 -->
-                    <div class="testimonial-item">
+                    <article class="testimonial-card">
                         <div class="testimonial-header">
                             <div class="testimonial-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="testimonial-author-info">
-                                <p class="name">Recent Patient</p>
-                                <p class="location">Bullhead City, AZ</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">Recent Patient</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
                                 </div>
                             </div>
                         </div>
@@ -640,27 +276,23 @@
                         <div class="testimonial-footer">
                             <div class="review-source">
                                 <i class="fas fa-user-md"></i>
-                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank">Healthgrades</a>
+                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener">Healthgrades</a>
                             </div>
                             <span class="testimonial-date">September 2023</span>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Healthgrades Review 2 -->
-                    <div class="testimonial-item">
+                    <article class="testimonial-card">
                         <div class="testimonial-header">
                             <div class="testimonial-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="testimonial-author-info">
-                                <p class="name">Ida</p>
-                                <p class="location">Bullhead City, AZ</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">Ida</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
                                 </div>
                             </div>
                         </div>
@@ -670,27 +302,23 @@
                         <div class="testimonial-footer">
                             <div class="review-source">
                                 <i class="fas fa-user-md"></i>
-                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank">Healthgrades</a>
+                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener">Healthgrades</a>
                             </div>
                             <span class="testimonial-date">October 2020</span>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Healthgrades Review 3 -->
-                    <div class="testimonial-item">
+                    <article class="testimonial-card">
                         <div class="testimonial-header">
                             <div class="testimonial-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="testimonial-author-info">
-                                <p class="name">Monica and James Bray</p>
-                                <p class="location">Fort Mohave, AZ</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">Monica and James Bray</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Fort Mohave, AZ</p>
                                 </div>
                             </div>
                         </div>
@@ -700,27 +328,23 @@
                         <div class="testimonial-footer">
                             <div class="review-source">
                                 <i class="fas fa-user-md"></i>
-                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank">Healthgrades</a>
+                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener">Healthgrades</a>
                             </div>
                             <span class="testimonial-date">August 2017</span>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Healthgrades Review 4 -->
-                    <div class="testimonial-item">
+                    <article class="testimonial-card">
                         <div class="testimonial-header">
                             <div class="testimonial-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="testimonial-author-info">
-                                <p class="name">J.L.</p>
-                                <p class="location">Fort Mohave, AZ</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">J.L.</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Fort Mohave, AZ</p>
                                 </div>
                             </div>
                         </div>
@@ -730,55 +354,135 @@
                         <div class="testimonial-footer">
                             <div class="review-source">
                                 <i class="fas fa-user-md"></i>
-                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank">Healthgrades</a>
+                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener">Healthgrades</a>
                             </div>
                             <span class="testimonial-date">October 2021</span>
                         </div>
-                    </div>
+                    </article>
+
+                    <!-- WebMD Review 3 - NEW -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">Long-time Patient</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>"Dr. Khatib is extremely knowledgeable, compassionate and thorough. He takes the time to listen to his patients and explains everything thoroughly. We are fortunate to have him as our doctor."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="review-source">
+                                <i class="fas fa-hospital"></i>
+                                Source: <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener">WebMD</a>
+                            </div>
+                            <span class="testimonial-date">March 2024</span>
+                        </div>
+                    </article>
+
+                    <!-- WebMD Review 4 - NEW -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">New Patient</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>"He asked a lot of questions. More than my previous doctor. He actually cared about me as a person. Very thorough examination and excellent bedside manner."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="review-source">
+                                <i class="fas fa-hospital"></i>
+                                Source: <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener">WebMD</a>
+                            </div>
+                            <span class="testimonial-date">February 2024</span>
+                        </div>
+                    </article>
+
+                    <!-- Healthgrades Review 5 - NEW -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="testimonial-author">
+                                <h3 class="patient-name">R.M.</h3>
+                                <div class="patient-info">
+                                    <div class="patient-rating">★★★★★</div>
+                                    <p class="patient-location">Bullhead City, AZ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>"Very thorough and professional. Dr. Khatib takes time to explain things and answers all questions. His office is clean and his staff is very friendly. I've recommended him to several friends who were looking for a new family doctor."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="review-source">
+                                <i class="fas fa-user-md"></i>
+                                Source: <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener">Healthgrades</a>
+                            </div>
+                            <span class="testimonial-date">December 2023</span>
+                        </div>
+                    </article>
                 </div>
-            </section>
-            
-            <!-- Share Your Reviews Section -->
-            <section class="share-reviews-section">
+            </div>
+        </section>
+        
+        <!-- Share Your Reviews Section -->
+        <section class="share-reviews-section">
+            <div class="container">
                 <div class="section-header">
                     <h2>Share Your Experience</h2>
                     <p>Help others find quality care by sharing your experience on these trusted platforms</p>
                 </div>
                 
-                <div class="review-platforms-container">
+                <div class="platform-cards">
                     <!-- WebMD Platform Card -->
-                    <div class="review-platform-card">
+                    <div class="platform-card webmd">
                         <div class="platform-icon">
                             <i class="fas fa-hospital"></i>
                         </div>
-                        <h3 style="color: var(--primary-color); margin-bottom: var(--spacing-sm);">WebMD</h3>
-                        <p style="margin-bottom: var(--spacing-lg);">WebMD is one of the most trusted healthcare review platforms, helping patients find quality care from verified doctors.</p>
-                        <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">Write a Review on WebMD</a>
+                        <h3>WebMD</h3>
+                        <p>WebMD is one of the most trusted healthcare review platforms, helping patients find quality care from verified doctors.</p>
+                        <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener" class="btn btn-primary platform-btn">Write a Review on WebMD</a>
                     </div>
                     
                     <!-- Healthgrades Platform Card -->
-                    <div class="review-platform-card">
+                    <div class="platform-card healthgrades">
                         <div class="platform-icon">
                             <i class="fas fa-user-md"></i>
                         </div>
-                        <h3 style="color: var(--primary-color); margin-bottom: var(--spacing-sm);">Healthgrades</h3>
-                        <p style="margin-bottom: var(--spacing-lg);">Healthgrades provides comprehensive information about physicians and hospitals to help patients make informed healthcare decisions.</p>
-                        <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">Write a Review on Healthgrades</a>
+                        <h3>Healthgrades</h3>
+                        <p>Healthgrades provides comprehensive information about physicians and hospitals to help patients make informed healthcare decisions.</p>
+                        <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener" class="btn btn-primary platform-btn">Write a Review on Healthgrades</a>
                     </div>
                     
                     <!-- Yelp Platform Card -->
-                    <div class="review-platform-card">
+                    <div class="platform-card yelp">
                         <div class="platform-icon">
                             <i class="fab fa-yelp"></i>
                         </div>
-                        <h3 style="color: var(--primary-color); margin-bottom: var(--spacing-sm);">Yelp</h3>
-                        <p style="margin-bottom: var(--spacing-lg);">Yelp is a popular review platform where you can share your healthcare experiences to help others in your community.</p>
-                        <a href="https://www.yelp.com/biz/khatib-family-practice-bullhead-city" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">Write a Review on Yelp</a>
+                        <h3>Yelp</h3>
+                        <p>Yelp is a popular review platform where you can share your healthcare experiences to help others in your community.</p>
+                        <a href="https://www.yelp.com/biz/khatib-family-practice-bullhead-city" target="_blank" rel="noopener" class="btn btn-primary platform-btn">Write a Review on Yelp</a>
                     </div>
                 </div>
                 
                 <div class="review-benefits">
-                    <h3 style="color: var(--primary-color); margin-bottom: var(--spacing-md);">Why Your Reviews Matter</h3>
+                    <h3>Why Your Reviews Matter</h3>
                     <p>Your honest feedback helps us improve our care and assists other patients in making informed healthcare decisions. When writing a review, consider sharing:</p>
                     <ul class="benefit-items">
                         <li class="benefit-item"><i class="fas fa-check-circle"></i> Your overall experience</li>
@@ -787,25 +491,25 @@
                         <li class="benefit-item"><i class="fas fa-check-circle"></i> Staff friendliness</li>
                         <li class="benefit-item"><i class="fas fa-check-circle"></i> How your care improved your health</li>
                     </ul>
-                    <p style="font-style: italic; margin-top: var(--spacing-md);">By sharing your experiences online, you help amplify the power of word-of-mouth and assist others in finding the quality care they deserve.</p>
-                </div>
-            </section>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Experience the Difference</h2>
-                <p>Join our community of satisfied patients. Contact us today.</p>
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn btn-primary">Want an appointment? Contact us!</a>
-                    <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                    <p class="benefits-note">By sharing your experiences online, you help amplify the power of word-of-mouth and assist others in finding the quality care they deserve.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Experience the Difference</h2>
+                    <p>Join our community of satisfied patients. Contact us today.</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary">Want an appointment? Contact us!</a>
+                        <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>

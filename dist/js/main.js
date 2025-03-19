@@ -6,8 +6,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Performance logging for page initialization
     const domLoadTime = Date.now() - performance.timing.navigationStart;
-    // Use a more browser-friendly approach for logging conditionally
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // Use conditional logging to avoid console statement warnings
+    if (process.env.NODE_ENV !== 'production') {
         console.info(`DOM loaded in ${domLoadTime}ms`);
     }
     
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Log form submission attempt
             if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                window.KLogger.logUserAction('Form Submission', { 
+                KLogger.logUserAction('Form Submission', { 
                     formId: 'contact-form',
                     fields: Object.fromEntries(new FormData(contactForm))
                 });
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formContainer.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i><h3>Thank you for your message!</h3><p>We will get back to you shortly.</p></div>';
             
             // Log successful form submission
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            if (process.env.NODE_ENV !== 'production') {
                 console.info('Contact form submitted successfully');
             }
         });
@@ -119,19 +119,20 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Function to check if an image exists
-    const imageExists = (url) => new Promise((resolve) => {
+    const imageExists = (url) => {
+        return new Promise((resolve) => {
             const img = new Image();
             img.onload = () => resolve(true);
             img.onerror = () => resolve(false);
             img.src = url;
         });
+    };
     
     images.forEach(img => {
         // Add performance tracking for image loading
         img.addEventListener('load', function() {
             if (window.KLogger && typeof window.KLogger.logPerformance === 'function') {
-                const loadTime = performance.now() - performance.timing.navigationStart;
-                window.KLogger.logPerformance('Image Loaded', Math.round(loadTime), 'ms');
+                KLogger.logPerformance('Image Loaded', Math.round(performance.now() - performance.timing.navigationStart), 'ms');
             }
             
             // Store the original width and height
@@ -143,11 +144,31 @@ document.addEventListener('DOMContentLoaded', function() {
         
         img.addEventListener('error', async function() {
             // Log image error
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            if (process.env.NODE_ENV !== 'production') {
                 console.warn(`Failed to load image: ${this.src}`);
             }
             
-            // First try with the base path placeholder
+            // Special handling for known problematic images
+            const imagePath = this.src.split('/').pop();
+            if (imagePath === 'reception-room-2.jpeg' || imagePath === 'courtyard.jpeg') {
+                // Try the WebP version directly as we know JPEG is missing
+                const basePath = getBasePath();
+                
+                // Map to correct filenames
+                let webpPath;
+                if (imagePath === 'reception-room-2.jpeg') {
+                    webpPath = `${basePath}images/reception-room-2.webp`;
+                } else if (imagePath === 'courtyard.jpeg') {
+                    webpPath = `${basePath}images/courtyard-of-the-building.webp`;
+                }
+                
+                if (webpPath) {
+                    this.src = webpPath;
+                    return; // Exit early as we've handled this special case
+                }
+            }
+            
+            // First try with the base path placeholder for other images
             const basePath = getBasePath();
             const placeholderPath = `${basePath}images/placeholder.jpg`;
             
@@ -166,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('placeholder-fallback');
             
             // Log the fallback
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            if (process.env.NODE_ENV !== 'production') {
                 console.info(`Image replaced with placeholder: ${this.src}`);
             }
         });
@@ -248,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const galleryImages = document.querySelectorAll('.gallery-image');
         
         // Log the resize event for debugging
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        if (process.env.NODE_ENV !== 'production') {
             console.info(`Window resized: ${window.innerWidth}px × ${window.innerHeight}px`);
             console.info(`Found ${serviceImages.length} service images, ${doctorImages.length} doctor images, ${galleryImages.length} gallery images`);
         }
@@ -312,26 +333,26 @@ document.addEventListener('DOMContentLoaded', function() {
         // Handle gallery images with similar approach
         if (galleryImages.length > 0) {
             galleryImages.forEach(img => {
+                // Ensure loaded state
                 if (!img.classList.contains('loaded')) {
                     img.classList.add('loaded');
                 }
+                
+                // Make sure they're visible
                 if (img.style.opacity !== '1') {
                     img.style.opacity = '1';
                 }
                 
-                // Handle balanced grid layout if present
+                // Set consistent aspect ratio for gallery images
                 const galleryItem = img.closest('.gallery-item');
-                if (galleryItem && galleryItem.parentElement.classList.contains('balanced-grid')) {
-                    // Set appropriate aspect ratio for balanced grid items
+                if (galleryItem) {
+                    // Adjust height based on viewport
                     if (window.innerWidth <= 576) {
-                        // Single column on small screens
-                        galleryItem.style.height = '250px';
-                    } else if (galleryItem.classList.contains('feature-image')) {
-                        // Feature images are slightly larger
-                        galleryItem.style.height = '300px';
+                        img.style.height = '200px';
+                    } else if (window.innerWidth <= 768) {
+                        img.style.height = '220px';
                     } else {
-                        // Standard gallery items
-                        galleryItem.style.height = '220px';
+                        img.style.height = '250px';
                     }
                 }
             });
@@ -345,9 +366,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Initialize all images with proper attributes
         initializeAllImages();
-        
-        // Initialize image captions if they exist
-        initializeImageCaptions();
     });
     
     // Initialize image handling on complete page load
@@ -365,34 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Initialize image captions function
-    function initializeImageCaptions() {
-        const captionElements = document.querySelectorAll('.image-caption');
-        if (captionElements.length > 0) {
-            captionElements.forEach(caption => {
-                // Ensure proper initial state
-                caption.style.opacity = '0';
-                
-                // Get parent gallery item
-                const galleryItem = caption.closest('.gallery-item');
-                if (galleryItem) {
-                    // Add hover event listeners if not already handled by CSS
-                    galleryItem.addEventListener('mouseenter', function() {
-                        caption.style.opacity = '1';
-                    });
-                    
-                    galleryItem.addEventListener('mouseleave', function() {
-                        caption.style.opacity = '0';
-                    });
-                }
-            });
-            
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                console.info(`Initialized ${captionElements.length} image captions`);
-            }
-        }
-    }
-    
     // Preload important images
     function preloadImages() {
         const criticalImages = [
@@ -403,6 +393,9 @@ document.addEventListener('DOMContentLoaded', function() {
             'outside-office.jpeg',
             'reception-room.jpeg',
             'examination-office.jpeg',
+            // Updated names to match actual files
+            'reception-room-2.webp', // Using webp as fallback since jpeg doesn't exist
+            'courtyard-of-the-building.webp', // Updated from courtyard.jpeg
             'dr-khatib-professional.jpg',
             
             // WebP versions
@@ -411,9 +404,9 @@ document.addEventListener('DOMContentLoaded', function() {
             'chronic-care.jpg.webp',
             'outside-office.webp',
             'reception-room.webp',
-            'reception-room-2.webp',
-            'courtyard-of-the-building.webp',
             'examination-office.webp',
+            'reception-room-2.webp',
+            'courtyard-of-the-building.webp', // Updated from courtyard.webp
             'dr-khatib-professional.webp',
             
             // Placeholder
@@ -431,9 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.head.appendChild(preloadLink);
             
             // Log preloading
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                console.info(`Preloading image: ${preloadLink.href}`);
-            }
+            console.info(`Preloading image: ${preloadLink.href}`);
         });
     }
     
@@ -456,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
             img.addEventListener('load', function() {
                 this.classList.add('loaded');
                 this.style.opacity = '1';
-                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                if (process.env.NODE_ENV !== 'production') {
                     console.info(`Image loaded successfully: ${this.src}`);
                 }
             });

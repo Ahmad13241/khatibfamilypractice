@@ -1,0 +1,846 @@
+/* 
+ * Khatib Family Practice - Testimonials Page Stylesheet
+ * Custom styles for the redesigned testimonials page
+ */
+
+/* ===== HERO SECTION ===== */
+.testimonial-hero {
+    background-color: var(--primary-color);
+    background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-hero::before {
+    content: '\201C';
+    font-family: Georgia, serif;
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.05;
+    top: -4rem;
+    left: -3rem;
+    color: var(--white);
+    line-height: 1;
+}
+
+.testimonial-hero::after {
+    content: '\201D';
+    font-family: Georgia, serif;
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.05;
+    bottom: -10rem;
+    right: -3rem;
+    color: var(--white);
+    line-height: 1;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-hero h1 {
+    color: var(--white);
+    font-size: 2.75rem;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    display: inline-block;
+}
+
+.testimonial-hero h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.testimonial-hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: var(--spacing-md) auto 0;
+    line-height: 1.7;
+}
+
+/* ===== RATING OVERVIEW SECTION ===== */
+.rating-overview-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--light-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.rating-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.rating-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.rating-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.rating-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: var(--secondary-color);
+}
+
+.rating-source {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+}
+
+.rating-source i {
+    margin-right: 0.75rem;
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+.rating-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.rating-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.rating-total {
+    font-size: 1.4rem;
+    color: var(--light-text);
+    margin-left: 0.5rem;
+}
+
+.rating-stars {
+    color: #f59e0b; /* Amber color for stars */
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: 0.1rem;
+}
+
+.rating-count {
+    color: var(--light-text);
+    font-size: 0.95rem;
+}
+
+.rating-metrics {
+    width: 100%;
+    margin-top: var(--spacing-md);
+}
+
+.rating-metric {
+    margin-bottom: var(--spacing-md);
+}
+
+.metric-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label-text {
+    color: var(--dark-text);
+    font-weight: 500;
+}
+
+.metric-score {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.metric-bar {
+    height: 10px;
+    background-color: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.metric-fill {
+    height: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    position: relative;
+    transition: width 1s ease-in-out;
+}
+
+.metric-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        rgba(255, 255, 255, 0.1) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* ===== TESTIMONIALS GRID SECTION ===== */
+.testimonials-grid-section {
+    padding: var(--spacing-xl) 0;
+    position: relative;
+    background-color: rgba(var(--primary-rgb), 0.02);
+    overflow: hidden;
+}
+
+.testimonials-grid-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.testimonials-grid-section .section-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.testimonials-grid-section .section-header h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    position: relative;
+    display: inline-block;
+}
+
+.testimonials-grid-section .section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.testimonials-grid-section .section-header p {
+    font-size: 0.95rem;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: height 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-card:hover::before {
+    height: 7px;
+}
+
+.testimonial-card:hover .testimonial-avatar {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-card:hover .patient-rating {
+    color: #f8a50c;
+    transform: scale(1.05);
+}
+
+.testimonial-card:hover .patient-name {
+    color: var(--secondary-color);
+}
+
+.testimonial-header {
+    padding: 1.5rem 1.5rem 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+.testimonial-card:hover .testimonial-avatar {
+    background-color: var(--secondary-light);
+}
+
+.testimonial-author {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: 0.25rem;
+}
+
+.patient-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+    line-height: 1.2;
+}
+
+.patient-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+    overflow: visible;
+}
+
+.patient-location {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+}
+
+.patient-location::before {
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 0.3rem;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.patient-rating {
+    white-space: nowrap;
+    display: block;
+}
+
+.testimonial-content {
+    padding: 0.75rem 1.5rem 1.5rem;
+    flex-grow: 1;
+    position: relative;
+}
+
+.testimonial-content p {
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--text-color);
+    margin: 0;
+    position: relative;
+    padding: 0 0.5rem;
+    letter-spacing: 0.01em;
+    font-size: 0.95rem;
+}
+
+.testimonial-content p::before,
+.testimonial-content p::after {
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    opacity: 0.4;
+    position: relative;
+    line-height: 0;
+    color: var(--primary-color);
+}
+
+.testimonial-content p::before {
+    content: '"';
+    margin-right: 0.2rem;
+}
+
+.testimonial-content p::after {
+    content: '"';
+    margin-left: 0.2rem;
+}
+
+.testimonial-footer {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.testimonial-date {
+    font-size: 0.8rem;
+    color: var(--light-text);
+}
+
+.review-source {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.review-source i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+}
+
+.review-source a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-left: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.review-source a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* ===== SHARE REVIEWS SECTION ===== */
+.share-reviews-section {
+    padding: var(--spacing-xl) 0;
+    background-color: rgba(var(--primary-rgb), 0.03);
+}
+
+.platform-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin: var(--spacing-lg) 0 var(--spacing-xl);
+}
+
+.platform-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.platform-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-lg);
+}
+
+.platform-icon {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    transition: transform 0.3s ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.platform-card:hover .platform-icon {
+    transform: scale(1.1);
+}
+
+.platform-card h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.5rem;
+}
+
+.platform-card p {
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+    line-height: 1.6;
+}
+
+.platform-btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Platform-specific styles */
+.platform-card.webmd .platform-icon {
+    color: #0078bf;
+}
+
+.platform-card.healthgrades .platform-icon {
+    color: #00b2a9;
+}
+
+.platform-card.yelp .platform-icon {
+    color: #d32323;
+}
+
+.review-benefits {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xxl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.review-benefits::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.03'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.review-benefits h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.review-benefits p {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benefit-items {
+    list-style-type: none;
+    padding: 0;
+    margin: var(--spacing-lg) 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-item {
+    background-color: rgba(var(--primary-rgb), 0.05);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.benefit-item:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-md);
+    background-color: var(--white);
+}
+
+.benefit-item i {
+    color: var(--secondary-color);
+    margin-right: 8px;
+}
+
+.benefits-note {
+    font-style: italic;
+    margin-top: var(--spacing-md);
+    color: var(--light-text);
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 992px) {
+    .testimonial-hero h1 {
+        font-size: 2.25rem;
+    }
+    
+    .rating-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .rating-card {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-hero {
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .testimonial-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .testimonial-hero p {
+        font-size: 1rem;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.25rem;
+    }
+    
+    .testimonial-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .platform-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .platform-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .benefit-items {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .benefit-item {
+        width: 100%;
+        max-width: 350px;
+        justify-content: center;
+    }
+    
+    .patient-rating {
+        font-size: 0.95rem;
+        gap: 0.25rem;
+        width: auto;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .testimonial-hero h1 {
+        font-size: 1.75rem;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: var(--spacing-md) 0 var(--spacing-lg);
+    }
+    
+    .testimonial-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1.25rem 0.75rem;
+        align-items: center;
+    }
+    
+    .testimonial-avatar {
+        margin: 0 0 0.75rem 0;
+        width: 65px;
+        height: 65px;
+        font-size: 1.75rem;
+    }
+    
+    .testimonial-author {
+        align-items: center;
+        padding-top: 0;
+        width: 100%;
+    }
+    
+    .patient-info {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .patient-rating {
+        justify-content: center;
+        margin-bottom: 0.4rem;
+        font-size: 1.1rem;
+        min-width: 130px;
+    }
+    
+    .patient-location {
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .testimonial-content {
+        padding: 0.5rem 1.25rem 1.25rem;
+        text-align: center;
+    }
+    
+    .testimonial-content p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .testimonial-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 1rem 1.25rem;
+    }
+    
+    .review-source {
+        justify-content: center;
+        margin-bottom: 0.25rem;
+    }
+    
+    .testimonials-grid-section .section-header {
+        padding: 0 1rem;
+    }
+    
+    .testimonials-grid-section .section-header h2 {
+        font-size: 1.75rem;
+    }
+    
+    .testimonials-grid-section .section-header p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Animation for card loading */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.rating-card,
+.testimonial-card,
+.platform-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.rating-card:nth-child(1) { animation-delay: 0.1s; }
+.rating-card:nth-child(2) { animation-delay: 0.2s; }
+
+.testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+.testimonial-card:nth-child(4) { animation-delay: 0.4s; }
+.testimonial-card:nth-child(5) { animation-delay: 0.5s; }
+.testimonial-card:nth-child(6) { animation-delay: 0.6s; }
+.testimonial-card:nth-child(7) { animation-delay: 0.7s; }
+.testimonial-card:nth-child(8) { animation-delay: 0.8s; }
+.testimonial-card:nth-child(9) { animation-delay: 0.9s; }
+
+.platform-card:nth-child(1) { animation-delay: 0.3s; }
+.platform-card:nth-child(2) { animation-delay: 0.4s; }
+.platform-card:nth-child(3) { animation-delay: 0.5s; }
+
+/* Adjust stars for small screens */
+@media screen and (max-width: 340px) {
+    .patient-rating {
+        font-size: 0.9rem;
+        min-width: 100px;
+    }
+    
+    .patient-rating i {
+        margin-right: 0.2rem;
+    }
+} 

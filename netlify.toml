@@ -1,8 +1,8 @@
 # Khatib Family Practice - Netlify Configuration File
 
 [build]
-  publish = "."
-  command = ""  # No build command needed for static HTML site
+  publish = "dist"
+  command = "npm run build"  # Use the build script from package.json
 
 # Enable HTTPS and ensure redirect from HTTP to HTTPS
 [[redirects]]
@@ -68,7 +68,7 @@
 [[plugins]]
   package = "netlify-plugin-image-optim"
 
-# Remove or comment out the Cloudinary plugin that's causing the build failure
+# Comment out Cloudinary plugin until properly configured
 # [[plugins]]
 #   package = "netlify-plugin-cloudinary"
 #   [plugins.inputs]

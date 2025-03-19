@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.info(`DOM loaded in ${domLoadTime}ms`);
     }
     
-    // Mobile menu toggle - UPDATED for better iOS compatibility
+    // Mobile menu toggle - Universal implementation
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const body = document.body;
@@ -40,63 +40,54 @@ document.addEventListener('DOMContentLoaded', function() {
     updateHeaderHeight();
     window.addEventListener('resize', updateHeaderHeight);
     
-    // Detect iOS devices
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (isIOS) {
-        document.documentElement.classList.add('ios');
-    }
+    // Create menu backdrop for better UX
+    const menuBackdrop = document.createElement('div');
+    menuBackdrop.className = 'menu-backdrop';
+    document.body.appendChild(menuBackdrop);
     
     if (mobileToggle) {
-        // Add both click and touch events to ensure it works on all devices, especially iOS
-        ['click', 'touchstart', 'touchend'].forEach(eventType => {
-            mobileToggle.addEventListener(eventType, function(e) {
-                // Prevent default behavior to avoid any browser handling conflicts
+        // Use simplified event handling that works across all devices
+        mobileToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            toggleMobileMenu();
+        });
+        
+        // Also handle touch events for better mobile compatibility
+        mobileToggle.addEventListener('touchend', function(e) {
+            // Prevent default only if this is a tap (not a scroll or other gesture)
+            if (!this.touchMoved) {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // For iOS, add a slight delay to ensure touch events are properly processed
-                setTimeout(() => {
-                    navMenu.classList.toggle('active');
-                    this.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                    
-                    // Update aria-expanded attribute
-                    const isExpanded = navMenu.classList.contains('active');
-                    this.setAttribute('aria-expanded', isExpanded);
-                    
-                    // Update header height after toggle
-                    setTimeout(updateHeaderHeight, 50);
-                }, isIOS ? 10 : 0);
-                
-                // Prevent multiple events from firing by returning false for touchstart
-                if (eventType === 'touchstart') {
-                    return false;
-                }
-            }, { passive: false, capture: true }); // Using capture to ensure event is handled first
+                toggleMobileMenu();
+                return false;
+            }
         });
         
-        // Add a specific handler for iOS double-tap issues
-        if (isIOS) {
-            let lastTap = 0;
-            mobileToggle.addEventListener('touchend', function(e) {
-                const currentTime = new Date().getTime();
-                const tapLength = currentTime - lastTap;
-                
-                // If tap interval is less than 500ms, it might be a double tap
-                if (tapLength < 500 && tapLength > 0) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Force toggle to ensure it works on double tap
-                    navMenu.classList.toggle('active');
-                    this.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                    
-                    return false;
-                }
-                
-                lastTap = currentTime;
-            }, { passive: false });
+        // Track touch movement to distinguish taps from scrolls
+        mobileToggle.addEventListener('touchstart', function() {
+            this.touchMoved = false;
+        });
+        
+        mobileToggle.addEventListener('touchmove', function() {
+            this.touchMoved = true;
+        });
+        
+        // Helper function for toggling the menu
+        function toggleMobileMenu() {
+            navMenu.classList.toggle('active');
+            mobileToggle.classList.toggle('active');
+            body.classList.toggle('menu-open');
+            menuBackdrop.classList.toggle('active');
+            
+            // Update aria-expanded attribute
+            const isExpanded = navMenu.classList.contains('active');
+            mobileToggle.setAttribute('aria-expanded', isExpanded);
+            
+            // Update header height after toggle
+            setTimeout(updateHeaderHeight, 50);
         }
     }
     
@@ -108,10 +99,20 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.remove('active');
             mobileToggle.classList.remove('active');
             body.classList.remove('menu-open');
+            menuBackdrop.classList.remove('active');
             
             // Update aria-expanded attribute
             mobileToggle.setAttribute('aria-expanded', 'false');
         }
+    });
+    
+    // Close menu when backdrop is clicked
+    menuBackdrop.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        body.classList.remove('menu-open');
+        this.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
     });
     
     // Handle smooth scrolling for anchor links
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     navMenu.classList.remove('active');
                     mobileToggle.classList.remove('active');
                     body.classList.remove('menu-open');
+                    menuBackdrop.classList.remove('active');
                 }
             }
         });
@@ -174,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formContainer.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i><h3>Thank you for your message!</h3><p>We will get back to you shortly.</p></div>';
             
             // Log successful form submission
-            if (process.env.NODE_ENV !== 'production') {
+            if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV !== 'production') {
                 console.info('Contact form submitted successfully');
             }
         });
@@ -657,4 +659,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         initMapLogging();
     }, 500);
+
+    // Update event handlers for mobile menu close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            body.classList.remove('menu-open');
+            menuBackdrop.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
 }); 

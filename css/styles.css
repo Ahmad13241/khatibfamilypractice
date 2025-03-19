@@ -341,28 +341,34 @@ img {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 30px;
-    height: 21px;
+    width: 35px; /* Increased from 30px */
+    height: 25px; /* Increased from 21px */
     cursor: pointer;
-    /* Improved clickable area */
-    padding: 10px;
-    margin: -10px;
+    padding: 12px; /* Increased padding */
+    margin: -12px; /* Adjusted margin */
     transition: transform 0.3s ease;
     position: relative;
-    z-index: 1001; /* Ensure it's above other elements */
+    z-index: 1001;
+    background-color: var(--primary-color); /* Add background color */
+    border-radius: 4px; /* Rounded corners */
 }
 
 .mobile-toggle span {
     height: 3px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: white; /* Changed to white for better contrast */
     border-radius: 2px;
     transition: all 0.3s ease;
-    display: block; /* Ensure it displays correctly */
+    display: block;
+    margin-bottom: 1px; /* Space between bars */
+}
+
+.mobile-toggle:hover span {
+    background-color: var(--accent-color); /* Change color on hover */
 }
 
 .mobile-toggle.active {
-    transform: rotate(180deg) scale(1.1); /* Add a slight animation effect */
+    transform: rotate(180deg) scale(1.1);
 }
 
 .mobile-toggle.active span:nth-child(1) {
@@ -377,27 +383,23 @@ img {
     transform: translateY(-9px) rotate(-45deg);
 }
 
-/* iOS specific fixes */
-.ios .mobile-toggle {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    z-index: 1002; /* Ensure it's above other elements on iOS */
+/* Menu backdrop overlay */
+.menu-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
 }
 
-.ios .mobile-toggle span {
-    /* Make sure spans are visible on iOS */
-    position: relative;
-    display: block;
-}
-
-.ios .mobile-toggle::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    z-index: -1;
+.menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Mobile Responsiveness */
@@ -443,19 +445,18 @@ img {
     }
     
     .nav-menu {
-        position: fixed; /* Change from absolute to fixed for better iOS handling */
+        position: fixed; /* Fixed positioning */
         top: 0;
         right: -100%; /* Start off-screen */
-        height: 100vh; /* Use viewport height */
-        width: 100%;
+        height: 100vh; /* Full viewport height */
+        width: 85%; /* Not full width for better UX */
         background-color: var(--white);
         flex-direction: column;
-        box-shadow: var(--shadow-md);
-        padding-top: 80px; /* Give space for the header */
-        transition: right 0.4s ease-in-out; /* Change transition property */
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        padding-top: 80px; /* Space for header */
+        transition: right 0.3s ease-in-out; /* Smooth slide-in animation */
         z-index: 1000;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
     }
     
     .nav-menu.active {
@@ -471,8 +472,12 @@ img {
     
     .nav-menu li a {
         display: block;
-        padding: 15px 25px; /* Larger tap targets for mobile */
-        font-size: 1.1rem; /* Increase font size for better tap targets */
+        padding: 18px 25px; /* Larger tap targets */
+        font-size: 1.2rem; /* Larger text for better visibility */
+    }
+    
+    .nav-menu li a:active {
+        background-color: rgba(0, 0, 0, 0.05); /* Subtle feedback when tapped */
     }
     
     .nav-item.active .nav-link {
@@ -489,23 +494,9 @@ img {
     /* Prevent body scrolling when menu is open */
     body.menu-open {
         overflow: hidden;
-        position: fixed; /* Fix body for iOS */
+        position: fixed; /* Fix body */
         width: 100%;
         height: 100%;
-    }
-    
-    /* iOS specific menu style */
-    .ios .nav-menu {
-        -webkit-transform: translateZ(0); /* Force hardware acceleration */
-        transform: translateZ(0);
-    }
-    
-    .ios .nav-menu.active {
-        right: 0;
-    }
-    
-    .ios .mobile-toggle {
-        transform: translateZ(0); /* Force hardware acceleration */
     }
 }
 

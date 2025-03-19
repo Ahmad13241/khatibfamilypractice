@@ -68,6 +68,12 @@
 [[plugins]]
   package = "netlify-plugin-image-optim"
 
+# Remove or comment out the Cloudinary plugin that's causing the build failure
+# [[plugins]]
+#   package = "netlify-plugin-cloudinary"
+#   [plugins.inputs]
+#     cloudName = "YOUR_CLOUD_NAME_HERE"
+
 [[plugins]]
   package = "netlify-plugin-no-more-404"
   [plugins.inputs]

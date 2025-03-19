@@ -2,7 +2,7 @@
 
 [build]
   publish = "dist"
-  command = "npm run build"  # Use the build script from package.json
+  command = "npm ci && npm run build"  # First install dependencies, then build
 
 # Enable HTTPS and ensure redirect from HTTP to HTTPS
 [[redirects]]

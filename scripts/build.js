@@ -3,6 +3,21 @@
  * Prepares the Khatib Family Practice website for production deployment
  */
 
+// Check for required modules before proceeding
+try {
+  require('fs');
+  require('path');
+  require('child_process');
+  require('chalk');
+  require('clean-css');
+  require('terser');
+  require('glob');
+} catch (err) {
+  console.error('ERROR: Missing required module - ' + err.message);
+  console.error('Please run "npm install" to install all required dependencies.');
+  process.exit(1);
+}
+
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');

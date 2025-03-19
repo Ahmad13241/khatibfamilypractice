@@ -2479,9 +2479,10 @@ select:focus {
 .doctor-card {
     display: flex;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: var(--border-radius-lg);
     overflow: hidden;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-lg);
+    margin: var(--spacing-lg) 0;
 }
 
 .doctor-image {
@@ -2489,20 +2490,41 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-dark);
-    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    padding: var(--spacing-lg);
+    position: relative;
+}
+
+.doctor-image::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    pointer-events: none;
 }
 
 .doctor-img {
     width: 100%;
     max-width: 420px;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    transform: scale(0.98);
+    filter: brightness(1.02);
+}
+
+.doctor-image:hover .doctor-img {
+    transform: scale(1);
+    filter: brightness(1.05);
 }
 
 .doctor-details {
     flex: 0 0 62%;
-    padding: 40px;
+    padding: var(--spacing-xl);
 }
 
 .doctor-details h2 {
@@ -2896,14 +2918,19 @@ select:focus {
     .doctor-image {
         flex: 0 0 auto;
         width: 100%;
-        max-height: 450px;
-        padding: 20px;
+        padding-top: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+    }
+    
+    .doctor-img {
+        max-width: 320px;
+        margin: 0 auto;
     }
     
     .doctor-details {
         flex: 0 0 auto;
         width: 100%;
-        padding: 30px;
+        padding: var(--spacing-lg);
     }
 }
 
@@ -2914,7 +2941,7 @@ select:focus {
     }
     
     .doctor-details h2 {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
     }
     
     .credentials {
@@ -2924,20 +2951,19 @@ select:focus {
 
 @media (max-width: 576px) {
     .doctor-image {
-        padding: 15px;
-        max-height: 350px;
+        padding: var(--spacing-md);
     }
     
     .doctor-details {
-        padding: 20px;
+        padding: var(--spacing-md);
     }
     
     .info-card {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-md);
     }
     
     .experience-summary {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-md);
     }
 }
 
@@ -3104,5 +3130,89 @@ select:focus {
     
     .contact-highlight {
         font-size: 1.1rem;
+    }
+}
+
+/* Our Practice Section Styles */
+.our-practice {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--light-color);
+}
+
+.practice-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.feature-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-top: 3px solid var(--primary-color);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-top: 3px solid var(--secondary-color);
+}
+
+.feature-card .feature-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(var(--primary-rgb), 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.feature-card .feature-icon i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.feature-card:hover .feature-icon {
+    background-color: var(--primary-color);
+}
+
+.feature-card:hover .feature-icon i {
+    color: var(--white);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--dark-color);
+}
+
+.feature-card p {
+    color: var(--light-text);
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+@media (max-width: 992px) {
+    .practice-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .practice-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-card {
+        padding: var(--spacing-md);
     }
 }

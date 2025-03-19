@@ -11,30 +11,60 @@ document.addEventListener('DOMContentLoaded', function() {
         console.info(`DOM loaded in ${domLoadTime}ms`);
     }
     
-    // Mobile menu toggle - UPDATED for new nav structure
+    // Mobile menu toggle - UPDATED for better mobile handling
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const body = document.body;
     
+    // Set header height CSS variable for proper mobile navigation
+    function updateHeaderHeight() {
+        const header = document.querySelector('header');
+        if (header) {
+            const headerHeight = header.offsetHeight;
+            document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+            console.log(`Header height set to ${headerHeight}px`);
+        }
+    }
+    
+    // Run on load and resize
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    
     if (mobileToggle) {
-        mobileToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            this.classList.toggle('active');
-            body.classList.toggle('menu-open');
-            
-            // Update aria-expanded attribute
-            const isExpanded = navMenu.classList.contains('active');
-            this.setAttribute('aria-expanded', isExpanded);
-            
-            // Log mobile menu action
-            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                const action = isExpanded ? 'open' : 'close';
-                window.KLogger.logUserAction('Mobile Menu', { action: action });
-            }
+        // Add both click and touchstart events to ensure it works on all devices
+        ['click', 'touchstart'].forEach(eventType => {
+            mobileToggle.addEventListener(eventType, function(e) {
+                e.preventDefault(); // Prevent default behavior
+                e.stopPropagation(); // Stop event bubbling
+                
+                navMenu.classList.toggle('active');
+                this.classList.toggle('active');
+                body.classList.toggle('menu-open');
+                
+                // Update aria-expanded attribute
+                const isExpanded = navMenu.classList.contains('active');
+                this.setAttribute('aria-expanded', isExpanded);
+                
+                // Update header height after toggle
+                setTimeout(updateHeaderHeight, 50);
+                
+                // Log mobile menu action
+                if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                    const action = isExpanded ? 'open' : 'close';
+                    window.KLogger.logUserAction('Mobile Menu', { action: action });
+                }
+                
+                console.log('Mobile menu toggled: ' + (isExpanded ? 'open' : 'closed')); // Debugging
+                
+                if (eventType === 'touchstart') {
+                    // Prevent multiple events from firing
+                    return false;
+                }
+            }, { passive: false });
         });
     }
     
-    // Close mobile menu when clicking outside
+    // Close mobile menu when clicking/touching outside
     document.addEventListener('click', function(e) {
         if (navMenu && navMenu.classList.contains('active') && 
             !e.target.closest('.nav-menu') && 
@@ -47,6 +77,21 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileToggle.setAttribute('aria-expanded', 'false');
         }
     });
+    
+    // Close mobile menu when escape key is pressed
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            body.classList.remove('menu-open');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Add specific code to handle iOS Safari quirks
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('ios');
+    }
     
     // Handle smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

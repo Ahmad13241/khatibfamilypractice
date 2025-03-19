@@ -3,9 +3,9 @@
  * Security Functionality
  */
 
-// Security module for Khatib Family Practice - Check if it already exists to avoid duplicate declaration
-if (typeof window.KSecurity === 'undefined') {
-    // Use a constant instead of variable to prevent redeclaration
+// Security module for Khatib Family Practice - Prevent duplicate declarations
+if (!window.KSecurity) {
+    // Store CSRF token
     const KSecurity = (function() {
         // Store CSRF token
         let csrfToken = '';
@@ -28,7 +28,7 @@ if (typeof window.KSecurity === 'undefined') {
                     if (!headers['x-content-type-options']) missingHeaders.push('X-Content-Type-Options');
                     if (!headers['referrer-policy']) missingHeaders.push('Referrer-Policy');
                     
-                    if (missingHeaders.length > 0 && console) {
+                    if (missingHeaders.length > 0) {
                       console.warn('Missing security headers:', missingHeaders.join(', '));
                     }
                   })
@@ -52,18 +52,10 @@ if (typeof window.KSecurity === 'undefined') {
                     const data = await response.json();
                     csrfToken = data.csrfToken;
                     return csrfToken;
-                } else {
-                    // Silent fail in production
-                    if (process.env.NODE_ENV !== 'production' && console) {
-                        console.error('Failed to fetch CSRF token');
-                    }
-                    return null;
                 }
+                return null;
             } catch (error) {
-                // Silent fail in production
-                if (process.env.NODE_ENV !== 'production' && console) {
-                    console.error('Error fetching CSRF token:', error);
-                }
+                // Silently fail when the endpoint doesn't exist
                 return null;
             }
         };
@@ -127,11 +119,14 @@ if (typeof window.KSecurity === 'undefined') {
         };
     })();
 
-    // Initialize security features when the DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
-        KSecurity.init();
-    });
-
     // Make security object available globally
     window.KSecurity = KSecurity;
-} 
+}
+
+// Initialize security features when the DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Only init if KSecurity exists
+    if (window.KSecurity && typeof window.KSecurity.init === 'function') {
+        window.KSecurity.init();
+    }
+}); 

@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
             body.classList.toggle('menu-open');
             
-            // Update aria-expanded state for accessibility
+            // Update aria-expanded attribute
             const isExpanded = navMenu.classList.contains('active');
-            this.setAttribute('aria-expanded', isExpanded.toString());
+            this.setAttribute('aria-expanded', isExpanded);
             
             // Log mobile menu action
             if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                const action = navMenu.classList.contains('active') ? 'open' : 'close';
+                const action = isExpanded ? 'open' : 'close';
                 window.KLogger.logUserAction('Mobile Menu', { action: action });
             }
         });
@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.remove('active');
             mobileToggle.classList.remove('active');
             body.classList.remove('menu-open');
-            // Update aria-expanded state
+            
+            // Update aria-expanded attribute
             mobileToggle.setAttribute('aria-expanded', 'false');
         }
     });
@@ -65,14 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     navMenu.classList.remove('active');
                     mobileToggle.classList.remove('active');
                     body.classList.remove('menu-open');
-                    // Update aria-expanded state
-                    mobileToggle.setAttribute('aria-expanded', 'false');
                 }
             }
         });
     });
     
-    // Add fixed header class on scroll - UPDATED with passive listener
+    // Add fixed header class on scroll
     const header = document.querySelector('header');
     const headerHeight = header.offsetHeight;
     
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.remove('fixed');
             document.body.classList.remove('has-fixed-header');
         }
-    }, { passive: true }); // Added passive flag for better performance
+    });
 
     // Handle form submissions if form exists
     const contactForm = document.getElementById('contact-form');
@@ -255,8 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                 }
-                // Reset aria-expanded attribute
-                mobileToggle.setAttribute('aria-expanded', 'false');
             }
         }
     }
@@ -264,25 +261,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize mobile menu styles
     updateMobileMenuStyles();
     
-    // Update on window resize - UPDATED with passive listener
+    // Update on window resize
     window.addEventListener('resize', function() {
         updateMobileMenuStyles();
         // Also update image handling on resize
         handleImageResize();
-    }, { passive: true });
-    
-    // Touch event handlers with passive flag
-    function handleTouchStart(e) {
-        // Touch event handling implementation
-    }
-    
-    function handleTouchMove(e) {
-        // Touch event handling implementation
-    }
-    
-    // Add passive touch event listeners for better performance
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    });
     
     // Handle image resizing when window size changes - IMPROVED VERSION
     function handleImageResize() {
@@ -415,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 img.style.opacity = '1';
             }
         });
-    }, { passive: true }); // Added passive flag for better performance
+    });
     
     // Preload important images
     function preloadImages() {
@@ -458,9 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.head.appendChild(preloadLink);
             
             // Log preloading
-            if (process.env.NODE_ENV !== 'production') {
-                console.info(`Preloading image: ${preloadLink.href}`);
-            }
+            console.info(`Preloading image: ${preloadLink.href}`);
         });
     }
     
@@ -591,19 +573,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Feature item hover effect - uses passive event listeners
+    // Feature item hover effect
     const featureItems = document.querySelectorAll('.feature-item');
     
     featureItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-5px)';
             this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
-        }, { passive: true });
+        });
         
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
             this.style.boxShadow = 'none';
-        }, { passive: true });
+        });
     });
 
     // Add event listeners with logging for all navigation links
@@ -617,4 +599,82 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Add event listeners to all links in the footer
+    const footerLinks = document.querySelectorAll('footer a');
+    footerLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Log the click with specific info
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                KLogger.logUserAction('Footer Link Click', {
+                    href: this.getAttribute('href')
+                });
+            }
+        });
+    });
+
+    // Map loading functionality
+    function initMapLoading() {
+        console.log('Initializing map loading functionality');
+        const loadMapBtn = document.getElementById('load-map-btn');
+        if (loadMapBtn) {
+            console.log('Map button found, attaching event listener');
+            loadMapBtn.addEventListener('click', loadGoogleMap);
+            
+            // Add a debug click handler to verify event binding
+            loadMapBtn.addEventListener('click', function() {
+                console.log('Map button clicked');
+            });
+        } else {
+            console.warn('Map button not found in the DOM');
+        }
+    }
+    
+    // Function to load Google Maps iframe on demand
+    function loadGoogleMap() {
+        console.log('loadGoogleMap function called');
+        const mapContainer = document.getElementById('map-iframe-container');
+        const staticMap = document.getElementById('static-map');
+        
+        console.log('Map container found:', !!mapContainer);
+        console.log('Static map found:', !!staticMap);
+        
+        if (!mapContainer || !staticMap) {
+            console.warn('Map container or static map not found');
+            return;
+        }
+        
+        // Create and insert the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus';
+        iframe.width = '100%';
+        iframe.height = '400';
+        iframe.style.border = '0';
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+        iframe.title = 'Khatib Family Practice location map';
+        iframe.setAttribute('aria-label', 'Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442');
+        
+        // Show the iframe container and hide the static map
+        mapContainer.classList.remove('hidden');
+        mapContainer.appendChild(iframe);
+        staticMap.classList.add('hidden');
+        
+        console.log('Map iframe created and added to the DOM');
+        
+        // Remove the event listener since we only need to load the map once
+        const loadMapBtn = document.getElementById('load-map-btn');
+        if (loadMapBtn) {
+            loadMapBtn.removeEventListener('click', loadGoogleMap);
+            console.log('Event listener removed from map button');
+        }
+    }
+    
+    // Initialize map loading functionality
+    // Wait a bit to ensure all elements are properly rendered
+    setTimeout(function() {
+        initMapLoading();
+        console.log('Map loading initialized with delay');
+    }, 500);
 }); 

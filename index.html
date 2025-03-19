@@ -17,21 +17,37 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
-    <!-- Font Awesome for icons with SRI -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    <!-- Font Awesome for icons with SRI - preloaded to avoid render blocking -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          as="style" 
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
           crossorigin="anonymous" 
-          referrerpolicy="no-referrer">
-    <!-- Google Fonts -->
+          referrerpolicy="no-referrer"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+              integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+              crossorigin="anonymous" 
+              referrerpolicy="no-referrer">
+    </noscript>
+    
+    <!-- Google Fonts - preloaded to avoid render blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- jQuery (updated version) with SRI -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" 
+          as="style" 
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" 
+              rel="stylesheet">
+    </noscript>
+    
+    <!-- jQuery (updated version) with SRI - loaded async to avoid render blocking -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
             crossorigin="anonymous" 
             referrerpolicy="no-referrer" 
-            defer></script>
+            async></script>
 </head>
 <body>
     <!-- Skip to content link for accessibility -->
@@ -43,18 +59,18 @@
             <div class="container">
                 <div class="contact-details">
                     <a href="tel:9287639009" class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         <span>(928) 763-9009</span>
                     </a>
                     <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
                        target="_blank" rel="noopener" class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
                     </a>
                 </div>
                 <div class="portal-access">
                     <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank" rel="noopener">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span>Patient Portal</span>
                     </a>
                 </div>
@@ -65,17 +81,18 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="index.html" class="practice-logo">
-                        <img src="images/Logo.png" alt="Khatib Family Practice Logo">
+                        <img src="images/Logo.png" alt="Khatib Family Practice Logo" width="150" height="80">
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
-                    <div class="mobile-toggle" aria-label="Toggle navigation menu">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
+                        <span class="visually-hidden">Toggle navigation menu</span>
+                    </button>
                     
-                    <ul class="nav-menu">
+                    <ul class="nav-menu" id="nav-menu">
                         <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="pages/about.html" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="pages/resources.html" class="nav-link">Patient Resources</a></li>
@@ -101,7 +118,7 @@
             </div>
             <div class="hero-image">
                 <!-- Practice Logo -->
-                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img">
+                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img" width="150" height="80">
             </div>
         </div>
     </section>
@@ -165,7 +182,7 @@
         <div class="container">
             <div class="doctor-image">
                 <!-- Practice image instead of doctor image -->
-                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img about-logo">
+                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img about-logo" width="150" height="80">
             </div>
             <div class="doctor-content">
                 <h2>About Khatib Family Practice</h2>
@@ -231,26 +248,21 @@
                 <p>Conveniently located in Bullhead City</p>
             </div>
             <div class="location-container">
-                <div class="map-container">
-                    <!-- Google Maps embed with enhanced security -->
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus" 
-                        width="100%" 
-                        height="400" 
-                        style="border:0;" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        sandbox="allow-scripts allow-same-origin allow-popups"
-                        title="Khatib Family Practice location map"
-                        aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442">
-                    </iframe>
+                <div id="map-container" class="map-container">
+                    <!-- Replacing iframe with div for lazy-loaded maps -->
+                    <div id="map" style="width:100%;height:400px;border:0;" 
+                         aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442">
+                       <noscript>
+                           <p>JavaScript is required to view the map. Our office is located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
+                       </noscript>
+                    </div>
                 </div>
                 <div class="location-details">
                     <div class="address">
                         <h3>Khatib Family Practice</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
-                        <p><i class="fas fa-phone"></i> (928) 763-9009</p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> (928) 763-9009</p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
                     </div>
                     <div class="hours">
                         <h3>Office Hours</h3>
@@ -273,9 +285,9 @@
                     <h3>Khatib Family Practice</h3>
                     <p>Serving the Bullhead City community and surrounding areas with quality-focused adult medicine since 1998.</p>
                     <div class="contact">
-                        <p><i class="fas fa-phone"></i> (928) 763-9009</p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> (928) 763-9009</p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
                     </div>
                 </div>
                 <div class="footer-section links">
@@ -305,7 +317,46 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/security.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/security.js" defer></script>
+    
+    <!-- Lazy load Google Maps -->
+    <script>
+      // Maps initialization function
+      function initMap() {
+        const mapLocation = { lat: 35.076931, lng: -114.572841 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 15,
+          center: mapLocation,
+          mapTypeControl: false,
+        });
+        const marker = new google.maps.Marker({
+          position: mapLocation,
+          map: map,
+          title: "Khatib Family Practice"
+        });
+      }
+
+      // Load Maps API only when map section is in viewport
+      document.addEventListener('DOMContentLoaded', function() {
+        const mapObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const mapScript = document.createElement('script');
+              mapScript.src = 'https://maps.googleapis.com/maps/api/js?callback=initMap';
+              mapScript.defer = true;
+              mapScript.async = true;
+              document.body.appendChild(mapScript);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {rootMargin: '200px 0px'});
+        
+        const mapContainer = document.getElementById('map-container');
+        if (mapContainer) {
+          mapObserver.observe(mapContainer);
+        }
+      });
+    </script>
 </body>
 </html> 

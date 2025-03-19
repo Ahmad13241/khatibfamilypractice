@@ -14,7 +14,7 @@
     --dark-color: #2d3748;          /* Dark Gray/Blue */
     --light-color: #f7fafc;         /* Very Light Gray */
     --text-color: #333333;          /* Text Dark Gray */
-    --light-text: #718096;          /* Light Gray Text */
+    --light-text: #4a5568;          /* Darker Gray Text for better contrast - updated */
     --white: #ffffff;               /* White */
     --success: #48bb78;             /* Green */
     --warning: #ed8936;             /* Orange */
@@ -78,6 +78,8 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     margin-bottom: var(--spacing-md);
+    color: #333333; /* Darker text for better contrast */
+    line-height: 1.6;
 }
 
 a {
@@ -133,8 +135,12 @@ img {
 }
 
 .section-header p {
-    color: var(--light-text);
+    color: #333333; /* Darker text for better contrast */
     font-size: 1.1rem;
+    margin-bottom: var(--spacing-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .image-placeholder {
@@ -218,37 +224,43 @@ img {
 }
 
 .contact-item {
+    display: inline-block; 
     color: var(--white);
-    margin-right: 20px;
-    font-size: 0.875rem;
     text-decoration: none;
-    display: flex;
-    align-items: center;
+    padding: 12px; /* Increased padding for larger tap targets */
+    min-height: 48px; /* Minimum height for tap targets */
+    min-width: 48px; /* Minimum width for tap targets */
+    margin-right: var(--spacing-md);
+    transition: color 0.3s ease;
+    font-weight: 500;
+    line-height: 1.5;
 }
 
 .contact-item i {
-    margin-right: 8px;
+    margin-right: var(--spacing-xs);
 }
 
 .portal-button {
-    background-color: var(--secondary-color);
-    color: var(--white);
-    padding: 6px 12px;
-    border-radius: var(--border-radius-sm);
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    background-color: #1a5599; /* Darker blue for better contrast */
+    color: var(--white);
+    text-decoration: none;
+    padding: 12px 16px; /* Increased padding for larger tap target */
+    border-radius: var(--border-radius);
     transition: background-color 0.3s ease;
+    font-weight: 600;
+    min-height: 48px; /* Minimum height for tap targets */
+    min-width: 48px; /* Minimum width for tap targets */
 }
 
 .portal-button i {
-    margin-right: 8px;
+    margin-right: var(--spacing-xs);
 }
 
 .portal-button:hover {
-    background-color: var(--secondary-dark);
+    background-color: #12407a; /* Even darker on hover for better contrast */
+    color: var(--white);
 }
 
 /* Main Navigation Styles */
@@ -307,12 +319,15 @@ img {
 }
 
 .nav-link {
+    display: inline-block;
     color: var(--dark-color);
     text-decoration: none;
-    font-weight: 500;
-    padding: 10px 15px;
-    display: block;
-    transition: color 0.2s ease;
+    font-weight: 600;
+    padding: 12px 16px; /* Increased padding for better tap target */
+    transition: color 0.3s ease;
+    position: relative;
+    min-height: 48px; /* Minimum height for tap targets */
+    min-width: 48px; /* Minimum width for tap targets */
 }
 
 .nav-link:hover, 
@@ -549,11 +564,14 @@ img {
 
 .service-card .read-more {
     display: inline-block;
-    margin-top: var(--spacing-md);
-    color: var(--secondary-color);
+    color: #0056b3; /* Darker blue for better contrast */
     font-weight: 600;
     text-decoration: none;
+    margin-top: var(--spacing-sm);
     position: relative;
+    transition: color 0.3s ease;
+    padding: 8px 0; /* Increased padding for tap target */
+    min-height: 44px; /* Increased tap target size */
 }
 
 /* Enhanced service page styles */
@@ -1115,12 +1133,13 @@ footer {
 
 .footer-section.links ul li a,
 .footer-section.resources ul li a {
-    color: var(--light-color);
+    color: #e2e8f0; /* Lighter color for better contrast on dark background */
     text-decoration: none;
     transition: color 0.3s ease;
-    display: inline-block;
     position: relative;
-    padding-left: 1.25rem;
+    padding: 6px 0 6px 20px;
+    display: inline-block;
+    min-height: 44px; /* Increased tap target size */
 }
 
 .footer-section.links ul li a::before,
@@ -1998,10 +2017,12 @@ select:focus {
 }
 
 .section-header p {
-    color: var(--light-text);
-    max-width: 700px;
-    margin: 0 auto;
+    color: #333333; /* Darker text for better contrast */
     font-size: 1.1rem;
+    margin-bottom: var(--spacing-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section-header::after {
@@ -2755,7 +2776,7 @@ select:focus {
 }
 
 .contact-section .section-header p {
-    color: var(--light-text);
+    color: #333333; /* Darker text for better contrast */
     font-size: 1.15rem;
     max-width: 600px;
     margin: 0 auto;
@@ -2862,7 +2883,7 @@ select:focus {
 
 .contact-method p {
     margin-bottom: var(--spacing-sm);
-    color: var(--text-color);
+    color: #333333; /* Darker text for better contrast */
 }
 
 .contact-highlight {

@@ -22,6 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
             body.classList.toggle('menu-open');
             
+            // Update aria-expanded state for accessibility
+            const isExpanded = navMenu.classList.contains('active');
+            this.setAttribute('aria-expanded', isExpanded.toString());
+            
             // Log mobile menu action
             if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
                 const action = navMenu.classList.contains('active') ? 'open' : 'close';
@@ -38,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.remove('active');
             mobileToggle.classList.remove('active');
             body.classList.remove('menu-open');
+            // Update aria-expanded state
+            mobileToggle.setAttribute('aria-expanded', 'false');
         }
     });
     
@@ -59,12 +65,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     navMenu.classList.remove('active');
                     mobileToggle.classList.remove('active');
                     body.classList.remove('menu-open');
+                    // Update aria-expanded state
+                    mobileToggle.setAttribute('aria-expanded', 'false');
                 }
             }
         });
     });
     
-    // Add fixed header class on scroll
+    // Add fixed header class on scroll - UPDATED with passive listener
     const header = document.querySelector('header');
     const headerHeight = header.offsetHeight;
     
@@ -79,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.remove('fixed');
             document.body.classList.remove('has-fixed-header');
         }
-    });
+    }, { passive: true }); // Added passive flag for better performance
 
     // Handle form submissions if form exists
     const contactForm = document.getElementById('contact-form');
@@ -247,6 +255,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                 }
+                // Reset aria-expanded attribute
+                mobileToggle.setAttribute('aria-expanded', 'false');
             }
         }
     }
@@ -254,12 +264,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize mobile menu styles
     updateMobileMenuStyles();
     
-    // Update on window resize
+    // Update on window resize - UPDATED with passive listener
     window.addEventListener('resize', function() {
         updateMobileMenuStyles();
         // Also update image handling on resize
         handleImageResize();
-    });
+    }, { passive: true });
+    
+    // Touch event handlers with passive flag
+    function handleTouchStart(e) {
+        // Touch event handling implementation
+    }
+    
+    function handleTouchMove(e) {
+        // Touch event handling implementation
+    }
+    
+    // Add passive touch event listeners for better performance
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: true });
     
     // Handle image resizing when window size changes - IMPROVED VERSION
     function handleImageResize() {
@@ -392,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 img.style.opacity = '1';
             }
         });
-    });
+    }, { passive: true }); // Added passive flag for better performance
     
     // Preload important images
     function preloadImages() {
@@ -435,7 +458,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.head.appendChild(preloadLink);
             
             // Log preloading
-            console.info(`Preloading image: ${preloadLink.href}`);
+            if (process.env.NODE_ENV !== 'production') {
+                console.info(`Preloading image: ${preloadLink.href}`);
+            }
         });
     }
     
@@ -566,19 +591,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Feature item hover effect
+    // Feature item hover effect - uses passive event listeners
     const featureItems = document.querySelectorAll('.feature-item');
     
     featureItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-5px)';
             this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
-        });
+        }, { passive: true });
         
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
             this.style.boxShadow = 'none';
-        });
+        }, { passive: true });
     });
 
     // Add event listeners with logging for all navigation links

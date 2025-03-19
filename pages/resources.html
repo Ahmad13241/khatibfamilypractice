@@ -3,41 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Access patient resources and services from Khatib Family Practice in Bullhead City, AZ. Our boutique practice offers individualized care plans and comprehensive services for adult patients 21 and older.">
+    <meta name="description" content="Resources for patients of Khatib Family Practice in Bullhead City, AZ. Find information about our services, download new patient forms, and learn about insurance options.">
+    <!-- Enhanced security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
     <title>Patient Resources | Khatib Family Practice</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/accessibility.css">
+    
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    
+    <!-- Font Awesome for icons - optimized loading -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          as="style" 
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    
+    <!-- Google Fonts - optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" 
+          as="style" 
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    </noscript>
 </head>
 <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+    
     <!-- Header Section -->
     <header>
         <div class="top-info-bar">
             <div class="container">
                 <div class="contact-details">
                     <a href="tel:9287639009" class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         <span>(928) 763-9009</span>
                     </a>
                     <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
                        target="_blank" rel="noopener" class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
                     </a>
                 </div>
                 <div class="portal-access">
                     <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank" rel="noopener">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span>Patient Portal</span>
                     </a>
                 </div>
@@ -48,17 +69,18 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="../index.html" class="practice-logo">
-                        <img src="../images/Logo.png" alt="Khatib Family Practice Logo">
+                        <img src="../images/Logo.png" alt="Khatib Family Practice Logo" width="150" height="80">
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
-                    <div class="mobile-toggle" aria-label="Toggle navigation menu">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
+                        <span class="visually-hidden">Toggle navigation menu</span>
+                    </button>
                     
-                    <ul class="nav-menu">
+                    <ul class="nav-menu" id="nav-menu">
                         <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                         <li class="nav-item active"><a href="resources.html" class="nav-link">Patient Resources</a></li>
@@ -71,332 +93,335 @@
         </div>
     </header>
 
-    <!-- Services Section -->
-    <section class="services-overview">
-        <div class="container">
-            <!-- Family Medicine -->
-            <div id="family-medicine" class="service-detail">
-                <div class="service-content">
-                    <div class="service-icon">
-                        <i class="fas fa-user-md"></i>
-                    </div>
-                    <div class="service-text">
-                        <h2>Adult Medicine</h2>
-                        <p>Our practice focuses on comprehensive healthcare for patients 21 and older. This approach allows Dr. Khatib to establish lasting connections with each patient and function as your dedicated healthcare partner for all medical needs.</p>
-                        <div class="service-features">
-                            <h3>Our Adult Medicine Services Include:</h3>
-                            <div class="feature-grid">
-                                <div class="feature-item">
-                                    <i class="fas fa-calendar-check"></i>
-                                    <h4>Routine Care</h4>
-                                    <p>Annual physical examinations and preventive screenings</p>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Services Section -->
+        <section class="services-overview">
+            <div class="container">
+                <!-- Family Medicine -->
+                <div id="family-medicine" class="service-detail">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="service-text">
+                            <h2>Adult Medicine</h2>
+                            <p>Our practice focuses on comprehensive healthcare for patients 21 and older. This approach allows Dr. Khatib to establish lasting connections with each patient and function as your dedicated healthcare partner for all medical needs.</p>
+                            <div class="service-features">
+                                <h3>Our Adult Medicine Services Include:</h3>
+                                <div class="feature-grid">
+                                    <div class="feature-item">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <h4>Routine Care</h4>
+                                        <p>Annual physical examinations and preventive screenings</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-first-aid"></i>
+                                        <h4>Acute Care</h4>
+                                        <p>Treatment of illnesses, injuries, and urgent health concerns</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-chart-line"></i>
+                                        <h4>Ongoing Management</h4>
+                                        <p>Continuous care for chronic conditions and overall wellness</p>
+                                    </div>
                                 </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-first-aid"></i>
-                                    <h4>Acute Care</h4>
-                                    <p>Treatment of illnesses, injuries, and urgent health concerns</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <h4>Ongoing Management</h4>
-                                    <p>Continuous care for chronic conditions and overall wellness</p>
+                                <div class="service-expand">
+                                    <details>
+                                        <summary>See All Services</summary>
+                                        <ul class="expanded-list">
+                                            <li>Annual physical examinations</li>
+                                            <li>Treatment of acute illnesses and injuries</li>
+                                            <li>Management of chronic conditions</li>
+                                            <li>Preventive care and screenings</li>
+                                            <li>Health maintenance and wellness care</li>
+                                            <li>Referrals to specialists when needed</li>
+                                            <li>Coordination of care with other healthcare providers</li>
+                                        </ul>
+                                    </details>
                                 </div>
                             </div>
-                            <div class="service-expand">
-                                <details>
-                                    <summary>See All Services</summary>
-                                    <ul class="expanded-list">
-                                        <li>Annual physical examinations</li>
-                                        <li>Treatment of acute illnesses and injuries</li>
-                                        <li>Management of chronic conditions</li>
-                                        <li>Preventive care and screenings</li>
-                                        <li>Health maintenance and wellness care</li>
-                                        <li>Referrals to specialists when needed</li>
-                                        <li>Coordination of care with other healthcare providers</li>
-                                    </ul>
-                                </details>
+                        </div>
+                    </div>
+                    <div class="service-image">
+                        <picture>
+                            <source srcset="../images/family-medicine.webp" type="image/webp">
+                            <img src="../images/family-medicine.jpg" 
+                                 alt="Dr. Khatib providing compassionate care to a family with members of different ages" 
+                                 class="service-img">
+                        </picture>
+                    </div>
+                </div>
+                
+                <!-- Preventive Care -->
+                <div id="preventive-care" class="service-detail">
+                    <div class="service-image">
+                        <picture>
+                            <source srcset="../images/preventative-care.webp" type="image/webp">
+                            <img src="../images/preventative-care.jpg" 
+                                 alt="Healthcare provider discussing prevention strategies with a patient in a warm, comfortable setting" 
+                                 class="service-img">
+                        </picture>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="service-text">
+                            <h2>Preventive Care</h2>
+                            <p>We believe that preventing illness is more effective than treating it. Our preventive care approach helps you maintain optimal health and identify potential issues early when they're most responsive to treatment.</p>
+                            <div class="service-features">
+                                <div class="feature-grid">
+                                    <div class="feature-item">
+                                        <i class="fas fa-clipboard-check"></i>
+                                        <h4>Screenings & Assessments</h4>
+                                        <p>Age-appropriate screenings and comprehensive health risk assessments</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-shield-virus"></i>
+                                        <h4>Immunizations</h4>
+                                        <p>Vaccinations for important and recommended diseases</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-apple-alt"></i>
+                                        <h4>Lifestyle Guidance</h4>
+                                        <p>Counseling on nutrition, exercise, and healthy habits</p>
+                                    </div>
+                                </div>
+                                <div class="service-expand">
+                                    <details>
+                                        <summary>Learn About All Preventive Services</summary>
+                                        <ul class="expanded-list">
+                                            <li>Annual wellness visits</li>
+                                            <li>Health risk assessments</li>
+                                            <li>Age-appropriate screenings</li>
+                                            <li>Important recommended immunizations and vaccinations</li>
+                                            <li>Lifestyle and nutrition counseling</li>
+                                            <li>Smoking cessation support</li>
+                                            <li>Weight management guidance</li>
+                                        </ul>
+                                    </details>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/family-medicine.webp" type="image/webp">
-                        <img src="../images/family-medicine.jpg" 
-                             alt="Dr. Khatib providing compassionate care to a family with members of different ages" 
-                             class="service-img">
-                    </picture>
-                </div>
-            </div>
-            
-            <!-- Preventive Care -->
-            <div id="preventive-care" class="service-detail">
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/preventative-care.webp" type="image/webp">
-                        <img src="../images/preventative-care.jpg" 
-                             alt="Healthcare provider discussing prevention strategies with a patient in a warm, comfortable setting" 
-                             class="service-img">
-                    </picture>
-                </div>
-                <div class="service-content">
-                    <div class="service-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <div class="service-text">
-                        <h2>Preventive Care</h2>
-                        <p>We believe that preventing illness is more effective than treating it. Our preventive care approach helps you maintain optimal health and identify potential issues early when they're most responsive to treatment.</p>
-                        <div class="service-features">
-                            <div class="feature-grid">
-                                <div class="feature-item">
-                                    <i class="fas fa-clipboard-check"></i>
-                                    <h4>Screenings & Assessments</h4>
-                                    <p>Age-appropriate screenings and comprehensive health risk assessments</p>
+                
+                <!-- Chronic Disease Management -->
+                <div id="chronic-disease" class="service-detail">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <div class="service-text">
+                            <h2>Chronic Disease Management</h2>
+                            <p>Managing a chronic condition presents unique challenges. We offer comprehensive support to help you effectively address your condition and enhance your quality of life.</p>
+                            <div class="service-features">
+                                <div class="feature-grid">
+                                    <div class="feature-item">
+                                        <i class="fas fa-heart"></i>
+                                        <h4>Cardiovascular Conditions</h4>
+                                        <p>Hypertension, heart disease, and high cholesterol management</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-tint"></i>
+                                        <h4>Metabolic Disorders</h4>
+                                        <p>Diabetes, thyroid disorders, and other metabolic conditions</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-lungs"></i>
+                                        <h4>Respiratory Conditions</h4>
+                                        <p>Asthma, COPD, and other chronic respiratory issues</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-brain"></i>
+                                        <h4>Neurological Issues</h4>
+                                        <p>Migraine management and other neurological conditions</p>
+                                    </div>
                                 </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-shield-virus"></i>
-                                    <h4>Immunizations</h4>
-                                    <p>Vaccinations for important and recommended diseases</p>
+                                <div class="care-approach">
+                                    <h4>Our Management Approach:</h4>
+                                    <p>We develop customized treatment plans tailored to your specific condition, health history, and lifestyle. Our boutique practice model enables Dr. Khatib to provide detailed monitoring, careful medication management, and coordinated specialist care while maintaining consistent oversight of your health journey. Unlike high-volume clinics, we dedicate the necessary time and attention for complex conditions.</p>
                                 </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-apple-alt"></i>
-                                    <h4>Lifestyle Guidance</h4>
-                                    <p>Counseling on nutrition, exercise, and healthy habits</p>
-                                </div>
-                            </div>
-                            <div class="service-expand">
-                                <details>
-                                    <summary>Learn About All Preventive Services</summary>
-                                    <ul class="expanded-list">
-                                        <li>Annual wellness visits</li>
-                                        <li>Health risk assessments</li>
-                                        <li>Age-appropriate screenings</li>
-                                        <li>Important recommended immunizations and vaccinations</li>
-                                        <li>Lifestyle and nutrition counseling</li>
-                                        <li>Smoking cessation support</li>
-                                        <li>Weight management guidance</li>
-                                    </ul>
-                                </details>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Chronic Disease Management -->
-            <div id="chronic-disease" class="service-detail">
-                <div class="service-content">
-                    <div class="service-icon">
-                        <i class="fas fa-notes-medical"></i>
-                    </div>
-                    <div class="service-text">
-                        <h2>Chronic Disease Management</h2>
-                        <p>Managing a chronic condition presents unique challenges. We offer comprehensive support to help you effectively address your condition and enhance your quality of life.</p>
-                        <div class="service-features">
-                            <div class="feature-grid">
-                                <div class="feature-item">
-                                    <i class="fas fa-heart"></i>
-                                    <h4>Cardiovascular Conditions</h4>
-                                    <p>Hypertension, heart disease, and high cholesterol management</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-tint"></i>
-                                    <h4>Metabolic Disorders</h4>
-                                    <p>Diabetes, thyroid disorders, and other metabolic conditions</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-lungs"></i>
-                                    <h4>Respiratory Conditions</h4>
-                                    <p>Asthma, COPD, and other chronic respiratory issues</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-brain"></i>
-                                    <h4>Neurological Issues</h4>
-                                    <p>Migraine management and other neurological conditions</p>
-                                </div>
-                            </div>
-                            <div class="care-approach">
-                                <h4>Our Management Approach:</h4>
-                                <p>We develop customized treatment plans tailored to your specific condition, health history, and lifestyle. Our boutique practice model enables Dr. Khatib to provide detailed monitoring, careful medication management, and coordinated specialist care while maintaining consistent oversight of your health journey. Unlike high-volume clinics, we dedicate the necessary time and attention for complex conditions.</p>
-                            </div>
-                        </div>
+                    <div class="service-image">
+                        <picture>
+                            <source srcset="../images/chronic-care.jpg.webp" type="image/webp">
+                            <img src="../images/chronic-care.jpg" 
+                                 alt="Provider helping a patient monitor their chronic condition with care and attention" 
+                                 class="service-img">
+                        </picture>
                     </div>
                 </div>
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/chronic-care.jpg.webp" type="image/webp">
-                        <img src="../images/chronic-care.jpg" 
-                             alt="Provider helping a patient monitor their chronic condition with care and attention" 
-                             class="service-img">
-                    </picture>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Resources Navigation -->
-    <section class="resources-nav">
-        <div class="container">
-            <div class="resources-nav-container">
-                <a href="#new-patients" class="resource-nav-item">
-                    <i class="fas fa-file-medical"></i>
-                    <span>New Patient Forms</span>
-                </a>
-                <a href="#insurance" class="resource-nav-item">
-                    <i class="fas fa-hand-holding-medical"></i>
-                    <span>Insurance Information</span>
-                </a>
-                <a href="healow.html" class="resource-nav-item">
-                    <i class="fas fa-laptop-medical"></i>
-                    <span>healow Patient Portal Service</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- New Patient Information Section -->
-    <section id="new-patients" class="resource-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>New Patient Information</h2>
-                <p>Everything you need to prepare for your first visit</p>
-            </div>
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">
+        <!-- Resources Navigation -->
+        <section class="resources-nav">
+            <div class="container">
+                <div class="resources-nav-container">
+                    <a href="#new-patients" class="resource-nav-item">
                         <i class="fas fa-file-medical"></i>
-                    </div>
-                    <h3>New Patient Forms</h3>
-                    <p>Please complete these fillable PDF forms before your first appointment to save time during your visit. Must be 21 years or older to become a patient.</p>
-                    <p class="form-instructions"><strong>How to complete:</strong> You can either print these forms and fill them out by hand, or download and complete them digitally using Adobe Acrobat Reader or another PDF application that supports fillable forms.</p>
-                    <ul class="resource-links">
-                        <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download"></i> Financial Policy</a></li>
-                        <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
-                        <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> Office Policies</a></li>
-                    </ul>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-clipboard-check"></i>
-                    </div>
-                    <h3>Appointment Preparation</h3>
-                    <p>How to prepare for your first visit with Dr. Khatib:</p>
-                    <ul>
-                        <li>Bring your completed forms (or arrive 15 minutes early to complete them)</li>
-                        <li>Bring your insurance card and photo ID</li>
-                        <li>Bring a list of current medications including dosages</li>
-                        <li>Bring any relevant medical records or test results</li>
-                        <li>Prepare a list of questions you may have for the doctor</li>
-                    </ul>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>Office Information</h3>
-                    <p>Our office is conveniently located in Bullhead City:</p>
-                    <p><strong>Address:</strong><br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
-                    <p><strong>Phone:</strong> (928) 763-9009</p>
-                    <p><strong>Hours:</strong><br>Monday - Friday: 8:00 AM - 5:00 PM<br>Lunch: 12:00 PM - 1:00 PM<br>Saturday - Sunday: Closed</p>
-                    <a href="contact.html" class="btn btn-secondary">View Map & Directions</a>
+                        <span>New Patient Forms</span>
+                    </a>
+                    <a href="#insurance" class="resource-nav-item">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        <span>Insurance Information</span>
+                    </a>
+                    <a href="healow.html" class="resource-nav-item">
+                        <i class="fas fa-laptop-medical"></i>
+                        <span>healow Patient Portal Service</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Insurance Information Section -->
-    <section id="insurance" class="resource-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Insurance Information</h2>
-                <p>Understanding your coverage and financial options</p>
-            </div>
-            <p class="insurance-intro">Khatib Family Practice accepts most major insurance plans. If you have specific questions about your coverage, please contact our office at <strong>(928) 763-9009</strong> for assistance.</p>
-            
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-id-card"></i>
-                    </div>
-                    <h3>Insurance Plans We Accept</h3>
-                    <p>We work with a wide range of insurance providers to ensure accessible care for our patients:</p>
-                    <div class="insurance-plans-grid">
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Medicare and Medicare Advantage</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Blue Cross Blue Shield</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Aetna</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Cigna</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>UnitedHealthcare</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Humana</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Tricare</span>
-                        </div>
-                    </div>
+        <!-- New Patient Information Section -->
+        <section id="new-patients" class="resource-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>New Patient Information</h2>
+                    <p>Everything you need to prepare for your first visit</p>
                 </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-dollar-sign"></i>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <h3>New Patient Forms</h3>
+                        <p>Please complete these fillable PDF forms before your first appointment to save time during your visit. Must be 21 years or older to become a patient.</p>
+                        <p class="form-instructions"><strong>How to complete:</strong> You can either print these forms and fill them out by hand, or download and complete them digitally using Adobe Acrobat Reader or another PDF application that supports fillable forms.</p>
+                        <ul class="resource-links">
+                            <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download"></i> Financial Policy</a></li>
+                            <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
+                            <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> Office Policies</a></li>
+                        </ul>
                     </div>
-                    <h3>Self-Pay Options</h3>
-                    <p>We offer reasonable self-pay rates for patients without insurance coverage. Our team is committed to making healthcare accessible and will work with you to find payment solutions that fit your budget.</p>
-                    <div class="insurance-contact">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>Call us at <strong>(928) 763-9009</strong> for more information about our self-pay options.</p>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Appointment Preparation</h3>
+                        <p>How to prepare for your first visit with Dr. Khatib:</p>
+                        <ul>
+                            <li>Bring your completed forms (or arrive 15 minutes early to complete them)</li>
+                            <li>Bring your insurance card and photo ID</li>
+                            <li>Bring a list of current medications including dosages</li>
+                            <li>Bring any relevant medical records or test results</li>
+                            <li>Prepare a list of questions you may have for the doctor</li>
+                        </ul>
                     </div>
-                    <a href="contact.html" class="btn btn-secondary">Contact Us About Insurance</a>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-question-circle"></i>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>Office Information</h3>
+                        <p>Our office is conveniently located in Bullhead City:</p>
+                        <p><strong>Address:</strong><br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+                        <p><strong>Phone:</strong> (928) 763-9009</p>
+                        <p><strong>Hours:</strong><br>Monday - Friday: 8:00 AM - 5:00 PM<br>Lunch: 12:00 PM - 1:00 PM<br>Saturday - Sunday: Closed</p>
+                        <a href="contact.html" class="btn btn-secondary">View Map & Directions</a>
                     </div>
-                    <h3>Insurance FAQs</h3>
-                    <p>Answers to common questions about insurance coverage at our practice:</p>
-                    <ul>
-                        <li>We verify your insurance benefits before your appointment</li>
-                        <li>Co-payments are collected at the time of service</li>
-                        <li>Please bring your insurance card to every visit</li>
-                        <li>We'll help you understand your coverage and benefits</li>
-                        <li>Our staff can assist with filing claims and resolving billing issues</li>
-                    </ul>
-                    <a href="contact.html#billing" class="btn btn-outline">Billing Questions</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Need any of our services?</h2>
-                <p>Our team is ready to help with all your family's healthcare needs.</p>
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn btn-primary">Contact Us for an Appointment</a>
-                    <a href="healow.html" class="btn btn-outline">Access the Healow Portal</a>
+        <!-- Insurance Information Section -->
+        <section id="insurance" class="resource-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Insurance Information</h2>
+                    <p>Understanding your coverage and financial options</p>
+                </div>
+                <p class="insurance-intro">Khatib Family Practice accepts most major insurance plans. If you have specific questions about your coverage, please contact our office at <strong>(928) 763-9009</strong> for assistance.</p>
+                
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <h3>Insurance Plans We Accept</h3>
+                        <p>We work with a wide range of insurance providers to ensure accessible care for our patients:</p>
+                        <div class="insurance-plans-grid">
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Medicare and Medicare Advantage</span>
+                            </div>
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Blue Cross Blue Shield</span>
+                            </div>
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Aetna</span>
+                            </div>
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Cigna</span>
+                            </div>
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>UnitedHealthcare</span>
+                            </div>
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Humana</span>
+                            </div>
+                            <div class="insurance-plan">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Tricare</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3>Self-Pay Options</h3>
+                        <p>We offer reasonable self-pay rates for patients without insurance coverage. Our team is committed to making healthcare accessible and will work with you to find payment solutions that fit your budget.</p>
+                        <div class="insurance-contact">
+                            <i class="fas fa-phone-alt"></i>
+                            <p>Call us at <strong>(928) 763-9009</strong> for more information about our self-pay options.</p>
+                        </div>
+                        <a href="contact.html" class="btn btn-secondary">Contact Us About Insurance</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Insurance FAQs</h3>
+                        <p>Answers to common questions about insurance coverage at our practice:</p>
+                        <ul>
+                            <li>We verify your insurance benefits before your appointment</li>
+                            <li>Co-payments are collected at the time of service</li>
+                            <li>Please bring your insurance card to every visit</li>
+                            <li>We'll help you understand your coverage and benefits</li>
+                            <li>Our staff can assist with filing claims and resolving billing issues</li>
+                        </ul>
+                        <a href="contact.html#billing" class="btn btn-outline">Billing Questions</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Need any of our services?</h2>
+                    <p>Our team is ready to help with all your family's healthcare needs.</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary">Contact Us for an Appointment</a>
+                        <a href="healow.html" class="btn btn-outline">Access the Healow Portal</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -406,9 +431,9 @@
                     <h3>Khatib Family Practice</h3>
                     <p>Serving the Bullhead City community and surrounding areas with quality-focused adult medicine since 1998.</p>
                     <div class="contact">
-                        <p><i class="fas fa-phone"></i> (928) 763-9009</p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> (928) 763-9009</p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
                     </div>
                 </div>
                 <div class="footer-section links">
@@ -438,6 +463,7 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/security.js" defer></script>
 </body>
 </html> 

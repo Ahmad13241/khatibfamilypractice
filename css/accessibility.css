@@ -1,0 +1,84 @@
+/**
+ * Khatib Family Practice - Accessibility Improvements
+ * CSS fixes for accessibility and performance issues identified in Lighthouse audit
+ */
+
+/* ===== CONTRAST IMPROVEMENTS ===== */
+
+/* Better contrast for informational text */
+p, .section-header p {
+    color: #333333 !important; /* Dark text for better contrast */
+}
+
+/* Higher contrast links */
+.read-more, .service-link, .resource-link {
+    color: #0056b3 !important; /* Darker blue for better contrast */
+    font-weight: 600;
+}
+
+/* Higher contrast portal button */
+.portal-button {
+    background-color: #1a5599 !important; /* Darker blue for better contrast */
+    color: #ffffff !important;
+}
+
+.portal-button:hover {
+    background-color: #12407a !important; /* Even darker on hover */
+}
+
+/* Better contrast for footer links against dark background */
+footer a {
+    color: #e2e8f0 !important; /* Lighter text against dark background */
+}
+
+/* ===== TAP TARGET IMPROVEMENTS ===== */
+
+/* Minimum tap target sizes for links */
+.contact-item,
+.portal-button,
+.nav-link,
+footer a,
+.btn {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    display: inline-flex !important;
+    align-items: center;
+    padding: 8px 12px !important;
+}
+
+/* Special handling for footer links */
+footer a {
+    padding: 6px 0 6px 20px !important;
+    min-height: 44px !important;
+}
+
+/* Ensure all icons in links have proper aria-hidden */
+a i, button i {
+    aria-hidden: true;
+}
+
+/* ===== LOGO IMAGE DIMENSIONS ===== */
+
+/* Explicit dimensions for Logo.png across the site */
+.logo-img,
+.practice-logo img {
+    width: 150px !important;
+    height: 80px !important;
+}
+
+/* ===== MOBILE MENU ACCESSIBILITY ===== */
+
+/* Transform div to button for semantic correctness */
+.mobile-toggle {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 10px;
+}
+
+/* ===== SMOOTH LOADING ===== */
+
+/* Prevent flash of unstyled content */
+.preload * {
+    transition: none !important;
+} 

@@ -2,11 +2,11 @@
 
 [build]
   publish = "dist"
-  command = "npm install && node scripts/build.js"
+  command = "npm install --force && npm install chalk@4.1.2 clean-css@5.3.3 terser@5.39.0 glob@8.1.0 --force && node scripts/build.js"
   
 [build.environment]
-  # Specify Node version for compatibility with your dependencies
-  NODE_VERSION = "16"
+  # Updated Node version for compatibility with dependencies
+  NODE_VERSION = "18.18.0"
 
 # Enable HTTPS and ensure redirect from HTTP to HTTPS
 [[redirects]]

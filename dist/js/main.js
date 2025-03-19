@@ -613,77 +613,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Map loading functionality
-    function initMapLoading() {
-        console.log('Initializing map loading functionality');
-        const loadMapBtn = document.getElementById('load-map-btn');
-        const mapContainer = document.getElementById('map-iframe-container');
-        const staticMap = document.getElementById('static-map');
+    // Map interaction logging
+    function initMapLogging() {
+        console.log('Initializing map logging');
+        const mapIframe = document.querySelector('.map-container iframe');
         
-        if (loadMapBtn && mapContainer && staticMap) {
-            console.log('Map elements found, attaching event listener');
+        if (mapIframe) {
+            console.log('Map iframe found, logging interaction');
             
-            // Use a named function so we can remove it later
-            const handleMapClick = function() {
-                loadGoogleMap();
-                console.log('Map button clicked, loading map');
-            };
+            // Log that the map was viewed
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                KLogger.logUserAction('Map', { action: 'map-view' });
+            }
             
-            // Add the event listener
-            loadMapBtn.addEventListener('click', handleMapClick);
-            
-            // Store the handler on the button to make it easier to remove later
-            loadMapBtn.mapClickHandler = handleMapClick;
+            // Add a click event listener to the map container to log interaction
+            const mapContainer = document.querySelector('.map-container');
+            if (mapContainer) {
+                mapContainer.addEventListener('click', function() {
+                    if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                        KLogger.logUserAction('Map', { action: 'map-click' });
+                    }
+                });
+            }
         } else {
-            console.warn('One or more map elements not found in the DOM');
+            console.warn('Map iframe not found in the DOM');
         }
     }
     
-    // Function to load Google Maps iframe on demand
-    function loadGoogleMap() {
-        console.log('loadGoogleMap function called');
-        const mapContainer = document.getElementById('map-iframe-container');
-        const staticMap = document.getElementById('static-map');
-        
-        console.log('Map container found:', !!mapContainer);
-        console.log('Static map found:', !!staticMap);
-        
-        if (!mapContainer || !staticMap) {
-            console.warn('Map container or static map not found');
-            return;
-        }
-        
-        // Create and insert the iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus';
-        iframe.width = '100%';
-        iframe.height = '400';
-        iframe.style.border = '0';
-        iframe.loading = 'lazy';
-        iframe.referrerPolicy = 'no-referrer-when-downgrade';
-        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
-        iframe.title = 'Khatib Family Practice location map';
-        iframe.setAttribute('aria-label', 'Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442');
-        
-        // Show the iframe container and hide the static map
-        mapContainer.classList.remove('hidden');
-        mapContainer.appendChild(iframe);
-        staticMap.classList.add('hidden');
-        
-        console.log('Map iframe created and added to the DOM');
-        
-        // Remove the event listener since we only need to load the map once
-        const loadMapBtn = document.getElementById('load-map-btn');
-        if (loadMapBtn && loadMapBtn.mapClickHandler) {
-            loadMapBtn.removeEventListener('click', loadMapBtn.mapClickHandler);
-            console.log('Event listener removed from map button');
-        }
-    }
-    
-    // Initialize map loading functionality
-    // Wait a bit to ensure all elements are properly rendered
+    // Initialize map logging with a slight delay to ensure DOM is fully loaded
     setTimeout(function() {
-        initMapLoading();
-        console.log('Map loading initialized with delay');
+        initMapLogging();
     }, 500);
 }); 

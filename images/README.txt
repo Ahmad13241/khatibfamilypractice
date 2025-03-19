@@ -1,3 +1,37 @@
+# Image Assets for Khatib Family Practice Website
+
+## Logo Files
+
+The website currently uses the following logo file:
+- LOGO.jpg - Currently in use in the website
+
+## IMPORTANT: Case Sensitivity in Images
+
+Netlify deployments are case-sensitive for filenames, while Windows development environments are not. To avoid deployment issues:
+
+1. Always use consistent casing in filenames (recommend lowercase with hyphens)
+2. Ensure HTML references match the exact case of the actual files
+3. When adding new images, verify both local and Netlify deployment
+
+## Optimization Recommendations
+
+The following images are currently quite large and would benefit from optimization:
+- outside-office.webp (optimize to 200-400KB)
+- reception-room.webp (optimize to 200-400KB)
+- examination-office.webp (optimize to 200-400KB)
+
+Recommended optimization steps:
+1. Resize to 1200×800px maximum dimensions (maintain aspect ratio)
+2. Compress WebP to 80-85% quality
+3. Target file size: 200-400KB per image for optimal web performance
+
+## Implementation
+
+To avoid deployment issues between local development and Netlify:
+1. Make sure all image references in HTML files use the exact filenames that exist in this directory
+2. Prefer WebP format with proper fallbacks for better performance
+3. After making changes, verify both local and Netlify deployments work correctly
+
 # Logo.png Specifications
 
 To complete the website update, please upload the Logo.png file to this directory with the following specifications:

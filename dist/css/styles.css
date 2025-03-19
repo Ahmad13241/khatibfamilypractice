@@ -14,7 +14,7 @@
     --dark-color: #2d3748;          /* Dark Gray/Blue */
     --light-color: #f7fafc;         /* Very Light Gray */
     --text-color: #333333;          /* Text Dark Gray */
-    --light-text: #718096;          /* Light Gray Text */
+    --light-text: #4a5568;          /* Light Gray Text - Darkened for better contrast from #718096 */
     --white: #ffffff;               /* White */
     --success: #48bb78;             /* Green */
     --warning: #ed8936;             /* Orange */
@@ -133,7 +133,7 @@ img {
 }
 
 .section-header p {
-    color: var(--light-text);
+    color: var(--text-color);
     font-size: 1.1rem;
 }
 
@@ -224,6 +224,9 @@ img {
     text-decoration: none;
     display: flex;
     align-items: center;
+    /* Improved tap target size */
+    padding: 12px;
+    min-height: 48px;
 }
 
 .contact-item i {
@@ -231,16 +234,18 @@ img {
 }
 
 .portal-button {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-dark); /* Darkened for better contrast */
     color: var(--white);
-    padding: 6px 12px;
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius);
     text-decoration: none;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600; /* Increased from 500 for better contrast */
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
+    /* Improved tap target size */
+    padding: 12px 16px;
+    min-height: 48px;
 }
 
 .portal-button i {
@@ -338,6 +343,9 @@ img {
     width: 30px;
     height: 21px;
     cursor: pointer;
+    /* Improved clickable area */
+    padding: 10px;
+    margin: -10px;
 }
 
 .mobile-toggle span {
@@ -520,11 +528,11 @@ img {
 
 .service-card {
     background-color: var(--white);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
     padding: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service-card:hover {
@@ -539,21 +547,24 @@ img {
 }
 
 .service-card h3 {
-    margin-bottom: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
     color: var(--primary-color);
 }
 
 .service-card p {
-    color: var(--text-color);
+    color: var(--text-color); /* Changed from light-text for better contrast */
+    margin-bottom: var(--spacing-lg);
 }
 
-.service-card .read-more {
+.read-more {
     display: inline-block;
-    margin-top: var(--spacing-md);
-    color: var(--secondary-color);
-    font-weight: 600;
+    color: var(--primary-color);
+    font-weight: 600; /* Increased for better contrast */
     text-decoration: none;
     position: relative;
+    /* Improved tap target */
+    padding: 8px 0;
+    min-height: 44px;
 }
 
 /* Enhanced service page styles */
@@ -1998,7 +2009,7 @@ select:focus {
 }
 
 .section-header p {
-    color: var(--light-text);
+    color: var(--text-color);
     max-width: 700px;
     margin: 0 auto;
     font-size: 1.1rem;
@@ -2755,7 +2766,7 @@ select:focus {
 }
 
 .contact-section .section-header p {
-    color: var(--light-text);
+    color: var(--text-color);
     font-size: 1.15rem;
     max-width: 600px;
     margin: 0 auto;
@@ -2983,634 +2994,76 @@ select:focus {
 
 /* Map Container Styling */
 .map-container {
-    height: 450px;
-    margin-top: var(--spacing-xl);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    border: 5px solid var(--white);
     position: relative;
-    z-index: 1;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 400px; /* Ensure minimum height even before map loads */
 }
 
-.map-container::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    border: 2px dashed var(--accent-color);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-    pointer-events: none;
-    border-radius: calc(var(--border-radius-lg) - 5px);
+.static-map-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #f1f1f1;
+    display: block; /* Ensure it's visible */
 }
 
-.map-container:hover::before {
-    opacity: 0.5;
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .contact-section::before {
-        width: 150px;
-        height: 150px;
-        background-size: 20px 20px;
-    }
-    
-    .contact-form-section::after {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .contact-section .section-header h2 {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .contact-methods {
-        gap: var(--spacing-lg);
-    }
-    
-    .contact-icon {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .contact-info-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .map-container {
-        height: 350px;
-    }
-    
-    .contact-highlight {
-        font-size: 1.3rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .contact-section {
-        padding: var(--spacing-lg) 0;
-    }
-    
-    .contact-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
-    .contact-method h3 {
-        font-size: 1.25rem;
-    }
-    
-    .map-container {
-        height: 300px;
-        margin-top: var(--spacing-lg);
-    }
-}
-
-/* Insurance plans grid inside resource cards */
-.resource-card .insurance-plans-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-md);
-}
-
-.insurance-plan {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
-    background-color: var(--light-color);
-    border-radius: var(--border-radius);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.insurance-plan:hover {
-    transform: translateY(-2px);
-    background-color: var(--accent-light);
-}
-
-.insurance-plan i {
-    color: var(--secondary-color);
-    font-size: 1.1rem;
-}
-
-.insurance-contact {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    background-color: var(--light-color);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius);
-    margin: var(--spacing-md) 0 var(--spacing-lg);
-}
-
-.insurance-contact i {
-    color: var(--secondary-color);
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.insurance-contact p {
-    margin: 0;
-}
-
-/* Resource cards in insurance section */
-#insurance .resource-card {
-    display: flex;
-    flex-direction: column;
+.static-map-container img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    display: block; /* Ensure image is displayed */
 }
 
-#insurance .resource-card ul {
-    margin-bottom: var(--spacing-lg);
-}
-
-#insurance .resource-card .btn {
-    margin-top: auto;
-    align-self: flex-start;
-}
-
-@media (max-width: 768px) {
-    .resource-card .insurance-plans-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .insurance-contact {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-@media (max-width: 576px) {
-    .resource-card .insurance-plans-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-#insurance .resource-icon {
-    background-color: var(--secondary-light);
-    color: var(--secondary-color);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-#insurance .resource-card:hover .resource-icon {
-    transform: scale(1.05);
-    background-color: var(--secondary-color);
-    color: white;
-}
-
-#insurance {
-    padding-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-}
-
-/* ===== CAREER SECTION STYLING ===== */
-.career-section {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: var(--spacing-xl) 0;
-    margin: var(--spacing-xxl) 0;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius);
-}
-
-.career-section::before {
-    content: '';
+.map-overlay {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px);
-    background-size: 20px 20px;
-    opacity: 0.2;
-    z-index: 1;
-}
-
-.career-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-lg);
-    position: relative;
-    z-index: 2;
-}
-
-.career-text {
-    flex: 2;
-}
-
-.career-text h2 {
-    color: var(--white);
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.8rem;
-}
-
-.career-text h2 i {
-    margin-right: var(--spacing-sm);
-    color: var(--secondary-color);
-}
-
-.career-text p {
-    margin-bottom: 0;
-    font-size: 1.1rem;
-    line-height: 1.5;
-}
-
-.career-action {
-    flex: 1;
-    text-align: right;
-}
-
-.career-action .btn {
-    font-weight: 600;
-    padding: 12px 24px;
-    transition: all 0.3s ease;
-    border: 2px solid var(--white);
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.career-action .btn i {
-    margin-left: var(--spacing-sm);
-    font-size: 0.9rem;
-}
-
-.career-action .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    background-color: var(--white);
-    color: var(--secondary-color);
-}
-
-/* Responsive styles for career section */
-@media (max-width: 768px) {
-    .career-content {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--spacing-md);
-    }
-    
-    .career-text {
-        margin-bottom: var(--spacing-md);
-    }
-    
-    .career-action {
-        text-align: center;
-        width: 100%;
-    }
-    
-    .career-action .btn {
-        width: 100%;
-        max-width: 300px;
-    }
-}
-
-/* ===== HEALOW PORTAL PAGE STYLES ===== */
-.process-steps {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-lg);
-    margin: var(--spacing-xl) 0;
-}
-
-.step {
-    flex: 1;
-    min-width: 220px;
-    background-color: var(--white);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.step:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.step-number {
-    background-color: var(--secondary-color);
-    color: var(--white);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--spacing-sm);
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-.step h4 {
-    margin-top: 0;
-    margin-bottom: var(--spacing-sm);
-    color: var(--primary-color);
-    font-family: var(--heading-font);
-    font-weight: 600;
-}
-
-.step p {
-    margin: 0 0 var(--spacing-lg);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.step-icon {
-    margin-top: auto;
-    color: var(--secondary-color);
-    font-size: 1.5rem;
-    opacity: 0.8;
-    align-self: flex-start;
-}
-
-.step-icon i {
-    font-size: 2rem;
-}
-
-.app-download {
-    margin: var(--spacing-xl) 0;
-    background-color: var(--accent-color);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-}
-
-.app-download h4 {
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-md);
-    font-size: 1.2rem;
-}
-
-.app-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
-}
-
-.app-btn {
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--dark-color);
-    color: var(--white);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.app-btn i {
-    margin-right: var(--spacing-sm);
-    font-size: 1.2rem;
-}
-
-.app-btn:hover {
-    transform: translateY(-2px);
-    background-color: #3a4a5e;
-    color: var(--white);
-    box-shadow: var(--shadow-md);
-}
-
-/* Service intro for healow page */
-.service-intro {
-    max-width: 800px;
-    margin: 0 auto var(--spacing-lg);
-    text-align: center;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-/* Additional responsive styles for healow page */
-@media (max-width: 992px) {
-    .step {
-        min-width: 200px;
-    }
-}
-
-@media (max-width: 768px) {
-    .process-steps {
-        flex-direction: column;
-    }
-    
-    .step {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .app-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--spacing-sm);
-    }
-    
-    .app-btn {
-        width: 100%;
-        max-width: 200px;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 576px) {
-    .step {
-        padding: var(--spacing-md);
-    }
-    
-    .step-number {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-    }
-}
-
-/* App preview placeholder styling */
-.app-preview-placeholder {
-    background-color: var(--white);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-lg);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--light-color);
-}
-
-/* Style overrides for portal benefits grid */
-#portal-benefits .feature-grid {
-    margin-top: var(--spacing-xl);
-}
-
-#portal-benefits .feature-item {
-    text-align: center;
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    background-color: var(--white);
-}
-
-#portal-benefits .feature-item i {
-    font-size: 2rem;
-    margin-bottom: var(--spacing-md);
-    color: var(--secondary-color);
-}
-
-#portal-benefits .feature-item h4 {
-    margin-bottom: var(--spacing-sm);
-}
-
-#portal-benefits .feature-item p {
-    flex-grow: 1;
-}
-
-/* App logo styling */
-.app-logo {
-    margin-bottom: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.app-logo i {
-    font-size: 4rem;
-    color: var(--secondary-color);
-    margin-bottom: var(--spacing-sm);
-}
-
-.app-logo span {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-family: var(--heading-font);
-}
-
-/* App features preview grid */
-.app-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+    z-index: 5; /* Ensure overlay is above the map */
 }
 
-.app-features .feature-item {
-    background-color: var(--light-color);
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius);
-    font-weight: 500;
+.map-overlay:hover {
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#load-map-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: var(--primary-color, #2c5282);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensure button is clickable */
 }
 
-.app-features .feature-item:hover {
-    transform: translateY(-3px);
-    background-color: var(--accent-color);
+#load-map-btn:hover {
+    background-color: var(--primary-dark, #1a365d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.app-features .feature-item i {
-    color: var(--secondary-color);
+#map-iframe-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
 }
 
-/* Responsive app preview */
-@media (max-width: 768px) {
-    .app-preview-placeholder {
-        padding: var(--spacing-md);
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    .app-features {
-        gap: var(--spacing-sm);
-    }
-    
-    .app-logo i {
-        font-size: 3rem;
-    }
-    
-    .app-logo span {
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .app-features {
-        grid-template-columns: 1fr;
-    }
-    
-    .app-features .feature-item {
-        text-align: left;
-        justify-content: flex-start;
-    }
-}
-
-.gallery-caption {
-    margin-top: 25px;
-    text-align: center;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 15px;
-}
-
-.gallery-caption p {
-    color: var(--color-text);
-    font-size: 16px;
-    line-height: 1.6;
-    font-style: italic;
-}
-
-@media (max-width: 768px) {
-    .gallery-caption {
-        margin-top: 20px;
-    }
-    
-    .gallery-caption p {
-        font-size: 15px;
-    }
-}
-
-.gallery-caption {
-    padding: 12px 15px;
-    background-color: #fff;
-    text-align: center;
-    border-top: 1px solid #f0f0f0;
-}
-
-.gallery-caption p {
-    margin: 0;
-    font-weight: 500;
-    color: var(--color-primary);
-    font-size: 0.95rem;
-}
-
-@media (max-width: 768px) {
-    .gallery-caption {
-        padding: 10px;
-    }
-    .gallery-caption p {
-        font-size: 0.9rem;
-    }
+.hidden {
+    display: none !important; /* Use !important to ensure it overrides other styles */
 }

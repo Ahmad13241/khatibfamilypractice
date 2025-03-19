@@ -140,3 +140,42 @@ All rights reserved. This website was created specifically for Khatib Family Pra
 - Created placeholder images for gallery sections
 - Updated CSS styling to improve image display across the site
 - Note: Some images are currently using placeholders and should be replaced with actual professional photos before site launch 
+
+## Netlify Deployment Troubleshooting
+
+If you encounter discrepancies between your local development environment and the Netlify deployment, consider the following common issues:
+
+### Case Sensitivity Issues
+
+Netlify servers (Linux-based) are case-sensitive for filenames, while Windows development environments are not. This often causes image loading failures in production.
+
+**Solution:**
+1. Ensure all HTML image references exactly match the case of your image files
+2. Standardize on a consistent naming convention (preferably all lowercase with hyphens)
+3. Use the exact same build process locally that Netlify will use
+
+### Missing Files
+
+Sometimes files that exist locally don't make it to the Netlify deployment.
+
+**Solution:**
+1. Make sure all images are properly committed to Git
+2. Verify the build script correctly copies all necessary files to the `/dist` directory
+3. Check that netlify.toml configuration correctly specifies the publish directory
+
+### Image Format Compatibility
+
+Some image formats may not be available on your local machine but exist in the repository.
+
+**Solution:**
+1. Use the WebP format with proper fallbacks (as implemented in <picture> elements)
+2. Ensure fallback images use formats that are available in the repository
+3. When referencing images, prioritize formats that exist in both environments
+
+### Fixing the Current Issues
+
+To fix the current deployment discrepancies:
+1. Run `npm run build` locally to generate a dist directory
+2. Push both your source files and the dist directory to GitHub
+3. Make sure the netlify.toml file in the root directory has the correct build settings
+4. Update image references to use only the file formats that exist in your repository 

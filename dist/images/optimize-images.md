@@ -57,20 +57,80 @@ cwebp -q 80 optimized.jpg -o optimized.webp
 
 ## Implementation Process
 
-1. **Create optimized versions**:
-   - Create both WebP and JPEG versions of each image
-   - Use naming convention: `[original-name].webp` and `[original-name]-opt.jpg`
-   - Place in `/images/optimized/` directory
+### Step 1: Download Original Images
+- Gather all original images that need optimization:
+  - outside-office.jpeg (2.6MB)
+  - reception-room.jpeg (2.5MB)
+  - examination-office.jpeg (1.8MB)
+  - family-medicine.jpg (827KB)
+  - preventative-care.jpg (784KB)
+  - chronic-care.jpg (910KB)
 
-2. **Update HTML to use responsive images**:
-   - Implement the `<picture>` element with WebP and JPEG sources
-   - Keep same alt text and class attributes
-   - Example HTML update is provided in the next section
+### Step 2: Optimize Using Squoosh (Recommended Method)
 
-3. **Test optimized page loading**:
-   - Verify images load correctly in all browsers
-   - Confirm proper responsive behavior on mobile devices
-   - Check load time improvement
+1. **Access Squoosh**
+   - Go to https://squoosh.app/ in your browser
+   - The tool works entirely in the browser with no installation needed
+
+2. **For Gallery Images (About Page)**
+   - Upload each gallery image (outside-office.jpeg, reception-room.jpeg, examination-office.jpeg)
+   - **Resize Settings:**
+     - Click "Resize" in the left panel
+     - Set width to 1200px (height will adjust automatically to maintain aspect ratio)
+     - Use "Lanczos3" sampling method for best quality
+   - **WebP Optimization:**
+     - Select "WebP" from the right codec dropdown
+     - Set quality to 80%
+     - Enable "Auto" effort level for best compression
+     - Preview image quality at 100% zoom to ensure sharpness
+     - Download the WebP version
+   - **JPEG Fallback:**
+     - Switch codec to "MozJPEG" 
+     - Set quality to 80%
+     - Set "Smoothing" to 0
+     - Preview image quality
+     - Download the JPEG version
+   - **Target Results:**
+     - Each WebP image should be 150-250KB
+     - Each JPEG fallback should be 200-400KB
+     - Visual quality should remain crisp and professional
+
+3. **For Service Images (Resources Page)**
+   - Upload each service image (family-medicine.jpg, preventative-care.jpg, chronic-care.jpg)
+   - **Resize Settings:**
+     - Set width to 1000px (height will adjust automatically)
+     - Use "Lanczos3" sampling method
+   - **WebP Optimization:**
+     - Select "WebP" codec
+     - Set quality to 85% 
+     - Enable "Auto" effort level
+     - Download the WebP version
+   - **JPEG Fallback:**
+     - Switch codec to "MozJPEG"
+     - Set quality to 85%
+     - Download the JPEG version
+   - **Target Results:**
+     - Each WebP image should be 100-200KB
+     - Each JPEG fallback should be 150-300KB
+
+### Step 3: Verify Results
+- Check file sizes of the optimized images to ensure they meet targets
+- Compare visual quality to originals to confirm acceptable quality
+- Reduced file sizes should be 80-90% smaller than originals
+
+### Step 4: Replace Images on Website
+- Replace original images with optimized versions in the images directory
+- Keep both JPEG and WebP versions for each image
+- Ensure the file names match exactly what's referenced in the HTML
+- Update any `<picture>` elements if needed to reference both formats
+
+### Image Display Tips for Developers
+- The website uses `object-fit: cover` in CSS to ensure images maintain aspect ratio while filling their containers
+- Gallery images on the About page are displayed at 400px height on desktop and 250px on mobile
+- Service images are displayed at variable widths based on container
+- The `<picture>` element with WebP/JPEG options ensures optimal format based on browser support
+
+Following these optimization steps will significantly improve page load times while maintaining high image quality across the site.
 
 ## Example HTML Implementation
 

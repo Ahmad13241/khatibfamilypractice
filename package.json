@@ -11,7 +11,9 @@
     "lint": "eslint js/*.js",
     "logs:clear": "node scripts/clear-logs.js",
     "build": "node scripts/build.js",
-    "start:prod": "NODE_ENV=production node server.js"
+    "start:prod": "NODE_ENV=production node server.js",
+    "deploy:prepare": "npm run build && git add dist/* && git commit -m \"Update build for deployment\" && git push origin master",
+    "fix:images": "node scripts/fix-image-refs.js"
   },
   "keywords": [
     "healthcare",

@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Handle gallery images with similar approach
+        // Handle gallery images with improved aspect ratio preservation
         if (galleryImages.length > 0) {
             galleryImages.forEach(img => {
                 // Ensure loaded state
@@ -343,16 +343,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.style.opacity = '1';
                 }
                 
-                // Set consistent aspect ratio for gallery images
+                // Set object-fit property to preserve aspect ratio
+                img.style.objectFit = 'cover';
+                
+                // Remove any inline height that might be causing stretching
+                if (img.style.height) {
+                    img.style.height = '';
+                }
+                
+                // Apply consistent width instead
+                img.style.width = '100%';
+                
+                // Set the container height instead of the image height
                 const galleryItem = img.closest('.gallery-item');
                 if (galleryItem) {
-                    // Adjust height based on viewport
+                    // Adjust container height based on viewport
                     if (window.innerWidth <= 576) {
-                        img.style.height = '200px';
+                        galleryItem.style.height = '200px';
                     } else if (window.innerWidth <= 768) {
-                        img.style.height = '220px';
+                        galleryItem.style.height = '220px';
                     } else {
-                        img.style.height = '250px';
+                        galleryItem.style.height = '250px';
                     }
                 }
             });
@@ -442,6 +453,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Start with opacity 1 to prevent disappearing
             img.style.opacity = '1';
+            
+            // Add object-fit cover property to all images
+            img.style.objectFit = 'cover';
+            
+            // For gallery images specifically, add higher quality settings
+            if (img.classList.contains('gallery-image')) {
+                img.style.objectFit = 'cover';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                
+                // Remove any potential inline styles causing quality issues
+                img.style.imageRendering = 'auto';
+                
+                // Set appropriate parent container styles
+                const container = img.closest('.gallery-item');
+                if (container) {
+                    container.style.overflow = 'hidden';
+                }
+            }
             
             // Listen for load event to ensure visibility
             img.addEventListener('load', function() {

@@ -2,7 +2,11 @@
 
 [build]
   publish = "dist"
-  command = "npm install && node scripts/build.js"  # Changed from 'npm ci' to 'npm install' to include dev dependencies
+  command = "npm install && node scripts/build.js"
+  
+[build.environment]
+  # Specify Node version for compatibility with your dependencies
+  NODE_VERSION = "16"
 
 # Enable HTTPS and ensure redirect from HTTP to HTTPS
 [[redirects]]
@@ -50,34 +54,29 @@
 [build.processing.html]
   pretty_urls = true
 
-# Recommended Plugins
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-  [plugins.inputs]
-    output_path = "reports/lighthouse.html"
-
+# Core plugins - only include essential ones initially
 [[plugins]]
   package = "@netlify/plugin-sitemap"
   [plugins.inputs]
     baseUrl = "https://khatibfamilypractice.com"
     exclude = ['/thank-you']
 
-[[plugins]]
-  package = "netlify-plugin-inline-critical-css"
-
-[[plugins]]
-  package = "netlify-plugin-image-optim"
-
-# Comment out Cloudinary plugin until properly configured
+# These plugins may be added back once basic build is successful
 # [[plugins]]
-#   package = "netlify-plugin-cloudinary"
+#   package = "@netlify/plugin-lighthouse"
 #   [plugins.inputs]
-#     cloudName = "YOUR_CLOUD_NAME_HERE"
+#     output_path = "reports/lighthouse.html"
 
-[[plugins]]
-  package = "netlify-plugin-no-more-404"
-  [plugins.inputs]
-    on404 = "error"
+# [[plugins]]
+#   package = "netlify-plugin-inline-critical-css"
+
+# [[plugins]]
+#   package = "netlify-plugin-image-optim"
+
+# [[plugins]]
+#   package = "netlify-plugin-no-more-404"
+#   [plugins.inputs]
+#     on404 = "error"
 
 # Define environment variables
 [context.production.environment]

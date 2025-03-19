@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Performance logging for page initialization
     const domLoadTime = Date.now() - performance.timing.navigationStart;
     // Use conditional logging to avoid console statement warnings
-    if (process.env.NODE_ENV !== 'production') {
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV !== 'production') {
         console.info(`DOM loaded in ${domLoadTime}ms`);
     }
     
-    // Mobile menu toggle - UPDATED for new nav structure
+    // Mobile menu toggle - UPDATED for better iOS compatibility
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const body = document.body;
@@ -27,22 +27,77 @@ document.addEventListener('DOMContentLoaded', function() {
         existingMobileStyles.remove();
     }
     
+    // Set header height CSS variable for proper mobile navigation
+    function updateHeaderHeight() {
+        const header = document.querySelector('header');
+        if (header) {
+            const headerHeight = header.offsetHeight;
+            document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+        }
+    }
+    
+    // Run on load and resize
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    
+    // Detect iOS devices
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+        document.documentElement.classList.add('ios');
+    }
+    
     if (mobileToggle) {
-        mobileToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            this.classList.toggle('active');
-            body.classList.toggle('menu-open');
-            
-            // Update aria-expanded attribute
-            const isExpanded = navMenu.classList.contains('active');
-            this.setAttribute('aria-expanded', isExpanded);
-            
-            // Log mobile menu action
-            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                const action = isExpanded ? 'open' : 'close';
-                window.KLogger.logUserAction('Mobile Menu', { action: action });
-            }
+        // Add both click and touch events to ensure it works on all devices, especially iOS
+        ['click', 'touchstart', 'touchend'].forEach(eventType => {
+            mobileToggle.addEventListener(eventType, function(e) {
+                // Prevent default behavior to avoid any browser handling conflicts
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // For iOS, add a slight delay to ensure touch events are properly processed
+                setTimeout(() => {
+                    navMenu.classList.toggle('active');
+                    this.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                    
+                    // Update aria-expanded attribute
+                    const isExpanded = navMenu.classList.contains('active');
+                    this.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Update header height after toggle
+                    setTimeout(updateHeaderHeight, 50);
+                }, isIOS ? 10 : 0);
+                
+                // Prevent multiple events from firing by returning false for touchstart
+                if (eventType === 'touchstart') {
+                    return false;
+                }
+            }, { passive: false, capture: true }); // Using capture to ensure event is handled first
         });
+        
+        // Add a specific handler for iOS double-tap issues
+        if (isIOS) {
+            let lastTap = 0;
+            mobileToggle.addEventListener('touchend', function(e) {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+                
+                // If tap interval is less than 500ms, it might be a double tap
+                if (tapLength < 500 && tapLength > 0) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Force toggle to ensure it works on double tap
+                    navMenu.classList.toggle('active');
+                    this.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                    
+                    return false;
+                }
+                
+                lastTap = currentTime;
+            }, { passive: false });
+        }
     }
     
     // Close mobile menu when clicking outside

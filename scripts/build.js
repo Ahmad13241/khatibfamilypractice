@@ -144,8 +144,11 @@ async function optimizeJsFiles() {
   const jsBundlePath = path.join(DIST_DIR, 'js', 'main.bundle.js');
 
   try {
+    // Replace process.env.NODE_ENV with 'production' before minification
+    let processedJsBundle = jsBundle.replace(/process\.env\.NODE_ENV/g, "'production'");
+    
     // Minify the bundled JS
-    const minifiedBundle = await minify(jsBundle, {
+    const minifiedBundle = await minify(processedJsBundle, {
       compress: {
         drop_console: true,
         drop_debugger: true
@@ -166,7 +169,10 @@ async function optimizeJsFiles() {
     
     // Minify individual JS files
     for (const jsFile of Object.keys(jsOriginals)) {
-      const minified = await minify(jsOriginals[jsFile], {
+      // Replace process.env.NODE_ENV with 'production' in each file
+      let processedJs = jsOriginals[jsFile].replace(/process\.env\.NODE_ENV/g, "'production'");
+      
+      const minified = await minify(processedJs, {
         compress: {
           drop_console: true,
           drop_debugger: true

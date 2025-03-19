@@ -2596,24 +2596,37 @@ select:focus {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-gap: 25px;
     margin-top: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Style adjustment for the last two images to center them in the second row */
 .gallery-grid .gallery-item:nth-last-child(-n+2) {
-    margin: 0 auto;
+    grid-column: span 1;
+}
+
+/* Ensure the last row is centered when less than 3 items */
+.gallery-grid .gallery-item:last-child:nth-child(3n-1) {
+    grid-column-end: 3;
+}
+
+.gallery-grid .gallery-item:last-child:nth-child(3n-2) {
+    grid-column-end: 4;
 }
 
 @media (max-width: 992px) {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 15px;
+        grid-gap: 20px;
+        max-width: 700px;
     }
     
     /* Reset the auto margin for tablet view */
     .gallery-grid .gallery-item:nth-last-child(-n+2) {
-        margin: 0;
+        grid-column: auto;
     }
 }
 
@@ -2621,25 +2634,33 @@ select:focus {
     .gallery-grid {
         grid-template-columns: 1fr;
         grid-gap: 25px;
+        max-width: 350px;
     }
 }
 
 .gallery-item {
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-image {
     width: 100%;
-    height: 250px;
-    object-fit: contain; /* Changed from 'cover' to 'contain' to prevent cropping */
-    transition: transform 0.3s ease;
-    background-color: #f9f9f9; /* Light background to make contained images visible */
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
 }
 
 .gallery-item:hover .gallery-image {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 /* Responsive Styles for Doctor Profile */
@@ -3568,5 +3589,28 @@ select:focus {
     
     .gallery-caption p {
         font-size: 15px;
+    }
+}
+
+.gallery-caption {
+    padding: 12px 15px;
+    background-color: #fff;
+    text-align: center;
+    border-top: 1px solid #f0f0f0;
+}
+
+.gallery-caption p {
+    margin: 0;
+    font-weight: 500;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .gallery-caption {
+        padding: 10px;
+    }
+    .gallery-caption p {
+        font-size: 0.9rem;
     }
 }

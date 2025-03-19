@@ -30,15 +30,14 @@
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 2rem;
-    --spacing-xl: 4rem;
-    --spacing-xxl: 6rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 5rem;
     
     /* Layout */
-    --header-height: 80px;
-    --mobile-header-height: 70px;
+    --header-height: 160px;
     
     /* Borders */
-    --border-radius: 8px;
+    --border-radius: 4px;
     --border-radius-lg: 8px;
     
     /* Shadows */
@@ -337,7 +336,6 @@ img {
     border-radius: 2px;
 }
 
-/* Mobile Navigation Controls */
 .mobile-toggle {
     display: none;
     flex-direction: column;
@@ -348,9 +346,6 @@ img {
     /* Improved clickable area */
     padding: 10px;
     margin: -10px;
-    transition: transform 0.3s ease;
-    position: relative;
-    z-index: 1001; /* Ensure it's above other elements */
 }
 
 .mobile-toggle span {
@@ -359,11 +354,6 @@ img {
     background-color: var(--primary-color);
     border-radius: 2px;
     transition: all 0.3s ease;
-    display: block; /* Ensure it displays correctly */
-}
-
-.mobile-toggle.active {
-    transform: rotate(180deg) scale(1.1); /* Add a slight animation effect */
 }
 
 .mobile-toggle.active span:nth-child(1) {
@@ -410,9 +400,6 @@ img {
     .nav-wrapper {
         position: relative;
         padding: 12px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
     
     .practice-logo img {
@@ -421,12 +408,11 @@ img {
     
     .mobile-toggle {
         display: flex;
-        z-index: 1001; /* Ensure it's above other elements */
     }
     
     .nav-menu {
-        position: fixed; /* Change to fixed positioning for better mobile experience */
-        top: var(--header-height, 80px); /* Use header height variable */
+        position: absolute;
+        top: 100%;
         left: 0;
         width: 100%;
         background-color: white;
@@ -437,11 +423,10 @@ img {
         overflow: hidden;
         transition: max-height 0.3s ease, padding 0.3s ease;
         z-index: 1000;
-        -webkit-overflow-scrolling: touch; /* Improved scroll on iOS */
     }
     
     .nav-menu.active {
-        max-height: calc(100vh - var(--header-height, 80px)); /* Use viewport height minus header */
+        max-height: 400px; /* Increase max-height to ensure all links are visible */
         padding: 1rem 0;
         overflow-y: auto; /* Add scrolling for smaller screens */
     }
@@ -454,47 +439,24 @@ img {
     
     .nav-menu li a {
         display: block;
-        padding: 1rem 1.5rem; /* Larger padding for better touch targets */
-        font-size: 1.2rem; /* Larger font size for better visibility */
-        font-weight: 500; /* Slightly bolder font */
-        color: var(--primary-color);
-        transition: background-color 0.2s ease;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Subtle separator */
-    }
-    
-    .nav-menu li a:hover,
-    .nav-menu li a:focus {
-        background-color: rgba(0, 0, 0, 0.03); /* Subtle hover effect */
+        padding: 0.75rem 1rem;
+        font-size: 1.1rem; /* Increase font size for better tap targets */
     }
     
     .nav-item.active .nav-link {
         color: var(--secondary-color);
         font-weight: 600;
-        background-color: rgba(0, 0, 0, 0.05); /* Highlight active item */
+    }
+
+    /* Ensure the toggle button is visible and positioned correctly */
+    .mobile-toggle {
+        display: flex;
+        z-index: 1001;
     }
     
     /* Prevent body scrolling when menu is open */
     body.menu-open {
         overflow: hidden;
-    }
-    
-    /* Add backdrop when menu is open */
-    body.menu-open::after {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        animation: fadeIn 0.3s ease;
-        pointer-events: none; /* Allow clicks to pass through */
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
     }
 }
 
@@ -3179,47 +3141,4 @@ select:focus {
         justify-content: center;
         margin-top: var(--spacing-md);
     }
-}
-
-/* Extra small devices (phones) */
-@media (max-width: 480px) {
-    .nav-menu.active {
-        max-height: 450px; /* Increased to ensure all links are visible */
-    }
-    
-    .nav-menu li a {
-        padding: 1rem; /* Adjusted for smaller screens */
-        font-size: 1.1rem;
-    }
-    
-    /* Adjust the logo size for very small screens */
-    .practice-logo img {
-        width: 150px; /* Smaller logo on very small screens */
-        max-height: 45px;
-    }
-    
-    /* Ensure the toggle button is easier to tap */
-    .mobile-toggle {
-        width: 25px;
-        height: 20px;
-        margin-right: 5px;
-    }
-    
-    /* Handle safari bottom bar */
-    .ios .nav-menu.active {
-        padding-bottom: 80px; /* Add extra padding at bottom for iOS safari */
-    }
-}
-
-/* Fix iOS-specific issues */
-.ios body.menu-open {
-    position: fixed; /* Prevent background scrolling on iOS */
-    width: 100%;
-    height: 100%;
-}
-
-/* Ensure accessibility with keyboard navigation */
-.mobile-toggle:focus {
-    outline: 2px solid var(--secondary-color);
-    outline-offset: 2px;
 }

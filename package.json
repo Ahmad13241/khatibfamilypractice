@@ -13,7 +13,9 @@
     "build": "node scripts/build.js",
     "start:prod": "NODE_ENV=production node server.js",
     "deploy:prepare": "npm run build && git add dist/* && git commit -m \"Update build for deployment\" && git push origin master",
-    "fix:images": "node scripts/fix-image-refs.js"
+    "fix:images": "node scripts/fix-image-refs.js",
+    "fix:deploy": "node scripts/deploy-fix.js",
+    "deploy:fix": "npm run fix:deploy && npm run build && git add . && git commit -m \"Fix deployment issues\" && git push origin master"
   },
   "keywords": [
     "healthcare",

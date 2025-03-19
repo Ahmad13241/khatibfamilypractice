@@ -558,20 +558,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize accordion functionality for FAQs
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const accordionItem = this.parentElement;
-            accordionItem.classList.toggle('active');
-            
-            // Log interaction if KLogger is available
-            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                window.KLogger.logUserAction('FAQ Accordion', { 
-                    action: accordionItem.classList.contains('active') ? 'expand' : 'collapse',
-                    question: this.querySelector('span').textContent
-                });
-            }
+    if (accordionHeaders.length > 0) {
+        console.log(`Found ${accordionHeaders.length} accordion headers`);
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const accordionItem = this.closest('.accordion-item');
+                accordionItem.classList.toggle('active');
+                
+                // Log accordion state for debugging
+                console.log(`Toggled accordion: ${this.querySelector('span').textContent} - active: ${accordionItem.classList.contains('active')}`);
+                
+                // Log interaction if KLogger is available
+                if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                    window.KLogger.logUserAction('FAQ Accordion', { 
+                        action: accordionItem.classList.contains('active') ? 'expand' : 'collapse',
+                        question: this.querySelector('span').textContent
+                    });
+                }
+            });
         });
-    });
+    } else {
+        console.warn('No accordion headers found on page');
+    }
     
     // Feature item hover effect
     const featureItems = document.querySelectorAll('.feature-item');

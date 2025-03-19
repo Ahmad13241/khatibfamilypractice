@@ -57,9 +57,6 @@
     output_path = "reports/lighthouse.html"
 
 [[plugins]]
-  package = "netlify-plugin-submit-form"
-
-[[plugins]]
   package = "@netlify/plugin-sitemap"
   [plugins.inputs]
     baseUrl = "https://khatibfamilypractice.com"

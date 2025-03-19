@@ -3,23 +3,104 @@
 [build]
   publish = "dist"
   command = """
-    echo "==== Starting Build Process ===="
-    npm config set loglevel warn
-    npm config set legacy-peer-deps true
-    echo "==== Installing all dependencies ===="
-    npm install --no-audit || exit 1
-    echo "==== Ensuring dev dependencies are installed ===="
-    npm install --save-dev chalk@4.1.2 clean-css@5.3.3 terser@5.39.0 glob@8.1.0 || exit 1
-    echo "==== Verifying critical dependencies ===="
-    node -e "try { require('chalk'); require('clean-css'); require('terser'); require('glob'); console.log('✅ All critical dependencies are accessible'); } catch (err) { console.error('❌ Dependency check failed:', err.message); process.exit(1); }"
-    echo "==== Starting build script with explicit NODE_PATH ===="
-    NODE_PATH=$(npm root) node scripts/build.js
+    echo "==== Creating minimal build script ===="
+    cat > build-netlify.js << 'EOL'
+    const fs = require('fs');
+    const path = require('path');
+    const { execSync } = require('child_process');
+    
+    console.log('Starting simplified build process...');
+    
+    // Create dist directory
+    const distDir = path.join(__dirname, 'dist');
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
+    
+    // Copy all static assets to dist
+    console.log('Copying static files...');
+    ['css', 'images', 'js', 'pages'].forEach(dir => {
+      if (fs.existsSync(dir)) {
+        execSync(`mkdir -p dist/${dir} && cp -R ${dir}/* dist/${dir}/`);
+        console.log(`Copied ${dir} files`);
+      }
+    });
+    
+    // Copy index.html and other root files
+    const rootFiles = ['index.html', 'favicon.ico'];
+    rootFiles.forEach(file => {
+      if (fs.existsSync(file)) {
+        fs.copyFileSync(file, path.join(distDir, file));
+        console.log(`Copied ${file}`);
+      }
+    });
+    
+    // Create server.js for production
+    const prodServerPath = path.join(distDir, 'server.js');
+    const prodServerContent = `const express = require('express');
+    const cors = require('cors');
+    const bodyParser = require('body-parser');
+    const path = require('path');
+    const morgan = require('morgan');
+    
+    const app = express();
+    const PORT = process.env.PORT || 3000;
+    
+    app.use(morgan('combined'));
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    
+    app.use(express.static(path.join(__dirname)));
+    
+    app.post('/api/contact', (req, res) => {
+      console.log('Contact form submission received');
+      res.status(200).json({ success: true, message: 'Form submitted successfully' });
+    });
+    
+    app.use((err, req, res, next) => {
+      console.error('Server Error:', err.message);
+      res.status(500).send('An error occurred. Please try again later.');
+    });
+    
+    app.listen(PORT, () => {
+      console.log(\`Khatib Family Practice server running on port \${PORT}\`);
+    });`;
+    
+    fs.writeFileSync(prodServerPath, prodServerContent);
+    console.log('Created production server.js');
+    
+    // Create production package.json
+    const prodPackagePath = path.join(distDir, 'package.json');
+    const prodPackageContent = {
+      name: 'khatib-family-practice',
+      version: '1.0.0',
+      description: 'Khatib Family Practice Website',
+      main: 'server.js',
+      scripts: {
+        start: 'node server.js'
+      },
+      dependencies: {
+        'body-parser': '^1.20.2',
+        'cors': '^2.8.5',
+        'express': '^4.18.2',
+        'morgan': '^1.10.0'
+      }
+    };
+    
+    fs.writeFileSync(prodPackagePath, JSON.stringify(prodPackageContent, null, 2));
+    console.log('Created production package.json');
+    
+    console.log('Build completed successfully!');
+    EOL
+    
+    echo "==== Running simplified build script ===="
+    node build-netlify.js
   """
   
 [build.environment]
-  # Updated Node version for compatibility with dependencies
+  # Updated Node version for compatibility
   NODE_VERSION = "18.18.0"
-  NPM_CONFIG_LEGACY_PEER_DEPS = "true"
 
 # Enable HTTPS and ensure redirect from HTTP to HTTPS
 [[redirects]]

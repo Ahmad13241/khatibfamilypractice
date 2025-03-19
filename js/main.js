@@ -617,16 +617,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function initMapLoading() {
         console.log('Initializing map loading functionality');
         const loadMapBtn = document.getElementById('load-map-btn');
-        if (loadMapBtn) {
-            console.log('Map button found, attaching event listener');
-            loadMapBtn.addEventListener('click', loadGoogleMap);
+        const mapContainer = document.getElementById('map-iframe-container');
+        const staticMap = document.getElementById('static-map');
+        
+        if (loadMapBtn && mapContainer && staticMap) {
+            console.log('Map elements found, attaching event listener');
             
-            // Add a debug click handler to verify event binding
-            loadMapBtn.addEventListener('click', function() {
-                console.log('Map button clicked');
-            });
+            // Use a named function so we can remove it later
+            const handleMapClick = function() {
+                loadGoogleMap();
+                console.log('Map button clicked, loading map');
+            };
+            
+            // Add the event listener
+            loadMapBtn.addEventListener('click', handleMapClick);
+            
+            // Store the handler on the button to make it easier to remove later
+            loadMapBtn.mapClickHandler = handleMapClick;
         } else {
-            console.warn('Map button not found in the DOM');
+            console.warn('One or more map elements not found in the DOM');
         }
     }
     
@@ -665,8 +674,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Remove the event listener since we only need to load the map once
         const loadMapBtn = document.getElementById('load-map-btn');
-        if (loadMapBtn) {
-            loadMapBtn.removeEventListener('click', loadGoogleMap);
+        if (loadMapBtn && loadMapBtn.mapClickHandler) {
+            loadMapBtn.removeEventListener('click', loadMapBtn.mapClickHandler);
             console.log('Event listener removed from map button');
         }
     }

@@ -22,9 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
             body.classList.toggle('menu-open');
             
+            // Update aria-expanded attribute
+            const isExpanded = navMenu.classList.contains('active');
+            this.setAttribute('aria-expanded', isExpanded);
+            
             // Log mobile menu action
             if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                const action = navMenu.classList.contains('active') ? 'open' : 'close';
+                const action = isExpanded ? 'open' : 'close';
                 window.KLogger.logUserAction('Mobile Menu', { action: action });
             }
         });
@@ -38,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.remove('active');
             mobileToggle.classList.remove('active');
             body.classList.remove('menu-open');
+            
+            // Update aria-expanded attribute
+            mobileToggle.setAttribute('aria-expanded', 'false');
         }
     });
     
@@ -330,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Handle gallery images with similar approach
+        // Handle gallery images with improved aspect ratio preservation
         if (galleryImages.length > 0) {
             galleryImages.forEach(img => {
                 // Ensure loaded state
@@ -343,16 +350,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.style.opacity = '1';
                 }
                 
-                // Set consistent aspect ratio for gallery images
+                // Set object-fit property to preserve aspect ratio
+                img.style.objectFit = 'cover';
+                
+                // Remove any inline height that might be causing stretching
+                if (img.style.height) {
+                    img.style.height = '';
+                }
+                
+                // Apply consistent width instead
+                img.style.width = '100%';
+                
+                // Set the container height instead of the image height
                 const galleryItem = img.closest('.gallery-item');
                 if (galleryItem) {
-                    // Adjust height based on viewport
+                    // Adjust container height based on viewport
                     if (window.innerWidth <= 576) {
-                        img.style.height = '200px';
+                        galleryItem.style.height = '200px';
                     } else if (window.innerWidth <= 768) {
-                        img.style.height = '220px';
+                        galleryItem.style.height = '220px';
                     } else {
-                        img.style.height = '250px';
+                        galleryItem.style.height = '250px';
                     }
                 }
             });
@@ -442,6 +460,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Start with opacity 1 to prevent disappearing
             img.style.opacity = '1';
+            
+            // Add object-fit cover property to all images
+            img.style.objectFit = 'cover';
+            
+            // For gallery images specifically, add higher quality settings
+            if (img.classList.contains('gallery-image')) {
+                img.style.objectFit = 'cover';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                
+                // Remove any potential inline styles causing quality issues
+                img.style.imageRendering = 'auto';
+                
+                // Set appropriate parent container styles
+                const container = img.closest('.gallery-item');
+                if (container) {
+                    container.style.overflow = 'hidden';
+                }
+            }
             
             // Listen for load event to ensure visibility
             img.addEventListener('load', function() {
@@ -562,4 +599,91 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Add event listeners to all links in the footer
+    const footerLinks = document.querySelectorAll('footer a');
+    footerLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Log the click with specific info
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                KLogger.logUserAction('Footer Link Click', {
+                    href: this.getAttribute('href')
+                });
+            }
+        });
+    });
+
+    // Map loading functionality
+    function initMapLoading() {
+        console.log('Initializing map loading functionality');
+        const loadMapBtn = document.getElementById('load-map-btn');
+        const mapContainer = document.getElementById('map-iframe-container');
+        const staticMap = document.getElementById('static-map');
+        
+        if (loadMapBtn && mapContainer && staticMap) {
+            console.log('Map elements found, attaching event listener');
+            
+            // Use a named function so we can remove it later
+            const handleMapClick = function() {
+                loadGoogleMap();
+                console.log('Map button clicked, loading map');
+            };
+            
+            // Add the event listener
+            loadMapBtn.addEventListener('click', handleMapClick);
+            
+            // Store the handler on the button to make it easier to remove later
+            loadMapBtn.mapClickHandler = handleMapClick;
+        } else {
+            console.warn('One or more map elements not found in the DOM');
+        }
+    }
+    
+    // Function to load Google Maps iframe on demand
+    function loadGoogleMap() {
+        console.log('loadGoogleMap function called');
+        const mapContainer = document.getElementById('map-iframe-container');
+        const staticMap = document.getElementById('static-map');
+        
+        console.log('Map container found:', !!mapContainer);
+        console.log('Static map found:', !!staticMap);
+        
+        if (!mapContainer || !staticMap) {
+            console.warn('Map container or static map not found');
+            return;
+        }
+        
+        // Create and insert the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus';
+        iframe.width = '100%';
+        iframe.height = '400';
+        iframe.style.border = '0';
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+        iframe.title = 'Khatib Family Practice location map';
+        iframe.setAttribute('aria-label', 'Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442');
+        
+        // Show the iframe container and hide the static map
+        mapContainer.classList.remove('hidden');
+        mapContainer.appendChild(iframe);
+        staticMap.classList.add('hidden');
+        
+        console.log('Map iframe created and added to the DOM');
+        
+        // Remove the event listener since we only need to load the map once
+        const loadMapBtn = document.getElementById('load-map-btn');
+        if (loadMapBtn && loadMapBtn.mapClickHandler) {
+            loadMapBtn.removeEventListener('click', loadMapBtn.mapClickHandler);
+            console.log('Event listener removed from map button');
+        }
+    }
+    
+    // Initialize map loading functionality
+    // Wait a bit to ensure all elements are properly rendered
+    setTimeout(function() {
+        initMapLoading();
+        console.log('Map loading initialized with delay');
+    }, 500);
 }); 

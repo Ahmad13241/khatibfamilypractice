@@ -13,23 +13,38 @@
     
     
     <title>Khatib Family Practice | Compassionate Family Care in Bullhead City</title>
+    <!-- Preconnect to external domains to establish early connections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Critical CSS first -->
     <link rel="stylesheet" href="css/main.bundle.css" media="screen">
+    
     <!-- Favicon -->
     <link rel="icon" href="images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
-    <!-- Font Awesome for icons with SRI -->
+    
+    <!-- Font Awesome loaded with high priority to prevent icon flickering -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
           crossorigin="anonymous" 
           referrerpolicy="no-referrer">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- jQuery (updated version) with SRI -->
+    
+    <!-- Google Fonts loaded asynchronously -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- CSS Loader utility to handle asynchronous CSS loading -->
+    <script src="js/cssLoader.js"></script>
+    
+    <!-- jQuery (updated version) loaded with defer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
             crossorigin="anonymous" 
@@ -104,7 +119,7 @@
             </div>
             <div class="hero-image">
                 <!-- Practice Logo -->
-                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img">
+                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img" width="300" height="300">
             </div>
         </div>
     </section>
@@ -168,7 +183,7 @@
         <div class="container">
             <div class="doctor-image">
                 <!-- Practice image instead of doctor image -->
-                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img about-logo">
+                <img src="images/Logo.png" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img about-logo" width="300" height="300">
             </div>
             <div class="doctor-content">
                 <h2>About Khatib Family Practice</h2>
@@ -235,7 +250,7 @@
             </div>
             <div class="location-container">
                 <div class="map-container">
-                    <!-- Google Maps embed with enhanced security -->
+                    <!-- Direct embedding of Google Maps iframe, similar to contact page -->
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus" 
                         width="100%" 
@@ -308,7 +323,7 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.bundle.js" defer></script>
     <script src="js/security.js" defer></script>
 </body>
 </html> 

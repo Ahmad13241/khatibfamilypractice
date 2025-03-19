@@ -2,11 +2,23 @@
 
 [build]
   publish = "dist"
-  command = "npm install --force && npm install chalk@4.1.2 clean-css@5.3.3 terser@5.39.0 glob@8.1.0 --force && node scripts/build.js"
+  command = """
+    echo "==== Starting Build Process ===="
+    npm config set loglevel warn
+    npm install --no-audit --production=false || exit 1
+    echo "==== Base dependencies installed ===="
+    npm list chalk clean-css terser glob || true
+    echo "==== Installing specific dependency versions ===="
+    npm install chalk@4.1.2 clean-css@5.3.3 terser@5.39.0 glob@8.1.0 --no-save || exit 1
+    echo "==== All dependencies installed successfully ===="
+    echo "==== Starting build script ===="
+    node scripts/build.js
+  """
   
 [build.environment]
   # Updated Node version for compatibility with dependencies
   NODE_VERSION = "18.18.0"
+  NPM_CONFIG_LEGACY_PEER_DEPS = "true"
 
 # Enable HTTPS and ensure redirect from HTTP to HTTPS
 [[redirects]]

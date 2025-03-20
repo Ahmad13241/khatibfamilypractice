@@ -1,0 +1,6 @@
+# Khatib Family Practice robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://khatibfamilypractice.netlify.app/sitemap.xml 

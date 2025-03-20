@@ -64,16 +64,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleMobileMenu();
                 return false;
             }
-        });
+        }, { passive: false });
         
         // Track touch movement to distinguish taps from scrolls
         mobileToggle.addEventListener('touchstart', function() {
             this.touchMoved = false;
-        });
+        }, { passive: true });
         
         mobileToggle.addEventListener('touchmove', function() {
             this.touchMoved = true;
-        });
+        }, { passive: true });
         
         // Helper function for toggling the menu
         function toggleMobileMenu() {
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update aria-expanded attribute
             mobileToggle.setAttribute('aria-expanded', 'false');
         }
-    });
+    }, { passive: true });
     
     // Close menu when backdrop is clicked
     menuBackdrop.addEventListener('click', function() {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         body.classList.remove('menu-open');
         this.classList.remove('active');
         mobileToggle.setAttribute('aria-expanded', 'false');
-    });
+    }, { passive: true });
     
     // Handle smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     menuBackdrop.classList.remove('active');
                 }
             }
-        });
+        }, { passive: false });
     });
     
     // Add fixed header class on scroll

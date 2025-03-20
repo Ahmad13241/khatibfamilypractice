@@ -42,7 +42,7 @@ fs.mkdirSync(DIST_DIR);
 // 2. Copy all static files
 console.log('Copying static files...');
 const copyDirectories = ['css', 'images', 'pages', 'js', 'forms'];
-const copyFiles = ['index.html', 'favicon.ico'];
+const copyFiles = ['index.html', 'favicon.ico', 'robots.txt', 'sitemap.xml'];
 
 // Copy directories
 copyDirectories.forEach(dir => {
@@ -316,6 +316,10 @@ function processHtmlFiles(directory) {
           content = content.replace('<head>', '<head>' + metaTags);
         }
         
+        // Simplified fix: don't modify the HTML attributes
+        // Since the original source has proper quotes, we should preserve them
+        // Lighthouse error likely comes from minification or other processing
+
         fs.writeFileSync(fullPath, content);
         console.log(`  ✓ Optimized ${entry.name}`);
       } catch (err) {

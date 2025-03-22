@@ -41,7 +41,7 @@ fs.mkdirSync(DIST_DIR);
 
 // 2. Copy all static files
 console.log('Copying static files...');
-const copyDirectories = ['css', 'images', 'pages', 'js', 'forms', '.well-known'];
+const copyDirectories = ['css', 'images', 'pages', 'js', 'forms'];
 const copyFiles = ['index.html', 'favicon.ico', 'robots.txt', 'sitemap.xml'];
 
 // Copy directories

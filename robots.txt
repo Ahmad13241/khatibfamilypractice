@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://khatibfamilypractice.netlify.app/sitemap.xml 
+Sitemap: https://khatibfamilypractice.com/sitemap.xml 

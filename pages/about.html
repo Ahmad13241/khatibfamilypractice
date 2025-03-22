@@ -18,6 +18,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
+    <!-- Preload critical images -->
+    <link rel="preload" href="../images/LOGO.webp" as="image" type="image/webp">
+    
     <!-- Critical CSS first -->
     <link rel="stylesheet" href="../css/styles.css">
     
@@ -122,7 +125,7 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="../index.html" class="practice-logo">
-                        <img src="../images/LOGO.jpg" alt="Khatib Family Practice Logo" width="180" height="60">
+                        <img src="../images/LOGO.webp" alt="Khatib Family Practice Logo" width="180" height="112" loading="eager" decoding="async">
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     

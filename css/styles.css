@@ -3302,27 +3302,3 @@ select:focus {
     margin-right: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
 }
-
-/* Logo styles for consistent rendering */
-.logo-img {
-    width: 300px;
-    height: 187px;
-    display: block;
-    object-fit: contain;
-}
-
-.hero-image {
-    min-height: 187px;
-    min-width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.practice-logo img {
-    width: 180px;
-    height: 112px;
-    object-fit: contain;
-}
-
-/* Default homepage styling */

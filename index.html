@@ -16,6 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
+    <!-- Preload critical logo image -->
+    <link rel="preload" href="images/LOGO.webp" as="image" fetchpriority="high" type="image/webp">
+    
     <!-- Critical CSS inlined for faster rendering -->
     <style>
     /* Critical CSS for above-the-fold content */
@@ -38,6 +41,18 @@
     .main-navigation{padding:var(--spacing-sm) 0;border-bottom:1px solid rgba(0,0,0,.1);background-color:var(--white)}
     .nav-wrapper{display:flex;justify-content:space-between;align-items:center}
     .practice-logo{display:flex;align-items:center}
+    </style>
+    
+    <!-- Logo-specific critical CSS to improve LCP -->
+    <style>
+    /* Critical styles for the logo image */
+    .logo-img{display:block;max-width:100%;height:auto;will-change:transform}
+    .hero-image .logo-img{max-height:300px;width:auto;margin:0 auto}
+    @media (max-width:768px){.hero-image .logo-img{max-height:220px;transform:none !important}}
+    @media (max-width:480px){.hero-image .logo-img{max-height:180px;padding:0.5rem}}
+    /* Prevent CLS */
+    .practice-logo img{width:180px;height:60px}
+    @media (max-width:480px){.practice-logo img{width:150px;height:50px}}
     </style>
     
     <!-- Non-critical CSS loaded asynchronously -->
@@ -204,7 +219,7 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="index.html" class="practice-logo">
-                        <img src="images/LOGO.webp" alt="Khatib Family Practice Logo" width="180" height="60">
+                        <img src="images/LOGO.webp" alt="Khatib Family Practice Logo" width="180" height="60" loading="eager" fetchpriority="high">
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
@@ -241,7 +256,15 @@
             </div>
             <div class="hero-image">
                 <!-- Practice Logo -->
-                <img src="images/LOGO.webp" alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" class="logo-img" width="300" height="300">
+                <img src="images/LOGO.webp" 
+                     alt="Khatib Family Practice Logo - Medical caduceus symbol with KFP initials" 
+                     class="logo-img" 
+                     width="300" 
+                     height="300"
+                     loading="eager"
+                     fetchpriority="high"
+                     decoding="async"
+                     style="content-visibility: auto;">
             </div>
         </div>
     </section>

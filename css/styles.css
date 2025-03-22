@@ -1612,6 +1612,29 @@ footer {
     margin: 0 auto;
     transition: transform 0.3s ease;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    /* Add will-change to optimize GPU rendering */
+    will-change: transform;
+}
+
+/* Mobile optimizations for logo */
+@media (max-width: 768px) {
+    .hero-image .logo-img {
+        max-height: 220px;
+        padding: 1rem;
+        /* Simplify transitions and effects on mobile */
+        transition: opacity 0.2s ease;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        transform: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-image .logo-img {
+        max-height: 180px;
+        padding: 0.5rem;
+        /* Remove filter entirely on small screens */
+        filter: none;
+    }
 }
 
 /* About section logo specific */

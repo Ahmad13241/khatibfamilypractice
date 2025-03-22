@@ -397,8 +397,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Apply resize handling to ensure correct dimensions
         handleImageResize();
         
-        // Mark all successfully loaded images
-        document.querySelectorAll('img').forEach(img => {
+        // Prioritize the logo images first
+        document.querySelectorAll('.logo-img').forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+                img.style.opacity = '1';
+                // Remove any complex transforms or filters on mobile
+                if (window.innerWidth <= 768) {
+                    img.style.transform = 'none';
+                    img.style.filter = 'none';
+                }
+            }
+        });
+        
+        // Mark all other successfully loaded images
+        document.querySelectorAll('img:not(.logo-img)').forEach(img => {
             if (img.complete && img.naturalHeight !== 0) {
                 img.classList.add('loaded');
                 // Ensure proper display
@@ -410,6 +423,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preload important images
     function preloadImages() {
         const criticalImages = [
+            // Logo (highest priority)
+            'LOGO.webp',
+            
             // JPEG/JPG versions
             'family-medicine.jpg',
             'preventative-care.jpg',
@@ -454,6 +470,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Consolidated function to initialize all images with consistent behavior
     function initializeAllImages() {
+        // Handle logo images with highest priority
+        const logoImages = document.querySelectorAll('.logo-img');
+        logoImages.forEach(img => {
+            // Ensure logo is loaded with highest priority
+            img.setAttribute('loading', 'eager');
+            img.setAttribute('fetchpriority', 'high');
+            
+            // Simplify transitions for the logo on mobile
+            if (window.innerWidth <= 768) {
+                img.style.transition = 'opacity 0.2s ease';
+                img.style.filter = 'none'; // Remove any filters on mobile
+            } else {
+                img.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            }
+            
+            // Force immediate display
+            img.style.opacity = '1';
+        });
+        
         // Target all relevant image types in one pass
         const allContentImages = document.querySelectorAll('.service-img, .card-img, .doctor-img, .gallery-image');
         

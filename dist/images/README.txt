@@ -3,7 +3,7 @@
 ## Logo Files
 
 The website currently uses the following logo file:
-- LOGO.jpg - Currently in use in the website
+- LOGO.webp - Currently in use in the website
 
 ## IMPORTANT: Case Sensitivity in Images
 

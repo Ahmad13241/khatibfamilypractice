@@ -3292,3 +3292,13 @@ select:focus {
         transition: all 0.3s ease;
     }
 }
+
+.career-action {
+    margin-top: var(--spacing-md);
+}
+
+.career-action .btn {
+    display: inline-block;
+    margin-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}

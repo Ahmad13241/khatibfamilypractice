@@ -24,6 +24,7 @@
     
     <title>Healow Patient Portal | Khatib Family Practice | Bullhead City, AZ</title>
     <link rel="stylesheet" href="../css/main.bundle.css" media="screen">
+    <link rel="stylesheet" href="../css/styles.css" media="screen">
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
@@ -368,7 +369,26 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.bundle.js" defer></script>
+    <script src="../js/main.js" defer></script>
     <script src="../js/security.js"></script>
+    <!-- Fallback script for accordion functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fallback for accordion functionality
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            if (accordionHeaders.length > 0) {
+                console.log(`Fallback: Found ${accordionHeaders.length} accordion headers`);
+                
+                accordionHeaders.forEach(header => {
+                    header.addEventListener('click', function() {
+                        const accordionItem = this.closest('.accordion-item');
+                        accordionItem.classList.toggle('active');
+                        console.log(`Toggled accordion: ${this.querySelector('span').textContent}`);
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html> 

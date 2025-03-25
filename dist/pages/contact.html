@@ -24,6 +24,7 @@
     
     <title>Contact Khatib Family Practice | Schedule an Appointment in Bullhead City, Laughlin & Fort Mohave</title>
     <link rel="stylesheet" href="../css/main.bundle.css" media="screen">
+    <link rel="stylesheet" href="../css/contact.css">
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
@@ -258,5 +259,64 @@
     <!-- JavaScript -->
     <script src="../js/main.bundle.js" defer></script>
     <script src="../js/security.js"></script>
+    
+    <!-- Page specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const animateOnScroll = function() {
+                const sections = document.querySelectorAll('.contact-method, .contact-info-box, .map-container, .section-header');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    // If section is in viewport
+                    if (sectionTop < windowHeight * 0.85 && !section.classList.contains('animated')) {
+                        section.classList.add('animated');
+                        section.style.opacity = '1';
+                    }
+                });
+            };
+            
+            // Initialize animation on load
+            setTimeout(animateOnScroll, 100);
+            
+            // Continue to check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Add hover pulse animation to contact phone numbers
+            const contactHighlights = document.querySelectorAll('.contact-highlight');
+            
+            contactHighlights.forEach(highlight => {
+                highlight.addEventListener('mouseenter', function() {
+                    this.style.animation = 'pulse 1s ease infinite';
+                });
+                
+                highlight.addEventListener('mouseleave', function() {
+                    this.style.animation = 'none';
+                });
+            });
+            
+            // Enhance download links with animated icon on hover
+            const downloadLinks = document.querySelectorAll('.download-link');
+            
+            downloadLinks.forEach(link => {
+                const icon = link.querySelector('i');
+                
+                link.addEventListener('mouseenter', function() {
+                    if (icon) {
+                        icon.style.transform = 'translateY(-3px)';
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    if (icon) {
+                        icon.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

@@ -28,6 +28,7 @@
     
     <!-- Critical CSS first -->
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/resources.css">
     
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
@@ -471,5 +472,68 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
+    
+    <!-- Page specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky Navigation Handler
+            const resourcesNav = document.querySelector('.resources-nav');
+            const resourcesIntro = document.querySelector('.resources-intro');
+            
+            if (resourcesNav && resourcesIntro) {
+                const stickyNavOffset = resourcesNav.offsetTop;
+                
+                function handleScroll() {
+                    if (window.scrollY > stickyNavOffset) {
+                        resourcesNav.classList.add('sticky');
+                    } else {
+                        resourcesNav.classList.remove('sticky');
+                    }
+                }
+                
+                window.addEventListener('scroll', handleScroll);
+            }
+            
+            // Animate elements on scroll
+            const animateOnScroll = function() {
+                const sections = document.querySelectorAll('.service-detail, .resource-section, .resource-card');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    // If section is in viewport
+                    if (sectionTop < windowHeight * 0.85) {
+                        section.style.opacity = '1';
+                    }
+                });
+            };
+            
+            // Initialize animation on load
+            animateOnScroll();
+            
+            // Continue to check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Smooth scroll for resource navigation
+            const resourceLinks = document.querySelectorAll('.resource-nav-item');
+            
+            resourceLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

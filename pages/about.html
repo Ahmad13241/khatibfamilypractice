@@ -29,6 +29,7 @@
     
     <!-- Critical CSS first -->
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/about.css">
     
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
@@ -379,5 +380,101 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
+    
+    <!-- Page specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const animateOnScroll = function() {
+                const sections = document.querySelectorAll('.doctor-card, .philosophy-text, .values, .feature-card, .gallery-item, .section-header, .office-gallery h3, .cta-content');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    // If section is in viewport
+                    if (sectionTop < windowHeight * 0.85 && !section.classList.contains('animated')) {
+                        section.classList.add('animated');
+                        
+                        // Remove any inline opacity that might have been set in CSS
+                        if (section.style.opacity !== '1') {
+                            section.style.opacity = '1';
+                        }
+                    }
+                });
+            };
+            
+            // Initialize animation on load
+            setTimeout(animateOnScroll, 100);
+            
+            // Continue to check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Add rotation animation to feature icons on hover
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            featureCards.forEach(card => {
+                const icon = card.querySelector('.feature-icon i');
+                
+                card.addEventListener('mouseenter', function() {
+                    if (icon) {
+                        icon.style.transform = 'rotate(360deg)';
+                        icon.style.transition = 'all 0.5s ease';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (icon) {
+                        icon.style.transform = 'rotate(0deg)';
+                        icon.style.transition = 'all 0.5s ease';
+                    }
+                });
+            });
+            
+            // Enhance gallery items with animated captions
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach(item => {
+                const caption = item.querySelector('.gallery-caption');
+                const image = item.querySelector('.gallery-image');
+                
+                if (caption && image) {
+                    // Initially hide caption
+                    caption.style.transform = 'translateY(100%)';
+                    
+                    item.addEventListener('mouseenter', function() {
+                        caption.style.transform = 'translateY(0)';
+                        image.style.transform = 'scale(1.05)';
+                    });
+                    
+                    item.addEventListener('mouseleave', function() {
+                        caption.style.transform = 'translateY(100%)';
+                        image.style.transform = 'scale(1)';
+                    });
+                }
+            });
+            
+            // Add hover effects to value list items
+            const valueItems = document.querySelectorAll('.values-list li');
+            
+            valueItems.forEach(item => {
+                const icon = item.querySelector('i');
+                
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(5px)';
+                    if (icon) {
+                        icon.style.transform = 'scale(1.2)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                    if (icon) {
+                        icon.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

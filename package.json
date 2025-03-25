@@ -47,6 +47,7 @@
     "eslint-plugin-promise": "^7.2.1",
     "glob": "^11.0.1",
     "nodemon": "^3.0.1",
+    "puppeteer": "^24.4.0",
     "terser": "^5.39.0"
   }
 }

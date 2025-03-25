@@ -120,6 +120,20 @@
                             <i class="fas fa-mobile-alt"></i>
                             <span>healow</span>
                         </div>
+                        <div class="app-features">
+                            <div class="feature-item">
+                                <i class="fas fa-calendar-check"></i> Appointments
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-pills"></i> Medications
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-flask"></i> Lab Results
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-comment-medical"></i> Messages
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -354,50 +368,22 @@
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
     <script src="../js/security.js"></script>
-    <!-- Fixed script for accordion functionality -->
+    <!-- Fallback script for accordion functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Direct accordion implementation to ensure functionality
+            // Fallback for accordion functionality
             const accordionHeaders = document.querySelectorAll('.accordion-header');
             
             if (accordionHeaders.length > 0) {
-                console.log(`Direct implementation: Found ${accordionHeaders.length} accordion headers`);
+                console.log(`Fallback: Found ${accordionHeaders.length} accordion headers`);
                 
-                // First ensure all accordions are closed by default
-                document.querySelectorAll('.accordion-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Then add click listeners
                 accordionHeaders.forEach(header => {
-                    header.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
+                    header.addEventListener('click', function() {
                         const accordionItem = this.closest('.accordion-item');
-                        if (accordionItem) {
-                            // Toggle the active class
-                            accordionItem.classList.toggle('active');
-                            
-                            // Update aria attributes for accessibility
-                            const isExpanded = accordionItem.classList.contains('active');
-                            this.setAttribute('aria-expanded', isExpanded);
-                            
-                            console.log(`Toggled accordion: ${this.querySelector('span').textContent} - active: ${isExpanded}`);
-                        }
-                    });
-                    
-                    // Add keyboard accessibility
-                    header.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.click();
-                        }
+                        accordionItem.classList.toggle('active');
+                        console.log(`Toggled accordion: ${this.querySelector('span').textContent}`);
                     });
                 });
-                
-                // Set initialization flag
-                window.accordionInitialized = true;
             }
         });
     </script>

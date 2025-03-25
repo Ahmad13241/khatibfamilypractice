@@ -800,4 +800,55 @@ document.addEventListener("DOMContentLoaded", function () {
       mobileToggle.setAttribute("aria-expanded", "false");
     }
   });
+
+  // Ensure accordion functionality is always initialized
+  function initAccordion() {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+    if (accordionHeaders.length > 0) {
+      console.log(
+        `Main.js initializing ${accordionHeaders.length} accordion headers`
+      );
+
+      // First make sure all accordions are properly closed
+      document.querySelectorAll(".accordion-item").forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      // Then add click listeners to each header
+      accordionHeaders.forEach((header) => {
+        // Remove any existing listeners to avoid duplicates
+        const newHeader = header.cloneNode(true);
+        header.parentNode.replaceChild(newHeader, header);
+
+        newHeader.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const accordionItem = this.closest(".accordion-item");
+
+          if (accordionItem) {
+            // Toggle the clicked accordion
+            accordionItem.classList.toggle("active");
+
+            // Update aria attributes
+            const isExpanded = accordionItem.classList.contains("active");
+            this.setAttribute("aria-expanded", isExpanded);
+
+            console.log(
+              `Main.js toggled accordion: ${
+                this.querySelector("span")?.textContent || "FAQ Item"
+              }`
+            );
+          }
+        });
+      });
+
+      // Set the initialization flag
+      window.accordionInitialized = true;
+    }
+  }
+
+  // Call accordion initialization
+  initAccordion();
 });

@@ -437,7 +437,7 @@
             <div class="footer-content">
                 <div class="footer-section about">
                     <h3>Khatib Family Practice</h3>
-                    <p>Serving the Bullhead City community and surrounding areas with quality-focused adult medicine since 1998.</p>
+                    <p>Offering compassionate, comprehensive medical care to adults (21+) in Bullhead City and surrounding communities with a quarter-century of healthcare expertise.</p>
                     <div class="contact">
                         <p><i class="fas fa-phone"></i> (928) 763-9009</p>
                         <p><i class="fas fa-fax"></i> (928) 758-7538</p>
@@ -530,6 +530,101 @@
                             top: targetElement.offsetTop - 120,
                             behavior: 'smooth'
                         });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Mobile Navigation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create and add the mobile navigation toggle button
+            const resourcesNav = document.querySelector('.resources-nav');
+            const toggleButton = document.createElement('button');
+            toggleButton.className = 'resources-nav-toggle';
+            toggleButton.innerHTML = '<i class="fas fa-bars"></i> Navigation Menu';
+            toggleButton.setAttribute('aria-label', 'Toggle navigation menu');
+            
+            // Create a container for the toggle button
+            const toggleContainer = document.createElement('div');
+            toggleContainer.className = 'resources-nav-toggle-container';
+            toggleContainer.appendChild(toggleButton);
+            
+            // Insert the toggle at the beginning of the navigation
+            resourcesNav.insertBefore(toggleContainer, resourcesNav.firstChild);
+            
+            // Collapse navigation by default on mobile
+            if (window.innerWidth <= 768) {
+                resourcesNav.classList.add('collapsed');
+            }
+            
+            // Toggle navigation when button is clicked
+            toggleButton.addEventListener('click', function() {
+                resourcesNav.classList.toggle('collapsed');
+                
+                // Change toggle button text based on state
+                const isCollapsed = resourcesNav.classList.contains('collapsed');
+                toggleButton.innerHTML = isCollapsed ? 
+                    '<i class="fas fa-bars"></i> Show Navigation' : 
+                    '<i class="fas fa-times"></i> Hide Navigation';
+            });
+            
+            // Create floating action button for mobile
+            const fab = document.createElement('div');
+            fab.className = 'mobile-nav-fab';
+            fab.innerHTML = '<i class="fas fa-list"></i>';
+            fab.setAttribute('aria-label', 'Navigate to sections');
+            document.body.appendChild(fab);
+            
+            // When FAB is clicked, scroll to navigation
+            fab.addEventListener('click', function() {
+                // Expand navigation if collapsed
+                if (resourcesNav.classList.contains('collapsed')) {
+                    resourcesNav.classList.remove('collapsed');
+                    toggleButton.innerHTML = '<i class="fas fa-times"></i> Hide Navigation';
+                }
+                
+                // Scroll to navigation
+                resourcesNav.scrollIntoView({behavior: 'smooth'});
+            });
+            
+            // Hide FAB when near the top of the page
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    fab.style.display = 'flex';
+                } else {
+                    fab.style.display = 'none';
+                }
+            });
+            
+            // Initially hide FAB if at the top
+            if (window.scrollY <= 300) {
+                fab.style.display = 'none';
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    // Remove collapsed class on desktop
+                    resourcesNav.classList.remove('collapsed');
+                } else {
+                    // Add collapsed class on mobile
+                    resourcesNav.classList.add('collapsed');
+                    toggleButton.innerHTML = '<i class="fas fa-bars"></i> Show Navigation';
+                }
+            });
+            
+            // Add click event listeners to navigation links for mobile
+            const navLinks = document.querySelectorAll('.resource-nav-item');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Auto-collapse the navigation after clicking a link on mobile
+                    if (window.innerWidth <= 768) {
+                        setTimeout(function() {
+                            resourcesNav.classList.add('collapsed');
+                            toggleButton.innerHTML = '<i class="fas fa-bars"></i> Show Navigation';
+                        }, 500); // Small delay to allow for smooth scrolling
                     }
                 });
             });

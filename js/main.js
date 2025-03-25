@@ -362,13 +362,17 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get parent container dimensions
         const container = img.closest(".service-image");
         if (container) {
-          // Ensure container has proper dimensions based on viewport width
-          if (window.innerWidth <= 576) {
-            container.style.height = "300px";
-          } else if (window.innerWidth <= 768) {
-            container.style.height = "250px";
+          // For mobile responsive layout, let CSS handle dimensions
+          if (window.innerWidth <= 992) {
+            // Remove fixed height to let padding-bottom control aspect ratio
+            container.style.height = "";
           } else {
+            // For desktop, maintain the original fixed height
             container.style.height = "400px";
+            // Reset any absolute positioning used for mobile
+            img.style.position = "";
+            img.style.top = "";
+            img.style.left = "";
           }
         }
       });
@@ -531,6 +535,15 @@ document.addEventListener("DOMContentLoaded", function () {
       // Add object-fit cover property to all images
       img.style.objectFit = "cover";
 
+      // For service images specifically on mobile
+      if (img.classList.contains("service-img") && window.innerWidth <= 992) {
+        const serviceImage = img.closest(".service-image");
+        if (serviceImage) {
+          // Let CSS handle the sizing via padding-bottom
+          serviceImage.style.height = "";
+        }
+      }
+
       // For gallery images specifically, add higher quality settings
       if (img.classList.contains("gallery-image")) {
         img.style.objectFit = "cover";
@@ -553,6 +566,17 @@ document.addEventListener("DOMContentLoaded", function () {
         this.style.opacity = "1";
         if (process.env.NODE_ENV !== "production") {
           console.info(`Image loaded successfully: ${this.src}`);
+        }
+      });
+
+      // Add specific error handling for service images
+      img.addEventListener("error", function () {
+        if (this.classList.contains("service-img")) {
+          const serviceImage = this.closest(".service-image");
+          if (serviceImage) {
+            // Apply a colored background if image fails to load
+            serviceImage.style.backgroundColor = "var(--accent-color)";
+          }
         }
       });
     });

@@ -144,8 +144,11 @@
     color: var(--primary-color);
 }
 
-/* Service Detail Enhancements */
+/* Service Detail Structure */
 .service-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 5rem;
     padding: 3rem 0;
     border-radius: 8px;
@@ -161,6 +164,7 @@
 
 .service-detail:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.8);
+    flex-direction: row-reverse;
 }
 
 /* Decorative elements */
@@ -177,9 +181,11 @@
 
 .service-content {
     padding: 0 2rem;
+    width: 60%;
 }
 
 .service-image {
+    width: 40%;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -196,6 +202,43 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+/* Enhanced focus states for better accessibility */
+.service-image:focus-within {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 3px;
+}
+
+.service-img:focus {
+    transform: scale(1.05);
+    outline: none; /* Remove default focus outline since we're using the parent container */
+}
+
+/* Enhanced hover states for improved interactivity */
+.service-image:hover .service-img {
+    transform: scale(1.05);
+}
+
+/* Image loading states */
+.service-img.loaded {
+    opacity: 1;
+}
+
+.service-img:not(.loaded) {
+    opacity: 0.5;
+}
+
+/* Fix for Safari/iOS image rendering */
+@supports (-webkit-overflow-scrolling: touch) {
+    .service-image {
+        will-change: transform;
+    }
+    
+    .service-img {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+    }
 }
 
 .service-icon {
@@ -629,7 +672,19 @@
 /* Media Queries */
 @media (max-width: 992px) {
     .service-detail {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1rem;
+    }
+    
+    /* Ensure consistent direction regardless of even/odd alternating layout */
+    .service-detail:nth-child(even) .service-content {
+        order: 1;
+    }
+    
+    .service-detail:nth-child(even) .service-image {
+        order: 2;
     }
     
     .service-content, .service-image {
@@ -637,8 +692,21 @@
     }
     
     .service-image {
-        margin-top: 2rem;
-        height: 350px;
+        margin: 2rem auto;
+        max-width: 100%;
+        height: 0;
+        padding-bottom: 66.67%; /* 2:3 aspect ratio */
+        position: relative;
+    }
+    
+    .service-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
     }
 }
 
@@ -743,7 +811,34 @@
     }
     
     .service-image {
-        height: 300px;
+        padding-bottom: 75%; /* 3:4 aspect ratio for smaller screens */
+    }
+    
+    .service-image:active {
+        transform: scale(0.98);
+    }
+    
+    .service-text h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .service-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .service-icon {
+        margin: 0 auto 1.5rem;
+    }
+    
+    .service-text p {
+        text-align: center;
+    }
+    
+    .service-features {
+        margin-top: 1.5rem;
     }
     
     .feature-grid {
@@ -761,6 +856,59 @@
     
     .insurance-plans-grid {
         grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Fix for image rendering on mobile devices with high DPI screens */
+    .service-img {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Improve touch feedback for images */
+    .service-image {
+        position: relative;
+        isolation: isolate;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-image::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border-radius: 8px;
+        z-index: 1;
+        pointer-events: none;
+        transition: background-color 0.3s ease;
+        touch-action: manipulation;
+    }
+    
+    .service-image:active::after {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Ensure images don't cause layout shifts while loading */
+    .service-image picture {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    
+    /* Enhanced lazy loading behavior */
+    .service-img[loading="lazy"] {
+        transition: opacity 0.5s ease, filter 0.5s ease;
+    }
+    
+    .service-img:not(.loaded)[loading="lazy"] {
+        filter: blur(10px);
+        opacity: 0.7;
     }
 }
 
@@ -781,8 +929,22 @@
         font-size: 0.9rem;
     }
     
+    .service-detail {
+        padding: 1.5rem 0.75rem;
+        margin-bottom: 3rem;
+    }
+    
+    .service-content {
+        padding: 0 0.75rem;
+    }
+    
     .service-image {
-        height: 250px;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio for very small screens */
+        margin: 1.5rem auto;
+    }
+    
+    .service-text h2 {
+        font-size: 1.5rem;
     }
     
     .resource-card {
@@ -791,6 +953,38 @@
     
     .insurance-plans-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Handle extreme narrow screens */
+@media (max-width: 360px) {
+    .service-image {
+        padding-bottom: 66.67%; /* Return to 2:3 ratio on very small screens */
+        margin: 1rem auto;
+    }
+    
+    .service-content {
+        padding: 0 0.5rem;
+    }
+    
+    .service-detail {
+        padding: 1rem 0.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .feature-item {
+        padding: 1rem;
+    }
+    
+    .feature-item h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Handle orientation changes gracefully */
+@media (orientation: landscape) and (max-width: 992px) {
+    .service-image {
+        padding-bottom: 40%; /* Wider aspect ratio for landscape */
     }
 }
 

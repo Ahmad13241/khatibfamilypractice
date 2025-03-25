@@ -133,7 +133,7 @@
                                     <span class="metric-score">4.0</span>
                                 </div>
                                 <div class="metric-bar">
-                                    <div class="metric-fill" style="width: 80%;"></div>
+                                    <div class="metric-fill" style="--percent: 80%;"></div>
                                 </div>
                             </div>
                             <div class="rating-metric">
@@ -142,7 +142,7 @@
                                     <span class="metric-score">4.5</span>
                                 </div>
                                 <div class="metric-bar">
-                                    <div class="metric-fill" style="width: 90%;"></div>
+                                    <div class="metric-fill" style="--percent: 90%;"></div>
                                 </div>
                             </div>
                             <div class="rating-metric">
@@ -151,7 +151,7 @@
                                     <span class="metric-score">4.5</span>
                                 </div>
                                 <div class="metric-bar">
-                                    <div class="metric-fill" style="width: 90%;"></div>
+                                    <div class="metric-fill" style="--percent: 90%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                     <span class="metric-score">69%</span>
                                 </div>
                                 <div class="metric-bar">
-                                    <div class="metric-fill" style="width: 69%;"></div>
+                                    <div class="metric-fill" style="--percent: 69%;"></div>
                                 </div>
                             </div>
                             <div class="rating-metric">
@@ -191,7 +191,7 @@
                                     <span class="metric-score">3.8</span>
                                 </div>
                                 <div class="metric-bar">
-                                    <div class="metric-fill" style="width: 76%;"></div>
+                                    <div class="metric-fill" style="--percent: 76%;"></div>
                                 </div>
                             </div>
                             <div class="rating-metric">
@@ -200,7 +200,7 @@
                                     <span class="metric-score">✓</span>
                                 </div>
                                 <div class="metric-bar">
-                                    <div class="metric-fill" style="width: 85%;"></div>
+                                    <div class="metric-fill" style="--percent: 85%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -566,5 +566,45 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
+    
+    <!-- Testimonials Page Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate rating metric bars when they come into view
+            const animateMetricBars = function() {
+                const metricFills = document.querySelectorAll('.metric-fill');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animated');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {threshold: 0.3});
+                
+                metricFills.forEach(metricFill => {
+                    observer.observe(metricFill);
+                });
+            };
+            
+            // Enhance the parallax effect on scroll for hero section elements
+            const enhanceParallax = function() {
+                const heroSection = document.querySelector('.testimonial-hero');
+                
+                window.addEventListener('scroll', () => {
+                    const scrollPosition = window.scrollY;
+                    if (scrollPosition < 600) {
+                        const translateY = scrollPosition * 0.2;
+                        heroSection.style.backgroundPosition = `center ${translateY}px`;
+                    }
+                });
+            };
+            
+            // Initialize animations
+            animateMetricBars();
+            enhanceParallax();
+        });
+    </script>
 </body>
 </html> 

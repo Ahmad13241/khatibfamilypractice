@@ -1,0 +1,541 @@
+/* 
+ * Khatib Family Practice - Healow Page Stylesheet
+ * Custom styles for the Healow Patient Portal page
+ */
+
+/* ===== HEALOW SPECIFIC VARIABLES ===== */
+:root {
+    /* Healow branding colors */
+    --healow-primary: #00a1df;     /* Healow blue color */
+    --healow-secondary: #88c540;   /* Healow green accent */
+    --healow-dark: #0080b3;        /* Darker blue for hover states */
+    --healow-light: #e6f7ff;       /* Light blue for backgrounds */
+}
+
+/* ===== HEALOW HERO SECTION ===== */
+.hero-section.healow-hero {
+    background: linear-gradient(135deg, var(--light-color) 0%, var(--healow-light) 100%);
+    padding: var(--spacing-xl) 0;
+}
+
+.hero-section.healow-hero .hero-content {
+    max-width: 550px;
+}
+
+.hero-section.healow-hero h1 {
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.hero-section.healow-hero h1::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: var(--healow-primary);
+}
+
+.hero-section.healow-hero p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* App device mockup styles */
+.app-device-mockup {
+    position: relative;
+    width: 280px;
+    height: 560px;
+    margin: 0 auto;
+    background-color: #333;
+    border-radius: 36px;
+    border: 10px solid #111;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.app-device-mockup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 30px;
+    background-color: #111;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 2;
+}
+
+.app-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.app-logo-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.healow-logo {
+    height: 40px;
+    width: auto;
+}
+
+/* Temporary app preview placeholder for old layout */
+.app-preview-placeholder {
+    background-color: var(--healow-light);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-preview-placeholder:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.app-logo {
+    font-size: 3rem;
+    color: var(--healow-primary);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app-logo i {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.app-logo span {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* ===== BENEFITS SECTION ===== */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin: 2.5rem 0;
+}
+
+.feature-item {
+    background-color: #fff;
+    border-radius: var(--border-radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-top: 4px solid var(--healow-primary);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-top-width: 6px;
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: var(--healow-primary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover i {
+    transform: scale(1.1);
+}
+
+.feature-item h4 {
+    color: var(--primary-dark);
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.feature-item p {
+    color: var(--light-text);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* ===== GETTING STARTED SECTION ===== */
+.process-steps {
+    counter-reset: step-counter;
+    position: relative;
+    margin: 3rem 0;
+    padding: 0 1rem;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background-color: var(--healow-primary);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    background-color: #fff;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 2;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: var(--healow-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    z-index: 3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.step h4 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.step p {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--light-text);
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    color: var(--healow-primary);
+    margin-top: 0.5rem;
+}
+
+/* App Download Section */
+.app-download {
+    background-color: var(--healow-light);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    margin-top: 2.5rem;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow-md);
+}
+
+.app-download h4 {
+    color: var(--primary-dark);
+    margin-bottom: 1.25rem;
+    font-size: 1.3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.app-download h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background-color: var(--healow-primary);
+}
+
+.app-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.app-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-color);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.app-btn i {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+}
+
+.app-btn:hover {
+    transform: translateY(-3px);
+    background-color: #222;
+    box-shadow: var(--shadow-md);
+    color: var(--white);
+}
+
+/* ===== FAQ SECTION ===== */
+.accordion {
+    margin: 2rem 0;
+}
+
+.accordion-item {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.accordion-header {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    color: var(--primary-dark);
+}
+
+.accordion-header:hover {
+    background-color: var(--healow-light);
+}
+
+.accordion-header span {
+    flex: 1;
+    padding-right: 1rem;
+}
+
+.accordion-header i {
+    color: var(--healow-primary);
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-header i {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    max-height: 500px;
+}
+
+.accordion-content p {
+    margin-bottom: 0;
+    color: var(--light-text);
+}
+
+.accordion-content a {
+    color: var(--healow-primary);
+}
+
+.accordion-content a:hover {
+    color: var(--healow-dark);
+    text-decoration: underline;
+}
+
+/* ===== CTA SECTION ===== */
+.cta-section {
+    background: linear-gradient(135deg, var(--healow-primary) 0%, var(--primary-color) 100%);
+    padding: var(--spacing-xl) 0;
+    color: white;
+    margin-top: var(--spacing-xl);
+}
+
+.cta-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    color: white;
+    margin-bottom: var(--spacing-md);
+    font-size: 2rem;
+}
+
+.cta-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-section .btn-primary {
+    background-color: white;
+    color: var(--healow-primary);
+    border-color: white;
+}
+
+.cta-section .btn-primary:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-section .btn-outline {
+    border-color: white;
+    color: white;
+}
+
+.cta-section .btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 991px) {
+    .hero-section.healow-hero .container {
+        flex-direction: column;
+    }
+    
+    .hero-section.healow-hero .hero-content {
+        text-align: center;
+        margin-bottom: var(--spacing-xl);
+        max-width: 100%;
+    }
+    
+    .hero-section.healow-hero h1::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .app-device-mockup {
+        width: 240px;
+        height: 480px;
+    }
+    
+    .process-steps::before {
+        left: 20px;
+    }
+    
+    .step {
+        padding-left: 3rem;
+        align-items: flex-start;
+    }
+    
+    .step-number {
+        left: 20px;
+        transform: translateX(-50%);
+    }
+    
+    .step h4, .step p {
+        text-align: left;
+    }
+}
+
+@media (max-width: 767px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-device-mockup {
+        width: 220px;
+        height: 440px;
+    }
+    
+    .app-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .app-btn {
+        width: 80%;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-section .btn {
+        width: 80%;
+    }
+}
+
+@media (max-width: 576px) {
+    .app-device-mockup {
+        width: 200px;
+        height: 400px;
+    }
+    
+    .step {
+        padding: 1.5rem 1rem 1.5rem 3rem;
+    }
+} 

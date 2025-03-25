@@ -20,8 +20,9 @@
     <link rel="canonical" href="https://khatibfamilypractice.com/pages/healow" />
     
     <title>Healow Patient Portal | Khatib Family Practice | Bullhead City, AZ</title>
-    <link rel="stylesheet" href="../css/main.css" media="screen">
-    <link rel="stylesheet" href="../css/styles.css" media="screen">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/healow.css">
+    
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
@@ -30,15 +31,18 @@
     <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
+    
     <!-- Font Awesome for icons with SRI -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
           crossorigin="anonymous" 
           referrerpolicy="no-referrer">
+          
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <!-- jQuery (updated version) with SRI -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
@@ -104,7 +108,7 @@
     <!-- Main Content -->
     <main id="main-content">
         <!-- Healow Portal Section -->
-        <section class="hero">
+        <section class="hero hero-section healow-hero">
             <div class="container">
                 <div class="hero-content">
                     <h1>Healow Patient Portal</h1>
@@ -115,10 +119,12 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="app-preview-placeholder">
-                        <div class="app-logo">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>healow</span>
+                    <div class="app-device-mockup">
+                        <div class="app-preview-placeholder">
+                            <div class="app-logo">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>healow</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,7 +251,7 @@
                 
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" aria-expanded="false">
                             <span>Does the healow app cost anything?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -255,7 +261,7 @@
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" aria-expanded="false">
                             <span>Is my information secure in the healow app?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -265,7 +271,7 @@
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" aria-expanded="false">
                             <span>How do I set up healow for multiple family members?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -275,7 +281,7 @@
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" aria-expanded="false">
                             <span>What if I forget my password or PIN?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -285,7 +291,7 @@
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" aria-expanded="false">
                             <span>Can I access healow from my computer?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -353,15 +359,13 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    <script src="../js/security.js"></script>
-    <!-- Fixed script for accordion functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Direct accordion implementation to ensure functionality
+            // Enhanced accordion implementation
             const accordionHeaders = document.querySelectorAll('.accordion-header');
             
             if (accordionHeaders.length > 0) {
-                console.log(`Direct implementation: Found ${accordionHeaders.length} accordion headers`);
+                console.log(`Enhanced implementation: Found ${accordionHeaders.length} accordion headers`);
                 
                 // First ensure all accordions are closed by default
                 document.querySelectorAll('.accordion-item').forEach(item => {

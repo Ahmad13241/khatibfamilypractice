@@ -154,6 +154,61 @@
                                     <div class="metric-fill" style="--percent: 90%;"></div>
                                 </div>
                             </div>
+                            <div class="rating-source-link">
+                                <a href="https://doctor.webmd.com/doctor/nadim-khatib-2705d5e7-55b0-466a-bcf4-2fa43af68a70-overview" target="_blank" rel="noopener">View on WebMD <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- US News Health Rating Card -->
+                    <div class="rating-card">
+                        <div class="rating-source">
+                            <i class="fas fa-hospital-user"></i> US News Health
+                        </div>
+                        <div class="rating-summary">
+                            <div class="rating-number">
+                                4.1<span class="rating-total">/5</span>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-count">Based on 38 patient ratings</div>
+                        </div>
+                        <div class="rating-metrics">
+                            <div class="rating-metric">
+                                <div class="metric-label">
+                                    <span class="metric-label-text">Explains conditions and treatments</span>
+                                    <span class="metric-score">4.0</span>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="--percent: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="rating-metric">
+                                <div class="metric-label">
+                                    <span class="metric-label-text">Takes time to answer questions</span>
+                                    <span class="metric-score">4.3</span>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="--percent: 86%;"></div>
+                                </div>
+                            </div>
+                            <div class="rating-metric">
+                                <div class="metric-label">
+                                    <span class="metric-label-text">Provides follow-up as needed</span>
+                                    <span class="metric-score">4.2</span>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="--percent: 84%;"></div>
+                                </div>
+                            </div>
+                            <div class="rating-source-link">
+                                <a href="https://health.usnews.com/doctors/nadim-khatib-314667" target="_blank" rel="noopener">View on US News Health <i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
                     </div>
                     
@@ -202,6 +257,9 @@
                                 <div class="metric-bar">
                                     <div class="metric-fill" style="--percent: 85%;"></div>
                                 </div>
+                            </div>
+                            <div class="rating-source-link">
+                                <a href="https://www.healthgrades.com/physician/dr-nadim-khatib-2dwbf" target="_blank" rel="noopener">View on Healthgrades <i class="fas fa-external-link-alt"></i></a>
                             </div>
                         </div>
                     </div>
@@ -493,6 +551,16 @@
                         <p>Yelp is a popular review platform where you can share your healthcare experiences to help others in your community.</p>
                         <a href="https://www.yelp.com/biz/khatib-family-practice-bullhead-city" target="_blank" rel="noopener" class="btn btn-primary platform-btn">Write a Review on Yelp</a>
                     </div>
+                    
+                    <!-- Google Reviews Platform Card -->
+                    <div class="platform-card google">
+                        <div class="platform-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <h3>Google Reviews</h3>
+                        <p>Share your experience on Google to help others find quality healthcare in the Bullhead City area.</p>
+                        <a href="https://www.google.com/search?sca_esv=dae00c36fa947bf4&sxsrf=AHTn8zphtiPXcr-S0bvG6KVJF315jUACzg:1742943973222&si=APYL9btvhO6SAb8jF9HqTZMMa7vs_teLnZaEVrJZwRKFIIKjoc2xN4EHzt6-CimiBOFgvGNsM_o_EH02G8-RdO8hi-0snhD1egc4wxUrv2YBfnfeQtmL-83q1VBmKxSeUTOqB8ZoaKNB5YSj94XudhfZO9JvRKYi4g%3D%3D&q=Khatib+Family+Practice+Reviews" target="_blank" rel="noopener" class="btn btn-primary platform-btn">Write a Review on Google</a>
+                    </div>
                 </div>
                 
                 <div class="review-benefits">
@@ -574,18 +642,27 @@
             const animateMetricBars = function() {
                 const metricFills = document.querySelectorAll('.metric-fill');
                 
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animated');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {threshold: 0.3});
-                
-                metricFills.forEach(metricFill => {
-                    observer.observe(metricFill);
+                // Add fallback in case IntersectionObserver doesn't work
+                // This ensures bars are always filled with color
+                metricFills.forEach(fill => {
+                    fill.classList.add('animated');
                 });
+                
+                // Still use IntersectionObserver for smooth animations on scroll
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animated');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, {threshold: 0.3});
+                    
+                    metricFills.forEach(metricFill => {
+                        observer.observe(metricFill);
+                    });
+                }
             };
             
             // Enhance the parallax effect on scroll for hero section elements

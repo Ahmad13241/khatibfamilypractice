@@ -3,6 +3,11 @@
  * Custom styles for the redesigned testimonials page
  */
 
+/* Add missing variable definition */
+:root {
+    --secondary-light: #4fd1cc; /* Lighter version of the secondary teal color */
+}
+
 /* ===== HERO SECTION ===== */
 .testimonial-hero {
     background-color: var(--primary-color);
@@ -1068,4 +1073,50 @@
     .benefit-item {
         font-size: 0.9rem;
     }
+}
+
+/* Add CSS for Google Reviews platform card */
+.platform-card.google .platform-icon {
+    background-color: #4285F4;
+}
+
+.platform-card.google::after {
+    background-color: rgba(66, 133, 244, 0.05);
+}
+
+/* Add CSS for Rating Source Links */
+.rating-source-link {
+    margin-top: var(--spacing-md);
+    text-align: center;
+    padding-top: var(--spacing-sm);
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.rating-source-link a {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.rating-source-link a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.rating-source-link i {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.rating-source-link a:hover i {
+    transform: translateX(3px);
+}
+
+.rating-card:hover .rating-source-link a {
+    color: var(--primary-color);
 } 

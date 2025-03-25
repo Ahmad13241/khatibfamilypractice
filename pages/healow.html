@@ -104,7 +104,7 @@
     <!-- Main Content -->
     <main id="main-content">
         <!-- Healow Portal Section -->
-        <section class="hero">
+        <section class="healow-hero">
             <div class="container">
                 <div class="hero-content">
                     <h1>Healow Patient Portal</h1>
@@ -259,52 +259,52 @@
                 
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-1">
                             <span>Does the healow app cost anything?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div id="faq-1" class="accordion-content">
                             <p>No, the healow app is completely free. We provide this service to our patients to help them access their health records and make better healthcare decisions.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-2">
                             <span>Is my information secure in the healow app?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div id="faq-2" class="accordion-content">
                             <p>Yes, your information is completely secure. It is protected with a username and password/PIN number of your choice through SSL encryption.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-3">
                             <span>How do I set up healow for multiple family members?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div id="faq-3" class="accordion-content">
                             <p>To add another family member to your healow app, you need to log out completely and then select "Begin Now" to add another account. You can then switch between accounts as needed.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-4">
                             <span>What if I forget my password or PIN?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div id="faq-4" class="accordion-content">
                             <p>If you forget your password or PIN, you can use the "Forgot Password" option on the login screen. You'll receive instructions to reset your credentials via the email address associated with your account.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header">
+                        <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-5">
                             <span>Can I access healow from my computer?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
-                            <p>Yes, you can access the healow patient portal through any web browser by visiting <a href="https://healow.com/apps/jsp/webview/index.jsp" target="_blank">healow.com</a>. The web version offers the same features as the mobile app.</p>
+                        <div id="faq-5" class="accordion-content">
+                            <p>Yes, you can access the healow patient portal through any web browser by visiting <a href="https://healow.com/apps/jsp/webview/index.jsp" target="_blank" rel="noopener">healow.com</a>. The web version offers the same features as the mobile app.</p>
                         </div>
                     </div>
                 </div>
@@ -371,19 +371,66 @@
     <!-- Fallback script for accordion functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Fallback for accordion functionality
+            // Fallback for accordion functionality - only runs if main.js fails to initialize
             const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const mainJsInitialized = window.accordionInitialized === true;
             
-            if (accordionHeaders.length > 0) {
+            if (accordionHeaders.length > 0 && !mainJsInitialized) {
                 console.log(`Fallback: Found ${accordionHeaders.length} accordion headers`);
                 
+                // Ensure all accordions are closed by default
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add keyboard accessibility
                 accordionHeaders.forEach(header => {
-                    header.addEventListener('click', function() {
-                        const accordionItem = this.closest('.accordion-item');
-                        accordionItem.classList.toggle('active');
-                        console.log(`Toggled accordion: ${this.querySelector('span').textContent}`);
+                    // Handle click events
+                    header.addEventListener('click', toggleAccordion);
+                    
+                    // Handle keyboard events
+                    header.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            toggleAccordion.call(this, e);
+                        }
                     });
                 });
+                
+                function toggleAccordion(e) {
+                    e.preventDefault();
+                    const accordionItem = this.closest('.accordion-item');
+                    
+                    if (accordionItem) {
+                        // Toggle active class
+                        accordionItem.classList.toggle('active');
+                        
+                        // Update aria-expanded attribute
+                        const isExpanded = accordionItem.classList.contains('active');
+                        this.setAttribute('aria-expanded', isExpanded);
+                        
+                        // Log for debugging
+                        console.log(`Toggled accordion: ${this.querySelector('span').textContent} - active: ${isExpanded}`);
+                        
+                        // Scroll into view if needed
+                        if (isExpanded) {
+                            setTimeout(() => {
+                                const rect = accordionItem.getBoundingClientRect();
+                                const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                                
+                                if (!isFullyVisible) {
+                                    accordionItem.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'center'
+                                    });
+                                }
+                            }, 300);
+                        }
+                    }
+                }
+                
+                // Mark as initialized to prevent double initialization
+                window.accordionInitialized = true;
             }
         });
     </script>

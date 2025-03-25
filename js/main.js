@@ -630,31 +630,78 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(`Found ${accordionHeaders.length} accordion headers`);
 
     accordionHeaders.forEach((header) => {
-      header.addEventListener("click", function () {
+      // Initialize - ensure all accordions are closed by default
+      const accordionItem = header.closest(".accordion-item");
+      if (accordionItem) {
+        accordionItem.classList.remove("active");
+      }
+
+      header.addEventListener("click", function (e) {
+        e.preventDefault();
         const accordionItem = this.closest(".accordion-item");
-        accordionItem.classList.toggle("active");
 
-        // Log accordion state for debugging
-        console.log(
-          `Toggled accordion: ${
-            this.querySelector("span").textContent
-          } - active: ${accordionItem.classList.contains("active")}`
-        );
+        if (accordionItem) {
+          // Close all other accordions (optional - for accordion-style behavior)
+          // document.querySelectorAll(".accordion-item.active").forEach(item => {
+          //   if (item !== accordionItem) item.classList.remove("active");
+          // });
 
-        // Log interaction if KLogger is available
-        if (
-          window.KLogger &&
-          typeof window.KLogger.logUserAction === "function"
-        ) {
-          window.KLogger.logUserAction("FAQ Accordion", {
-            action: accordionItem.classList.contains("active")
-              ? "expand"
-              : "collapse",
-            question: this.querySelector("span").textContent,
-          });
+          // Toggle the clicked accordion
+          accordionItem.classList.toggle("active");
+
+          // Update aria-expanded attribute
+          const isExpanded = accordionItem.classList.contains("active");
+          this.setAttribute("aria-expanded", isExpanded);
+
+          // Log accordion state for debugging
+          console.log(
+            `Toggled accordion: ${
+              this.querySelector("span")?.textContent || "FAQ Item"
+            } - active: ${accordionItem.classList.contains("active")}`
+          );
+
+          // Scroll into view if needed when opening
+          if (accordionItem.classList.contains("active")) {
+            setTimeout(() => {
+              const rect = accordionItem.getBoundingClientRect();
+              const isFullyVisible =
+                rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+              if (!isFullyVisible) {
+                accordionItem.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+              }
+            }, 300); // Short delay to allow animation to start
+          }
+
+          // Log interaction if KLogger is available
+          if (
+            window.KLogger &&
+            typeof window.KLogger.logUserAction === "function"
+          ) {
+            window.KLogger.logUserAction("FAQ Accordion", {
+              action: accordionItem.classList.contains("active")
+                ? "expand"
+                : "collapse",
+              question: this.querySelector("span")?.textContent || "FAQ Item",
+            });
+          }
+        }
+      });
+
+      // Add keyboard accessibility
+      header.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.click();
         }
       });
     });
+
+    // Mark as initialized to prevent double initialization from fallback
+    window.accordionInitialized = true;
   } else {
     console.warn("No accordion headers found on page");
   }

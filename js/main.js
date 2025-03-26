@@ -96,14 +96,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Helper function for toggling the menu
     function toggleMobileMenu() {
+      const isOpening = !navMenu.classList.contains("active");
+
       navMenu.classList.toggle("active");
       mobileToggle.classList.toggle("active");
-      body.classList.toggle("menu-open");
       menuBackdrop.classList.toggle("active");
 
       // Update aria-expanded attribute
       const isExpanded = navMenu.classList.contains("active");
       mobileToggle.setAttribute("aria-expanded", isExpanded);
+
+      // Only add/remove body class after checking if we're opening or closing
+      if (isOpening) {
+        // Save the current scroll position before locking
+        window.menuScrollPosition =
+          window.pageYOffset || document.documentElement.scrollTop;
+        body.classList.add("menu-open");
+      } else {
+        body.classList.remove("menu-open");
+        // Restore scroll position after removing the menu-open class
+        setTimeout(() => {
+          window.scrollTo(0, window.menuScrollPosition || 0);
+        }, 10);
+      }
 
       // Update header height after toggle
       setTimeout(updateHeaderHeight, 50);
@@ -120,6 +135,9 @@ document.addEventListener("DOMContentLoaded", function () {
         !e.target.closest(".nav-menu") &&
         !e.target.closest(".mobile-toggle")
       ) {
+        // Save the scroll position before removing classes
+        const savedPosition = window.menuScrollPosition || 0;
+
         navMenu.classList.remove("active");
         mobileToggle.classList.remove("active");
         body.classList.remove("menu-open");
@@ -127,6 +145,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Update aria-expanded attribute
         mobileToggle.setAttribute("aria-expanded", "false");
+
+        // Restore scroll position
+        setTimeout(() => {
+          window.scrollTo(0, savedPosition);
+        }, 10);
       }
     },
     { passive: true }
@@ -136,11 +159,19 @@ document.addEventListener("DOMContentLoaded", function () {
   menuBackdrop.addEventListener(
     "click",
     function () {
+      // Save the scroll position before removing classes
+      const savedPosition = window.menuScrollPosition || 0;
+
       navMenu.classList.remove("active");
       mobileToggle.classList.remove("active");
       body.classList.remove("menu-open");
       this.classList.remove("active");
       mobileToggle.setAttribute("aria-expanded", "false");
+
+      // Restore scroll position
+      setTimeout(() => {
+        window.scrollTo(0, savedPosition);
+      }, 10);
     },
     { passive: true }
   );
@@ -155,18 +186,30 @@ document.addEventListener("DOMContentLoaded", function () {
         if (target) {
           e.preventDefault();
 
-          window.scrollTo({
-            top: target.offsetTop - 100, // Offset for fixed header
-            behavior: "smooth",
-          });
-
-          // Close mobile menu if open
+          // Close mobile menu if open before scrolling
           if (navMenu && navMenu.classList.contains("active")) {
             navMenu.classList.remove("active");
             mobileToggle.classList.remove("active");
             body.classList.remove("menu-open");
             menuBackdrop.classList.remove("active");
+            mobileToggle.setAttribute("aria-expanded", "false");
           }
+
+          // Allow a moment for menu cleanup before scrolling
+          setTimeout(() => {
+            const headerOffset = header.classList.contains("fixed")
+              ? header.offsetHeight
+              : 100;
+            const targetPosition =
+              target.getBoundingClientRect().top +
+              window.pageYOffset -
+              headerOffset;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }, 50);
         }
       },
       { passive: false }
@@ -875,4 +918,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Call accordion initialization
   initAccordion();
+
+  // Add specific handling for resource navigation items to ensure they navigate correctly
+  const resourceNavItems = document.querySelectorAll(".resource-nav-item");
+  resourceNavItems.forEach((item) => {
+    item.addEventListener("click", function (e) {
+      // Only process if this is a link to another page (not an anchor)
+      const href = this.getAttribute("href");
+      if (href && !href.startsWith("#")) {
+        // This is a navigation to another page, ensure normal link behavior
+        // Don't prevent default, just ensure we're removing any menu classes
+        if (body.classList.contains("menu-open")) {
+          body.classList.remove("menu-open");
+          navMenu.classList.remove("active");
+          mobileToggle.classList.remove("active");
+          menuBackdrop.classList.remove("active");
+        }
+      }
+    });
+  });
 });

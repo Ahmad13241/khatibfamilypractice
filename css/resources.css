@@ -101,8 +101,9 @@
     color: var(--text-color);
     position: relative;
     cursor: pointer;
-    z-index: 1;
+    z-index: 10;
     overflow: hidden;
+    will-change: transform;
 }
 
 .resource-nav-item::before {
@@ -118,13 +119,19 @@
     transition: opacity 0.3s ease;
 }
 
-.resource-nav-item:hover {
+.resource-nav-item:hover,
+.resource-nav-item:focus {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
     color: var(--white);
 }
 
-.resource-nav-item:hover::before {
+.resource-nav-item:active {
+    transform: translateY(-2px);
+}
+
+.resource-nav-item:hover::before,
+.resource-nav-item:focus::before {
     opacity: 0.9;
 }
 
@@ -135,7 +142,8 @@
     transition: color 0.3s ease;
 }
 
-.resource-nav-item:hover i {
+.resource-nav-item:hover i,
+.resource-nav-item:focus i {
     color: var(--white);
 }
 
@@ -145,8 +153,42 @@
     transition: color 0.3s ease;
 }
 
-.resource-nav-item:hover span {
+.resource-nav-item:hover span,
+.resource-nav-item:focus span {
     color: var(--white);
+}
+
+/* Special styling for healow portal link */
+.healow-portal-link {
+    z-index: 20;
+    position: relative;
+    outline: none;
+}
+
+.healow-portal-link:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.healow-portal-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border-radius: var(--border-radius);
+    pointer-events: none;
+}
+
+.resource-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Service Detail Structure */
@@ -1007,5 +1049,48 @@
     
     .mobile-nav-fab {
         display: none !important; /* Ensure FAB is never shown on desktop */
+    }
+}
+
+/* Additional enhanced styles for healow portal link */
+a.healow-portal-link {
+    display: block; /* Ensure full block coverage */
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(56, 178, 172, 0.3); /* Light tap highlight for mobile */
+    transform-style: preserve-3d; /* Helps with 3D transforms */
+    pointer-events: auto !important; /* Ensure clickability always */
+}
+
+/* Make sure the link is clearly highlighted when focused or active */
+a.healow-portal-link:focus,
+a.healow-portal-link:active {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Ensure visibility of the portal link by adding a subtle animation */
+@keyframes portal-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.healow-portal-link .resource-nav-inner {
+    animation: portal-pulse 2s infinite ease-in-out;
+}
+
+/* Make sure the portal link is accessible on all device types */
+@media (hover: none) {
+    /* Specific improvements for touch devices */
+    .healow-portal-link {
+        padding: calc(var(--spacing-md) + 4px);
+        margin: 4px;
+    }
+    
+    .healow-portal-link::before {
+        opacity: 0.05; /* Slight background color to indicate it's tappable */
     }
 } 

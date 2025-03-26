@@ -98,27 +98,47 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleMobileMenu() {
       const isOpening = !navMenu.classList.contains("active");
 
-      navMenu.classList.toggle("active");
-      mobileToggle.classList.toggle("active");
-      menuBackdrop.classList.toggle("active");
-
-      // Update aria-expanded attribute
-      const isExpanded = navMenu.classList.contains("active");
-      mobileToggle.setAttribute("aria-expanded", isExpanded);
-
-      // Only add/remove body class after checking if we're opening or closing
+      // Before making any changes, ensure we have a clean state
       if (isOpening) {
         // Save the current scroll position before locking
         window.menuScrollPosition =
           window.pageYOffset || document.documentElement.scrollTop;
-        body.classList.add("menu-open");
+
+        // Add classes in sequence
+        menuBackdrop.classList.add("active");
+        navMenu.classList.add("active");
+        mobileToggle.classList.add("active");
+
+        // Add body class last to trigger fixed positioning
+        requestAnimationFrame(() => {
+          body.classList.add("menu-open");
+        });
       } else {
+        // Save position for restoration
+        const savedPosition = window.menuScrollPosition || 0;
+
+        // Remove body class first to restore scrolling
         body.classList.remove("menu-open");
-        // Restore scroll position after removing the menu-open class
+
+        // Then remove other classes
+        navMenu.classList.remove("active");
+        mobileToggle.classList.remove("active");
+        menuBackdrop.classList.remove("active");
+
+        // Restore scroll position with a delay to ensure rendering
         setTimeout(() => {
-          window.scrollTo(0, window.menuScrollPosition || 0);
-        }, 10);
+          window.scrollTo({
+            top: savedPosition,
+            behavior: "auto", // Use 'auto' instead of 'smooth' for more reliable restoration
+          });
+        }, 20);
       }
+
+      // Update aria-expanded attribute
+      mobileToggle.setAttribute(
+        "aria-expanded",
+        navMenu.classList.contains("active")
+      );
 
       // Update header height after toggle
       setTimeout(updateHeaderHeight, 50);
@@ -936,5 +956,158 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
+  });
+
+  // Document ready function - run immediately when DOM is ready
+  (function () {
+    // Special handling for resource navigation links, especially the healow portal link
+    const healowLinks = document.querySelectorAll(
+      '.healow-portal-link, a[href="healow.html"]'
+    );
+
+    if (healowLinks.length > 0) {
+      healowLinks.forEach((link) => {
+        ["click", "keydown", "touchend"].forEach((eventType) => {
+          link.addEventListener(
+            eventType,
+            function (e) {
+              // For keyboard navigation, only proceed on Enter or Space
+              if (
+                eventType === "keydown" &&
+                !(e.key === "Enter" || e.key === " ")
+              ) {
+                return;
+              }
+
+              e.preventDefault(); // Prevent default to handle navigation manually
+              e.stopPropagation(); // Stop event bubbling
+
+              // Close mobile menu if open
+              if (body.classList.contains("menu-open")) {
+                body.classList.remove("menu-open");
+                if (navMenu) navMenu.classList.remove("active");
+                if (mobileToggle) mobileToggle.classList.remove("active");
+                if (menuBackdrop) menuBackdrop.classList.remove("active");
+              }
+
+              // Force navigation to healow.html
+              console.log("Navigating to healow.html");
+              window.location.href = "healow.html";
+            },
+            { passive: false }
+          );
+        });
+      });
+    }
+  })();
+
+  // Add debounced scroll handler for smoother transitions
+  let scrollTimeout;
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (scrollTimeout) {
+        window.cancelAnimationFrame(scrollTimeout);
+      }
+
+      scrollTimeout = window.requestAnimationFrame(function () {
+        // Only apply scroll-related changes if menu is not open
+        if (!body.classList.contains("menu-open")) {
+          // Handle fixed header
+          if (window.scrollY > headerHeight) {
+            if (!header.classList.contains("fixed")) {
+              header.classList.add("fixed");
+              document.body.classList.add("has-fixed-header");
+            }
+          } else {
+            if (header.classList.contains("fixed")) {
+              header.classList.remove("fixed");
+              document.body.classList.remove("has-fixed-header");
+            }
+          }
+
+          // Add a subtle class when user has scrolled past hero for better transitions
+          const scrolledPastHero = window.scrollY > window.innerHeight * 0.5;
+          document.body.classList.toggle(
+            "scrolled-past-hero",
+            scrolledPastHero
+          );
+        }
+      });
+    },
+    { passive: true }
+  );
+
+  // Final check to ensure healow link functionality - runs after all other scripts
+  document.addEventListener("DOMContentLoaded", function () {
+    // Direct binding to healow links as a fallback
+    const healowLinks = document.querySelectorAll(
+      '.healow-portal-link, a[href="healow.html"]'
+    );
+    if (healowLinks.length > 0) {
+      healowLinks.forEach((link) => {
+        // Completely replace the existing element with a fresh one
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+
+        // Add multiple event handlers to the new element
+        newLink.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log("Direct healow navigation triggered");
+          window.location.href = "healow.html";
+        });
+
+        // Make it keyboard accessible
+        newLink.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            window.location.href = "healow.html";
+          }
+        });
+      });
+    }
+
+    // Improve scrolling behavior on mobile devices
+    if (
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      // Get all sections for scroll improvements
+      const sections = document.querySelectorAll("section");
+
+      // Improve touch scrolling
+      let touchStartY = 0;
+      let touchEndY = 0;
+
+      document.addEventListener(
+        "touchstart",
+        function (e) {
+          touchStartY = e.changedTouches[0].screenY;
+        },
+        { passive: true }
+      );
+
+      document.addEventListener(
+        "touchend",
+        function (e) {
+          touchEndY = e.changedTouches[0].screenY;
+          const touchDiff = touchStartY - touchEndY;
+
+          // Only handle significant swipes
+          if (Math.abs(touchDiff) > 50) {
+            // Add a class to improve transitions during touch scrolling
+            document.body.classList.add("touch-scrolling");
+
+            // Remove the class after the scroll animation would complete
+            setTimeout(() => {
+              document.body.classList.remove("touch-scrolling");
+            }, 500);
+          }
+        },
+        { passive: true }
+      );
+    }
   });
 });

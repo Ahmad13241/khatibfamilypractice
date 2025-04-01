@@ -50,7 +50,8 @@ const securityHeadersMiddleware = (req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
-      "script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com; " +
+      "script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.googletagmanager.com; " +
+      "script-src-elem 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.googletagmanager.com; " +
       "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " +
       "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; " +
       "img-src 'self' data: https://maps.google.com https://maps.gstatic.com; " +

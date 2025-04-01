@@ -54,6 +54,9 @@
     <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="skip-to-content">Skip to content</a>
     
+    <!-- Add menu backdrop element -->
+    <div class="menu-backdrop"></div>
+    
     <!-- Header Section -->
     <header>
         <div class="top-info-bar">
@@ -359,51 +362,5 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced accordion implementation
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            
-            if (accordionHeaders.length > 0) {
-                console.log(`Enhanced implementation: Found ${accordionHeaders.length} accordion headers`);
-                
-                // First ensure all accordions are closed by default
-                document.querySelectorAll('.accordion-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Then add click listeners
-                accordionHeaders.forEach(header => {
-                    header.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        const accordionItem = this.closest('.accordion-item');
-                        if (accordionItem) {
-                            // Toggle the active class
-                            accordionItem.classList.toggle('active');
-                            
-                            // Update aria attributes for accessibility
-                            const isExpanded = accordionItem.classList.contains('active');
-                            this.setAttribute('aria-expanded', isExpanded);
-                            
-                            console.log(`Toggled accordion: ${this.querySelector('span').textContent} - active: ${isExpanded}`);
-                        }
-                    });
-                    
-                    // Add keyboard accessibility
-                    header.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.click();
-                        }
-                    });
-                });
-                
-                // Set initialization flag
-                window.accordionInitialized = true;
-            }
-        });
-    </script>
 </body>
 </html> 

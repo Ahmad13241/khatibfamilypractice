@@ -12,14 +12,14 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Access the Healow Patient Portal for Khatib Family Practice serving Bullhead City, Laughlin, Fort Mohave, and Mohave Valley. Manage appointments, view lab results, and communicate with Dr. Khatib's office from anywhere in the Tri-State area.">
+    <meta name="description" content="Access your secure patient portal through Healow at Khatib Family Practice in Bullhead City, AZ. Manage your healthcare digitally with appointment scheduling, prescription refills, and secure messaging with Dr. Khatib's office.">
     <!-- Security headers (CSP handled by server) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
     <link rel="canonical" href="https://khatibfamilypractice.com/pages/healow" />
     
-    <title>Healow Patient Portal | Khatib Family Practice | Bullhead City, AZ</title>
+    <title>Patient Portal Access | Khatib Family Practice | Bullhead City, AZ</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/healow.css">
     
@@ -112,7 +112,7 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Healow Patient Portal</h1>
-                    <p>This secure online platform connects you directly with our practice, putting your health information at your fingertips and enabling you to take an active role in managing your healthcare.</p>
+                    <p>For Bullhead City patients of Dr. Khatib, this secure online platform connects you directly with our practice, putting your health information at your fingertips and enabling you to take an active role in managing your healthcare from anywhere, at any time.</p>
                     <div class="hero-buttons">
                         <a href="https://healow.com/apps/jsp/webview/index.jsp" class="btn btn-primary" target="_blank" rel="noopener">Access Patient Portal</a>
                         <a href="#portal-benefits" class="btn btn-outline">Learn About Benefits</a>
@@ -140,7 +140,7 @@
                 </div>
                 
                 <div class="service-intro">
-                    <p>As part of our commitment to modern, accessible healthcare, Khatib Family Practice offers the healow Patient Portal service to all our patients. This secure online platform puts your health information at your fingertips, enabling you to take an active role in managing your healthcare.</p>
+                    <p>As part of our commitment to modern, accessible healthcare for Bullhead City residents, Khatib Family Practice offers the healow Patient Portal service to all our patients. This secure digital platform developed specifically for medical practices puts your health information at your fingertips, enabling convenient communication with our office and greater control over your healthcare management.</p>
                 </div>
                 
                 <div class="benefits-grid feature-grid">
@@ -359,51 +359,5 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced accordion implementation
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            
-            if (accordionHeaders.length > 0) {
-                console.log(`Enhanced implementation: Found ${accordionHeaders.length} accordion headers`);
-                
-                // First ensure all accordions are closed by default
-                document.querySelectorAll('.accordion-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Then add click listeners
-                accordionHeaders.forEach(header => {
-                    header.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        const accordionItem = this.closest('.accordion-item');
-                        if (accordionItem) {
-                            // Toggle the active class
-                            accordionItem.classList.toggle('active');
-                            
-                            // Update aria attributes for accessibility
-                            const isExpanded = accordionItem.classList.contains('active');
-                            this.setAttribute('aria-expanded', isExpanded);
-                            
-                            console.log(`Toggled accordion: ${this.querySelector('span').textContent} - active: ${isExpanded}`);
-                        }
-                    });
-                    
-                    // Add keyboard accessibility
-                    header.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.click();
-                        }
-                    });
-                });
-                
-                // Set initialization flag
-                window.accordionInitialized = true;
-            }
-        });
-    </script>
 </body>
 </html> 

@@ -36,6 +36,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org structured data for ContactPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Khatib Family Practice in Bullhead City",
+      "description": "Contact details, map, and appointment information for Khatib Family Practice, serving adults 21+ in Bullhead City, AZ and the Tri-State area.",
+      "url": "https://khatibfamilypractice.com/pages/contact.html",
+      "mainEntity": {
+        "@type": "MedicalBusiness",
+        "name": "Khatib Family Practice",
+        "telephone": "+1-928-763-9009",
+        "faxNumber": "+1-928-758-7538",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2755 Silver Creek Road, Suite 109",
+          "addressLocality": "Bullhead City",
+          "addressRegion": "AZ",
+          "postalCode": "86442",
+          "addressCountry": "US"
+        },
+        "openingHours": "Mo-Fr 08:00-17:00",
+        "image": "https://khatibfamilypractice.com/images/LOGO.webp",
+        "priceRange": "$$",
+        "areaServed": ["Bullhead City", "Laughlin", "Fort Mohave", "Mohave Valley"]
+      }
+    }
+    </script>
 </head>
 <body>
     <!-- Skip to content link for accessibility -->
@@ -99,7 +128,7 @@
     <section class="contact-section" id="main-content">
         <div class="container">
             <div class="section-header">
-                <h1>Contact Khatib Family Practice</h1>
+                <h1>Contact Khatib Family Practice in Bullhead City</h1>
                 <p>We're here to help with your healthcare needs</p>
             </div>
             
@@ -143,6 +172,67 @@
                 </div>
             </div>
             
+            <!-- Contact Form Section -->
+            <div class="contact-form-wrapper">
+                <div class="section-header">
+                    <h2>Send Us a Message</h2>
+                    <p>For general inquiries, feedback, or questions, please use the form below</p>
+                </div>
+                
+                <form id="contact-form" class="contact-form" data-netlify="true" name="contact">
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                            <span class="input-hint">Format: 123-456-7890</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject <span class="required">*</span></label>
+                        <select id="subject" name="subject" required aria-required="true">
+                            <option value="" disabled selected>Please select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Billing Question">Billing Question</option>
+                            <option value="Insurance">Insurance Question</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+                    </div>
+                    
+                    <div class="form-group consent-check">
+                        <input type="checkbox" id="consent" name="consent" required aria-required="true">
+                        <label for="consent">I understand that this form is for non-urgent matters only. For appointments, please call (928) 763-9009 directly. <span class="required">*</span></label>
+                    </div>
+                    
+                    <!-- Honeypot field for spam prevention -->
+                    <div class="form-group form-hp" aria-hidden="true">
+                        <label for="hp">Leave this field empty</label>
+                        <input type="text" name="hp" id="hp" tabindex="-1">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    
+                    <div class="form-disclaimer">
+                        <p><i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> This form is for general inquiries only. For faster service or to schedule an appointment, please call our office at <a href="tel:+19287639009">(928) 763-9009</a>.</p>
+                    </div>
+                </form>
+            </div>
+            
             <!-- Appointment Information Section -->
             <div id="appointment" class="contact-form-section">
                 <div class="section-header">
@@ -157,7 +247,7 @@
                         <p>To schedule an appointment with Dr. Khatib, please call our office directly.</p>
                         <p class="contact-highlight"><a href="tel:+19287639009" aria-label="Call us at (928) 763-9009">(928) 763-9009</a></p>
                         <p>Our staff will assist you in finding a convenient appointment time.</p>
-                        <p>As a personalized practice by design, we offer greater flexibility, shorter wait times, and unhurried appointments—providing the care and attention you deserve.</p>
+                        <p>For the quickest scheduling and to ensure we match you with the best time slot, please call our office directly rather than using the contact form above.</p>
                     </div>
                     
                     <div class="contact-info-box">
@@ -178,11 +268,12 @@
                             <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
                             <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> Office Policies</a></li>
                         </ul>
+                        <p class="form-instructions">Please print and complete these forms before your appointment, or arrive 15 minutes early to fill them out in our office.</p>
                     </div>
                     
                     <div class="contact-info-box">
                         <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Insurance & Billing</h3>
-                        <p>We accept most major insurance plans including:</p>
+                        <p>We accept many major insurance plans including (but not limited to):</p>
                         <ul>
                             <li>Medicare</li>
                             <li>Blue Cross Blue Shield</li>
@@ -190,7 +281,7 @@
                             <li>United Healthcare</li>
                             <li>Cigna</li>
                         </ul>
-                        <p>For billing questions, please call during office hours.</p>
+                        <p>For billing questions, please call during office hours or <a href="#contact-form">use our contact form</a>.</p>
                     </div>
                 </div>
             </div>
@@ -202,18 +293,18 @@
             </div>
             
             <div class="map-container">
-                <!-- Properly embedded Google Maps with enhanced security -->
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.5171632901583!2d-114.5733273!3d35.877888799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cf55de89e80001%3A0x4c7c33fbfdb81fcd!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442!5e0!3m2!1sen!2sus!4v1660000000000!5m2!1sen!2sus" 
-                    width="100%" 
-                    height="100%" 
-                    style="border:0;" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"
-                    sandbox="allow-scripts allow-same-origin allow-popups"
-                    title="Khatib Family Practice Location Map"
-                    aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442">
-                </iframe>
+                <!-- Map will be loaded by mapLoader.js -->
+                <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
+                <div class="map-placeholder" data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.5171632901583!2d-114.5733273!3d35.877888799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cf55de89e80001%3A0x4c7c33fbfdb81fcd!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442!5e0!3m2!1sen!2sus!4v1660000000000!5m2!1sen!2sus" 
+                      data-map-title="Khatib Family Practice Location Map"
+                      data-map-aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442"
+                      data-map-sandbox="allow-scripts allow-same-origin allow-popups">
+                    <div class="map-placeholder-content">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Click to load map</p>
+                        <p class="map-address">Khatib Family Practice<br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -260,13 +351,14 @@
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
     <script src="../js/security.js"></script>
+    <script src="../js/mapLoader.js"></script>
     
     <!-- Page specific JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Animate elements on scroll
             const animateOnScroll = function() {
-                const sections = document.querySelectorAll('.contact-method, .contact-info-box, .map-container, .section-header');
+                const sections = document.querySelectorAll('.contact-method, .contact-info-box, .map-container, .section-header, .contact-form-wrapper');
                 
                 sections.forEach(section => {
                     const sectionTop = section.getBoundingClientRect().top;
@@ -317,6 +409,20 @@
                     }
                 });
             });
+            
+            // Form submission handling
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // Form validation is handled by HTML5 validation
+                    // This is just for additional behavior
+                    const honeypot = document.getElementById('hp');
+                    if (honeypot && honeypot.value) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            }
         });
     </script>
 </body>

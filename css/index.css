@@ -56,7 +56,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(135deg, rgba(var(--primary-rgb), 0.03) 25%, transparent 25%, transparent 50%, rgba(var(--primary-rgb), 0.03) 50%, rgba(var(--primary-rgb), 0.03) 75%, transparent 75%);
+    background-image: linear-gradient(135deg, rgba(var(--primary-rgb), 0.04) 25%, transparent 25%, transparent 50%, rgba(var(--primary-rgb), 0.04) 50%, rgba(var(--primary-rgb), 0.04) 75%, transparent 75%);
     background-size: 20px 20px;
     opacity: 0.5;
     z-index: 0;
@@ -124,13 +124,23 @@
     justify-content: center;
     align-items: center;
     height: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
 }
 
-.hero-image .logo-img {
-    max-width: 100%;
-    height: auto;
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
+    transition: transform 0.5s ease;
+}
+
+.hero-image:hover .hero-img {
+    transform: scale(1.03);
 }
 
 /* ===== SERVICES SECTION ===== */
@@ -381,14 +391,56 @@
     z-index: 1;
 }
 
-.doctor-image {
+.about-image-container {
     flex: 1;
-    height: 450px;
     margin-right: var(--spacing-lg);
+}
+
+.doctor-image {
+    height: 450px;
     border-radius: var(--border-radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     position: relative;
+    border: 5px solid var(--white);
+    filter: saturate(1.05);
+}
+
+.about-doctor-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: all 0.5s ease;
+    display: block;
+    filter: contrast(1.05);
+}
+
+.brand-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.brand-overlay:hover {
+    transform: scale(1.1);
+}
+
+.brand-logo {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
 }
 
 .doctor-content {
@@ -724,9 +776,33 @@
     }
 }
 
+@media screen and (max-width: 992px) {
+    .about-doctor .container {
+        flex-direction: column;
+    }
+    
+    .about-image-container {
+        margin-right: 0;
+        margin-bottom: var(--spacing-lg);
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .doctor-image {
+        height: 400px;
+    }
+    
+    .brand-overlay {
+        width: 80px;
+        height: 80px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .hero .container {
-        flex-direction: column-reverse;
+        flex-direction: column;
         gap: var(--spacing-lg);
     }
     
@@ -740,12 +816,9 @@
     }
     
     .hero-image {
-        height: auto;
+        height: 300px;
+        width: 100%;
         margin-bottom: var(--spacing-md);
-    }
-    
-    .hero-image .logo-img {
-        max-height: 250px;
     }
     
     .service-card {
@@ -768,16 +841,14 @@
     
     .about-doctor .container {
         flex-direction: column;
-        text-align: center;
     }
     
     .doctor-image {
-        margin-right: 0;
-        margin-bottom: var(--spacing-lg);
-        max-width: 350px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        height: 350px;
+    }
+    
+    .doctor-content {
+        text-align: center;
     }
     
     .doctor-content h2::after {
@@ -828,6 +899,10 @@
         font-size: 1rem;
     }
     
+    .hero-image {
+        height: 250px;
+    }
+    
     .section-header h2 {
         font-size: 1.8rem;
     }
@@ -852,6 +927,17 @@
     
     .doctor-content h2 {
         font-size: 1.8rem;
+    }
+    
+    .doctor-image {
+        height: 300px;
+    }
+    
+    .brand-overlay {
+        width: 60px;
+        height: 60px;
+        bottom: 10px;
+        right: 10px;
     }
     
     .testimonial-card {

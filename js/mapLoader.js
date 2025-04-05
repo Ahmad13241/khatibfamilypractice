@@ -1,140 +1,118 @@
 /**
  * Map Loader Utility
  * Provides lazy loading functionality for Google Maps iframes
- * to improve initial page load performance
+ * to improve initial page load performance - CORRECTED VERSION
  */
 
 (function() {
-    // Only load the map when it scrolls into view
     document.addEventListener('DOMContentLoaded', function() {
-        const mapContainers = document.querySelectorAll('.map-container');
-        
-        if (!mapContainers.length) return;
-        
-        // Create a placeholder for each map
-        mapContainers.forEach(function(container) {
-            // Check if this container has already been processed
-            if (container.classList.contains('map-processed')) return;
-            
-            // Store the original iframe if it exists
-            const existingIframe = container.querySelector('iframe');
-            
-            if (existingIframe) {
-                // Save the iframe source
-                const mapSrc = existingIframe.getAttribute('src');
-                const mapHeight = existingIframe.getAttribute('height') || '400';
-                const mapWidth = existingIframe.getAttribute('width') || '100%';
-                const mapTitle = existingIframe.getAttribute('title') || 'Google Map';
-                const mapAriaLabel = existingIframe.getAttribute('aria-label') || '';
-                const mapSandbox = existingIframe.getAttribute('sandbox') || '';
-                
-                // Create placeholder
-                const placeholderDiv = document.createElement('div');
-                placeholderDiv.className = 'map-placeholder';
-                placeholderDiv.style.height = mapHeight + 'px';
-                placeholderDiv.style.width = mapWidth;
-                placeholderDiv.style.backgroundColor = '#f0f0f0';
-                placeholderDiv.style.display = 'flex';
-                placeholderDiv.style.alignItems = 'center';
-                placeholderDiv.style.justifyContent = 'center';
-                placeholderDiv.style.cursor = 'pointer';
-                placeholderDiv.style.border = '1px solid #ddd';
-                placeholderDiv.style.borderRadius = '4px';
-                
-                // Add placeholder content
-                placeholderDiv.innerHTML = `
-                    <div style="text-align: center; padding: 20px;">
-                        <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: #2c5282; margin-bottom: 10px;"></i>
-                        <p>Click to load map</p>
-                        <p style="font-size: 0.8rem; margin-top: 5px;">Khatib Family Practice<br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
-                    </div>
-                `;
-                
-                // Replace the iframe with the placeholder
-                existingIframe.remove();
-                container.appendChild(placeholderDiv);
-                
-                // Store the iframe data as attributes on the container
-                container.setAttribute('data-map-src', mapSrc);
-                container.setAttribute('data-map-height', mapHeight);
-                container.setAttribute('data-map-width', mapWidth);
-                container.setAttribute('data-map-title', mapTitle);
-                container.setAttribute('data-map-aria-label', mapAriaLabel);
-                container.setAttribute('data-map-sandbox', mapSandbox);
-                
-                // Mark as processed
-                container.classList.add('map-processed');
-                
-                // Setup intersection observer or click-to-load
-                setupMapLoading(container);
+        // Select the placeholders directly
+        const mapPlaceholders = document.querySelectorAll('.map-placeholder');
+
+        if (!mapPlaceholders.length) {
+            // console.log("MapLoader: No map placeholders found.");
+            return;
+        }
+        // console.log(`MapLoader: Found ${mapPlaceholders.length} map placeholders.`);
+
+        mapPlaceholders.forEach(function(placeholder) {
+            const container = placeholder.closest('.map-container');
+
+            if (!container) {
+                console.warn("MapLoader: Found a placeholder without a .map-container parent.", placeholder);
+                return;
             }
+
+            // Check if this container has already been processed (e.g., if script runs twice)
+            if (container.classList.contains('map-loading-setup')) {
+                // console.log("MapLoader: Skipping already processed container.", container);
+                return;
+            }
+
+            // --- REMOVED: Code block that looked for an existing iframe ---
+            // --- This block was incorrect for the current HTML structure ---
+
+            // Directly set up the loading mechanism for the container
+            setupMapLoading(container, placeholder);
+            container.classList.add('map-loading-setup'); // Mark as processed
         });
     });
-    
+
     // Setup map loading either by intersection observer or click
-    function setupMapLoading(container) {
+    function setupMapLoading(container, placeholder) {
+        // Check if required data attributes exist on the placeholder
+        if (!placeholder.dataset.mapSrc) {
+             console.warn("MapLoader: Placeholder is missing data-map-src attribute.", placeholder);
+             return;
+        }
+
         if ('IntersectionObserver' in window) {
             // Use intersection observer for modern browsers
             const observer = new IntersectionObserver(
                 function(entries) {
                     entries.forEach(function(entry) {
                         if (entry.isIntersecting) {
-                            loadMap(container);
-                            observer.unobserve(container);
+                            // console.log("MapLoader: Map container intersecting, loading map.", container);
+                            loadMap(container, placeholder);
+                            observer.unobserve(container); // Stop observing once loaded
                         }
                     });
                 },
                 { threshold: 0.1 } // Load when 10% of the map is visible
             );
-            
+
             observer.observe(container);
+            // console.log("MapLoader: IntersectionObserver attached to container.", container);
         } else {
-            // Fallback for browsers that don't support IntersectionObserver
-            const placeholder = container.querySelector('.map-placeholder');
-            if (placeholder) {
-                placeholder.addEventListener('click', function() {
-                    loadMap(container);
-                });
-            }
+            // Fallback for browsers that don't support IntersectionObserver: Load on click
+            // console.log("MapLoader: IntersectionObserver not supported, using click fallback.", placeholder);
+            placeholder.addEventListener('click', function() {
+                // console.log("MapLoader: Placeholder clicked, loading map.", container);
+                loadMap(container, placeholder);
+            }, { once: true }); // Remove listener after first click
         }
     }
-    
+
     // Load the map
-    function loadMap(container) {
-        // Get the stored map data
-        const mapSrc = container.getAttribute('data-map-src');
-        const mapHeight = container.getAttribute('data-map-height');
-        const mapWidth = container.getAttribute('data-map-width');
-        const mapTitle = container.getAttribute('data-map-title');
-        const mapAriaLabel = container.getAttribute('data-map-aria-label');
-        const mapSandbox = container.getAttribute('data-map-sandbox');
-        
-        if (!mapSrc) return;
-        
-        // Remove the placeholder
-        const placeholder = container.querySelector('.map-placeholder');
-        if (placeholder) {
-            placeholder.remove();
+    function loadMap(container, placeholder) {
+        // Get the map data from the placeholder's data attributes
+        const mapSrc = placeholder.dataset.mapSrc;
+        const mapHeight = placeholder.dataset.mapHeight || '450'; // Default height
+        const mapWidth = placeholder.dataset.mapWidth || '100%'; // Default width
+        const mapTitle = placeholder.dataset.mapTitle || 'Google Map';
+        const mapAriaLabel = placeholder.dataset.mapAriaLabel || mapTitle; // Use title as fallback
+        const mapSandbox = placeholder.dataset.mapSandbox || 'allow-scripts allow-same-origin allow-popups'; // Default sandbox
+
+        if (!mapSrc) {
+            console.error("MapLoader: Cannot load map, data-map-src is missing.", placeholder);
+            return;
         }
-        
+
+        // console.log("MapLoader: Creating iframe with src:", mapSrc);
+
         // Create and insert the iframe
         const iframe = document.createElement('iframe');
         iframe.src = mapSrc;
         iframe.width = mapWidth;
         iframe.height = mapHeight;
         iframe.style.border = '0';
-        iframe.loading = 'lazy';
+        iframe.loading = 'lazy'; // Still good practice
         iframe.referrerPolicy = 'no-referrer-when-downgrade';
-        
-        if (mapTitle) iframe.title = mapTitle;
-        if (mapAriaLabel) iframe.setAttribute('aria-label', mapAriaLabel);
-        if (mapSandbox) iframe.sandbox = mapSandbox;
-        
+        iframe.title = mapTitle;
+        iframe.setAttribute('aria-label', mapAriaLabel);
+        iframe.sandbox = mapSandbox;
+
+        // Replace the placeholder content within the container
+        container.innerHTML = ''; // Clear the container (removes placeholder)
         container.appendChild(iframe);
-        
+        container.classList.add('map-loaded'); // Add class to indicate map is loaded
+
         // Log map interaction if the logging function exists
         if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-            KLogger.logUserAction('Map', { action: 'map-load' });
+            KLogger.logUserAction('Map Interaction', { action: 'map-load-triggered' });
+        } else if (typeof logUserAction === 'function') {
+            // Fallback if KLogger isn't defined but a global logUserAction is
+            logUserAction('Map Interaction', { action: 'map-load-triggered' });
         }
     }
 })(); 

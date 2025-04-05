@@ -18,11 +18,24 @@
   [headers.values]
     Content-Type = "text/html; charset=UTF-8"
 
-# Add security headers
+# Forms handling
+[build.processing.html]
+  pretty_urls = true
+
+# Enable Netlify form detection & handling
+[build.environment]
+  NETLIFY_USE_YARN = "true"
+
+# Add security headers, allowing Netlify forms
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
-    Content-Security-Policy = "default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.google.com; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com; frame-src https://www.google.com;" 
+    Content-Security-Policy = "default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.google.com api.netlify.com; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com; frame-src https://www.google.com; connect-src 'self' api.netlify.com; form-action 'self';"
+    
+# Enable form submissions for contact forms
+[build.processing.forms]
+  # Process forms in HTML files that include the data-netlify="true" attribute
+  scan_html = true 

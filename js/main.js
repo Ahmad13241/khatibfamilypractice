@@ -212,7 +212,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Load handler
       img.addEventListener("load", function () {
         this.classList.remove("image-loading");
-        this.classList.add("image-loaded");
+        // *** FIX: Change 'image-loaded' to 'loaded' to match CSS ***
+        this.classList.add("loaded");
         logPerformance("Image Loaded", performance.now(), img.src);
       }, { once: true }); // Run only once per image
 
@@ -566,13 +567,13 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   function setupServiceCardEnhancements() {
     if (!serviceCards.length) return;
-    
+
     serviceCards.forEach(card => {
       const icon = card.querySelector('.service-icon i');
       const title = card.querySelector('h3');
       const paragraph = card.querySelector('p');
       const readMore = card.querySelector('.read-more');
-      
+
       // Add hover effects for desktop devices
       if (window.matchMedia('(min-width: 768px)').matches) {
         card.addEventListener('mouseenter', function() {
@@ -587,12 +588,12 @@ document.addEventListener("DOMContentLoaded", function () {
           if (paragraph) {
             paragraph.style.color = 'var(--dark-color)';
           }
-          
+
           // Add border highlight with animation
           this.style.borderColor = 'rgba(44, 82, 130, 0.15)';
           this.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
         });
-        
+
         card.addEventListener('mouseleave', function() {
           if (icon) {
             icon.style.transform = '';
@@ -605,18 +606,18 @@ document.addEventListener("DOMContentLoaded", function () {
           if (paragraph) {
             paragraph.style.color = '';
           }
-          
+
           this.style.borderColor = '';
           this.style.boxShadow = '';
         });
       }
     });
-    
+
     // Add pulse animation to CTA button
     const ctaButton = document.querySelector('.services-cta .btn-primary');
     if (ctaButton) {
       ctaButton.style.animation = 'pulse 2s infinite';
-      
+
       // Define pulse animation if it doesn't exist
       if (!document.querySelector('style#pulse-animation')) {
         const style = document.createElement('style');
@@ -638,13 +639,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
-  
+
   /**
    * Initialize section animations
    */
   function setupSectionAnimations() {
     if (!sections.length) return;
-    
+
     if ('IntersectionObserver' in window) {
       const sectionObserver = new IntersectionObserver(
         (entries) => {
@@ -657,18 +658,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
         },
-        { 
+        {
           threshold: 0.15,  // Show when 15% of the section is visible
           rootMargin: '0px 0px -50px 0px'  // Adjust trigger area
         }
       );
-      
+
       sections.forEach(section => {
         // Add initial styles
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-        
+
         // Observe the section
         sectionObserver.observe(section);
       });

@@ -179,7 +179,7 @@
                     <p>For general inquiries, feedback, or questions, please use the form below</p>
                 </div>
                 
-                <form id="contact-form" class="contact-form" data-netlify="true" name="contact">
+                <form id="contact-form" class="contact-form" data-netlify="true" name="contact" method="POST" netlify-honeypot="bot-field">
                     <div class="form-group">
                         <label for="name">Full Name <span class="required">*</span></label>
                         <input type="text" id="name" name="name" required aria-required="true">
@@ -219,11 +219,12 @@
                         <label for="consent">I understand that this form is for non-urgent matters only. For appointments, please call (928) 763-9009 directly. <span class="required">*</span></label>
                     </div>
                     
-                    <!-- Honeypot field for spam prevention -->
-                    <div class="form-group form-hp" aria-hidden="true">
-                        <label for="hp">Leave this field empty</label>
-                        <input type="text" name="hp" id="hp" tabindex="-1">
-                    </div>
+                    <!-- Netlify honeypot field for spam prevention -->
+                    <p class="hidden" style="position: absolute; left: -9999px;" aria-hidden="true">
+                        <label>
+                            Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" />
+                        </label>
+                    </p>
                     
                     <button type="submit" class="btn btn-primary">Send Message</button>
                     
@@ -266,7 +267,7 @@
                         <ul class="resource-links">
                             <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download"></i> Financial Policy</a></li>
                             <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
-                            <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> Office Policies</a></li>
+                            <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> New Patient Forms</a></li>
                         </ul>
                         <p class="form-instructions">Please print and complete these forms before your appointment, or arrive 15 minutes early to fill them out in our office.</p>
                     </div>

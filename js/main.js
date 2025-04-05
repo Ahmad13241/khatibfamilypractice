@@ -367,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function attachFormListener() {
         contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
+            // e.preventDefault(); // REMOVED: Allow the form to submit naturally for Netlify processing
 
             logUserAction("Form Submission Attempt", {
                 formId: "contact-form",
@@ -375,28 +375,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // fields: Object.fromEntries(new FormData(contactForm)),
             });
 
-            // --- Actual form submission logic would go here ---
-            // Example using fetch:
-            // fetch('/api/contact', {
-            //     method: 'POST',
-            //     body: new FormData(contactForm)
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     if (data.success) {
-            //         showSuccessMessage();
-            //     } else {
-            //         showErrorMessage(data.message || 'Submission failed.');
-            //     }
-            // })
-            // .catch(error => {
-            //     showErrorMessage('An error occurred.');
-            //     console.error('Form submission error:', error);
-            // });
-            // --- End of example submission logic ---
-
-            // For now, just show the success message
-            showSuccessMessage();
+            // REMOVED: showSuccessMessage() call
+            // Netlify will handle the form submission and redirect the user to a success page
         });
     }
 

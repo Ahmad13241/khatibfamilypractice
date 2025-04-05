@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contact-form");
   const mapContainer = document.querySelector(".map-container");
   const featureItems = document.querySelectorAll(".feature-item");
+  const serviceCards = document.querySelectorAll(".service-card");
+  const sections = document.querySelectorAll('.services, .career-section, .about-doctor, .testimonials, .location');
 
   // --- Initialization Functions ---
 
@@ -559,6 +561,125 @@ document.addEventListener("DOMContentLoaded", function () {
        // No separate keydown listener needed for standard link activation
    }
 
+  /**
+   * Initialize service card visual enhancements
+   */
+  function setupServiceCardEnhancements() {
+    if (!serviceCards.length) return;
+    
+    serviceCards.forEach(card => {
+      const icon = card.querySelector('.service-icon i');
+      const title = card.querySelector('h3');
+      const paragraph = card.querySelector('p');
+      const readMore = card.querySelector('.read-more');
+      
+      // Add hover effects for desktop devices
+      if (window.matchMedia('(min-width: 768px)').matches) {
+        card.addEventListener('mouseenter', function() {
+          if (icon) {
+            icon.style.transform = 'scale(1.2)';
+            icon.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.7)';
+          }
+          if (title) {
+            title.style.transform = 'translateY(-3px)';
+            title.style.color = 'var(--primary-dark)';
+          }
+          if (paragraph) {
+            paragraph.style.color = 'var(--dark-color)';
+          }
+          
+          // Add border highlight with animation
+          this.style.borderColor = 'rgba(44, 82, 130, 0.15)';
+          this.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          if (icon) {
+            icon.style.transform = '';
+            icon.style.textShadow = '';
+          }
+          if (title) {
+            title.style.transform = '';
+            title.style.color = '';
+          }
+          if (paragraph) {
+            paragraph.style.color = '';
+          }
+          
+          this.style.borderColor = '';
+          this.style.boxShadow = '';
+        });
+      }
+    });
+    
+    // Add pulse animation to CTA button
+    const ctaButton = document.querySelector('.services-cta .btn-primary');
+    if (ctaButton) {
+      ctaButton.style.animation = 'pulse 2s infinite';
+      
+      // Define pulse animation if it doesn't exist
+      if (!document.querySelector('style#pulse-animation')) {
+        const style = document.createElement('style');
+        style.id = 'pulse-animation';
+        style.textContent = `
+          @keyframes pulse {
+            0% {
+              box-shadow: 0 0 0 0 rgba(44, 82, 130, 0.7);
+            }
+            70% {
+              box-shadow: 0 0 0 10px rgba(44, 82, 130, 0);
+            }
+            100% {
+              box-shadow: 0 0 0 0 rgba(44, 82, 130, 0);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+  }
+  
+  /**
+   * Initialize section animations
+   */
+  function setupSectionAnimations() {
+    if (!sections.length) return;
+    
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              // Once the animation has played, no need to observe anymore
+              sectionObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { 
+          threshold: 0.15,  // Show when 15% of the section is visible
+          rootMargin: '0px 0px -50px 0px'  // Adjust trigger area
+        }
+      );
+      
+      sections.forEach(section => {
+        // Add initial styles
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+        
+        // Observe the section
+        sectionObserver.observe(section);
+      });
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      sections.forEach(section => {
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
+      });
+    }
+  }
 
   // --- Helper Functions ---
 
@@ -611,6 +732,8 @@ document.addEventListener("DOMContentLoaded", function () {
   setupActiveNavLinks();
   setupLinkClickLogging(); // General logging for clicks
   setupHealowLinkNavigation(); // Specific handler for healow links
+  setupServiceCardEnhancements();
+  setupSectionAnimations();
 
 
   // --- Final Log ---

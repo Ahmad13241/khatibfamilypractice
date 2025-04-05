@@ -30,6 +30,78 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/resources.css">
     
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "MedicalBusiness",
+                "@id": "https://khatibfamilypractice.com/#organization",
+                "name": "Khatib Family Practice",
+                "url": "https://khatibfamilypractice.com/",
+                "logo": "https://khatibfamilypractice.com/images/LOGO.webp",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "2755 Silver Creek Road, Suite 109",
+                    "addressLocality": "Bullhead City",
+                    "addressRegion": "AZ",
+                    "postalCode": "86442",
+                    "addressCountry": "US"
+                },
+                "telephone": "(928) 763-9009",
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                        "opens": "08:00",
+                        "closes": "17:00"
+                    }
+                ]
+            },
+            {
+                "@type": "MedicalService",
+                "name": "Adult Medicine",
+                "description": "Comprehensive healthcare for patients 21 and older, including annual physical examinations, treatment of acute illnesses and injuries, management of chronic conditions, and more.",
+                "provider": {
+                    "@id": "https://khatibfamilypractice.com/#organization"
+                },
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Bullhead City, AZ"
+                },
+                "serviceType": "Primary Care"
+            },
+            {
+                "@type": "MedicalService",
+                "name": "Preventive Care",
+                "description": "Preventive healthcare services including annual wellness visits, health risk assessments, age-appropriate screenings, immunizations, lifestyle and nutrition counseling, and more.",
+                "provider": {
+                    "@id": "https://khatibfamilypractice.com/#organization"
+                },
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Bullhead City, AZ"
+                },
+                "serviceType": "Preventive Medicine"
+            },
+            {
+                "@type": "MedicalService",
+                "name": "Chronic Disease Management",
+                "description": "Comprehensive management of chronic health conditions including cardiovascular conditions, metabolic disorders, respiratory conditions, and neurological issues through personalized care plans.",
+                "provider": {
+                    "@id": "https://khatibfamilypractice.com/#organization"
+                },
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Bullhead City, AZ"
+                },
+                "serviceType": "Chronic Disease Management"
+            }
+        ]
+    }
+    </script>
+    
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
@@ -126,7 +198,7 @@
                         <i class="fas fa-hand-holding-medical"></i>
                         <span>Insurance Information</span>
                     </a>
-                    <a href="healow.html" class="resource-nav-item healow-portal-link" onclick="window.location.href='healow.html'; return false;" tabindex="0" role="button">
+                    <a href="healow.html" class="resource-nav-item healow-portal-link" tabindex="0">
                         <div class="resource-nav-inner">
                             <i class="fas fa-laptop-medical"></i>
                             <span>healow Patient Portal Service</span>
@@ -164,18 +236,22 @@
                                 </div>
                             </div>
                             <div class="service-expand">
-                                <details>
-                                    <summary>See All Services</summary>
-                                    <ul class="expanded-list">
-                                        <li>Annual physical examinations</li>
-                                        <li>Treatment of acute illnesses and injuries</li>
-                                        <li>Management of chronic conditions</li>
-                                        <li>Preventive care and screenings</li>
-                                        <li>Health maintenance and wellness care</li>
-                                        <li>Referrals to specialists when needed</li>
-                                        <li>Coordination of care with other healthcare providers</li>
-                                    </ul>
-                                </details>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" tabindex="0" aria-expanded="false">
+                                        <span>See All Services</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <ul class="expanded-list">
+                                            <li>Annual physical examinations</li>
+                                            <li>Treatment of acute illnesses and injuries</li>
+                                            <li>Management of chronic conditions</li>
+                                            <li>Preventive care and screenings</li>
+                                            <li>Health maintenance and wellness care</li>
+                                            <li>Referrals to specialists when needed</li>
+                                            <li>Coordination of care with other healthcare providers</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -192,14 +268,6 @@
             
             <!-- Preventive Care -->
             <div id="preventive-care" class="service-detail">
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/preventative-care.webp" type="image/webp">
-                        <img src="../images/preventative-care.jpg" 
-                             alt="Healthcare provider discussing prevention strategies with a patient in a warm, comfortable setting" 
-                             class="service-img">
-                    </picture>
-                </div>
                 <div class="service-content">
                     <div class="service-icon">
                         <i class="fas fa-heartbeat"></i>
@@ -226,21 +294,33 @@
                                 </div>
                             </div>
                             <div class="service-expand">
-                                <details>
-                                    <summary>Learn About All Preventive Services</summary>
-                                    <ul class="expanded-list">
-                                        <li>Annual wellness visits</li>
-                                        <li>Health risk assessments</li>
-                                        <li>Age-appropriate screenings</li>
-                                        <li>Important recommended immunizations and vaccinations</li>
-                                        <li>Lifestyle and nutrition counseling</li>
-                                        <li>Smoking cessation support</li>
-                                        <li>Weight management guidance</li>
-                                    </ul>
-                                </details>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" tabindex="0" aria-expanded="false">
+                                        <span>Learn About All Preventive Services</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <ul class="expanded-list">
+                                            <li>Annual wellness visits</li>
+                                            <li>Health risk assessments</li>
+                                            <li>Age-appropriate screenings</li>
+                                            <li>Important recommended immunizations and vaccinations</li>
+                                            <li>Lifestyle and nutrition counseling</li>
+                                            <li>Smoking cessation support</li>
+                                            <li>Weight management guidance</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="service-image">
+                    <picture>
+                        <source srcset="../images/preventative-care.webp" type="image/webp">
+                        <img src="../images/preventative-care.jpg" 
+                             alt="Healthcare provider discussing prevention strategies with a patient in a warm, comfortable setting" 
+                             class="service-img">
+                    </picture>
                 </div>
             </div>
             
@@ -309,7 +389,7 @@
                     </div>
                     <h3>New Patient Forms</h3>
                     <p>Please complete these fillable PDF forms before your first appointment to save time during your visit. Dr. Khatib and our Bullhead City office provide medical care exclusively for adults age 21 and older, so all new patients must meet this age requirement.</p>
-                    <p class="form-instructions"><strong>How to complete:</strong> You can either print these forms and fill them out by hand, or download and complete them digitally using Adobe Acrobat Reader or another PDF application that supports fillable forms.</p>
+                    <p class="form-instructions"><strong>How to complete:</strong> Please print and complete these forms and bring them to your first appointment. Alternatively, you may arrive 15 minutes early to complete them in our office.</p>
                     <ul class="resource-links">
                         <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download"></i> Financial Policy</a></li>
                         <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
@@ -352,7 +432,7 @@
                 <h2>Insurance Information</h2>
                 <p>Understanding your coverage and financial options</p>
             </div>
-            <p class="insurance-intro">Khatib Family Practice accepts most major insurance plans. Our Bullhead City office is in-network with many major providers, making quality healthcare accessible and affordable for residents throughout the Tri-State area. If you have specific questions about your coverage, please contact our office at <strong>(928) 763-9009</strong> for assistance.</p>
+            <p class="insurance-intro">Khatib Family Practice accepts a wide variety of insurance plans. Below are some examples of major providers we work with. To confirm if we accept your specific insurance plan, please call our office directly at <strong>(928) 763-9009</strong> before your appointment.</p>
             
             <div class="resource-grid">
                 <div class="resource-card">
@@ -489,10 +569,12 @@
             const resourcesIntro = document.querySelector('.resources-intro');
             
             if (resourcesNav && resourcesIntro) {
-                const stickyNavOffset = resourcesNav.offsetTop;
-                
                 function handleScroll() {
-                    if (window.scrollY > stickyNavOffset) {
+                    const introBottom = resourcesIntro.getBoundingClientRect().bottom;
+                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                    
+                    // Only make sticky after scrolling past the intro section
+                    if (introBottom <= headerHeight) {
                         resourcesNav.classList.add('sticky');
                     } else {
                         resourcesNav.classList.remove('sticky');
@@ -500,7 +582,46 @@
                 }
                 
                 window.addEventListener('scroll', handleScroll);
+                // Initialize on page load
+                handleScroll();
             }
+            
+            // Setup accordion functionality
+            function setupAccordion() {
+                const accordionHeaders = document.querySelectorAll('.accordion-header');
+                
+                accordionHeaders.forEach(header => {
+                    header.addEventListener('click', function() {
+                        const accordionItem = this.closest('.accordion-item');
+                        const isActive = accordionItem.classList.toggle('active');
+                        this.setAttribute('aria-expanded', isActive);
+                        
+                        // Close other accordions
+                        if (isActive) {
+                            accordionHeaders.forEach(otherHeader => {
+                                if (otherHeader !== this) {
+                                    const otherItem = otherHeader.closest('.accordion-item');
+                                    if (otherItem && otherItem.classList.contains('active')) {
+                                        otherItem.classList.remove('active');
+                                        otherHeader.setAttribute('aria-expanded', 'false');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    
+                    // Keyboard accessibility
+                    header.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.click();
+                        }
+                    });
+                });
+            }
+            
+            // Initialize accordion
+            setupAccordion();
             
             // Animate elements on scroll
             const animateOnScroll = function() {
@@ -527,6 +648,9 @@
             const resourceLinks = document.querySelectorAll('.resource-nav-item');
             
             resourceLinks.forEach(link => {
+                // Skip links that don't point to page anchors
+                if(!link.getAttribute('href').startsWith('#')) return;
+                
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
@@ -534,8 +658,12 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
+                        const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                        const navHeight = resourcesNav.classList.contains('sticky') ? resourcesNav.offsetHeight : 0;
+                        const offset = headerHeight + navHeight + 20; // Additional 20px padding
+                        
                         window.scrollTo({
-                            top: targetElement.offsetTop - 120,
+                            top: targetElement.offsetTop - offset,
                             behavior: 'smooth'
                         });
                     }
@@ -577,39 +705,6 @@
                     '<i class="fas fa-bars"></i> Show Navigation' : 
                     '<i class="fas fa-times"></i> Hide Navigation';
             });
-            
-            // Create floating action button for mobile
-            const fab = document.createElement('div');
-            fab.className = 'mobile-nav-fab';
-            fab.innerHTML = '<i class="fas fa-list"></i>';
-            fab.setAttribute('aria-label', 'Navigate to sections');
-            document.body.appendChild(fab);
-            
-            // When FAB is clicked, scroll to navigation
-            fab.addEventListener('click', function() {
-                // Expand navigation if collapsed
-                if (resourcesNav.classList.contains('collapsed')) {
-                    resourcesNav.classList.remove('collapsed');
-                    toggleButton.innerHTML = '<i class="fas fa-times"></i> Hide Navigation';
-                }
-                
-                // Scroll to navigation
-                resourcesNav.scrollIntoView({behavior: 'smooth'});
-            });
-            
-            // Hide FAB when near the top of the page
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    fab.style.display = 'flex';
-                } else {
-                    fab.style.display = 'none';
-                }
-            });
-            
-            // Initially hide FAB if at the top
-            if (window.scrollY <= 300) {
-                fab.style.display = 'none';
-            }
             
             // Handle window resize
             window.addEventListener('resize', function() {

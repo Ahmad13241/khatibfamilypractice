@@ -66,14 +66,16 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 2;
+    transition: all 0.3s ease;
 }
 
 .resources-nav.sticky {
     position: sticky;
-    top: 80px;
+    top: var(--header-height);
     z-index: 100;
     margin-top: 0;
     animation: slideDown 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .resources-nav-container {
@@ -203,15 +205,7 @@
     animation: fadeIn 0.8s ease;
     position: relative;
     overflow: hidden;
-}
-
-.service-detail:nth-child(odd) {
-    background-color: rgba(246, 233, 215, 0.2); /* Subtle accent-color background */
-}
-
-.service-detail:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.8);
-    flex-direction: row-reverse;
+    background-color: rgba(246, 233, 215, 0.2); /* Subtle accent-color background for all service details */
 }
 
 /* Decorative elements */
@@ -367,11 +361,12 @@
     margin-top: 2rem;
 }
 
-.service-expand details {
+.service-expand .accordion-item {
     width: 100%;
+    margin-bottom: 1rem;
 }
 
-.service-expand summary {
+.service-expand .accordion-header {
     padding: 1rem 1.5rem;
     background-color: var(--light-color);
     border-radius: 5px;
@@ -385,11 +380,11 @@
     align-items: center;
 }
 
-.service-expand summary:hover {
+.service-expand .accordion-header:hover {
     background-color: #e9ecef;
 }
 
-.service-expand summary::before {
+.service-expand .accordion-header::before {
     content: '\f107';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -398,22 +393,32 @@
     transition: transform 0.3s ease;
 }
 
-.service-expand details[open] summary {
+.service-expand .accordion-item.active .accordion-header {
     background-color: #e9ecef;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.service-expand details[open] summary::before {
+.service-expand .accordion-item.active .accordion-header::before {
     transform: rotate(180deg);
 }
 
-.expanded-list {
+.service-expand .accordion-content {
+    display: none;
     background-color: var(--white);
     padding: 1.5rem 2rem;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.service-expand .accordion-item.active .accordion-content {
+    display: block;
+}
+
+.expanded-list {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .expanded-list li {
@@ -725,15 +730,6 @@
         padding: 2rem 1rem;
     }
     
-    /* Ensure consistent direction regardless of even/odd alternating layout */
-    .service-detail:nth-child(even) .service-content {
-        order: 1;
-    }
-    
-    .service-detail:nth-child(even) .service-image {
-        order: 2;
-    }
-    
     .service-content, .service-image {
         width: 100%;
     }
@@ -824,37 +820,6 @@
     .resource-nav-item i {
         margin-right: 1rem;
         margin-bottom: 0;
-    }
-    
-    /* 4. Add floating button for navigation */
-    .mobile-nav-fab {
-        display: flex;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        color: var(--white);
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px solid rgba(255, 255, 255, 0.7);
-    }
-    
-    .mobile-nav-fab:hover, 
-    .mobile-nav-fab:focus {
-        background-color: var(--secondary-color);
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-    }
-    
-    .mobile-nav-fab i {
-        font-size: 1.25rem;
     }
     
     .service-image {
@@ -1045,10 +1010,6 @@
 @media (min-width: 769px) {
     .resources-nav-toggle-container {
         display: none; /* Hide on desktop */
-    }
-    
-    .mobile-nav-fab {
-        display: none !important; /* Ensure FAB is never shown on desktop */
     }
 }
 

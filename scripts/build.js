@@ -36,6 +36,7 @@ console.log("Copying static files...");
 const copyFilesAndDirs = [
     { type: 'dir', src: 'images', dest: 'images' },
     { type: 'dir', src: 'forms', dest: 'forms' },
+    { type: 'dir', src: 'css', dest: 'css' }, // Explicitly copy CSS directory
     { type: 'file', src: 'index.html', dest: 'index.html' },
     { type: 'file', src: 'netlify.toml', dest: 'netlify.toml' },
     { type: 'file', src: 'robots.txt', dest: 'robots.txt' },

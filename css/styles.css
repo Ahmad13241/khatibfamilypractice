@@ -1,4 +1,4 @@
-/* 
+/*
  * Khatib Family Practice - Main Stylesheet
  * A modern, responsive design for a family medical practice
  */
@@ -20,11 +20,11 @@
     --warning: #ed8936;             /* Orange */
     --danger: #e53e3e;              /* Red */
     --primary-rgb: 44, 82, 130;     /* Primary Blue as RGB */
-    
+
     /* Typography */
     --heading-font: 'Montserrat', sans-serif;
     --body-font: 'Open Sans', sans-serif;
-    
+
     /* Spacing */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
@@ -32,19 +32,19 @@
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
     --spacing-xxl: 5rem;
-    
+
     /* Layout */
-    --header-height: 160px;
-    
+    --header-height: 160px; /* Default, will be updated by JS */
+
     /* Borders */
     --border-radius: 4px;
     --border-radius-lg: 8px;
-    
+
     /* Shadows */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    
+
     /* Container */
     --container-width: 1200px;
 }
@@ -66,6 +66,7 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     background-color: var(--white);
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -90,7 +91,7 @@ a:hover {
     color: var(--secondary-color);
 }
 
-ul, ol {
+ul, ol { /* Added ol for semantic lists */
     margin-bottom: var(--spacing-md);
     padding-left: var(--spacing-lg);
 }
@@ -98,6 +99,7 @@ ul, ol {
 img {
     max-width: 100%;
     height: auto;
+    display: block; /* remove extra space below images */
 }
 
 /* ===== UTILITY CLASSES ===== */
@@ -113,7 +115,7 @@ img {
     margin-bottom: var(--spacing-xl);
 }
 
-.section-header h2 {
+.section-header h2 { /* This is usually the main heading for a section */
     font-size: 2.25rem;
     color: var(--primary-color);
     margin-bottom: var(--spacing-sm);
@@ -133,7 +135,7 @@ img {
 }
 
 .section-header p {
-    color: var(--text-color);
+    color: var(--text-color); 
     font-size: 1.1rem;
 }
 
@@ -151,6 +153,19 @@ img {
     text-align: center;
 }
 
+.visually-hidden { 
+    position: absolute !important; /* Ensure it's truly hidden */
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+    white-space: nowrap !important; /* Prevent line breaks from affecting layout */
+}
+
+
 /* ===== BUTTONS ===== */
 .btn {
     display: inline-block;
@@ -165,9 +180,10 @@ img {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    border: 2px solid transparent; 
 }
 
-.btn::after {
+.btn::after { 
     content: '';
     position: absolute;
     top: 50%;
@@ -177,113 +193,128 @@ img {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    transition: width 0.5s, height 0.5s;
+    transition: width 0.5s ease, height 0.5s ease; 
     z-index: -1;
 }
 
 .btn:hover::after {
-    width: 300px;
+    width: 300px; 
     height: 300px;
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
 }
 
 .btn-primary {
     background-color: var(--primary-color);
     color: var(--white);
-    border: 2px solid var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .btn-primary:hover {
     background-color: var(--primary-dark);
     border-color: var(--primary-dark);
-    color: var(--white);
+    color: var(--white); 
 }
 
 .btn-secondary {
     background-color: var(--secondary-color);
     color: var(--white);
-    border: 2px solid var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
 .btn-secondary:hover {
     background-color: var(--secondary-dark);
     border-color: var(--secondary-dark);
-    color: var(--white);
+    color: var(--white); 
 }
 
 .btn-outline {
     background-color: transparent;
     color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .btn-outline:hover {
     background-color: var(--primary-color);
     color: var(--white);
+    border-color: var(--primary-color); 
 }
 
-/* ===== REDESIGNED TOP BAR STYLES ===== */
+/* ===== HEADER STYLES ===== */
+header {
+    width: 100%;
+    z-index: 1000; 
+    background: var(--white);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: relative; 
+}
+
 .top-info-bar {
-    background-color: var(--primary-dark);
+    background-color: var(--primary-dark); 
     color: var(--white);
-    padding: 8px 0;
-}
-
-.contact-details, .portal-access {
-    display: flex;
-    align-items: center;
+    padding: var(--spacing-xs) 0; 
+    font-size: 0.875rem; 
 }
 
 .top-info-bar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; 
+}
+
+.contact-details, .portal-access {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md); 
 }
 
 .contact-item {
     color: var(--white);
-    margin-right: 20px;
-    font-size: 0.875rem;
-    text-decoration: none;
+    text-decoration: none; 
     display: flex;
     align-items: center;
+    transition: color 0.2s ease;
+}
+.contact-item:hover {
+    color: var(--secondary-color); 
 }
 
 .contact-item i {
-    margin-right: 8px;
+    margin-right: var(--spacing-sm); 
+    font-size: 1rem;
 }
 
 .portal-button {
     display: inline-flex;
     align-items: center;
-    padding: 6px 12px;
+    padding: 6px 12px; 
     background-color: var(--secondary-color);
     color: var(--white);
     border-radius: var(--border-radius);
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 600; 
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .portal-button i {
-    margin-right: 8px;
+    margin-right: var(--spacing-sm);
 }
 
 .portal-button:hover {
     background-color: var(--secondary-dark);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* Main Navigation Styles */
 .main-navigation {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-sm) 0; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08); 
     background-color: var(--white);
 }
 
@@ -301,27 +332,15 @@ img {
 }
 
 .practice-logo img {
-    height: 60px;
+    height: 60px; 
     width: auto;
     object-fit: contain;
+    transition: height 0.3s ease; 
 }
 
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-.practice-logo h1 {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    margin: 0;
-    margin-left: 1rem;
+.practice-logo h1 { 
+    /* Visually hidden, but present for SEO/Accessibility. Styled by .visually-hidden */
+    margin: 0 0 0 1rem; 
 }
 
 .nav-menu {
@@ -329,7 +348,7 @@ img {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 1.25rem;
+    gap: 1.5rem; 
 }
 
 .nav-item {
@@ -340,7 +359,7 @@ img {
     color: var(--dark-color);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.75rem 0;
+    padding: 0.75rem 0.25rem; 
     display: inline-block;
     position: relative;
     transition: color 0.3s ease;
@@ -356,8 +375,9 @@ img {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -1px;
-    left: 0;
+    bottom: 0; 
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     transition: width 0.3s ease;
 }
@@ -367,38 +387,21 @@ img {
     width: 100%;
 }
 
-.nav-item.active::after {
-    background-color: var(--primary-color);
-}
 
-/* Mobile Navigation Controls */
-.mobile-toggle {
-    display: none;
+/* Mobile Navigation Controls - Converted div to button in HTML */
+.mobile-toggle { /* This is now a <button> */
+    display: none; 
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around; 
     width: 30px;
-    height: 21px;
+    height: 24px; 
     cursor: pointer;
-    z-index: 200;
+    z-index: 1100; 
     position: relative;
-    transition: all 0.3s ease-in-out;
     padding: 0;
     background: transparent;
     border: none;
-    outline: none;
-}
-
-.mobile-toggle::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    bottom: -10px;
-    left: -10px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.3s ease-in-out;
-    z-index: -1;
+    transition: transform 0.3s ease-in-out;
 }
 
 .mobile-toggle span {
@@ -408,35 +411,27 @@ img {
     background-color: var(--primary-color);
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
+    transform-origin: center; 
 }
 
 .mobile-toggle:hover {
     transform: scale(1.1);
 }
-
 .mobile-toggle:hover span {
     background-color: var(--secondary-color);
 }
 
-.mobile-toggle.active {
-    transform: rotate(180deg);
-}
-
 .mobile-toggle.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(7.5px) rotate(45deg); 
 }
-
 .mobile-toggle.active span:nth-child(2) {
     opacity: 0;
+    transform: translateX(-10px); 
 }
-
 .mobile-toggle.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-7.5px) rotate(-45deg); 
 }
 
-.mobile-toggle.active::after {
-    background-color: rgba(255, 255, 255, 0.1);
-}
 
 /* Menu Backdrop */
 .menu-backdrop {
@@ -445,426 +440,20 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 90;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 999; 
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; 
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
-
 .menu-backdrop.active {
     visibility: visible;
     opacity: 1;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 992px) {
-    .contact-details {
-        flex-wrap: wrap;
-    }
-    
-    .practice-logo img {
-        height: 50px;
-    }
-    
-    .nav-link {
-        font-size: 0.95rem;
-    }
-    
-    .hero-image .logo-img {
-        max-width: 240px;
-    }
-}
-
-@media (max-width: 768px) {
-    .top-info-bar .container {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .portal-access {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .nav-wrapper {
-        padding: 0.5rem 0;
-    }
-    
-    .practice-logo img {
-        height: 45px;
-    }
-    
-    .mobile-toggle {
-        display: flex;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 270px;
-        height: 100vh;
-        background-color: var(--white);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 0;
-        transition: right 0.3s ease-in-out;
-        z-index: 100;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .nav-menu.active {
-        right: 0;
-    }
-    
-    .nav-menu li {
-        width: 100%;
-        text-align: center;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .nav-menu li a {
-        width: 100%;
-        display: block;
-        padding: 0.5rem 0;
-        font-size: 1rem;
-    }
-    
-    .nav-menu li a:active {
-        color: var(--secondary-color);
-    }
-    
-    .nav-item.active .nav-link {
-        color: var(--primary-color);
-        font-weight: 600;
-    }
-    
-    .mobile-toggle {
-        display: flex;
-        position: relative;
-        z-index: 110;
-    }
-    
-    body.menu-open {
-        overflow: hidden;
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    
-    body.menu-open .menu-backdrop {
-        visibility: visible;
-        opacity: 1;
-    }
-    
-    body:not(.menu-open) {
-        overflow: auto;
-        position: static;
-        height: auto;
-        width: auto;
-    }
-}
-
-@media (max-width: 576px) {
-    .contact-item span {
-        display: none;
-    }
-    
-    .contact-details {
-        justify-content: center;
-    }
-    
-    .practice-logo h1 {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-menu.active {
-        width: 100%;
-    }
-    
-    .nav-menu li a {
-        font-size: 1.1rem;
-    }
-}
-
-/* ===== FOOTER ===== */
-footer {
-    background-color: var(--primary-dark);
-    color: var(--white);
-    padding: var(--spacing-xl) 0 var(--spacing-md);
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.footer-section {
-    margin-bottom: var(--spacing-lg);
-}
-
-.footer-section h3 {
-    color: var(--white);
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-md);
-    position: relative;
-    padding-bottom: 0.75rem;
-}
-
-.footer-section h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: var(--secondary-color);
-    border-radius: 2px;
-}
-
-.footer-section p {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.footer-section.about .contact {
-    margin-top: var(--spacing-md);
-}
-
-.footer-section.about .contact p {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.footer-section.about .contact p i {
-    color: var(--secondary-color);
-    margin-right: 0.75rem;
-    width: 16px;
-}
-
-.footer-section.links ul,
-.footer-section.resources ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-section.links ul li,
-.footer-section.resources ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section.links ul li a,
-.footer-section.resources ul li a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-    position: relative;
-}
-
-.footer-section.links ul li a::before,
-.footer-section.resources ul li a::before {
-    content: '\f054';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    color: var(--secondary-color);
-    margin-right: 0.5rem;
-    font-size: 0.75rem;
-    transition: transform 0.3s ease;
-}
-
-.footer-section.links ul li a:hover,
-.footer-section.resources ul li a:hover {
-    color: var(--white);
-}
-
-.footer-bottom {
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-}
-
-.footer-bottom p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
-}
-
-.social-media {
-    display: flex;
-    gap: 1rem;
-    margin-top: var(--spacing-md);
-}
-
-.social-media a {
-    color: var(--white);
-    background-color: rgba(255, 255, 255, 0.1);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.social-media a:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-}
-
-/* Enhanced visual styles */
-.btn {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-
-.section-header::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background-color: var(--secondary-color);
-    margin: 0.5rem auto 0;
-    border-radius: 3px;
-}
-
-.top-bar {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.patient-portal a.btn-secondary {
-    background-color: var(--secondary-color);
-    color: var(--white);
-    border-radius: var(--border-radius);
-    padding: 0.5rem 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.patient-portal a.btn-secondary:hover {
-    background-color: var(--secondary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-footer {
-    background-color: var(--primary-dark);
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
-    border-top: 5px solid var(--secondary-color);
-}
-
-.footer-section h3 {
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.footer-section h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: var(--secondary-color);
-}
-
-.social-media a {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-    transition: all 0.3s ease;
-}
-
-.social-media a:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-}
-
-/* ===== RESPONSIVE ENHANCEMENTS ===== */
-@media (max-width: 768px) {
-    .hero .container {
-        flex-direction: column;
-    }
-    
-    .hero-content {
-        text-align: center;
-    }
-}
-
-/* ===== IMAGE STYLING ===== */
-.img-responsive {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-.logo-img {
-    max-width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-img:hover {
-    transform: scale(1.05);
-}
-
-.hero-image .logo-img {
-    max-width: 300px;
-    height: auto;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
-    transition: transform 0.5s ease, filter 0.5s ease;
-}
-
-.placeholder-fallback {
-    background-color: #f1f5f9;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #718096;
-    font-weight: 500;
-}
-
-/* ===== MOBILE NAVIGATION ===== */
-.nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links.active {
-    display: flex;
-}
-
-.mobile-menu-toggle {
-    display: none;
-}
-
-body.menu-open {
-    overflow: hidden;
-}
 
 /* ===== FIXED HEADER ===== */
 header.fixed {
@@ -872,17 +461,15 @@ header.fixed {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    animation: slideDown 0.5s ease forwards;
+    box-shadow: var(--shadow-md); 
+    animation: slideDownHeader 0.5s ease forwards;
 }
 
 body.has-fixed-header {
-    padding-top: var(--header-height);
+    padding-top: var(--header-height); 
 }
 
-@keyframes slideDown {
+@keyframes slideDownHeader { 
     from {
         transform: translateY(-100%);
         opacity: 0;
@@ -893,109 +480,334 @@ body.has-fixed-header {
     }
 }
 
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    padding: var(--spacing-xl) 0 var(--spacing-md);
+    border-top: 5px solid var(--secondary-color); 
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: var(--spacing-lg); 
+}
+
+.footer-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer-section h3 {
+    color: var(--white);
+    font-size: 1.35rem; 
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px; 
+    height: 3px; 
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+.footer-section p {
+    color: rgba(255, 255, 255, 0.85); 
+    font-size: 0.95rem; 
+}
+
+.footer-section.about .contact {
+    margin-top: var(--spacing-md);
+}
+
+.footer-section.about .contact p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem; 
+}
+.footer-section.about .contact p a { 
+    color: rgba(255, 255, 255, 0.85);
+    transition: color 0.2s ease;
+}
+.footer-section.about .contact p a:hover {
+    color: var(--secondary-color);
+}
+
+
+.footer-section.about .contact p i {
+    color: var(--secondary-color);
+    margin-right: 0.75rem;
+    width: 18px; 
+    text-align: center; 
+}
+
+.footer-section.links ul,
+.footer-section.resources ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section.links ul li,
+.footer-section.resources ul li {
+    margin-bottom: 0.75rem; 
+}
+
+.footer-section.links ul li a,
+.footer-section.resources ul li a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex; 
+    align-items: center;
+    position: relative;
+}
+
+.footer-section.links ul li a::before,
+.footer-section.resources ul li a::before {
+    content: '\f054'; 
+    font-family: 'Font Awesome 5 Free'; 
+    font-weight: 900; 
+    color: var(--secondary-color);
+    margin-right: 0.6rem; 
+    font-size: 0.8rem; 
+    transition: transform 0.3s ease;
+}
+
+.footer-section.links ul li a:hover,
+.footer-section.resources ul li a:hover {
+    color: var(--white);
+    transform: translateX(3px); 
+}
+.footer-section.links ul li a:hover::before,
+.footer-section.resources ul li a:hover::before {
+    transform: scale(1.1); 
+}
+
+.footer-bottom {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.7); 
+    font-size: 0.9rem; 
+}
+
+.social-media {
+    display: flex;
+    justify-content: center; 
+    gap: 1.25rem; 
+    margin-top: var(--spacing-md);
+}
+
+.social-media a {
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.15); 
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem; 
+}
+
+.social-media a:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-4px) scale(1.1); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 /* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+/* Enhanced Focus Styles */
+a:focus-visible, 
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.mobile-toggle:focus-visible,
+.accordion-header:focus-visible,
+.resource-nav-item:focus-visible,
+.map-placeholder:focus-visible,
+[tabindex="0"]:focus-visible { 
+    outline: 3px solid var(--secondary-dark) !important; 
+    outline-offset: 2px !important; 
+    box-shadow: 0 0 0 4px rgba(var(--secondary-color), 0.4) !important; 
+    border-radius: var(--border-radius) !important; 
+}
+/* Fallback for older browsers that don't support :focus-visible */
 a:focus,
 button:focus,
 .btn:focus,
 input:focus,
 textarea:focus,
-select:focus {
-    outline: 3px solid var(--secondary-color);
-    outline-offset: 2px;
+select:focus,
+.mobile-toggle:focus,
+.accordion-header:focus,
+.resource-nav-item:focus,
+.map-placeholder:focus,
+[tabindex="0"]:focus {
+    outline: 3px solid var(--secondary-dark) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(var(--secondary-color), 0.4) !important;
+    border-radius: var(--border-radius) !important;
+}
+
+
+.gallery-item:focus-within { 
+    outline: 3px solid var(--secondary-dark) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px rgba(var(--secondary-color), 0.4) !important;
+    border-radius: var(--border-radius-lg) !important; 
+    z-index: 10 !important; 
 }
 
 .skip-to-content {
     position: absolute;
-    left: -9999px;
+    left: -9999px; 
     top: auto;
     width: 1px;
     height: 1px;
     overflow: hidden;
-    z-index: 9999;
+    z-index: 99999; 
+    background-color: var(--primary-color); 
+    color: var(--white);
+    padding: 0.75rem 1.5rem; 
+    border-radius: var(--border-radius);
+    font-weight: 600; 
+    box-shadow: var(--shadow-lg); 
+    text-decoration: underline;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
 
-.skip-to-content:focus {
-    left: 0;
-    top: 0;
+.skip-to-content:focus { 
+    position: fixed; 
+    left: 1rem;
+    top: 1rem;
     width: auto;
     height: auto;
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-color);
-    color: var(--white);
+    overflow: visible;
+    transform: translateY(0);
+    opacity: 1;
+    outline: 3px solid var(--secondary-dark) !important; 
+    outline-offset: 3px !important;
 }
 
-.footer-section.links ul li a,
-.footer-section.resources ul li a {
-    color: rgba(255, 255, 255, 0.9);
+/* Section fade-in animation (if used by JS) */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+.fade-in-section.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* ===== CALL TO ACTION SECTION ===== */
-.cta-section {
-    padding: 4rem 0;
-    background-color: var(--accent-color);
-    margin: 2rem 0;
-    border-radius: var(--border-radius-lg);
+
+/* ===== RESPONSIVE ENHANCEMENTS ===== */
+@media (max-width: 992px) {
+    .contact-details {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm); 
+        justify-content: center; 
+    }
+    .contact-item {
+        margin-right: 0; 
+    }
+    .practice-logo img {
+        height: 50px;
+    }
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.75rem 0.1rem; 
+    }
+    .nav-menu {
+        gap: 1rem; 
+    }
 }
 
-.cta-content {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.cta-content h2 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.cta-content p {
-    color: var(--light-text);
-    margin-bottom: 2rem;
-}
-
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.cta-buttons .btn-primary {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.cta-buttons .btn-primary:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.cta-buttons .btn-outline {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.cta-buttons .btn-outline:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
+    .top-info-bar .container {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    .portal-access {
+        margin-top: var(--spacing-xs);
+        width: auto; 
+    }
+    .nav-wrapper {
+        padding: 0.5rem 0;
+    }
+    .practice-logo img {
+        height: 45px;
+    }
+    .mobile-toggle {
+        display: flex; 
+    }
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 280px; 
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        justify-content: flex-start; 
+        align-items: stretch; 
+        gap: 0;
+        padding-top: calc(var(--header-height) + 1rem); 
+        transition: right 0.35s ease-in-out; 
+        z-index: 1000; 
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+        overflow-y: auto; 
+    }
+    .nav-menu.active {
+        right: 0;
+    }
+    .nav-menu .nav-item {
+        width: 100%;
+        text-align: left; 
+    }
+    .nav-menu .nav-link {
+        width: 100%;
+        display: block;
+        padding: 1rem 1.5rem; 
+        font-size: 1.05rem; 
+        border-bottom: 1px solid rgba(0,0,0,0.05); 
+    }
+    .nav-menu .nav-link::before { 
+        left: 1.5rem;
+        bottom: 0.5rem;
+        transform: translateX(0);
+        height: 2px;
+    }
+    .nav-menu .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    .nav-menu .nav-link:hover,
+    .nav-menu .nav-item.active .nav-link {
+        background-color: rgba(var(--primary-rgb), 0.05); 
+    }
+
+    body.menu-open {
+        overflow: hidden; 
+    }
+    
     .cta-buttons {
         flex-direction: column;
         width: 100%;
@@ -1006,167 +818,60 @@ select:focus {
         width: 100%;
         margin-bottom: 0.5rem;
     }
-}
-
-/* ===== SERVICE INTRO ===== */
-.service-intro {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 2.5rem;
-    background-color: var(--light-color);
-    padding: 2rem;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-}
-
-.service-intro p {
-    color: var(--light-text);
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-
-/* Scrolling/Transition Improvements */
-body.scrolled-past-hero {
-    --scroll-padding: 70px;
-}
-
-body.scrolled-past-hero section {
-    scroll-margin-top: var(--scroll-padding);
-    scroll-snap-margin-top: var(--scroll-padding);
-}
-
-section {
-    transition: opacity 0.4s ease, transform 0.6s ease;
-    will-change: opacity, transform;
-    overflow: hidden;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-    html, body {
-        overflow-x: hidden;
-    }
     
-    body.has-fixed-header {
-        padding-top: var(--header-height);
-    }
-    
-    section {
-        will-change: opacity, transform;
-        transition: opacity 0.5s ease, transform 0.7s ease;
-        transform: translateZ(0);
-        -webkit-font-smoothing: antialiased;
+    .service-intro {
+        padding: 1.5rem;
     }
 }
 
-body.touch-scrolling {
-    -webkit-overflow-scrolling: touch;
-}
-
-body.touch-scrolling section {
-    transform: translateZ(0);
-}
-
-@media (max-width: 768px) {
-    /* Mobile optimizations */
-    .hero {
-        padding-top: 1rem;
-        background-size: 100% auto;
-        background-attachment: scroll;
-        background-position: center bottom;
-    }
-    
-    section {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-        -webkit-overflow-scrolling: touch;
-        overflow: hidden;
-    }
-    
-    section + section {
-        padding-top: 2rem;
-    }
-    
-    main {
-        overflow-x: hidden;
-        width: 100%;
-        position: relative;
-    }
-}
-
-/* ===== Menu Backdrop ===== */
-.menu-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 99;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-.menu-backdrop.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-@media (max-width: 768px) {
-    /* Mobile menu improvements */
-    body.menu-open {
-        overflow: hidden;
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    
-    body.menu-open .menu-backdrop.active {
-        visibility: visible;
-        opacity: 1;
-        z-index: 99;
-    }
-    
-    body:not(.menu-open) {
-        overflow: auto;
-        position: static;
-        height: auto;
-        width: auto;
-    }
-}
-
-/* Mobile optimization for fixed header */
-@media (max-width: 768px) {
-    header.fixed {
-        height: auto;
-    }
-    
-    header.fixed .main-navigation {
-        padding: 0.5rem 0;
-    }
-    
-    header.fixed .practice-logo img {
-        height: 40px;
-        transition: height 0.3s ease;
-    }
-    
-    header.fixed .mobile-toggle {
-        transform: scale(0.9);
-    }
-    
-    header.fixed .portal-access {
+@media (max-width: 576px) {
+    .contact-item span { 
         display: none;
     }
-    
-    header.fixed .contact-details {
-        display: none;
+    .contact-item i {
+        margin-right: 0; 
     }
-    
-    .main-navigation, .practice-logo img, .mobile-toggle {
-        transition: all 0.3s ease;
+    .contact-details {
+        justify-content: center;
+        gap: var(--spacing-md); 
     }
+    .practice-logo h1 {
+        font-size: 1.2rem;
+    }
+    .section-header h2 {
+        font-size: 1.8rem; 
+    }
+    .section-header p {
+        font-size: 1rem;
+    }
+    footer {
+        padding: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+    .footer-content {
+        gap: var(--spacing-md);
+    }
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        width: 100%; 
+    }
+    .nav-menu .nav-link {
+        font-size: 1.1rem; 
+    }
+    .top-info-bar {
+        font-size: 0.8rem;
+    }
+    .portal-button {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Ensure main content area is focusable for skip link */
+main:focus {
+    outline: none; /* Remove default outline if not desired on main itself */
 }

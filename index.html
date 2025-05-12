@@ -47,6 +47,8 @@
     .main-navigation{padding:var(--spacing-sm) 0;border-bottom:1px solid rgba(0,0,0,.1);background-color:var(--white)}
     .nav-wrapper{display:flex;justify-content:space-between;align-items:center}
     .practice-logo{display:flex;align-items:center}
+    .skip-to-content{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background-color:var(--primary-color);color:var(--white);padding:.75rem 1.5rem;border-radius:var(--border-radius);font-weight:500;box-shadow:var(--shadow-md);transition:transform .2s ease-out}
+    .skip-to-content:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;overflow:visible;outline:3px solid var(--secondary-dark);outline-offset:3px;transform:translateY(0)}
     </style>
     
     <!-- Non-critical CSS loaded asynchronously -->
@@ -88,7 +90,7 @@
     </noscript>
     
     <!-- CSS Loader utility to handle asynchronous CSS loading -->
-    <script src="js/cssLoader.js"></script>
+    <script src="js/cssLoader.js" data-env="development" defer></script> <!-- Mark as dev-only -->
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -193,18 +195,18 @@
             <div class="container">
                 <div class="contact-details">
                     <a href="tel:9287639009" class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         <span>(928) 763-9009</span>
                     </a>
                     <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
                        target="_blank" rel="noopener" class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
                     </a>
                 </div>
                 <div class="portal-access">
                     <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank" rel="noopener">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span>Patient Portal</span>
                     </a>
                 </div>
@@ -219,14 +221,14 @@
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
-                    <div class="mobile-toggle" role="button" aria-expanded="false" aria-label="Toggle navigation menu" tabindex="0">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list" aria-label="Toggle navigation menu">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
+                    </button>
                     
-                    <ul class="nav-menu">
-                        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <ul class="nav-menu" id="nav-menu-list">
+                        <li class="nav-item active"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
                         <li class="nav-item"><a href="pages/about.html" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="pages/resources.html" class="nav-link">Patient Resources</a></li>
                         <li class="nav-item"><a href="pages/healow.html" class="nav-link">Healow Portal Service</a></li>
@@ -238,201 +240,205 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="main-content">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Khatib Family Practice</h1>
-                <h2>Your Dedicated Adult Primary Care Physician in Bullhead City, Serving the Tri-State Area</h2>
-                <p>Since 1998, Dr. Nadim Khatib has provided exceptional, personalized medical care focused on adults (21+). Our patient-centered model ensures residents of Bullhead City, Laughlin, Fort Mohave, and Mohave Valley receive the time, individualized attention, and comprehensive healthcare they deserve from a trusted family doctor.</p>
-                <div class="hero-buttons">
-                    <a href="pages/contact.html" class="btn btn-primary">Want an appointment? Contact us!</a>
-                    <a href="pages/about.html" class="btn btn-outline">Learn More About Us</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <!-- Replace logo with courtyard image -->
-                <picture>
-                    <source srcset="images/courtyard-of-the-building.webp" type="image/webp">
-                    <img src="images/courtyard-of-the-building.webp" 
-                         alt="Khatib Family Practice - Peaceful courtyard view of our medical building with beautifully landscaped surroundings" 
-                         class="hero-img" width="600" height="400">
-                </picture>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Services</h2>
-                <p>Comprehensive healthcare tailored for adults 21 and older in Bullhead City and the surrounding Tri-State communities.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-user-md"></i>
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Khatib Family Practice</h1>
+                    <h2>Your Dedicated Adult Primary Care Physician in Bullhead City, Serving the Tri-State Area</h2>
+                    <p>Since 1998, Dr. Nadim Khatib has provided exceptional, personalized medical care focused on adults (21+). Our patient-centered model ensures residents of Bullhead City, Laughlin, Fort Mohave, and Mohave Valley receive the time, individualized attention, and comprehensive healthcare they deserve from a trusted family doctor.</p>
+                    <div class="hero-buttons">
+                        <a href="pages/contact.html" class="btn btn-primary">Want an appointment? Contact us!</a>
+                        <a href="pages/about.html" class="btn btn-outline">Learn More About Us</a>
                     </div>
-                    <h3>Adult Medicine</h3>
-                    <p>Personalized healthcare for adults 21+ focused on your specific needs and health goals, delivering care that's as unique as you are.</p>
-                    <a href="pages/resources.html#adult-medicine" class="read-more">Learn More About Adult Medicine</a>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h3>Preventive Care</h3>
-                    <p>Proactive health management through screenings, vaccinations, and lifestyle guidance to help you maintain optimal health and prevent disease.</p>
-                    <a href="pages/resources.html#preventive-care" class="read-more">Learn More About Preventive Care</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-notes-medical"></i>
-                    </div>
-                    <h3>Chronic Disease Management</h3>
-                    <p>Consistent, coordinated care for long-term health conditions with individualized approaches, leading to better health outcomes and fewer complications.</p>
-                    <a href="pages/resources.html#chronic-disease" class="read-more">Learn More About Chronic Disease Management</a>
-                </div>
-            </div>
-            <div class="services-cta">
-                <a href="pages/resources.html" class="btn btn-primary">View All Services</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Career Opportunities Section -->
-    <section class="career-section">
-        <div class="container">
-            <div class="career-content">
-                <div class="career-text">
-                    <h2><i class="fas fa-stethoscope"></i> Join Our Team</h2>
-                    <p>We're looking to hire a Medical Assistant to join our small team. If you're passionate about patient care and want to work in a supportive environment, we'd love to hear from you.</p>
-                </div>
-                <div class="career-action">
-                    <a href="https://www.linkedin.com/in/susan-khatib-2905a0235" class="btn btn-secondary" target="_blank" rel="noopener">Apply on LinkedIn <i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.indeed.com/cmp/Khatib-Family-Practice/jobs" class="btn btn-secondary" target="_blank" rel="noopener">Apply on Indeed <i class="fas fa-briefcase"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Practice Section -->
-    <section class="about-doctor">
-        <div class="container">
-            <div class="about-image-container">
-                <div class="doctor-image">
+                <div class="hero-image">
                     <picture>
-                        <source srcset="images/dr-khatib-professional.webp" type="image/webp">
-                        <img src="images/dr-khatib-professional.webp" 
-                             alt="Dr. Nadim Khatib, Board Certified Family Medicine Physician with over 25 years of experience serving Bullhead City and the Tri-State area" 
-                             class="about-doctor-img">
+                        <source srcset="images/courtyard-of-the-building.webp" type="image/webp">
+                        <img src="images/courtyard-of-the-building.webp" 
+                             alt="Khatib Family Practice - Peaceful courtyard view of our medical building with beautifully landscaped surroundings" 
+                             class="hero-img" width="600" height="400" fetchpriority="high" loading="eager">
                     </picture>
-                    <div class="brand-overlay">
-                        <img src="images/LOGO.webp" alt="Khatib Family Practice Logo" class="brand-logo">
-                    </div>
                 </div>
             </div>
-            <div class="doctor-content">
-                <h2>About Khatib Family Practice</h2>
-                <p class="doctor-credentials">Tailored Adult Medicine Serving Bullhead City, Laughlin, Fort Mohave & Mohave Valley Since 1998</p>
-                <p>What distinguishes Khatib Family Practice is our deliberate healthcare delivery model. Unlike high-volume clinics, Dr. Khatib maintains a smaller practice focused on fostering meaningful, long-term doctor-patient relationships. Many patients from throughout Bullhead City and surrounding communities like Laughlin and Fort Mohave have remained with us for years, benefiting from care that's both deeply personalized and clinically excellent, resulting in better health outcomes and a more satisfying healthcare experience.</p>
-                <a href="pages/about.html" class="btn btn-secondary">Learn More About Our Practice</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>Patient Testimonials</h2>
-                <p>See what our patients have to say about their experience</p>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Dr. Khatib takes time to listen to my concerns and thoroughly explains everything. His staff is friendly and appointments are never rushed. I trust his decisions completely."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <p class="name">- Monica and James Bray, Fort Mohave, AZ</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+        <!-- Services Section -->
+        <section class="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive healthcare tailored for adults 21 and older in Bullhead City and the surrounding Tri-State communities.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <i class="fas fa-user-md"></i>
                         </div>
-                        <p class="source">Healthgrades Review</p>
+                        <h3>Adult Medicine</h3>
+                        <p>Personalized healthcare for adults 21+ focused on your specific needs and health goals, delivering care that's as unique as you are.</p>
+                        <a href="pages/resources.html#family-medicine" class="read-more">Learn More About Adult Medicine</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Preventive Care</h3>
+                        <p>Proactive health management through screenings, vaccinations, and lifestyle guidance to help you maintain optimal health and prevent disease.</p>
+                        <a href="pages/resources.html#preventive-care" class="read-more">Learn More About Preventive Care</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <h3>Chronic Disease Management</h3>
+                        <p>Consistent, coordinated care for long-term health conditions with individualized approaches, leading to better health outcomes and fewer complications.</p>
+                        <a href="pages/resources.html#chronic-disease" class="read-more">Learn More About Chronic Disease Management</a>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"I appreciate Dr. Khatib's attention to detail. Appointment scheduling is easy, he listens and explains conditions clearly. His staff is friendly and appointments are never rushed. I completely trust his decisions."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <p class="name">- Denice B., Bullhead City, AZ</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="source">Healthgrades Review</p>
-                    </div>
+                <div class="services-cta">
+                    <a href="pages/resources.html" class="btn btn-primary">View All Services</a>
                 </div>
             </div>
-            <div class="testimonial-controls">
-                <a href="pages/testimonials.html" class="btn btn-secondary">View All Testimonials</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Location Section -->
-    <section class="location">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Location</h2>
-                <p>Conveniently located in Bullhead City to serve the entire Tri-State area including Laughlin, Fort Mohave, and Mohave Valley</p>
+        <!-- Career Opportunities Section -->
+        <section class="career-section">
+            <div class="container">
+                <div class="career-content">
+                    <div class="career-text">
+                        <h2><i class="fas fa-stethoscope" aria-hidden="true"></i> Join Our Team</h2>
+                        <p>We're looking to hire a Medical Assistant to join our small team. If you're passionate about patient care and want to work in a supportive environment, we'd love to hear from you.</p>
+                    </div>
+                    <div class="career-action">
+                        <a href="https://www.linkedin.com/in/susan-khatib-2905a0235" class="btn btn-secondary" target="_blank" rel="noopener">Apply on LinkedIn <i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                        <a href="https://www.indeed.com/cmp/Khatib-Family-Practice/jobs" class="btn btn-secondary" target="_blank" rel="noopener">Apply on Indeed <i class="fas fa-briefcase" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="location-container">
-                <div class="map-container" data-map-processed="false">
-                    <!-- Map will be loaded via mapLoader.js -->
-                    <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
-                    <div class="map-placeholder" data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus" 
-                         data-map-height="400"
-                         data-map-width="100%"
-                         data-map-title="Khatib Family Practice location map"
-                         data-map-aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442"
-                         data-map-sandbox="allow-scripts allow-same-origin allow-popups">
-                        <div class="map-placeholder-content">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Click to load map</p>
-                            <p class="map-address">Khatib Family Practice<br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+        </section>
+
+        <!-- About Practice Section -->
+        <section class="about-doctor">
+            <div class="container">
+                <div class="about-image-container">
+                    <div class="doctor-image">
+                        <picture>
+                            <source srcset="images/dr-khatib-professional.webp" type="image/webp">
+                            <img src="images/dr-khatib-professional.webp" 
+                                 alt="Dr. Nadim Khatib, Board Certified Family Medicine Physician at Khatib Family Practice, providing care in Bullhead City." 
+                                 class="about-doctor-img" loading="lazy" width="500" height="500">
+                        </picture>
+                        <div class="brand-overlay">
+                            <img src="images/LOGO.webp" alt="Khatib Family Practice Logo" class="brand-logo" loading="lazy" width="80" height="80">
                         </div>
                     </div>
                 </div>
-                <div class="location-details">
-                    <div class="address">
-                        <h3>Khatib Family Practice</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
-                        <p><i class="fas fa-phone"></i> <a href="tel:9287639009">(928) 763-9009</a></p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
-                        <p><i class="fas fa-info-circle"></i> Providing care to patients from Bullhead City, Laughlin, Fort Mohave, and Mohave Valley</p>
-                    </div>
-                    <div class="hours">
-                        <h3>Office Hours</h3>
-                        <ul>
-                            <li><span>Monday - Friday:</span> 8:00 AM - 5:00 PM</li>
-                            <li><span>Saturday - Sunday:</span> Closed</li>
-                        </ul>
-                    </div>
-                    <a href="pages/contact.html#appointment" class="btn btn-primary">Request Appointment</a>
+                <div class="doctor-content">
+                    <h2>About Khatib Family Practice</h2>
+                    <p class="doctor-credentials">Tailored Adult Medicine Serving Bullhead City, Laughlin, Fort Mohave & Mohave Valley Since 1998</p>
+                    <p>What distinguishes Khatib Family Practice is our deliberate healthcare delivery model. Unlike high-volume clinics, Dr. Khatib maintains a smaller practice focused on fostering meaningful, long-term doctor-patient relationships. Many patients from throughout Bullhead City and surrounding communities like Laughlin and Fort Mohave have remained with us for years, benefiting from care that's both deeply personalized and clinically excellent, resulting in better health outcomes and a more satisfying healthcare experience.</p>
+                    <a href="pages/about.html" class="btn btn-secondary">Learn More About Our Practice</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Patient Testimonials</h2>
+                    <p>See what our patients have to say about their experience</p>
+                </div>
+                <div class="testimonial-slider">
+                    <article class="testimonial-card" aria-labelledby="testimonial-author-1">
+                        <div class="testimonial-content">
+                            <p>"Dr. Khatib takes time to listen to my concerns and thoroughly explains everything. His staff is friendly and appointments are never rushed. I trust his decisions completely."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <p class="name" id="testimonial-author-1">- Monica and James Bray, Fort Mohave, AZ</p>
+                            <div class="rating" aria-label="Rated 5 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <p class="source">Healthgrades Review</p>
+                        </div>
+                    </article>
+                    <article class="testimonial-card" aria-labelledby="testimonial-author-2">
+                        <div class="testimonial-content">
+                            <p>"I appreciate Dr. Khatib's attention to detail. Appointment scheduling is easy, he listens and explains conditions clearly. His staff is friendly and appointments are never rushed. I completely trust his decisions."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <p class="name" id="testimonial-author-2">- Denice B., Bullhead City, AZ</p>
+                            <div class="rating" aria-label="Rated 5 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <p class="source">Healthgrades Review</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="testimonial-controls">
+                    <a href="pages/testimonials.html" class="btn btn-secondary">View All Testimonials</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="location">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Location</h2>
+                    <p>Conveniently located in Bullhead City to serve the entire Tri-State area including Laughlin, Fort Mohave, and Mohave Valley</p>
+                </div>
+                <div class="location-container">
+                    <div class="map-container" data-map-processed="false">
+                        <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
+                        <div class="map-placeholder" 
+                             role="button" 
+                             tabindex="0" 
+                             aria-label="Load interactive map"
+                             data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus" 
+                             data-map-height="400"
+                             data-map-width="100%"
+                             data-map-title="Khatib Family Practice location map"
+                             data-map-aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442"
+                             data-map-sandbox="allow-scripts allow-same-origin allow-popups">
+                            <div class="map-placeholder-content">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <p>Click or press Enter to load map</p>
+                                <address class="map-address">Khatib Family Practice<br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</address>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-details">
+                        <div class="address">
+                            <h3>Khatib Family Practice</h3>
+                            <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+                            <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:9287639009">(928) 763-9009</a></p>
+                            <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Providing care to patients from Bullhead City, Laughlin, Fort Mohave, and Mohave Valley</p>
+                        </div>
+                        <div class="hours">
+                            <h3>Office Hours</h3>
+                            <ul>
+                                <li><span>Monday - Friday:</span> 8:00 AM - 5:00 PM</li>
+                                <li><span>Saturday - Sunday:</span> Closed</li>
+                            </ul>
+                        </div>
+                        <a href="pages/contact.html#appointment" class="btn btn-primary">Request Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -442,9 +448,9 @@
                     <h3>Khatib Family Practice</h3>
                     <p>Serving Bullhead City, Laughlin, Fort Mohave, and Mohave Valley with quality-focused adult medicine since 1998.</p>
                     <div class="contact">
-                        <p><i class="fas fa-phone"></i> <a href="tel:9287639009">(928) 763-9009</a></p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:9287639009">(928) 763-9009</a></p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
                     </div>
                 </div>
                 <div class="footer-section links">
@@ -469,6 +475,11 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <div class="social-media">
+                    <!-- Add actual links when available -->
+                    <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
         </div>
     </footer>
@@ -478,5 +489,10 @@
     
     <!-- Map Loader for lazy loading Google Maps -->
     <script src="js/mapLoader.js" defer></script>
+    
+    <!-- Development-only scripts, build process should remove these -->
+    <script src="js/logger.js" data-env="development" defer></script>
+    <script src="js/security.js" data-env="development" defer></script>
 </body>
-</html> 
+</html>
+```

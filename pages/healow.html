@@ -17,7 +17,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
-    <link rel="canonical" href="https://khatibfamilypractice.com/pages/healow" />
+    <link rel="canonical" href="https://khatibfamilypractice.com/pages/healow.html" />
     
     <title>Patient Portal Access | Khatib Family Practice | Bullhead City, AZ</title>
     <link rel="stylesheet" href="../css/styles.css">
@@ -56,18 +56,18 @@
             <div class="container">
                 <div class="contact-details">
                     <a href="tel:9287639009" class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         <span>(928) 763-9009</span>
                     </a>
                     <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
                        target="_blank" rel="noopener" class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
                     </a>
                 </div>
                 <div class="portal-access">
                     <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank" rel="noopener">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span>Patient Portal</span>
                     </a>
                 </div>
@@ -82,17 +82,17 @@
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
-                    <div class="mobile-toggle" role="button" aria-expanded="false" aria-label="Toggle navigation menu" tabindex="0">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list-healow" aria-label="Toggle navigation menu">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
+                    </button>
                     
-                    <ul class="nav-menu">
+                    <ul class="nav-menu" id="nav-menu-list-healow">
                         <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="resources.html" class="nav-link">Patient Resources</a></li>
-                        <li class="nav-item active"><a href="healow.html" class="nav-link">Healow Portal Service</a></li>
+                        <li class="nav-item active"><a href="healow.html" class="nav-link" aria-current="page">Healow Portal Service</a></li>
                         <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                     </ul>
@@ -101,7 +101,6 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main id="main-content">
         <!-- Healow Portal Section -->
         <section class="hero hero-section healow-hero">
@@ -115,12 +114,14 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="app-device-mockup">
+                    <div class="app-device-mockup" aria-label="Mockup of Healow app on a smartphone">
                         <div class="app-preview-placeholder">
-                            <div class="app-logo">
+                            <div class="app-logo" aria-hidden="true">
                                 <i class="fas fa-mobile-alt"></i>
                                 <span>healow</span>
                             </div>
+                             <!-- Consider adding an actual screenshot if available and ensure alt text -->
+                             <img src="../images/healow-app-screenshot-placeholder.webp" alt="Screenshot of the Healow patient portal app interface." class="app-screenshot" loading="lazy" width="260" height="540" style="display:none;"> <!-- Placeholder for actual screenshot -->
                         </div>
                     </div>
                 </div>
@@ -141,32 +142,32 @@
                 
                 <div class="benefits-grid feature-grid">
                     <div class="feature-item">
-                        <i class="fas fa-calendar-check"></i>
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
                         <h4>Schedule Appointments</h4>
                         <p>Book, reschedule, or cancel appointments online at your convenience, 24/7.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-pills"></i>
+                        <i class="fas fa-pills" aria-hidden="true"></i>
                         <h4>Medication Refills</h4>
                         <p>Request prescription refills directly through the portal without phone calls.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-flask"></i>
+                        <i class="fas fa-flask" aria-hidden="true"></i>
                         <h4>View Lab Results</h4>
                         <p>Access your test results as soon as they become available to your provider.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-comment-medical"></i>
+                        <i class="fas fa-comment-medical" aria-hidden="true"></i>
                         <h4>Secure Messaging</h4>
                         <p>Communicate directly with our office through secure, private messaging.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-file-medical-alt"></i>
+                        <i class="fas fa-file-medical-alt" aria-hidden="true"></i>
                         <h4>Medical Records</h4>
                         <p>View your medical history, diagnoses, and treatment plans in one secure place.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-bell"></i>
+                        <i class="fas fa-bell" aria-hidden="true"></i>
                         <h4>Health Reminders</h4>
                         <p>Receive alerts for upcoming appointments and preventive care recommendations.</p>
                     </div>
@@ -186,51 +187,51 @@
                     <p>Setting up your healow account is easy and only takes a few minutes. Once set up, you'll have secure access to your health information anytime, anywhere.</p>
                 </div>
                 
-                <div class="process-steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
+                <ol class="process-steps"> <!-- Changed div to ol for semantic list of steps -->
+                    <li class="step"> <!-- Changed div to li -->
+                        <div class="step-number" aria-hidden="true">1</div>
                         <h4>Download the healow App</h4>
                         <p>Get the free healow app from the App Store (iPhone) or Google Play (Android) on your mobile device.</p>
-                        <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
-                    </div>
+                        <div class="step-icon" aria-hidden="true"><i class="fas fa-mobile-alt"></i></div>
+                    </li>
                     
-                    <div class="step">
-                        <div class="step-number">2</div>
+                    <li class="step"> <!-- Changed div to li -->
+                        <div class="step-number" aria-hidden="true">2</div>
                         <h4>Create Your Account</h4>
                         <p>Enter your first name, last name, and date of birth to begin the account setup process.</p>
-                        <div class="step-icon"><i class="fas fa-user-plus"></i></div>
-                    </div>
+                        <div class="step-icon" aria-hidden="true"><i class="fas fa-user-plus"></i></div>
+                    </li>
                     
-                    <div class="step">
-                        <div class="step-number">3</div>
+                    <li class="step"> <!-- Changed div to li -->
+                        <div class="step-number" aria-hidden="true">3</div>
                         <h4>Find Our Practice</h4>
                         <p>Search for "Khatib Family Practice" or enter our practice code (DGAEAD) to connect with us.</p>
-                        <div class="step-icon"><i class="fas fa-search"></i></div>
-                    </div>
+                        <div class="step-icon" aria-hidden="true"><i class="fas fa-search"></i></div>
+                    </li>
                     
-                    <div class="step">
-                        <div class="step-number">4</div>
+                    <li class="step"> <!-- Changed div to li -->
+                        <div class="step-number" aria-hidden="true">4</div>
                         <h4>Set Up Security</h4>
                         <p>Create a secure PIN to protect your health information and ensure only you can access your records.</p>
-                        <div class="step-icon"><i class="fas fa-lock"></i></div>
-                    </div>
+                        <div class="step-icon" aria-hidden="true"><i class="fas fa-lock"></i></div>
+                    </li>
                     
-                    <div class="step">
-                        <div class="step-number">5</div>
+                    <li class="step"> <!-- Changed div to li -->
+                        <div class="step-number" aria-hidden="true">5</div>
                         <h4>Start Using healow</h4>
                         <p>Log in to access all your health information and begin using the portal's convenient features.</p>
-                        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
-                    </div>
-                </div>
+                        <div class="step-icon" aria-hidden="true"><i class="fas fa-check-circle"></i></div>
+                    </li>
+                </ol>
                 
                 <div class="app-download">
                     <h4>Download the healow app now:</h4>
                     <div class="app-buttons">
-                        <a href="https://apps.apple.com/us/app/healow/id595012291" target="_blank" rel="noopener" class="app-btn">
-                            <i class="fab fa-apple"></i> App Store
+                        <a href="https://apps.apple.com/us/app/healow/id595012291" target="_blank" rel="noopener" class="app-btn" aria-label="Download Healow from the Apple App Store">
+                            <i class="fab fa-apple" aria-hidden="true"></i> App Store
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=com.ecw.healow" target="_blank" rel="noopener" class="app-btn">
-                            <i class="fab fa-google-play"></i> Google Play
+                        <a href="https://play.google.com/store/apps/details?id=com.ecw.healow" target="_blank" rel="noopener" class="app-btn" aria-label="Download Healow from the Google Play Store">
+                            <i class="fab fa-google-play" aria-hidden="true"></i> Google Play
                         </a>
                     </div>
                 </div>
@@ -247,52 +248,52 @@
                 
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header" aria-expanded="false">
+                        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-content-1">
                             <span>Does the healow app cost anything?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div class="accordion-content" id="faq-content-1" role="region" aria-hidden="true">
                             <p>No, the healow app is completely free. We provide this service to our patients to help them access their health records and make better healthcare decisions.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" aria-expanded="false">
+                        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-content-2">
                             <span>Is my information secure in the healow app?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div class="accordion-content" id="faq-content-2" role="region" aria-hidden="true">
                             <p>Yes, your information is completely secure. It is protected with a username and password/PIN number of your choice through SSL encryption.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" aria-expanded="false">
+                        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-content-3">
                             <span>How do I set up healow for multiple family members?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div class="accordion-content" id="faq-content-3" role="region" aria-hidden="true">
                             <p>To add another family member to your healow app, you need to log out completely and then select "Begin Now" to add another account. You can then switch between accounts as needed.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" aria-expanded="false">
+                        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-content-4">
                             <span>What if I forget my password or PIN?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
+                        <div class="accordion-content" id="faq-content-4" role="region" aria-hidden="true">
                             <p>If you forget your password or PIN, you can use the "Forgot Password" option on the login screen. You'll receive instructions to reset your credentials via the email address associated with your account.</p>
                         </div>
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" aria-expanded="false">
+                        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-content-5">
                             <span>Can I access healow from my computer?</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <div class="accordion-content">
-                            <p>Yes, you can access the healow patient portal through any web browser by visiting <a href="https://healow.com/apps/jsp/webview/index.jsp" target="_blank">healow.com</a>. The web version offers the same features as the mobile app.</p>
+                        <div class="accordion-content" id="faq-content-5" role="region" aria-hidden="true">
+                            <p>Yes, you can access the healow patient portal through any web browser by visiting <a href="https://healow.com/apps/jsp/webview/index.jsp" target="_blank" rel="noopener">healow.com</a>. The web version offers the same features as the mobile app.</p>
                         </div>
                     </div>
                 </div>
@@ -322,9 +323,9 @@
                     <h3>Khatib Family Practice</h3>
                     <p>Providing compassionate, comprehensive medical care to adults (21+) in Bullhead City and surrounding communities since 1998.</p>
                     <div class="contact">
-                        <p><i class="fas fa-phone"></i> (928) 763-9009</p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:9287639009">(928) 763-9009</a></p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
                     </div>
                 </div>
                 <div class="footer-section links">
@@ -349,11 +350,18 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <div class="social-media">
+                     <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" defer></script>
+    <!-- Development-only scripts -->
+    <script src="../js/logger.js" data-env="development" defer></script>
+    <script src="../js/security.js" data-env="development" defer></script>
 </body>
-</html> 
+</html>

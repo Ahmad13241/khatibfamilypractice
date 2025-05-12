@@ -3,26 +3,8 @@
  * Prepares the Khatib Family Practice website for production deployment
  */
 
-// Check for required modules before proceeding
-try {
-  require("fs");
-  require("path");
-  require("child_process");
-  require("chalk");
-  require("clean-css");
-  require("terser");
-  require("glob");
-} catch (err) {
-  console.error("ERROR: Missing required module - " + err.message);
-  console.error(
-    'Please run "npm install" to install all required dependencies.'
-  );
-  process.exit(1);
-}
-
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
 const chalk = require("chalk");
 const CleanCSS = require("clean-css");
 const { minify } = require("terser");
@@ -31,371 +13,226 @@ const glob = require("glob");
 // Define paths
 const ROOT_DIR = path.join(__dirname, "..");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
+const CSS_SRC_DIR = path.join(ROOT_DIR, "css");
+const JS_SRC_DIR = path.join(ROOT_DIR, "js");
 
 console.log(chalk.blue("Starting production build process..."));
 
-// 1. Clean previous builds
+// --- 1. Clean previous builds ---
 console.log("Cleaning previous builds...");
 if (fs.existsSync(DIST_DIR)) {
   fs.rmSync(DIST_DIR, { recursive: true, force: true });
 }
-fs.mkdirSync(DIST_DIR);
+fs.mkdirSync(DIST_DIR, { recursive: true });
+fs.mkdirSync(path.join(DIST_DIR, "css"), { recursive: true });
+fs.mkdirSync(path.join(DIST_DIR, "js"), { recursive: true });
+fs.mkdirSync(path.join(DIST_DIR, "pages"), { recursive: true });
+fs.mkdirSync(path.join(DIST_DIR, "images"), { recursive: true });
+fs.mkdirSync(path.join(DIST_DIR, "forms"), { recursive: true });
 
-// 2. Copy all static files
+
+// --- 2. Copy static files (HTML, images, forms, etc.) ---
 console.log("Copying static files...");
-const copyDirectories = ["css", "images", "pages", "js", "forms"];
-const copyFiles = ["index.html", "favicon.ico", "robots.txt", "sitemap.xml"];
+const copyFilesAndDirs = [
+    { type: 'dir', src: 'images', dest: 'images' },
+    { type: 'dir', src: 'forms', dest: 'forms' },
+    { type: 'file', src: 'index.html', dest: 'index.html' },
+    { type: 'file', src: 'netlify.toml', dest: 'netlify.toml' },
+    { type: 'file', src: 'robots.txt', dest: 'robots.txt' },
+    { type: 'file', src: 'sitemap.xml', dest: 'sitemap.xml' },
+    // Favicon files from images/favicon
+    { type: 'dir', src: 'images/favicon', dest: 'images/favicon' }
+];
 
-// Copy directories
-copyDirectories.forEach((dir) => {
-  const sourcePath = path.join(ROOT_DIR, dir);
-  const destPath = path.join(DIST_DIR, dir);
-
-  if (fs.existsSync(sourcePath)) {
-    fs.mkdirSync(destPath, { recursive: true });
-    fs.cpSync(sourcePath, destPath, { recursive: true });
-    console.log(`  ✓ ${dir}/ directory copied`);
-  } else {
-    // Create directory even if source doesn't exist to prevent errors later
-    fs.mkdirSync(destPath, { recursive: true });
-    console.log(`  ! ${dir}/ directory created (source not found)`);
-  }
+// Copy HTML files from pages directory
+const pageHtmlFiles = glob.sync(path.join(ROOT_DIR, 'pages', '*.html'));
+pageHtmlFiles.forEach(htmlFile => {
+    copyFilesAndDirs.push({
+        type: 'file',
+        src: path.join('pages', path.basename(htmlFile)),
+        dest: path.join('pages', path.basename(htmlFile))
+    });
 });
 
-// Copy individual files
-copyFiles.forEach((file) => {
-  const sourcePath = path.join(ROOT_DIR, file);
-  const destPath = path.join(DIST_DIR, file);
 
-  if (fs.existsSync(sourcePath)) {
-    fs.copyFileSync(sourcePath, destPath);
-    console.log(`  ✓ ${file} copied`);
-  }
+copyFilesAndDirs.forEach(item => {
+    const sourcePath = path.join(ROOT_DIR, item.src);
+    const destPath = path.join(DIST_DIR, item.dest);
+    if (fs.existsSync(sourcePath)) {
+        if (item.type === 'dir') {
+            fs.cpSync(sourcePath, destPath, { recursive: true });
+            console.log(chalk.green(`  ✓ Directory copied: ${item.src} to ${item.dest}`));
+        } else {
+            fs.copyFileSync(sourcePath, destPath);
+            console.log(chalk.green(`  ✓ File copied: ${item.src} to ${item.dest}`));
+        }
+    } else {
+        console.warn(chalk.yellow(`  ! Source not found for copying: ${item.src}`));
+    }
 });
 
-// 3. CSS Minification and Bundling
+// --- 3. CSS Minification and Bundling ---
 console.log("Optimizing CSS files...");
-const cssFiles = glob.sync(path.join(DIST_DIR, "css", "**/*.css"));
+const cssFilesToBundle = glob.sync(path.join(CSS_SRC_DIR, "*.css")); // Bundle all CSS from source
+const cssBundlePath = path.join(DIST_DIR, "css", "main.bundle.css");
 
-if (cssFiles.length > 0) {
-  // Create a backup of the original files before minification
-  const cssOriginals = {};
-  cssFiles.forEach((cssFile) => {
-    cssOriginals[cssFile] = fs.readFileSync(cssFile, "utf8");
-  });
-
-  // First, create a bundled version of all CSS
-  const cssBundle = cssFiles.map((file) => cssOriginals[file]).join("\n");
-  const cssOutputPath = path.join(DIST_DIR, "css", "main.bundle.css");
-
-  // Minify the bundled CSS
-  const minifiedCssBundle = new CleanCSS({
-    level: 2, // Advanced optimization
-    compatibility: "ie10",
-    format: "keep-breaks",
-  }).minify(cssBundle);
-
-  fs.writeFileSync(cssOutputPath, minifiedCssBundle.styles);
-
-  // Report CSS optimization results
-  const originalCssSize = cssBundle.length;
-  const minifiedCssSize = minifiedCssBundle.styles.length;
-  const cssReduction = (
-    ((originalCssSize - minifiedCssSize) / originalCssSize) *
-    100
-  ).toFixed(1);
-  console.log(
-    `  ✓ CSS files bundled and minified into main.bundle.css (${cssReduction}% size reduction)`
-  );
-
-  // Minify individual CSS files as well
-  cssFiles.forEach((cssFile) => {
-    const content = cssOriginals[cssFile];
-    const minified = new CleanCSS({
-      level: 2,
-      compatibility: "ie10",
-    }).minify(content);
-
-    fs.writeFileSync(cssFile, minified.styles);
-    console.log(`  ✓ Minified ${path.basename(cssFile)}`);
-  });
-} else {
-  console.log("  ! No CSS files found to optimize");
-  // Create an empty bundle to prevent errors
-  fs.writeFileSync(path.join(DIST_DIR, "css", "main.bundle.css"), "");
-}
-
-// 4. JavaScript Minification and Bundling
-console.log("Optimizing JavaScript files...");
-const jsFiles = glob
-  .sync(path.join(DIST_DIR, "js", "**/*.js"))
-  .filter((file) => !file.includes("min.js"));
-
-// Function to minify and save JS
-async function optimizeJsFiles() {
-  // Create empty JS bundle if no files found
-  if (jsFiles.length === 0) {
-    console.log("  ! No JavaScript files found to optimize");
-    // Create an empty bundle to prevent errors
-    fs.writeFileSync(path.join(DIST_DIR, "js", "main.bundle.js"), "");
-    return;
-  }
-
-  // Create a backup of the original files before minification
-  const jsOriginals = {};
-  jsFiles.forEach((jsFile) => {
-    jsOriginals[jsFile] = fs.readFileSync(jsFile, "utf8");
-  });
-
-  // First, bundle all JS
-  const jsBundle = jsFiles.map((file) => jsOriginals[file]).join("\n");
-  const jsBundlePath = path.join(DIST_DIR, "js", "main.bundle.js");
-
-  try {
-    // Replace process.env.NODE_ENV with 'production' before minification
-    let processedJsBundle = jsBundle.replace(
-      /process\.env\.NODE_ENV/g,
-      "'production'"
-    );
-
-    // Minify the bundled JS
-    const minifiedBundle = await minify(processedJsBundle, {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-      mangle: true,
-      format: {
-        comments: false,
-      },
+if (cssFilesToBundle.length > 0) {
+    const cssSources = {};
+    cssFilesToBundle.forEach(file => {
+        cssSources[file] = { styles: fs.readFileSync(file, 'utf8') };
     });
 
-    fs.writeFileSync(jsBundlePath, minifiedBundle.code);
+    const minifiedCssOutput = new CleanCSS({
+        level: 2,
+        compatibility: 'ie10', // Adjust if needed
+        format: 'keep-breaks', // Optional for slight readability in bundled file
+        inline: ['none']
+    }).minify(cssSources);
 
-    // Report JS optimization results
-    const originalJsSize = jsBundle.length;
-    const minifiedJsSize = minifiedBundle.code.length;
-    const jsReduction = (
-      ((originalJsSize - minifiedJsSize) / originalJsSize) *
-      100
-    ).toFixed(1);
-    console.log(
-      `  ✓ JS files bundled and minified into main.bundle.js (${jsReduction}% size reduction)`
-    );
-
-    // Minify individual JS files
-    for (const jsFile of Object.keys(jsOriginals)) {
-      // Replace process.env.NODE_ENV with 'production' in each file
-      let processedJs = jsOriginals[jsFile].replace(
-        /process\.env\.NODE_ENV/g,
-        "'production'"
-      );
-
-      const minified = await minify(processedJs, {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-        mangle: true,
-        format: {
-          comments: false,
-        },
-      });
-
-      fs.writeFileSync(jsFile, minified.code);
-      console.log(`  ✓ Minified ${path.basename(jsFile)}`);
+    if (minifiedCssOutput.errors && minifiedCssOutput.errors.length > 0) {
+        minifiedCssOutput.errors.forEach(err => console.error(chalk.red(`  ✗ CSS Error: ${err}`)));
     }
-  } catch (err) {
-    console.error(`  ✗ Error during JavaScript optimization: ${err.message}`);
-    // Create an empty bundle to prevent errors
-    fs.writeFileSync(jsBundlePath, "");
-  }
+    if (minifiedCssOutput.warnings && minifiedCssOutput.warnings.length > 0) {
+        minifiedCssOutput.warnings.forEach(warn => console.warn(chalk.yellow(`  ! CSS Warning: ${warn}`)));
+    }
+
+    fs.writeFileSync(cssBundlePath, minifiedCssOutput.styles);
+    const originalCssSize = Object.values(cssSources).reduce((sum, src) => sum + src.styles.length, 0);
+    const minifiedCssSize = minifiedCssOutput.styles.length;
+    const cssReduction = originalCssSize > 0 ? (((originalCssSize - minifiedCssSize) / originalCssSize) * 100).toFixed(1) : "0.0";
+    console.log(chalk.green(`  ✓ CSS bundled and minified to css/main.bundle.css (${cssReduction}% reduction)`));
+} else {
+    console.warn(chalk.yellow("  ! No CSS files found in css/ to bundle."));
+    fs.writeFileSync(cssBundlePath, "/* No CSS files found */");
 }
 
-// 5. Create production server file
-console.log("Creating production server configuration...");
-const devServerPath = path.join(ROOT_DIR, "server.js");
-const prodServerPath = path.join(DIST_DIR, "server.js");
+// --- 4. JavaScript Minification and Bundling ---
+console.log("Optimizing JavaScript files...");
+const jsProductionFiles = [ // Explicitly list production JS files
+    path.join(JS_SRC_DIR, "main.js"),
+    path.join(JS_SRC_DIR, "mapLoader.js"),
+    // DO NOT include logger.js, security.js, cssLoader.js here
+].filter(fs.existsSync); // Ensure files exist
 
-let serverContent = fs.readFileSync(devServerPath, "utf-8");
+const jsBundlePath = path.join(DIST_DIR, "js", "main.bundle.js");
 
-// Create production version of server.js
-const productionServerContent = `/**
- * Khatib Family Practice Production Server
- */
+async function bundleAndMinifyJs() {
+    if (jsProductionFiles.length === 0) {
+        console.warn(chalk.yellow("  ! No production JavaScript files specified or found to bundle."));
+        fs.writeFileSync(jsBundlePath, "// No JS files bundled");
+        return;
+    }
 
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const path = require('path');
-const morgan = require('morgan');
+    const jsCode = {};
+    jsProductionFiles.forEach(file => {
+        jsCode[path.basename(file)] = fs.readFileSync(file, 'utf8');
+    });
 
-// Create Express app
-const app = express();
-const PORT = process.env.PORT || 3000;
+    try {
+        const minifiedResult = await minify(jsCode, {
+            compress: {
+                drop_console: true, // Remove console.* calls
+                drop_debugger: true,
+                // Define IS_DEVELOPMENT as false for production builds
+                // This effectively dead-code eliminates blocks guarded by `if (IS_DEVELOPMENT)`
+                global_defs: {
+                    "IS_DEVELOPMENT": false
+                },
+                // Handle the process.env.NODE_ENV check more robustly
+                // This attempts to replace the entire conditional check if possible
+                // or at least the process.env.NODE_ENV part
+                // Note: This might need refinement based on exact usage in main.js
+                evaluate: true, // Allow terser to evaluate constant expressions
+                
+            },
+            mangle: {
+                toplevel: true, // Mangle top-level variable and function names
+            },
+            format: {
+                comments: false, // Remove all comments
+            },
+            sourceMap: false, // No source maps for production bundle
+        });
 
-// Basic production logging - much simpler than development
-app.use(morgan('combined'));
-
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// Serve static files
-app.use(express.static(path.join(__dirname)));
-
-// Simple form submission endpoint
-app.post('/api/contact', (req, res) => {
-  // In production this would send an email or connect to a CRM
-  // For now just log minimally and return success
-  console.log('Contact form submission received');
-  res.status(200).json({ success: true, message: 'Form submitted successfully' });
-});
-
-// Basic error handling for production
-app.use((err, req, res, next) => {
-  console.error('Server Error:', err.message);
-  res.status(500).send('An error occurred. Please try again later.');
-});
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(\`Khatib Family Practice server running on port \${PORT}\`);
-});`;
-
-fs.writeFileSync(prodServerPath, productionServerContent);
-console.log("  ✓ Production server.js created");
-
-// 6. Create simplified package.json for production
-console.log("Creating production package.json...");
-const packageJson = require(path.join(ROOT_DIR, "package.json"));
-
-// Keep only production dependencies
-const prodPackage = {
-  name: packageJson.name,
-  version: packageJson.version,
-  description: packageJson.description,
-  main: "server.js",
-  scripts: {
-    start: "node server.js",
-  },
-  dependencies: {
-    "body-parser": "^1.20.2",
-    cors: "^2.8.5",
-    express: "^4.18.2",
-    morgan: "^1.10.0",
-  },
-};
-
-fs.writeFileSync(
-  path.join(DIST_DIR, "package.json"),
-  JSON.stringify(prodPackage, null, 2)
-);
-console.log("  ✓ Production package.json created");
-
-// 7. Process HTML files to use optimized assets
-console.log("Optimizing HTML files...");
-function processHtmlFiles(directory) {
-  const entries = fs.readdirSync(directory, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const fullPath = path.join(directory, entry.name);
-
-    if (entry.isDirectory()) {
-      processHtmlFiles(fullPath);
-    } else if (entry.name.endsWith(".html")) {
-      let content = fs.readFileSync(fullPath, "utf-8");
-
-      try {
-        // Remove development-only scripts
-        content = content.replace(
-          /<script.*?data-env="development".*?><\/script>/g,
-          ""
-        );
-
-        // Update CSS references to use the bundled version
-        content = content.replace(
-          /<link\s+rel="stylesheet"\s+href="(.*?)styles\.css".*?>/g,
-          (match, pathPrefix) => {
-            return `<link rel="stylesheet" href="${pathPrefix}main.bundle.css" media="screen">`;
-          }
-        );
-
-        // Update JS references to use the bundled version
-        content = content.replace(
-          /<script\s+src="(.*?)main\.js".*?><\/script>/g,
-          (match, pathPrefix) => {
-            return `<script src="${pathPrefix}main.bundle.js" defer></script>`;
-          }
-        );
-
-        // Add production-specific meta tags
-        if (content.includes("<head>")) {
-          const metaTags = `
-    <!-- Production environment -->
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Cache-Control" content="public, max-age=86400">`;
-          content = content.replace("<head>", "<head>" + metaTags);
+        if (minifiedResult.error) {
+            throw minifiedResult.error;
         }
 
-        // Simplified fix: don't modify the HTML attributes
-        // Since the original source has proper quotes, we should preserve them
-        // Lighthouse error likely comes from minification or other processing
+        fs.writeFileSync(jsBundlePath, minifiedResult.code);
 
-        fs.writeFileSync(fullPath, content);
-        console.log(`  ✓ Optimized ${entry.name}`);
-      } catch (err) {
-        console.error(`  ✗ Error optimizing ${entry.name}: ${err.message}`);
-      }
+        const originalJsSize = Object.values(jsCode).reduce((sum, code) => sum + code.length, 0);
+        const minifiedJsSize = minifiedResult.code.length;
+        const jsReduction = originalJsSize > 0 ? (((originalJsSize - minifiedJsSize) / originalJsSize) * 100).toFixed(1) : "0.0";
+        console.log(chalk.green(`  ✓ JS bundled and minified to js/main.bundle.js (${jsReduction}% reduction)`));
+
+    } catch (error) {
+        console.error(chalk.red("  ✗ Error during JavaScript optimization:"), error);
+        fs.writeFileSync(jsBundlePath, `// Error during JS optimization: ${error.message}`);
     }
-  }
 }
 
-// 8. Create a .env.production file
-console.log("Creating production environment file...");
-const envContent = `NODE_ENV=production
-PORT=3000
-LOGGING_ENABLED=false`;
+// --- 5. Process HTML files to use optimized assets ---
+function processHtmlFiles(directory) {
+    const htmlFiles = glob.sync(path.join(directory, "**/*.html"));
 
-fs.writeFileSync(path.join(DIST_DIR, ".env.production"), envContent);
-console.log("  ✓ .env.production created");
+    htmlFiles.forEach(htmlFile => {
+        console.log(chalk.cyan(`  Processing HTML: ${path.relative(DIST_DIR, htmlFile)}`));
+        let content = fs.readFileSync(htmlFile, "utf-8");
 
-// Execute asynchronous operations
-(async function () {
-  try {
-    // Run JS optimization
-    await optimizeJsFiles();
+        // Determine asset prefix (e.g., '../' for files in pages/)
+        const relativePath = path.relative(path.dirname(htmlFile), DIST_DIR);
+        let prefix = relativePath ? (relativePath.replace(/\\/g, '/') + '/').replace(/^\.\//, '') : '';
+        if (prefix === '/') prefix = ''; // For root files like index.html
 
-    // Process HTML files after JS/CSS optimization
-    processHtmlFiles(DIST_DIR);
+        // Remove development-only scripts marked with data-env="development"
+        content = content.replace(/<script[^>]+data-env="development"[^>]*><\/script>\s*/gi, '');
+        console.log(chalk.gray(`    Removed dev-only scripts.`));
 
-    // Complete the build
-    console.log(chalk.green("\nBuild completed successfully! ✓"));
-    console.log("\nAsset Optimization Results:");
+        // Remove individual CSS <link> tags (excluding critical inline <style>)
+        // This regex targets <link rel="stylesheet" href="[prefix]css/anyname.css">
+        content = content.replace(/<link\s+rel="stylesheet"\s+href="(?:\.\.\/)?css\/[^"]+\.css"[^>]*>\s*/gi, '');
+        // Remove preload links for CSS
+        content = content.replace(/<link\s+rel="preload"\s+href="(?:\.\.\/)?css\/[^"]+\.css"[^>]*as="style"[^>]*>\s*/gi, '');
+        console.log(chalk.gray(`    Removed individual CSS links.`));
+        
+        // Add the bundled CSS link inside <head> if not already (idempotent)
+        const bundleCssLinkTag = `<link rel="stylesheet" href="${prefix}css/main.bundle.css">`;
+        if (!content.includes(bundleCssLinkTag.replace('>', '')) && content.includes("</head>")) {
+            content = content.replace("</head>", `    ${bundleCssLinkTag}\n</head>`);
+            console.log(chalk.gray(`    Added bundled CSS link.`));
+        }
 
-    // Calculate and display total asset size reduction
-    function getFileSizeInKB(filePath) {
-      if (fs.existsSync(filePath)) {
-        const stats = fs.statSync(filePath);
-        return (stats.size / 1024).toFixed(2);
-      }
-      return "0.00";
+        // Remove individual JS <script> tags for files that are now bundled
+        const bundledJsFilesRegex = /(?:main|mapLoader)\.js/i; // Add other bundled JS filenames here
+        content = content.replace(new RegExp(`<script\\s+src="(\\.\\.\\/)?js\\/(${bundledJsFilesRegex.source})"[^>]*><\\/script>\\s*`, "gi"), (match, p1, p2) => {
+            console.log(chalk.gray(`    Removed individual JS script: js/${p2}`));
+            return '';
+        });
+        
+        // Add the bundled JS link before </body> if not already (idempotent)
+        const bundleJsLinkTag = `<script src="${prefix}js/main.bundle.js" defer></script>`;
+        if (!content.includes(bundleJsLinkTag.replace(' defer></script>', '')) && content.includes("</body>")) {
+            content = content.replace("</body>", `    ${bundleJsLinkTag}\n</body>`);
+            console.log(chalk.gray(`    Added bundled JS link.`));
+        }
+        
+        fs.writeFileSync(htmlFile, content);
+    });
+}
+
+
+// --- Main Build Execution ---
+(async () => {
+    try {
+        await bundleAndMinifyJs();
+        console.log("Processing HTML files...");
+        processHtmlFiles(DIST_DIR); // Process root and pages/ HTML files
+
+        console.log(chalk.green("\nBuild completed successfully! ✓"));
+        console.log("Production files are in the dist/ directory.");
+
+    } catch (error) {
+        console.error(chalk.red("\nBuild process failed:"), error);
+        process.exit(1);
     }
-
-    const bundledCss = path.join(DIST_DIR, "css", "main.bundle.css");
-    const bundledJs = path.join(DIST_DIR, "js", "main.bundle.js");
-
-    console.log(`CSS Bundle: ${getFileSizeInKB(bundledCss)} KB`);
-    console.log(`JS Bundle: ${getFileSizeInKB(bundledJs)} KB`);
-
-    console.log(chalk.yellow("\nTo deploy:"));
-    console.log(
-      "1. Upload the contents of the dist/ directory to your web server"
-    );
-    console.log("2. Install production dependencies: npm install --production");
-    console.log("3. Start the server: npm start\n");
-  } catch (err) {
-    console.error(chalk.red("Build failed:"), err);
-    process.exit(1);
-  }
 })();

@@ -17,7 +17,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
-    <link rel="canonical" href="https://khatibfamilypractice.com/pages/contact" />
+    <link rel="canonical" href="https://khatibfamilypractice.com/pages/contact.html" />
     
     <title>Contact Dr. Khatib | Schedule an Appointment in Bullhead City | Khatib Family Practice</title>
     <link rel="stylesheet" href="../css/styles.css">
@@ -79,18 +79,18 @@
             <div class="container">
                 <div class="contact-details">
                     <a href="tel:9287639009" class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         <span>(928) 763-9009</span>
                     </a>
                     <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
                        target="_blank" rel="noopener" class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
                     </a>
                 </div>
                 <div class="portal-access">
                     <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank" rel="noopener">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span>Patient Portal</span>
                     </a>
                 </div>
@@ -105,13 +105,13 @@
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
-                    <div class="mobile-toggle" role="button" aria-expanded="false" aria-label="Toggle navigation menu" tabindex="0">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list-contact" aria-label="Toggle navigation menu">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
+                    </button>
                     
-                    <ul class="nav-menu">
+                    <ul class="nav-menu" id="nav-menu-list-contact">
                         <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="resources.html" class="nav-link">Patient Resources</a></li>
@@ -124,191 +124,199 @@
         </div>
     </header>
 
-    <!-- Contact Section -->
-    <section class="contact-section" id="main-content">
-        <div class="container">
-            <div class="section-header">
-                <h1>Contact Khatib Family Practice in Bullhead City</h1>
-                <p>We're here to help with your healthcare needs</p>
-            </div>
-            
-            <div class="contact-intro">
-                <p>Thank you for your interest in Khatib Family Practice. Dr. Khatib and our skilled team in Bullhead City are committed to providing quality, attentive healthcare to adults (21+) throughout the Tri-State area. Whether you're a new or existing patient, please contact us with any questions or to schedule an appointment at our conveniently located office.</p>
-            </div>
-            
-            <div class="contact-methods">
-                <div class="contact-method">
-                    <div class="contact-icon" aria-hidden="true">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <h3>Call Us</h3>
-                    <p>Our friendly staff is available during office hours:</p>
-                    <p class="contact-highlight"><a href="tel:+19287639009" aria-label="Call us at (928) 763-9009">(928) 763-9009</a></p>
-                    <p>Fax: <span aria-label="Fax number: (928) 758-7538">(928) 758-7538</span></p>
-                </div>
-                
-                <div class="contact-method">
-                    <div class="contact-icon" aria-hidden="true">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Visit Us</h3>
-                    <p>2755 Silver Creek Road, Suite 109</p>
-                    <p>Bullhead City, AZ 86442</p>
-                    <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
-                       target="_blank" 
-                       rel="noopener" 
-                       class="btn btn-outline" 
-                       aria-label="Get directions to our office">Get Directions</a>
-                </div>
-                
-                <div class="contact-method">
-                    <div class="contact-icon" aria-hidden="true">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Office Hours</h3>
-                    <p><strong>Monday - Friday:</strong><br>8:00 AM - 5:00 PM</p>
-                    <p><strong>Lunch:</strong><br>12:00 PM - 1:00 PM</p>
-                    <p><strong>Saturday - Sunday:</strong><br>Closed</p>
-                </div>
-            </div>
-            
-            <!-- Contact Form Section -->
-            <div class="contact-form-wrapper">
+    <main id="main-content">
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
                 <div class="section-header">
-                    <h2>Send Us a Message</h2>
-                    <p>For general inquiries, feedback, or questions, please use the form below</p>
+                    <h1>Contact Khatib Family Practice in Bullhead City</h1>
+                    <p>We're here to help with your healthcare needs</p>
                 </div>
                 
-                <form id="contact-form" class="contact-form" data-netlify="true" name="contact" method="POST" netlify-honeypot="bot-field">
-                    <div class="form-group">
-                        <label for="name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="name" name="name" required aria-required="true">
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                            <span class="input-hint">Format: 123-456-7890</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject <span class="required">*</span></label>
-                        <select id="subject" name="subject" required aria-required="true">
-                            <option value="" disabled selected>Please select a subject</option>
-                            <option value="General Inquiry">General Inquiry</option>
-                            <option value="Billing Question">Billing Question</option>
-                            <option value="Insurance">Insurance Question</option>
-                            <option value="Feedback">Feedback</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message <span class="required">*</span></label>
-                        <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
-                    </div>
-                    
-                    <div class="form-group consent-check">
-                        <input type="checkbox" id="consent" name="consent" required aria-required="true">
-                        <label for="consent">I understand that this form is for non-urgent matters only. For appointments, please call (928) 763-9009 directly. <span class="required">*</span></label>
-                    </div>
-                    
-                    <!-- Netlify honeypot field for spam prevention -->
-                    <p class="hidden" style="position: absolute; left: -9999px;" aria-hidden="true">
-                        <label>
-                            Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" />
-                        </label>
-                    </p>
-                    
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                    
-                    <div class="form-disclaimer">
-                        <p><i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> This form is for general inquiries only. For faster service or to schedule an appointment, please call our office at <a href="tel:+19287639009">(928) 763-9009</a>.</p>
-                    </div>
-                </form>
-            </div>
-            
-            <!-- Appointment Information Section -->
-            <div id="appointment" class="contact-form-section">
-                <div class="section-header">
-                    <h2>Request an Appointment</h2>
-                    <p>Our dedicated Bullhead City team is ready to assist you with scheduling an appointment that fits your needs. For faster service, please call us directly at <a href="tel:9287639009">(928) 763-9009</a> during regular business hours to speak with our friendly staff.</p>
-                    <p>As a personalized practice by design, we offer greater flexibility, shorter wait times, and unhurried appointments—providing the care and attention you deserve right here in the Tri-State area.</p>
+                <div class="contact-intro">
+                    <p>Thank you for your interest in Khatib Family Practice. Dr. Khatib and our skilled team in Bullhead City are committed to providing quality, attentive healthcare to adults (21+) throughout the Tri-State area. Whether you're a new or existing patient, please contact us with any questions or to schedule an appointment at our conveniently located office.</p>
                 </div>
                 
-                <div class="contact-info-container">
-                    <div class="contact-info-box">
-                        <h3><i class="fas fa-calendar-check" aria-hidden="true"></i> How to Schedule</h3>
-                        <p>To schedule an appointment with Dr. Khatib, please call our office directly.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon" aria-hidden="true">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Call Us</h3>
+                        <p>Our friendly staff is available during office hours:</p>
                         <p class="contact-highlight"><a href="tel:+19287639009" aria-label="Call us at (928) 763-9009">(928) 763-9009</a></p>
-                        <p>Our staff will assist you in finding a convenient appointment time.</p>
-                        <p>For the quickest scheduling and to ensure we match you with the best time slot, please call our office directly rather than using the contact form above.</p>
+                        <p>Fax: <span aria-label="Fax number: (928) 758-7538">(928) 758-7538</span></p>
                     </div>
                     
-                    <div class="contact-info-box">
-                        <h3><i class="fas fa-user-plus" aria-hidden="true"></i> New Patients (21+ Only)</h3>
-                        <p>For your first appointment, please bring:</p>
-                        <ul>
-                            <li>Photo ID (must be 21 years or older)</li>
-                            <li>Insurance card</li>
-                            <li>Medical history</li>
-                            <li>Current medications list</li>
-                            <li>Previous medical records (if available)</li>
-                        </ul>
-                        <p>Please arrive 15 minutes early to complete paperwork.</p>
+                    <div class="contact-method">
+                        <div class="contact-icon" aria-hidden="true">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Visit Us</h3>
+                        <address>
+                            <p>2755 Silver Creek Road, Suite 109</p>
+                            <p>Bullhead City, AZ 86442</p>
+                        </address>
+                        <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442" 
+                           target="_blank" 
+                           rel="noopener" 
+                           class="btn btn-outline" 
+                           aria-label="Get directions to our office">Get Directions</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon" aria-hidden="true">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Office Hours</h3>
+                        <p><strong>Monday - Friday:</strong><br>8:00 AM - 5:00 PM</p>
+                        <p><strong>Lunch:</strong><br>12:00 PM - 1:00 PM</p>
+                        <p><strong>Saturday - Sunday:</strong><br>Closed</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Form Section -->
+                <div class="contact-form-wrapper">
+                    <div class="section-header">
+                        <h2>Send Us a Message</h2>
+                        <p>For general inquiries, feedback, or questions, please use the form below</p>
+                    </div>
+                    
+                    <form id="contact-form" class="contact-form" data-netlify="true" name="contact" method="POST" netlify-honeypot="bot-field">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+                        </div>
                         
-                        <p>Download and complete these forms before your first visit:</p>
-                        <ul class="resource-links">
-                            <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download"></i> Financial Policy</a></li>
-                            <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
-                            <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> New Patient Forms</a></li>
-                        </ul>
-                        <p class="form-instructions">Please print and complete these forms before your appointment, or arrive 15 minutes early to fill them out in our office.</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="tel">
+                                <span class="input-hint">Format: 123-456-7890</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject <span class="required">*</span></label>
+                            <select id="subject" name="subject" required aria-required="true">
+                                <option value="" disabled selected>Please select a subject</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Billing Question">Billing Question</option>
+                                <option value="Insurance">Insurance Question</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+                        </div>
+                        
+                        <div class="form-group consent-check">
+                            <input type="checkbox" id="consent" name="consent" required aria-required="true">
+                            <label for="consent">I understand that this form is for non-urgent matters only. For appointments, please call (928) 763-9009 directly. <span class="required">*</span></label>
+                        </div>
+                        
+                        <p class="form-hp" aria-hidden="true">
+                            <label>
+                                Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" />
+                            </label>
+                        </p>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        
+                        <div class="form-disclaimer">
+                            <p><i class="fas fa-exclamation-circle" aria-hidden="true"></i> <strong>Important:</strong> This form is for general inquiries only. For faster service or to schedule an appointment, please call our office at <a href="tel:+19287639009">(928) 763-9009</a>.</p>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Appointment Information Section -->
+                <div id="appointment" class="contact-form-section">
+                    <div class="section-header">
+                        <h2>Request an Appointment</h2>
+                        <p>Our dedicated Bullhead City team is ready to assist you with scheduling an appointment that fits your needs. For faster service, please call us directly at <a href="tel:9287639009">(928) 763-9009</a> during regular business hours to speak with our friendly staff.</p>
+                        <p>As a personalized practice by design, we offer greater flexibility, shorter wait times, and unhurried appointments—providing the care and attention you deserve right here in the Tri-State area.</p>
                     </div>
                     
-                    <div class="contact-info-box">
-                        <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Insurance & Billing</h3>
-                        <p>We accept many major insurance plans including (but not limited to):</p>
-                        <ul>
-                            <li>Medicare</li>
-                            <li>Blue Cross Blue Shield</li>
-                            <li>Aetna</li>
-                            <li>United Healthcare</li>
-                            <li>Cigna</li>
-                        </ul>
-                        <p>For billing questions, please call during office hours or <a href="#contact-form">use our contact form</a>.</p>
+                    <div class="contact-info-container">
+                        <div class="contact-info-box">
+                            <h3><i class="fas fa-calendar-check" aria-hidden="true"></i> How to Schedule</h3>
+                            <p>To schedule an appointment with Dr. Khatib, please call our office directly.</p>
+                            <p class="contact-highlight"><a href="tel:+19287639009" aria-label="Call us at (928) 763-9009">(928) 763-9009</a></p>
+                            <p>Our staff will assist you in finding a convenient appointment time.</p>
+                            <p>For the quickest scheduling and to ensure we match you with the best time slot, please call our office directly rather than using the contact form above.</p>
+                        </div>
+                        
+                        <div class="contact-info-box">
+                            <h3><i class="fas fa-user-plus" aria-hidden="true"></i> New Patients (21+ Only)</h3>
+                            <p>For your first appointment, please bring:</p>
+                            <ul>
+                                <li>Photo ID (must be 21 years or older)</li>
+                                <li>Insurance card</li>
+                                <li>Medical history</li>
+                                <li>Current medications list</li>
+                                <li>Previous medical records (if available)</li>
+                            </ul>
+                            <p>Please arrive 15 minutes early to complete paperwork.</p>
+                            
+                            <p>Download and complete these forms before your first visit:</p>
+                            <ul class="resource-links">
+                                <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download" aria-hidden="true"></i> Financial Policy</a></li>
+                                <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download" aria-hidden="true"></i> Records Request Form</a></li>
+                                <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download" aria-hidden="true"></i> New Patient Forms</a></li>
+                            </ul>
+                            <p class="form-instructions">Please print and complete these forms before your appointment, or arrive 15 minutes early to fill them out in our office.</p>
+                        </div>
+                        
+                        <div class="contact-info-box">
+                            <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Insurance & Billing</h3>
+                            <p>We accept many major insurance plans including (but not limited to):</p>
+                            <ul>
+                                <li>Medicare</li>
+                                <li>Blue Cross Blue Shield</li>
+                                <li>Aetna</li>
+                                <li>United Healthcare</li>
+                                <li>Cigna</li>
+                            </ul>
+                            <p>For billing questions, please call during office hours or <a href="#contact-form">use our contact form</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map Section -->
+                <div class="section-header">
+                    <h2>Find Us</h2>
+                    <p>Conveniently located in Bullhead City</p>
+                </div>
+                
+                <div class="map-container">
+                    <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
+                    <div class="map-placeholder" 
+                         role="button" 
+                         tabindex="0"
+                         aria-label="Load interactive map"
+                         data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus" 
+                         data-map-height="400"
+                         data-map-width="100%"
+                         data-map-title="Khatib Family Practice Location Map"
+                         data-map-aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442"
+                         data-map-sandbox="allow-scripts allow-same-origin allow-popups">
+                        <div class="map-placeholder-content">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <p>Click or press Enter to load map</p>
+                            <address class="map-address">Khatib Family Practice<br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</address>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Map Section -->
-            <div class="section-header">
-                <h2>Find Us</h2>
-                <p>Conveniently located in Bullhead City</p>
-            </div>
-            
-            <div class="map-container">
-                <!-- Map will be loaded by mapLoader.js -->
-                <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
-                <div class="map-placeholder" data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.5171632901583!2d-114.5733273!3d35.877888799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cf55de89e80001%3A0x4c7c33fbfdb81fcd!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442!5e0!3m2!1sen!2sus!4v1660000000000!5m2!1sen!2sus" 
-                      data-map-title="Khatib Family Practice Location Map"
-                      data-map-aria-label="Google Maps showing Khatib Family Practice location at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442"
-                      data-map-sandbox="allow-scripts allow-same-origin allow-popups">
-                    <div class="map-placeholder-content">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Click to load map</p>
-                        <p class="map-address">Khatib Family Practice<br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -345,14 +353,18 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <div class="social-media">
+                     <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/security.js"></script>
-    <script src="../js/mapLoader.js"></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/security.js" data-env="development" defer></script> <!-- Mark as dev-only -->
+    <script src="../js/mapLoader.js" defer></script>
     
     <!-- Page specific JavaScript -->
     <script>
@@ -365,66 +377,16 @@
                     const sectionTop = section.getBoundingClientRect().top;
                     const windowHeight = window.innerHeight;
                     
-                    // If section is in viewport
                     if (sectionTop < windowHeight * 0.85 && !section.classList.contains('animated')) {
                         section.classList.add('animated');
-                        section.style.opacity = '1';
+                        // CSS animations will handle opacity, so no need to set style.opacity here
                     }
                 });
             };
             
-            // Initialize animation on load
-            setTimeout(animateOnScroll, 100);
-            
-            // Continue to check on scroll
+            setTimeout(animateOnScroll, 100); // Initial check
             window.addEventListener('scroll', animateOnScroll);
-            
-            // Add hover pulse animation to contact phone numbers
-            const contactHighlights = document.querySelectorAll('.contact-highlight');
-            
-            contactHighlights.forEach(highlight => {
-                highlight.addEventListener('mouseenter', function() {
-                    this.style.animation = 'pulse 1s ease infinite';
-                });
-                
-                highlight.addEventListener('mouseleave', function() {
-                    this.style.animation = 'none';
-                });
-            });
-            
-            // Enhance download links with animated icon on hover
-            const downloadLinks = document.querySelectorAll('.download-link');
-            
-            downloadLinks.forEach(link => {
-                const icon = link.querySelector('i');
-                
-                link.addEventListener('mouseenter', function() {
-                    if (icon) {
-                        icon.style.transform = 'translateY(-3px)';
-                    }
-                });
-                
-                link.addEventListener('mouseleave', function() {
-                    if (icon) {
-                        icon.style.transform = 'translateY(0)';
-                    }
-                });
-            });
-            
-            // Form submission handling
-            const contactForm = document.getElementById('contact-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    // Form validation is handled by HTML5 validation
-                    // This is just for additional behavior
-                    const honeypot = document.getElementById('hp');
-                    if (honeypot && honeypot.value) {
-                        e.preventDefault();
-                        return false;
-                    }
-                });
-            }
         });
     </script>
 </body>
-</html> 
+</html>

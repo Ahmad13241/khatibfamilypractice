@@ -1,3 +1,4 @@
+<!-- pages/about.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,8 +313,8 @@
                         <figure class="gallery-item" role="group" aria-labelledby="caption-waiting">
                             <picture>
                                 <source srcset="../images/reception-room-2.webp" type="image/webp"> 
-                                <source srcset="../images/reception-room-2.jpg" type="image/jpeg"> 
-                                <img src="../images/reception-room-2.jpg" 
+                                <source srcset="../images/reception-room-2.jpeg" type="image/jpeg"> <!-- Changed jpg to jpeg -->
+                                <img src="../images/reception-room-2.jpeg" <!-- Changed jpg to jpeg -->
                                      alt="Comfortable patient waiting area in Khatib Family Practice with ample seating." 
                                      class="gallery-image" loading="lazy" width="400" height="250">
                             </picture>
@@ -386,7 +387,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>© 2025 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
                      <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
@@ -411,9 +412,7 @@
                     
                     if (sectionTop < windowHeight * 0.85 && !section.classList.contains('animated')) {
                         section.classList.add('animated');
-                        if (section.style.opacity !== '1') { // Avoid overriding CSS animation opacity
-                            section.style.opacity = '1';
-                        }
+                        // CSS animations handle opacity
                     }
                 });
             };

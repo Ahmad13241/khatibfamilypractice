@@ -1,16 +1,16 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "npm run build" # Tells Netlify how to build your site
+  publish = "dist"          # Tells Netlify which folder to deploy
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
+  force = false # Only if no other file matches
 
 # Ensure all deployed files keep their case sensitivity
 [build.processing]
-  skip_processing = true
+  skip_processing = true # Good for static sites
 
 # Set proper content type for HTML files
 [[headers]]
@@ -18,24 +18,25 @@
   [headers.values]
     Content-Type = "text/html; charset=UTF-8"
 
-# Forms handling
-[build.processing.html]
-  pretty_urls = true
-
-# Enable Netlify form detection & handling
-[build.environment]
-  NETLIFY_USE_YARN = "true"
-
-# Add security headers, allowing Netlify forms
+# Security Headers (Adjust CSP as needed)
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
-    Content-Security-Policy = "default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.google.com api.netlify.com; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com; frame-src https://www.google.com; connect-src 'self' api.netlify.com; form-action 'self';"
-    
-# Enable form submissions for contact forms
-[build.processing.forms]
-  # Process forms in HTML files that include the data-netlify="true" attribute
-  scan_html = true 
+    # Content-Security-Policy is critical but can be complex. Start restrictive and test.
+    # This is a more permissive example allowing Google Fonts, Font Awesome, Google Maps, and Netlify API.
+    # You might need to adjust it based on actual external resources.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.googletagmanager.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com *.google.com *.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://www.google.com https://healow.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com *.netlify.app;"
+    X-XSS-Protection = "1; mode=block" # For older browsers
+
+# Netlify Forms handling
+# This tells Netlify to process forms found in your HTML.
+# The form itself needs data-netlify="true" in its tag.
+# [build.processing.html] # Not needed if skip_processing = true
+#  pretty_urls = true # Optional: if you want clean URLs
+
+[build.environment]
+  NODE_ENV = "production" # Ensures build script runs in production mode
+  # NPM_VERSION = "8.19.3" # Specify if needed, Netlify usually uses a recent LTS

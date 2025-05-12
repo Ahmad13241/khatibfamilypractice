@@ -52,12 +52,10 @@
     </style>
     
     <!-- Non-critical CSS loaded asynchronously -->
-    <link rel="preload" href="css/styles.css?v=20250325" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/styles.css?v=20250325"></noscript>
+    <noscript></noscript>
     
     <!-- Homepage-specific CSS -->
-    <link rel="preload" href="css/index.css?v=20250325" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.css?v=20250325"></noscript>
+    <noscript></noscript>
     
     <!-- Favicon -->
     <link rel="icon" href="images/favicon/favicon.ico">
@@ -90,7 +88,7 @@
     </noscript>
     
     <!-- CSS Loader utility to handle asynchronous CSS loading -->
-    <script src="js/cssLoader.js" data-env="development" defer></script> <!-- Mark as dev-only -->
+    <!-- Mark as dev-only -->
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -181,6 +179,7 @@
       ]
     }
     </script>
+    <link rel="stylesheet" href="css/main.bundle.css">
 </head>
 <body>
     <!-- Skip to content link for accessibility -->
@@ -485,14 +484,9 @@
     </footer>
 
     <!-- Main JavaScript -->
-    <script src="js/main.js" defer></script>
-    
     <!-- Map Loader for lazy loading Google Maps -->
-    <script src="js/mapLoader.js" defer></script>
-    
     <!-- Development-only scripts, build process should remove these -->
-    <script src="js/logger.js" data-env="development" defer></script>
-    <script src="js/security.js" data-env="development" defer></script>
+        <script src="js/main.bundle.js" defer></script>
 </body>
 </html>
 

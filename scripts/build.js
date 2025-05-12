@@ -36,7 +36,6 @@ console.log("Copying static files...");
 const copyFilesAndDirs = [
     { type: 'dir', src: 'images', dest: 'images' },
     { type: 'dir', src: 'forms', dest: 'forms' },
-    { type: 'dir', src: 'css', dest: 'css' }, // Explicitly copy CSS directory
     { type: 'file', src: 'index.html', dest: 'index.html' },
     { type: 'file', src: 'netlify.toml', dest: 'netlify.toml' },
     { type: 'file', src: 'robots.txt', dest: 'robots.txt' },
@@ -72,9 +71,26 @@ copyFilesAndDirs.forEach(item => {
     }
 });
 
-// --- 3. CSS Minification and Bundling ---
+// --- 3. Copy CSS files individually first ---
+console.log("Copying CSS files...");
+// Fix: Construct glob pattern with forward slashes explicitly
+const cssSearchPattern = `${CSS_SRC_DIR.replace(/\\/g, '/')}/*.css`;
+const cssFiles = glob.sync(cssSearchPattern);
+
+if (cssFiles.length > 0) {
+    cssFiles.forEach(cssFile => {
+        const destPath = path.join(DIST_DIR, "css", path.basename(cssFile));
+        fs.copyFileSync(cssFile, destPath);
+        console.log(chalk.green(`  ✓ CSS file copied: ${path.basename(cssFile)}`));
+    });
+} else {
+    console.warn(chalk.yellow("  ! No CSS files found in css/ directory."));
+}
+
+// --- 4. CSS Minification and Bundling ---
 console.log("Optimizing CSS files...");
-const cssFilesToBundle = glob.sync(path.join(CSS_SRC_DIR, "*.css")); // Bundle all CSS from source
+// Now bundle from the DIST directory where we just copied the files
+const cssFilesToBundle = glob.sync(path.join(DIST_DIR, "css", "*.css").replace(/\\/g, '/')); // Ensure forward slashes here too
 const cssBundlePath = path.join(DIST_DIR, "css", "main.bundle.css");
 
 if (cssFilesToBundle.length > 0) {
@@ -103,11 +119,11 @@ if (cssFilesToBundle.length > 0) {
     const cssReduction = originalCssSize > 0 ? (((originalCssSize - minifiedCssSize) / originalCssSize) * 100).toFixed(1) : "0.0";
     console.log(chalk.green(`  ✓ CSS bundled and minified to css/main.bundle.css (${cssReduction}% reduction)`));
 } else {
-    console.warn(chalk.yellow("  ! No CSS files found in css/ to bundle."));
+    console.warn(chalk.yellow("  ! No CSS files found to bundle."));
     fs.writeFileSync(cssBundlePath, "/* No CSS files found */");
 }
 
-// --- 4. JavaScript Minification and Bundling ---
+// --- 5. JavaScript Minification and Bundling ---
 console.log("Optimizing JavaScript files...");
 const jsProductionFiles = [ // Explicitly list production JS files
     path.join(JS_SRC_DIR, "main.js"),
@@ -144,7 +160,7 @@ async function bundleAndMinifyJs() {
                 // or at least the process.env.NODE_ENV part
                 // Note: This might need refinement based on exact usage in main.js
                 evaluate: true, // Allow terser to evaluate constant expressions
-                
+
             },
             mangle: {
                 toplevel: true, // Mangle top-level variable and function names
@@ -172,9 +188,9 @@ async function bundleAndMinifyJs() {
     }
 }
 
-// --- 5. Process HTML files to use optimized assets ---
+// --- 6. Process HTML files to use optimized assets ---
 function processHtmlFiles(directory) {
-    const htmlFiles = glob.sync(path.join(directory, "**/*.html"));
+    const htmlFiles = glob.sync(path.join(directory, "**/*.html").replace(/\\/g, '/')); // Ensure forward slashes
 
     htmlFiles.forEach(htmlFile => {
         console.log(chalk.cyan(`  Processing HTML: ${path.relative(DIST_DIR, htmlFile)}`));
@@ -190,12 +206,12 @@ function processHtmlFiles(directory) {
         console.log(chalk.gray(`    Removed dev-only scripts.`));
 
         // Remove individual CSS <link> tags (excluding critical inline <style>)
-        // This regex targets <link rel="stylesheet" href="[prefix]css/anyname.css">
-        content = content.replace(/<link\s+rel="stylesheet"\s+href="(?:\.\.\/)?css\/[^"]+\.css"[^>]*>\s*/gi, '');
+        // Updated regex to handle potential ../ prefix and query strings
+        content = content.replace(/<link\s+rel="stylesheet"\s+href="(?:\.\.\/)?css\/[^"?]+\.css(?:\?[^"]*)?"[^>]*>\s*/gi, '');
         // Remove preload links for CSS
-        content = content.replace(/<link\s+rel="preload"\s+href="(?:\.\.\/)?css\/[^"]+\.css"[^>]*as="style"[^>]*>\s*/gi, '');
+        content = content.replace(/<link\s+rel="preload"\s+href="(?:\.\.\/)?css\/[^"?]+\.css(?:\?[^"]*)?"[^>]*as="style"[^>]*>\s*/gi, '');
         console.log(chalk.gray(`    Removed individual CSS links.`));
-        
+
         // Add the bundled CSS link inside <head> if not already (idempotent)
         const bundleCssLinkTag = `<link rel="stylesheet" href="${prefix}css/main.bundle.css">`;
         if (!content.includes(bundleCssLinkTag.replace('>', '')) && content.includes("</head>")) {
@@ -209,14 +225,14 @@ function processHtmlFiles(directory) {
             console.log(chalk.gray(`    Removed individual JS script: js/${p2}`));
             return '';
         });
-        
+
         // Add the bundled JS link before </body> if not already (idempotent)
         const bundleJsLinkTag = `<script src="${prefix}js/main.bundle.js" defer></script>`;
         if (!content.includes(bundleJsLinkTag.replace(' defer></script>', '')) && content.includes("</body>")) {
             content = content.replace("</body>", `    ${bundleJsLinkTag}\n</body>`);
             console.log(chalk.gray(`    Added bundled JS link.`));
         }
-        
+
         fs.writeFileSync(htmlFile, content);
     });
 }

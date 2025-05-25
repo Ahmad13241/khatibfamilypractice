@@ -1,6 +1,9 @@
 # Khatib Family Practice robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /debug-headers
 
 # Sitemap location
 Sitemap: https://khatibfamilypractice.com/sitemap.xml 

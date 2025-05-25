@@ -15,8 +15,13 @@ const moment = require("moment");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const csrf = require("csurf");
+const csrf = require("csrf");
 const { v4: uuidv4 } = require("uuid");
+const createDOMPurify = require("dompurify");
+const { JSDOM } = require("jsdom");
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
 
 // Create Express app
 const app = express();
@@ -104,26 +109,34 @@ app.use(
 );
 
 // CSRF Protection - updated implementation
-const csrfProtection = csrf({
-  cookie: {
-    key: "_csrf",
-    httpOnly: true,
-    secure: isProduction,
-    sameSite: "strict",
-    path: "/",
-  },
+const csrfTokens = new csrf();
+
+// Generate and store CSRF secrets in session
+app.use((req, res, next) => {
+  if (!req.session.csrfSecret) {
+    req.session.csrfSecret = csrfTokens.secretSync();
+  }
+  next();
 });
 
-// Apply CSRF protection to all routes except some specific API endpoints
-app.use((req, res, next) => {
+// CSRF protection middleware
+const csrfProtection = (req, res, next) => {
   // Skip CSRF for certain routes if needed
   if (req.path === "/api/logs" && !isProduction) {
     return next();
   }
 
-  // Apply CSRF protection
-  csrfProtection(req, res, next);
-});
+  if (req.method === "GET" || req.method === "HEAD" || req.method === "OPTIONS") {
+    return next();
+  }
+
+  const token = req.body._csrf || req.headers["x-csrf-token"];
+  if (!token || !csrfTokens.verify(req.session.csrfSecret, token)) {
+    return res.status(403).json({ error: "Invalid CSRF token" });
+  }
+  
+  next();
+};
 
 // Parse application/json and application/x-www-form-urlencoded
 app.use(bodyParser.json());
@@ -324,8 +337,9 @@ app.use((req, res, next) => {
 });
 
 // API endpoint to get CSRF token
-app.get("/api/csrf-token", csrfProtection, (req, res) => {
-  return res.json({ csrfToken: req.csrfToken() });
+app.get("/api/csrf-token", (req, res) => {
+  const token = csrfTokens.create(req.session.csrfSecret);
+  return res.json({ csrfToken: token });
 });
 
 // Form submission endpoint - works in both environments
@@ -338,12 +352,21 @@ app.post("/api/contact", csrfProtection, (req, res) => {
     });
   }
 
-  // Sanitize inputs (basic implementation)
+  // Sanitize inputs with DOMPurify
   const sanitizedData = {
-    name: req.body.name.replace(/[<>]/g, ""),
-    email: req.body.email.replace(/[<>]/g, ""),
-    message: req.body.message ? req.body.message.replace(/[<>]/g, "") : "",
+    name: DOMPurify.sanitize(req.body.name.trim(), { ALLOWED_TAGS: [] }),
+    email: DOMPurify.sanitize(req.body.email.trim(), { ALLOWED_TAGS: [] }),
+    message: req.body.message ? DOMPurify.sanitize(req.body.message.trim(), { ALLOWED_TAGS: [] }) : "",
   };
+
+  // Additional email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(sanitizedData.email)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid email format",
+    });
+  }
 
   if (isProduction) {
     // In production, this would send an email or connect to a CRM

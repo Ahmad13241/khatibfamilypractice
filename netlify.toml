@@ -28,8 +28,8 @@
     # Content-Security-Policy is critical but can be complex. Start restrictive and test.
     # This is a more permissive example allowing Google Fonts, Font Awesome, Google Maps, and Netlify API.
     # You might need to adjust it based on actual external resources.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.googletagmanager.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com *.google.com *.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://www.google.com https://healow.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com *.netlify.app;"
-    X-XSS-Protection = "1; mode=block" # For older browsers
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.googletagmanager.com 'sha256-4qS6JuvqpYFYHPCBx0q2KwZFYO3xVSZFHgYvKNNS+4Q=' 'sha256-7fGhLe1nYkZxQvVNJNXtVKz6DnhRYv8qJ9LyKWPtjlQ='; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com *.google.com *.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://www.google.com https://healow.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com *.netlify.app; object-src 'none'; base-uri 'self'; form-action 'self';"
+
 
 # Netlify Forms handling
 # This tells Netlify to process forms found in your HTML.

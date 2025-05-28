@@ -644,9 +644,9 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js" defer></script>
-    <!-- Development-only scripts -->
-    <script src="../js/logger.js" data-env="development" defer></script>
-    <script src="../js/security.js" data-env="development" defer></script>
+    
+    
+    
     
     <!-- Testimonials Page Animations -->
     <script>
@@ -657,24 +657,45 @@
                 if ('IntersectionObserver' in window) {
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('animated');
+                            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                                // Small delay to ensure the element is visible
+                                setTimeout(() => {
+                                    entry.target.classList.add('animated');
+                                }, 100);
                                 observer.unobserve(entry.target);
                             }
                         });
-                    }, {threshold: 0.3});
+                    }, {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    });
                     
                     metricFills.forEach(metricFill => {
                         observer.observe(metricFill);
                     });
-                } else { // Fallback for older browsers
-                    metricFills.forEach(fill => {
-                        fill.classList.add('animated');
-                    });
+                } else { 
+                    // Fallback for older browsers
+                    setTimeout(() => {
+                        metricFills.forEach(fill => {
+                            fill.classList.add('animated');
+                        });
+                    }, 500);
                 }
             };
             
-            animateMetricBars(); // Call the function
+            // Initialize animations
+            animateMetricBars();
+            
+            // Force animation on bars that might be immediately visible
+            setTimeout(() => {
+                const visibleBars = document.querySelectorAll('.metric-fill:not(.animated)');
+                visibleBars.forEach(bar => {
+                    const rect = bar.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        bar.classList.add('animated');
+                    }
+                });
+            }, 1000);
         });
     </script>
 </body>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,8 +37,8 @@
     a:hover{color:var(--primary-dark)}
     img{max-width:100%;height:auto}
     .container{width:100%;max-width:var(--container-width);margin:0 auto;padding:0 var(--spacing-md)}
-    header{width:100%;z-index:100;background:var(--white);transition:all .3s ease-in-out}
-    .top-info-bar{background-color:var(--primary-color);color:var(--white);padding:var(--spacing-xs) 0}
+    header{width:100%;z-index:1000;background:var(--white);transition:all .3s ease-in-out;position:relative}
+    .top-info-bar{background-color:var(--primary-dark);color:var(--white);padding:var(--spacing-xs) 0}
     .contact-details,.portal-access{display:flex;align-items:center}
     .top-info-bar .container{display:flex;justify-content:space-between;align-items:center}
     .contact-item{color:var(--white);font-size:.9rem;display:flex;align-items:center;margin-right:var(--spacing-md);text-decoration:none}
@@ -45,17 +46,17 @@
     .main-navigation{padding:var(--spacing-sm) 0;border-bottom:1px solid rgba(0,0,0,.1);background-color:var(--white)}
     .nav-wrapper{display:flex;justify-content:space-between;align-items:center}
     .practice-logo{display:flex;align-items:center}
-    .skip-to-content{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background-color:var(--primary-color);color:var(--white);padding:.75rem 1.5rem;border-radius:var(--border-radius);font-weight:500;box-shadow:var(--shadow-md);transition:transform .2s ease-out}
-    .skip-to-content:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;overflow:visible;outline:3px solid var(--secondary-dark);outline-offset:3px;transform:translateY(0)}
+    .skip-to-content{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:99999;background-color:var(--primary-color);color:var(--white);padding:.75rem 1.5rem;border-radius:var(--border-radius);font-weight:600;box-shadow:var(--shadow-lg);text-decoration:underline;transition:transform .2s ease-out,opacity .2s ease-out}
+    .skip-to-content:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;overflow:visible;transform:translateY(0);opacity:1;outline:3px solid var(--secondary-dark) !important;outline-offset:3px !important}
     </style>
     
     <!-- Non-critical CSS loaded asynchronously -->
-    <link rel="preload" href="css/styles.css?v=1748454806214" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/styles.css?v=1748454806214"></noscript>
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
     
     <!-- Homepage-specific CSS -->
-    <link rel="preload" href="css/index.css?v=1748454806214" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.css?v=1748454806214"></noscript>
+    <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.css"></noscript>
     
     <!-- Favicon -->
     <link rel="icon" href="images/favicon/favicon.ico">
@@ -86,10 +87,7 @@
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     </noscript>
-    
-    <!-- CSS Loader utility to handle asynchronous CSS loading -->
-     
-    
+        
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -413,7 +411,7 @@
                     <p>Conveniently located in Bullhead City to serve the entire Tri-State area including Laughlin, Fort Mohave, and Mohave Valley</p>
                 </div>
                 <div class="location-container">
-                    <div class="map-container" data-map-processed="false">
+                    <div class="map-container">
                         <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
                         <div class="map-placeholder" 
                              role="button" 
@@ -490,9 +488,9 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                    <!-- TODO: Add actual social media links when available -->
-                    <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- Social media links are disabled as they are not set up -->
+                    <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
+                    <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -503,10 +501,7 @@
     
     <!-- Map Loader for lazy loading Google Maps -->
     <script src="js/mapLoader.js" defer></script>
-    
-    
-    
-    
 </body>
 </html>
+
 

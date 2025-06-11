@@ -12,7 +12,7 @@ const path = require("path");
 const fs = require("fs");
 const chalk = require("chalk");
 const moment = require("moment");
-const helmet = require("helmet");
+const helmet =require("helmet");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const csrf = require("csrf");
@@ -38,42 +38,40 @@ const isProduction = NODE_ENV === "production";
 // Remove X-Powered-By header first thing
 app.disable("x-powered-by");
 
-// Use Helmet for basic security headers - disable contentSecurityPolicy as we'll set it manually
+// Use Helmet for basic security headers
 app.use(
   helmet({
-    contentSecurityPolicy: false, // We'll define a more specific CSP below
-    xFrameOptions: { action: "deny" }, // Prevent your page from being framed
+    contentSecurityPolicy: false, // We define a more specific CSP below
+    xFrameOptions: { action: "deny" },
     hsts: isProduction ? { maxAge: 31536000, includeSubDomains: true } : false,
-    noSniff: true, // Prevent MIME sniffing
+    noSniff: true,
     referrerPolicy: { policy: "strict-origin-when-cross-origin" },
   })
 );
 
-// Custom security headers middleware with hardened setup
+// Custom security headers middleware with a Content Security Policy (CSP)
+// that matches the production CSP in netlify.toml for consistent behavior.
 const securityHeadersMiddleware = (req, res, next) => {
-  // Fixed Content Security Policy to address unsafe-inline, unsafe-eval, and wildcard issues
+  const inlineScriptSha = "'sha256-4qS6JuvqpYFYHPCBx0q2KwZFYO3xVSZFHgYvKNNS+4Q='"; // gtag inline script
+  const inlineStyleSha = "'sha256-4+5YjO1sw32dZp1i9TbrdFvTJk2rTf2nOupWd4h9c2I='"; // critical css inline style
+
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
-      "script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com; " +
-      "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " +
+      `script-src 'self' https://www.googletagmanager.com ${inlineScriptSha}; ` +
+      `style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com ${inlineStyleSha}; ` +
       "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; " +
-      "img-src 'self' data: https://maps.google.com https://maps.gstatic.com; " +
+      "img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com *.google.com *.gstatic.com; " +
       "frame-src https://www.google.com https://healow.com; " +
-      "connect-src 'self'; " +
+      "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; " +
       "object-src 'none'; " +
       "base-uri 'self'; " +
-      "form-action 'self'; " +
-      "frame-ancestors 'none'"
+      "form-action 'self'; "
   );
 
-  // Prevent clickjacking - being explicit even though helmet sets this
   res.setHeader("X-Frame-Options", "DENY");
-
-  // Prevent MIME type sniffing - being explicit even though helmet sets this
   res.setHeader("X-Content-Type-Options", "nosniff");
 
-  // Enable HSTS (HTTP Strict Transport Security)
   if (isProduction) {
     res.setHeader(
       "Strict-Transport-Security",
@@ -84,34 +82,37 @@ const securityHeadersMiddleware = (req, res, next) => {
   next();
 };
 
-// Apply security headers middleware early in the chain
+// Apply security headers middleware
 app.use(securityHeadersMiddleware);
 
-// Cookie parser middleware (required for session)
+// --- NOTE ON LOCAL DEV vs. PROD ---
+// The following session, cookie, and CSRF setup is for local development testing.
+// In the Netlify production environment, form submissions are handled by Netlify Forms,
+// and this server-side logic is not executed.
+
+// Cookie parser middleware
 app.use(cookieParser());
 
-// Session configuration - enhanced security
+// Session configuration
 app.use(
   session({
-    genid: () => uuidv4(), // Generate unique session IDs
+    genid: () => uuidv4(),
     secret: process.env.SESSION_SECRET || "khatib-practice-secure-session",
     resave: false,
-    saveUninitialized: false, // Prevent session creation until needed
+    saveUninitialized: false,
     cookie: {
-      httpOnly: true, // Prevents client-side JS from reading the cookie
-      secure: isProduction, // Secure in production only
-      sameSite: "strict", // Prevent CSRF
-      maxAge: 3600000, // 1 hour
-      path: "/", // Restrict to root path
-      domain: isProduction ? "khatibfamilypractice.com" : undefined, // Restrict to domain in production
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: "strict",
+      maxAge: 3600000,
+      path: "/",
+      domain: isProduction ? "khatibfamilypractice.com" : undefined,
     },
   })
 );
 
-// CSRF Protection - updated implementation
+// CSRF Protection
 const csrfTokens = new csrf();
-
-// Generate and store CSRF secrets in session
 app.use((req, res, next) => {
   if (!req.session.csrfSecret) {
     req.session.csrfSecret = csrfTokens.secretSync();
@@ -119,323 +120,124 @@ app.use((req, res, next) => {
   next();
 });
 
-// CSRF protection middleware
 const csrfProtection = (req, res, next) => {
-  // Skip CSRF for certain routes if needed
   if (req.path === "/api/logs" && !isProduction) {
     return next();
   }
-
   if (req.method === "GET" || req.method === "HEAD" || req.method === "OPTIONS") {
     return next();
   }
-
   const token = req.body._csrf || req.headers["x-csrf-token"];
   if (!token || !csrfTokens.verify(req.session.csrfSecret, token)) {
     return res.status(403).json({ error: "Invalid CSRF token" });
   }
-  
   next();
 };
 
-// Parse application/json and application/x-www-form-urlencoded
+// Parse request bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// CORS settings - more restrictive
+// CORS settings
 const corsOptions = {
-  origin: isProduction
-    ? "https://khatibfamilypractice.com"
-    : "http://localhost:3000",
+  origin: isProduction ? "https://khatibfamilypractice.com" : ["http://localhost:3000", "http://localhost:3001"], // Add BS proxy
   optionsSuccessStatus: 200,
   credentials: true,
   methods: ["GET", "POST"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "X-CSRF-Token",
-  ],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"],
 };
 app.use(cors(corsOptions));
 
-// Add debugging endpoint for headers (development only)
+// Development-only configurations
 if (!isProduction) {
   app.get("/debug-headers", (req, res) => {
-    const responseHeaders = {};
-
-    // Get headers that will be sent in the response
-    Object.keys(res._headers || {}).forEach((key) => {
-      responseHeaders[key] = res.getHeader(key);
-    });
-
     res.json({
-      headers: responseHeaders,
+      headers: res.getHeaders(),
       environment: NODE_ENV,
     });
   });
 
-  // =====================================
-  // DEVELOPMENT-ONLY CONFIGURATION
-  // =====================================
-
-  // Custom logging format for Morgan
-  morgan.token("coloredMethod", (req) => {
-    const method = req.method;
-    switch (method) {
-      case "GET":
-        return chalk.green(method);
-      case "POST":
-        return chalk.yellow(method);
-      case "PUT":
-        return chalk.blue(method);
-      case "DELETE":
-        return chalk.red(method);
-      default:
-        return chalk.gray(method);
-    }
-  });
-
+  morgan.token("coloredMethod", (req) => chalk[req.method === "GET" ? "green" : "yellow"](req.method));
   morgan.token("coloredStatus", (req, res) => {
     const status = res.statusCode;
-    if (status < 300) return chalk.green(status);
-    if (status < 400) return chalk.cyan(status);
-    if (status < 500) return chalk.yellow(status);
-    return chalk.red(status);
+    const color = status >= 500 ? "red" : status >= 400 ? "yellow" : status >= 300 ? "cyan" : "green";
+    return chalk[color](status);
   });
+  morgan.token("timestamp", () => chalk.gray(`[${moment().format("HH:mm:ss")}]`));
 
-  morgan.token("timestamp", () => {
-    return chalk.gray(`[${moment().format("YYYY-MM-DD HH:mm:ss")}]`);
-  });
-
-  // Custom middleware for detailed logging
   app.use(
-    morgan((tokens, req, res) => {
-      return [
+    morgan((tokens, req, res) =>
+      [
         tokens.timestamp(req, res),
         tokens.coloredMethod(req, res),
         tokens.url(req, res),
         tokens.coloredStatus(req, res),
-        tokens.res(req, res, "content-length") || "0",
-        "bytes",
+        tokens.res(req, res, "content-length"),
         "-",
-        tokens["response-time"](req, res),
+        tokens["response-time"](req, res, 3),
         "ms",
-      ].join(" ");
-    })
+      ].join(" ")
+    )
   );
 
-  // Development endpoint for client-side logs
   app.post("/api/logs", (req, res) => {
     const { level, message, details, timestamp } = req.body;
-
-    // Format the log output
-    let logMessage = `${chalk.gray(`[${timestamp}]`)} `;
-
-    switch (level) {
-      case "info":
-        logMessage += `${chalk.blue("INFO")} `;
-        break;
-      case "warn":
-        logMessage += `${chalk.yellow("WARN")} `;
-        break;
-      case "error":
-        logMessage += `${chalk.red("ERROR")} `;
-        break;
-      case "debug":
-        logMessage += `${chalk.magenta("DEBUG")} `;
-        break;
-      default:
-        logMessage += `${chalk.white("LOG")} `;
-    }
-
-    logMessage += `${message}`;
-
-    if (details) {
-      logMessage += `\n${chalk.gray("Details:")} ${JSON.stringify(
-        details,
-        null,
-        2
-      )}`;
-    }
-
-    console.log(logMessage);
-
+    let color = chalk.white;
+    if (level === "error") color = chalk.red;
+    if (level === "warn") color = chalk.yellow;
+    if (level === "info") color = chalk.blue;
+    console.log(`${chalk.gray(`[${timestamp}]`)} ${color(level.toUpperCase())}: ${message}`, details || "");
     res.status(200).send("Log received");
   });
-
-  // Track file access for detailed debugging
-  app.get("*", (req, res, next) => {
-    // Only track HTML, CSS, and JS files
-    const ext = path.extname(req.path);
-    if ([".html", ".css", ".js"].includes(ext)) {
-      console.log(chalk.cyan("File accessed:"), chalk.white(req.path));
-    }
-    next();
-  });
 } else {
-  // =====================================
-  // PRODUCTION-ONLY CONFIGURATION
-  // =====================================
-
-  // Simple production logging
   app.use(morgan("combined"));
 }
 
-// =====================================
-// SHARED CONFIGURATION (BOTH ENVIRONMENTS)
-// =====================================
-
-// Add explicit robots.txt handler before static files to ensure proper headers
-app.get("/robots.txt", (req, res) => {
-  res.type("text/plain");
-  res.send(`
-# Robots.txt for Khatib Family Practice
-User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-Disallow: /debug-headers
-  `);
-});
-
-// Serve static files with security options
+// Serve static files
 app.use(
   express.static(path.join(__dirname), {
-    etag: true, // Enable ETag for caching
-    lastModified: true, // Enable Last-Modified for caching
-    maxAge: isProduction ? "1d" : 0, // Cache static assets for 1 day in production only
-    setHeaders: (res, path) => {
-      // Add additional security headers for static files
-      res.setHeader("X-Content-Type-Options", "nosniff");
-
-      // Add Cache-Control header for specific file types
-      if (path.endsWith(".html")) {
-        // Don't cache HTML files
+    maxAge: isProduction ? "1d" : 0,
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".html")) {
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-      } else if (path.endsWith(".css") && !isProduction) {
-        // Don't cache CSS files in development
-        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-      } else if (
-        path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)
-      ) {
-        // Cache assets for 1 day in production, 0 seconds in development
-        res.setHeader(
-          "Cache-Control",
-          isProduction ? "public, max-age=86400" : "no-cache, must-revalidate"
-        );
       }
     },
   })
 );
 
-// Middleware to provide CSRF token to templates
-app.use((req, res, next) => {
-  // For API routes, we'll apply CSRF protection selectively
-  req.isApiRoute = req.path.startsWith("/api/");
-  next();
-});
-
-// API endpoint to get CSRF token
-app.get("/api/csrf-token", (req, res) => {
-  const token = csrfTokens.create(req.session.csrfSecret);
-  return res.json({ csrfToken: token });
-});
-
-// Form submission endpoint - works in both environments
+// Form submission endpoint (for local dev only)
 app.post("/api/contact", csrfProtection, (req, res) => {
-  // Validate the request
   if (!req.body.name || !req.body.email) {
-    return res.status(400).json({
-      success: false,
-      message: "Missing required fields",
-    });
+    return res.status(400).json({ success: false, message: "Missing required fields" });
   }
 
-  // Sanitize inputs with DOMPurify
   const sanitizedData = {
-    name: DOMPurify.sanitize(req.body.name.trim(), { ALLOWED_TAGS: [] }),
-    email: DOMPurify.sanitize(req.body.email.trim(), { ALLOWED_TAGS: [] }),
-    message: req.body.message ? DOMPurify.sanitize(req.body.message.trim(), { ALLOWED_TAGS: [] }) : "",
+    name: DOMPurify.sanitize(req.body.name.trim()),
+    email: DOMPurify.sanitize(req.body.email.trim()),
+    message: DOMPurify.sanitize(req.body.message.trim()),
   };
-
-  // Additional email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(sanitizedData.email)) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid email format",
-    });
-  }
-
-  if (isProduction) {
-    // In production, this would send an email or connect to a CRM
-    console.log("Contact form submission received");
-    // Log sanitized data only
-    res
-      .status(200)
-      .json({ success: true, message: "Form submitted successfully" });
-  } else {
-    // In development, provide more detailed logging
-    console.log(chalk.green("Contact form submission received:"));
-    console.log(chalk.cyan("Form data:"), sanitizedData);
-    res.status(200).json({
-      success: true,
-      message: "Form submitted successfully (development)",
-    });
-  }
+  
+  console.log(chalk.green("Local contact form submission received:"), sanitizedData);
+  res.status(200).json({ success: true, message: "Form submitted (dev)" });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  // Log the error internally
   const errorId = uuidv4();
-
-  if (isProduction) {
-    // Simple generic error for production - no details exposed
-    console.error(`Server Error [${errorId}]:`, err.message);
-    // Don't expose error details to client
-    res.status(500).json({
-      success: false,
-      message: "An error occurred. Please try again later.",
-      errorId: errorId, // Reference ID for support
-    });
-  } else {
-    // Detailed error for development
-    console.error(chalk.red(`Server Error [${errorId}]:`), err.stack);
-    res.status(500).json({
-      success: false,
-      message: "Something broke! Check the server logs for details.",
-      errorId: errorId,
-      error: err.message,
-    });
-  }
+  console.error(chalk.red(`Server Error [${errorId}]:`), err);
+  res.status(500).json({
+    success: false,
+    message: isProduction ? "An error occurred." : err.message,
+    errorId: errorId,
+  });
 });
 
 // Start the server
 app.listen(PORT, () => {
-  if (isProduction) {
-    console.log(
-      `Khatib Family Practice server running in production mode on port ${PORT}`
-    );
-  } else {
-    console.log("\n" + "-".repeat(50));
-    console.log(
-      `${chalk.green("✓")} ${chalk.bold(
-        "Khatib Family Practice Development Server"
-      )}`
-    );
-    console.log(
-      `${chalk.green("✓")} ${chalk.white("Server running at:")} ${chalk.cyan(
-        `http://localhost:${PORT}`
-      )}`
-    );
-    console.log(
-      `${chalk.green("✓")} ${chalk.white("Comprehensive logging enabled")}`
-    );
-    console.log(
-      `${chalk.green("✓")} ${chalk.white("Security measures enabled")}`
-    );
-    console.log("-".repeat(50) + "\n");
-  }
+  console.log("\n" + "-".repeat(50));
+  console.log(chalk.green.bold("Khatib Family Practice Server"));
+  console.log(`  ${chalk.white("Status:")} ${chalk.cyan("Running")}`);
+  console.log(`  ${chalk.white("Mode:")}   ${chalk.yellow(NODE_ENV)}`);
+  console.log(`  ${chalk.white("URL:")}    ${chalk.cyan(`http://localhost:${PORT}`)}`);
+  console.log("-".repeat(50) + "\n");
 });

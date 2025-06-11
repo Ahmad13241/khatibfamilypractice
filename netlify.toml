@@ -18,25 +18,18 @@
   [headers.values]
     Content-Type = "text/html; charset=UTF-8"
 
-# Security Headers (Adjust CSP as needed)
+# Security Headers
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
-    # Content-Security-Policy is critical but can be complex. Start restrictive and test.
-    # This is a more permissive example allowing Google Fonts, Font Awesome, Google Maps, and Netlify API.
-    # You might need to adjust it based on actual external resources.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://maps.googleapis.com https://www.googletagmanager.com 'sha256-4qS6JuvqpYFYHPCBx0q2KwZFYO3xVSZFHgYvKNNS+4Q=' 'sha256-7fGhLe1nYkZxQvVNJNXtVKz6DnhRYv8qJ9LyKWPtjlQ='; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com *.google.com *.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://www.google.com https://healow.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com *.netlify.app; object-src 'none'; base-uri 'self'; form-action 'self';"
-
-
-# Netlify Forms handling
-# This tells Netlify to process forms found in your HTML.
-# The form itself needs data-netlify="true" in its tag.
-# [build.processing.html] # Not needed if skip_processing = true
-#  pretty_urls = true # Optional: if you want clean URLs
+    # Content-Security-Policy:
+    # - Fixed script-src to add Google Tag Manager and fixed style-src to allow critical inline styles.
+    # - Fixed connect-src to allow Google Analytics to send data.
+    # - Removed unused SHA hash.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-4qS6JuvqpYFYHPCBx0q2KwZFYO3xVSZFHgYvKNNS+4Q='; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'sha256-4+5YjO1sw32dZp1i9TbrdFvTJk2rTf2nOupWd4h9c2I='; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com *.google.com *.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://www.google.com https://healow.com; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self';"
 
 [build.environment]
-  NODE_ENV = "production" # Ensures build script runs in production mode
-  # NPM_VERSION = "8.19.3" # Specify if needed, Netlify usually uses a recent LTS
+  NODE_ENV = "production"

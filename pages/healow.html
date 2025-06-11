@@ -13,9 +13,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Access your secure patient portal through Healow at Khatib Family Practice in Bullhead City, AZ. Manage your healthcare digitally with appointment scheduling, prescription refills, and secure messaging with Dr. Khatib's office.">
-    <!-- Security headers (CSP handled by server) -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
     <link rel="canonical" href="https://khatibfamilypractice.com/pages/healow.html" />
     
@@ -32,7 +29,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
     
-    <!-- Font Awesome for icons with SRI -->
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
           crossorigin="anonymous" 
@@ -82,13 +79,13 @@
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
                     
-                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list-healow" aria-label="Toggle navigation menu">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list" aria-label="Toggle navigation menu">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
                     
-                    <ul class="nav-menu" id="nav-menu-list-healow">
+                    <ul class="nav-menu" id="nav-menu-list">
                         <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="resources.html" class="nav-link">Patient Resources</a></li>
@@ -185,36 +182,36 @@
                     <p>Setting up your healow account is easy and only takes a few minutes. Once set up, you'll have secure access to your health information anytime, anywhere.</p>
                 </div>
                 
-                <ol class="process-steps"> <!-- Changed div to ol for semantic list of steps -->
-                    <li class="step"> <!-- Changed div to li -->
+                <ol class="process-steps">
+                    <li class="step">
                         <div class="step-number" aria-hidden="true">1</div>
                         <h4>Download the healow App</h4>
                         <p>Get the free healow app from the App Store (iPhone) or Google Play (Android) on your mobile device.</p>
                         <div class="step-icon" aria-hidden="true"><i class="fas fa-mobile-alt"></i></div>
                     </li>
                     
-                    <li class="step"> <!-- Changed div to li -->
+                    <li class="step">
                         <div class="step-number" aria-hidden="true">2</div>
                         <h4>Create Your Account</h4>
                         <p>Enter your first name, last name, and date of birth to begin the account setup process.</p>
                         <div class="step-icon" aria-hidden="true"><i class="fas fa-user-plus"></i></div>
                     </li>
                     
-                    <li class="step"> <!-- Changed div to li -->
+                    <li class="step">
                         <div class="step-number" aria-hidden="true">3</div>
                         <h4>Find Our Practice</h4>
                         <p>Search for "Khatib Family Practice" or enter our practice code (DGAEAD) to connect with us.</p>
                         <div class="step-icon" aria-hidden="true"><i class="fas fa-search"></i></div>
                     </li>
                     
-                    <li class="step"> <!-- Changed div to li -->
+                    <li class="step">
                         <div class="step-number" aria-hidden="true">4</div>
                         <h4>Set Up Security</h4>
                         <p>Create a secure PIN to protect your health information and ensure only you can access your records.</p>
                         <div class="step-icon" aria-hidden="true"><i class="fas fa-lock"></i></div>
                     </li>
                     
-                    <li class="step"> <!-- Changed div to li -->
+                    <li class="step">
                         <div class="step-number" aria-hidden="true">5</div>
                         <h4>Start Using healow</h4>
                         <p>Log in to access all your health information and begin using the portal's convenient features.</p>
@@ -349,8 +346,8 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                     <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                     <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
+                     <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -358,8 +355,5 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js" defer></script>
-    
-    
-    
 </body>
 </html>

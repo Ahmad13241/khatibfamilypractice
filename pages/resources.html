@@ -13,20 +13,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore primary care services for adults at Khatib Family Practice in Bullhead City. Find information about preventive care, chronic disease management, and patient resources for residents of Bullhead City and surrounding communities.">
-    <!-- Security headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-
-    <link rel="canonical" href="https://khatibfamilypractice.com/pages/resources" />
+    
+    <link rel="canonical" href="https://khatibfamilypractice.com/pages/resources.html" />
 
     <title>Healthcare Services & Patient Resources | Khatib Family Practice in Bullhead City, AZ</title>
 
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
-    <!-- Critical CSS first -->
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/resources.css">
 
@@ -63,39 +55,24 @@
                 "@type": "MedicalService",
                 "name": "Adult Medicine",
                 "description": "Comprehensive healthcare for patients 21 and older, including annual physical examinations, treatment of acute illnesses and injuries, management of chronic conditions, and more.",
-                "provider": {
-                    "@id": "https://khatibfamilypractice.com/#organization"
-                },
-                "areaServed": {
-                    "@type": "City",
-                    "name": "Bullhead City, AZ"
-                },
+                "provider": { "@id": "https://khatibfamilypractice.com/#organization" },
+                "areaServed": { "@type": "City", "name": "Bullhead City, AZ" },
                 "serviceType": "Primary Care"
             },
             {
                 "@type": "MedicalService",
                 "name": "Preventive Care",
                 "description": "Preventive healthcare services including annual wellness visits, health risk assessments, age-appropriate screenings, immunizations, lifestyle and nutrition counseling, and more.",
-                "provider": {
-                    "@id": "https://khatibfamilypractice.com/#organization"
-                },
-                "areaServed": {
-                    "@type": "City",
-                    "name": "Bullhead City, AZ"
-                },
+                "provider": { "@id": "https://khatibfamilypractice.com/#organization" },
+                "areaServed": { "@type": "City", "name": "Bullhead City, AZ" },
                 "serviceType": "Preventive Medicine"
             },
             {
                 "@type": "MedicalService",
                 "name": "Chronic Disease Management",
                 "description": "Comprehensive management of chronic health conditions including cardiovascular conditions, metabolic disorders, respiratory conditions, and neurological issues through personalized care plans.",
-                "provider": {
-                    "@id": "https://khatibfamilypractice.com/#organization"
-                },
-                "areaServed": {
-                    "@type": "City",
-                    "name": "Bullhead City, AZ"
-                },
+                "provider": { "@id": "https://khatibfamilypractice.com/#organization" },
+                "areaServed": { "@type": "City", "name": "Bullhead City, AZ" },
                 "serviceType": "Chronic Disease Management"
             }
         ]
@@ -111,15 +88,13 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
 
-    <!-- Font Awesome loaded with high priority to prevent icon flickering -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Google Fonts loaded asynchronously -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" as="style"
-          onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    </noscript>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Skip to content link for accessibility -->
@@ -160,16 +135,16 @@
                         <span class="visually-hidden">Khatib Family Practice</span>
                     </a>
 
-                    <div class="mobile-toggle" role="button" aria-expanded="false" aria-label="Toggle navigation menu" tabindex="0">
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list" aria-label="Toggle navigation menu">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
+                    </button>
 
-                    <ul class="nav-menu">
+                    <ul class="nav-menu" id="nav-menu-list">
                         <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                        <li class="nav-item active"><a href="resources.html" class="nav-link">Patient Resources</a></li>
+                        <li class="nav-item active"><a href="resources.html" class="nav-link" aria-current="page">Patient Resources</a></li>
                         <li class="nav-item"><a href="healow.html" class="nav-link">Healow Portal Service</a></li>
                         <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
@@ -179,409 +154,343 @@
         </div>
     </header>
 
-    <!-- Patient Resources Section -->
-    <section class="resources-intro" id="main-content">
-        <div class="container">
-            <div class="section-header">
-                <h1>Patient Resources</h1>
-                <p>Comprehensive services for your healthcare needs</p>
-            </div>
-
-            <!-- Resources Navigation -->
-            <div class="resources-nav">
-                <div class="resources-nav-container">
-                    <a href="#new-patients" class="resource-nav-item">
-                        <i class="fas fa-file-medical"></i>
-                        <span>New Patient Forms</span>
-                    </a>
-                    <a href="#insurance" class="resource-nav-item">
-                        <i class="fas fa-hand-holding-medical"></i>
-                        <span>Insurance Information</span>
-                    </a>
+    <main id="main-content">
+        <!-- Patient Resources Section -->
+        <section class="resources-intro">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Patient Resources</h1>
+                    <p>Comprehensive services for your healthcare needs</p>
                 </div>
-            </div>
 
-            <!-- Family Medicine -->
-            <div id="family-medicine" class="service-detail">
-                <div class="service-content">
-                    <div class="service-icon">
-                        <i class="fas fa-user-md"></i>
+                <!-- Resources Navigation -->
+                <nav class="resources-nav" aria-label="Page Sections Navigation">
+                    <div class="resources-nav-container">
+                        <a href="#family-medicine" class="resource-nav-item">
+                            <i class="fas fa-user-md" aria-hidden="true"></i>
+                            <span>Adult Medicine</span>
+                        </a>
+                        <a href="#preventive-care" class="resource-nav-item">
+                            <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                            <span>Preventive Care</span>
+                        </a>
+                        <a href="#chronic-disease" class="resource-nav-item">
+                            <i class="fas fa-notes-medical" aria-hidden="true"></i>
+                            <span>Chronic Disease</span>
+                        </a>
+                        <a href="#new-patients" class="resource-nav-item">
+                            <i class="fas fa-file-medical" aria-hidden="true"></i>
+                            <span>New Patient Forms</span>
+                        </a>
+                        <a href="#insurance" class="resource-nav-item">
+                            <i class="fas fa-hand-holding-medical" aria-hidden="true"></i>
+                            <span>Insurance Info</span>
+                        </a>
                     </div>
-                    <div class="service-text">
-                        <h2>Personalized Adult Primary Care (21+) in Bullhead City</h2>
-                        
-                        <div class="service-intro">
-                            <p><strong>Focused exclusively on adult healthcare.</strong> Our Bullhead City practice provides comprehensive primary healthcare for adults 21 and older, allowing Dr. Khatib to establish lasting connections with each patient.</p>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Services Details Section -->
+        <section class="services-details">
+            <div class="container">
+                <!-- Family Medicine -->
+                <article id="family-medicine" class="service-detail" aria-labelledby="family-medicine-heading">
+                    <div class="service-content">
+                        <div class="service-icon" aria-hidden="true">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="service-text">
+                            <h2 id="family-medicine-heading">Personalized Adult Primary Care (21+) in Bullhead City</h2>
+                            
+                            <div class="service-intro">
+                                <p><strong>Focused exclusively on adult healthcare.</strong> Our Bullhead City practice provides comprehensive primary healthcare for adults 21 and older, allowing Dr. Khatib to establish lasting connections with each patient.</p>
+                            </div>
                             
                             <div class="practice-highlights">
                                 <div class="highlight-box">
-                                    <i class="fas fa-users"></i>
+                                    <i class="fas fa-users" aria-hidden="true"></i>
                                     <div>
                                         <h4>Dedicated Healthcare Partner</h4>
                                         <p>Your trusted medical advocate for all health needs</p>
                                     </div>
                                 </div>
                                 <div class="highlight-box">
-                                    <i class="fas fa-map-marker-alt"></i>
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                     <div>
                                         <h4>Serving the Tri-State Area</h4>
                                         <p>Bullhead City, Laughlin, Fort Mohave, and surrounding communities</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="service-features">
-                            <h3>Our Adult Medicine Services Include:</h3>
+
                             <div class="feature-grid">
                                 <div class="feature-item">
-                                    <i class="fas fa-calendar-check"></i>
+                                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
                                     <h4>Routine Care</h4>
                                     <p>Annual physical examinations and preventive screenings</p>
                                 </div>
                                 <div class="feature-item">
-                                    <i class="fas fa-first-aid"></i>
+                                    <i class="fas fa-first-aid" aria-hidden="true"></i>
                                     <h4>Acute Care</h4>
                                     <p>Treatment of illnesses, injuries, and urgent health concerns</p>
                                 </div>
                                 <div class="feature-item">
-                                    <i class="fas fa-chart-line"></i>
+                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
                                     <h4>Ongoing Management</h4>
                                     <p>Continuous care for chronic conditions and overall wellness</p>
                                 </div>
                             </div>
-                            <div class="service-expand">
-                                <div class="accordion-item">
-                                    <div class="accordion-header" tabindex="0" aria-expanded="false">
-                                        <span>See All Services</span>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <ul class="expanded-list">
-                                            <li>Annual physical examinations</li>
-                                            <li>Management of common illnesses (cold, flu, infections)</li>
-                                            <li>Minor injury evaluation and treatment</li>
-                                            <li>Management of chronic conditions</li>
-                                            <li>Preventive care and screenings</li>
-                                            <li>Health maintenance and wellness care</li>
-                                            <li>Referrals to trusted specialists in the Bullhead City area</li>
-                                            <li>Coordination of care with other healthcare providers</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/family-medicine.webp" type="image/webp">
-                        <img src="../images/family-medicine.jpg"
-                             alt="Dr. Khatib providing compassionate care to a family with members of different ages"
-                             class="service-img">
-                    </picture>
-                </div>
-            </div>
-
-            <!-- Preventive Care -->
-            <div id="preventive-care" class="service-detail">
-                <div class="service-content">
-                    <div class="service-icon">
-                        <i class="fas fa-heartbeat"></i>
+                    <div class="service-image">
+                        <picture>
+                            <source srcset="../images/family-medicine.webp" type="image/webp">
+                            <img src="../images/family-medicine.webp"
+                                 alt="Dr. Khatib providing compassionate care to an adult patient."
+                                 class="service-img" loading="lazy">
+                        </picture>
                     </div>
-                    <div class="service-text">
-                        <h2>Preventive Healthcare & Screenings in Bullhead City</h2>
-                        
-                        <div class="service-intro">
-                            <p><strong>Prevention is the foundation of good health.</strong> At Khatib Family Practice in Bullhead City, our preventive care approach helps you maintain optimal health through early detection and proactive health management.</p>
+                </article>
+
+                <!-- Preventive Care -->
+                <article id="preventive-care" class="service-detail" aria-labelledby="preventive-care-heading">
+                    <div class="service-content">
+                        <div class="service-icon" aria-hidden="true">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="service-text">
+                            <h2 id="preventive-care-heading">Preventive Healthcare & Screenings in Bullhead City</h2>
                             
+                            <div class="service-intro">
+                                <p><strong>Prevention is the foundation of good health.</strong> At Khatib Family Practice in Bullhead City, our preventive care approach helps you maintain optimal health through early detection and proactive health management.</p>
+                            </div>
+
                             <div class="key-benefits">
                                 <div class="benefit-highlight">
-                                    <i class="fas fa-search-plus"></i>
+                                    <i class="fas fa-search-plus" aria-hidden="true"></i>
                                     <span>Early detection when issues are most treatable</span>
                                 </div>
                                 <div class="benefit-highlight">
-                                    <i class="fas fa-user-shield"></i>
+                                    <i class="fas fa-user-shield" aria-hidden="true"></i>
                                     <span>Personalized care for Bullhead City adults</span>
                                 </div>
                                 <div class="benefit-highlight">
-                                    <i class="fas fa-chart-line"></i>
+                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
                                     <span>Proactive health management strategies</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="service-features">
+                            
                             <div class="feature-grid">
                                 <div class="feature-item">
-                                    <i class="fas fa-clipboard-check"></i>
+                                    <i class="fas fa-clipboard-check" aria-hidden="true"></i>
                                     <h4>Screenings & Assessments</h4>
-                                    <p>Age-appropriate screenings (e.g., blood pressure, cholesterol, diabetes, cancer screenings like mammograms/colonoscopies based on guidelines)</p>
+                                    <p>Age-appropriate screenings (e.g., blood pressure, cholesterol, diabetes, cancer screenings).</p>
                                 </div>
                                 <div class="feature-item">
-                                    <i class="fas fa-shield-virus"></i>
+                                    <i class="fas fa-shield-virus" aria-hidden="true"></i>
                                     <h4>Immunizations</h4>
-                                    <p>Vaccinations for important diseases (e.g., flu shots, pneumonia, shingles vaccines)</p>
+                                    <p>Vaccinations for important diseases (e.g., flu shots, pneumonia, shingles vaccines).</p>
                                 </div>
                                 <div class="feature-item">
-                                    <i class="fas fa-apple-alt"></i>
+                                    <i class="fas fa-apple-alt" aria-hidden="true"></i>
                                     <h4>Lifestyle Guidance</h4>
-                                    <p>Counseling on nutrition, exercise, weight management, and healthy habits</p>
-                                </div>
-                            </div>
-                            <div class="service-expand">
-                                <div class="accordion-item">
-                                    <div class="accordion-header" tabindex="0" aria-expanded="false">
-                                        <span>Learn About All Preventive Services</span>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <ul class="expanded-list">
-                                            <li>Annual wellness visits</li>
-                                            <li>Health risk assessments</li>
-                                            <li>Age-appropriate screenings (blood pressure, cholesterol, diabetes)</li>
-                                            <li>Cancer screenings (mammograms, colonoscopies, skin cancer checks)</li>
-                                            <li>Important vaccinations (flu, pneumonia, shingles, Tdap)</li>
-                                            <li>Lifestyle and nutrition counseling</li>
-                                            <li>Smoking cessation support</li>
-                                            <li>Weight management guidance</li>
-                                        </ul>
-                                    </div>
+                                    <p>Counseling on nutrition, exercise, weight management, and healthy habits.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/preventative-care.webp" type="image/webp">
-                        <img src="../images/preventative-care.jpg"
-                             alt="Healthcare provider discussing prevention strategies with a patient in a warm, comfortable setting"
-                             class="service-img">
-                    </picture>
-                </div>
-            </div>
-
-            <!-- Chronic Disease Management -->
-            <div id="chronic-disease" class="service-detail">
-                <div class="service-content">
-                    <div class="service-icon">
-                        <i class="fas fa-notes-medical"></i>
+                    <div class="service-image">
+                        <picture>
+                            <source srcset="../images/preventative-care.webp" type="image/webp">
+                            <img src="../images/preventative-care.webp"
+                                 alt="Healthcare provider discussing prevention strategies with a patient in a warm, comfortable setting."
+                                 class="service-img" loading="lazy">
+                        </picture>
                     </div>
-                    <div class="service-text">
-                        <h2>Managing Chronic Conditions in Bullhead City</h2>
-                        
-                        <div class="service-intro">
-                            <p><strong>Comprehensive care for long-term health conditions.</strong> Living with chronic health conditions presents unique challenges for adults in Bullhead City and surrounding communities.</p>
+                </article>
+
+                <!-- Chronic Disease Management -->
+                <article id="chronic-disease" class="service-detail" aria-labelledby="chronic-disease-heading">
+                    <div class="service-content">
+                        <div class="service-icon" aria-hidden="true">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <div class="service-text">
+                            <h2 id="chronic-disease-heading">Managing Chronic Conditions in Bullhead City</h2>
                             
+                            <div class="service-intro">
+                                <p><strong>Comprehensive care for long-term health conditions.</strong> Living with chronic health conditions presents unique challenges for adults in Bullhead City and surrounding communities.</p>
+                            </div>
+
                             <div class="care-promise">
                                 <div class="promise-item">
-                                    <i class="fas fa-user-md"></i>
+                                    <i class="fas fa-user-md" aria-hidden="true"></i>
                                     <div>
                                         <h4>Personalized Management Plans</h4>
                                         <p>Dr. Khatib creates tailored strategies for your specific condition and healthcare goals.</p>
                                     </div>
                                 </div>
                                 <div class="promise-item">
-                                    <i class="fas fa-hands-helping"></i>
+                                    <i class="fas fa-hands-helping" aria-hidden="true"></i>
                                     <div>
                                         <h4>Comprehensive Support</h4>
                                         <p>Ongoing care coordination to enhance your quality of life and health outcomes.</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="service-features">
+                            
                             <div class="feature-grid">
                                 <div class="feature-item">
-                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart" aria-hidden="true"></i>
                                     <h4>Cardiovascular Conditions</h4>
                                     <p>Hypertension, heart disease, and high cholesterol management</p>
                                 </div>
                                 <div class="feature-item">
-                                    <i class="fas fa-tint"></i>
+                                    <i class="fas fa-tint" aria-hidden="true"></i>
                                     <h4>Metabolic Disorders</h4>
                                     <p>Diabetes, thyroid disorders, and other metabolic conditions</p>
                                 </div>
                                 <div class="feature-item">
-                                    <i class="fas fa-lungs"></i>
+                                    <i class="fas fa-lungs" aria-hidden="true"></i>
                                     <h4>Respiratory Conditions</h4>
                                     <p>Asthma, COPD, and other chronic respiratory issues</p>
                                 </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-bone"></i>
-                                    <h4>Arthritis & Osteoporosis</h4>
-                                    <p>Management of joint pain, inflammation, and bone health</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-brain"></i>
-                                    <h4>Neurological Issues</h4>
-                                    <p>Migraine management and other neurological conditions</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-smile"></i>
-                                    <h4>Mental Health</h4>
-                                    <p>Depression/anxiety screening and coordination of care</p>
-                                </div>
-                            </div>
-                            <div class="care-approach">
-                                <h4>Our Management Approach:</h4>
-                                <p>Our approach to chronic disease management begins with a thorough understanding of your condition, health history, and lifestyle. Our individualized care model enables Dr. Khatib to provide detailed monitoring, careful medication management, and coordinated specialist care while maintaining consistent oversight of your health journey.</p>
                             </div>
                         </div>
                     </div>
+                    <div class="service-image">
+                        <picture>
+                            <source srcset="../images/chronic-care.webp" type="image/webp">
+                            <img src="../images/chronic-care.webp"
+                                 alt="Provider helping a patient monitor their chronic condition with care and attention."
+                                 class="service-img" loading="lazy">
+                        </picture>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- New Patient Information Section -->
+        <section id="new-patients" class="resource-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>New Patient Information (Adults 21+) - Bullhead City Practice</h2>
+                    <p>Everything you need to prepare for your first visit</p>
                 </div>
-                <div class="service-image">
-                    <picture>
-                        <source srcset="../images/chronic-care.jpg.webp" type="image/webp">
-                        <img src="../images/chronic-care.jpg"
-                             alt="Provider helping a patient monitor their chronic condition with care and attention"
-                             class="service-img">
-                    </picture>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <h3>New Patient Forms</h3>
+                        <p>Please complete these fillable PDF forms before your first appointment to save time during your visit. Dr. Khatib and our Bullhead City office provide medical care exclusively for adults age 21 and older, so all new patients must meet this age requirement.</p>
+                        <p class="form-instructions"><strong>How to complete:</strong> Please print and complete these forms and bring them to your first appointment. Alternatively, you may arrive 15 minutes early to complete them in our office.</p>
+                        <ul class="resource-links">
+                            <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download" aria-hidden="true"></i> Financial Policy</a></li>
+                            <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download" aria-hidden="true"></i> Records Request Form</a></li>
+                            <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download" aria-hidden="true"></i> New Patient Forms</a></li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Appointment Preparation</h3>
+                        <p>How to prepare for your first visit with Dr. Khatib:</p>
+                        <ul>
+                            <li>Bring your completed forms (or arrive 15 minutes early)</li>
+                            <li>Bring your insurance card and photo ID</li>
+                            <li>Bring a list of current medications including dosages</li>
+                            <li>Bring any relevant medical records or test results</li>
+                            <li>Prepare a list of questions you may have for the doctor</li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>Office Information</h3>
+                        <p>Our office is conveniently located in Bullhead City:</p>
+                        <p><strong>Address:</strong><br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+                        <p><strong>Phone:</strong> (928) 763-9009</p>
+                        <p><strong>Hours:</strong><br>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday - Sunday: Closed</p>
+                        <a href="contact.html" class="btn btn-secondary">View Map & Directions</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- New Patient Information Section -->
-    <section id="new-patients" class="resource-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>New Patient Information (Adults 21+) - Bullhead City Practice</h2>
-                <p>Everything you need to prepare for your first visit</p>
-            </div>
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-file-medical"></i>
-                    </div>
-                    <h3>New Patient Forms</h3>
-                    <p>Please complete these fillable PDF forms before your first appointment to save time during your visit. Dr. Khatib and our Bullhead City office provide medical care exclusively for adults age 21 and older, so all new patients must meet this age requirement.</p>
-                    <p class="form-instructions"><strong>How to complete:</strong> Please print and complete these forms and bring them to your first appointment. Alternatively, you may arrive 15 minutes early to complete them in our office.</p>
-                    <ul class="resource-links">
-                        <li><a href="../forms/financial-policy.pdf" class="download-link" download><i class="fas fa-download"></i> Financial Policy</a></li>
-                        <li><a href="../forms/records-request.pdf" class="download-link" download><i class="fas fa-download"></i> Records Request Form</a></li>
-                        <li><a href="../forms/office-policies.pdf" class="download-link" download><i class="fas fa-download"></i> New Patient Forms</a></li>
-                    </ul>
+        <!-- Insurance Information Section -->
+        <section id="insurance" class="resource-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Insurance Accepted at Our Bullhead City Office</h2>
+                    <p>Understanding your coverage and financial options</p>
                 </div>
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-clipboard-check"></i>
-                    </div>
-                    <h3>Appointment Preparation</h3>
-                    <p>How to prepare for your first visit with Dr. Khatib:</p>
-                    <ul>
-                        <li>Bring your completed forms (or arrive 15 minutes early to complete them)</li>
-                        <li>Bring your insurance card and photo ID</li>
-                        <li>Bring a list of current medications including dosages</li>
-                        <li>Bring any relevant medical records or test results</li>
-                        <li>Prepare a list of questions you may have for the doctor</li>
-                    </ul>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>Office Information</h3>
-                    <p>Our office is conveniently located in Bullhead City:</p>
-                    <p><strong>Address:</strong><br>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
-                    <p><strong>Phone:</strong> (928) 763-9009</p>
-                    <p><strong>Hours:</strong><br>Monday - Friday: 8:00 AM - 5:00 PM<br>Lunch: 12:00 PM - 1:00 PM<br>Saturday - Sunday: Closed</p>
-                    <a href="contact.html" class="btn btn-secondary">View Map & Directions</a>
-                </div>
-            </div>
-        </div>
-    </section>
+                <p class="insurance-intro">Khatib Family Practice accepts a wide variety of insurance plans for our Bullhead City patients. Below are some examples of major providers we work with. To confirm if we accept your specific insurance plan, please call our office directly at <strong>(928) 763-9009</strong> before your appointment.</p>
 
-    <!-- Insurance Information Section -->
-    <section id="insurance" class="resource-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Insurance Accepted at Our Bullhead City Office</h2>
-                <p>Understanding your coverage and financial options</p>
-            </div>
-            <p class="insurance-intro">Khatib Family Practice accepts a wide variety of insurance plans for our Bullhead City patients. Below are some examples of major providers we work with. To confirm if we accept your specific insurance plan, please call our office directly at <strong>(928) 763-9009</strong> before your appointment.</p>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <h3>Insurance Plans We Accept</h3>
+                        <p>We work with a wide range of insurance providers to ensure accessible care for our patients:</p>
+                        <div class="insurance-plans-grid">
+                            <div class="insurance-plan"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Medicare</span></div>
+                            <div class="insurance-plan"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Blue Cross Blue Shield</span></div>
+                            <div class="insurance-plan"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Aetna</span></div>
+                            <div class="insurance-plan"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Cigna</span></div>
+                            <div class="insurance-plan"><i class="fas fa-check-circle" aria-hidden="true"></i><span>UnitedHealthcare</span></div>
+                            <div class="insurance-plan"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Humana</span></div>
+                        </div>
+                    </div>
 
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-id-card"></i>
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3>Self-Pay Options</h3>
+                        <p>We offer affordable self-pay options for Bullhead City residents without insurance coverage. Our team is committed to making healthcare accessible for all adults in our community.</p>
+                        <div class="insurance-contact">
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                            <p>Call us at <strong>(928) 763-9009</strong> for more information.</p>
+                        </div>
+                        <a href="contact.html" class="btn btn-secondary">Contact Us About Insurance</a>
                     </div>
-                    <h3>Insurance Plans We Accept</h3>
-                    <p>We work with a wide range of insurance providers to ensure accessible care for our patients:</p>
-                    <div class="insurance-plans-grid">
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Medicare and Medicare Advantage</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Blue Cross Blue Shield</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Aetna</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Cigna</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>UnitedHealthcare</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Humana</span>
-                        </div>
-                        <div class="insurance-plan">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Tricare</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-dollar-sign"></i>
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Insurance FAQs</h3>
+                        <p>Answers to common questions about insurance coverage:</p>
+                        <ul>
+                            <li>We verify your insurance benefits before your appointment.</li>
+                            <li>Co-payments are collected at the time of service.</li>
+                            <li>Please bring your insurance card to every visit.</li>
+                            <li>Our staff can assist with filing claims and resolving billing issues.</li>
+                        </ul>
                     </div>
-                    <h3>Self-Pay Options</h3>
-                    <p>We offer affordable self-pay options for Bullhead City residents without insurance coverage. Our team is committed to making healthcare accessible for all adults in our community and will work with you to find payment solutions that fit your budget.</p>
-                    <div class="insurance-contact">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>Call us at <strong>(928) 763-9009</strong> for more information about our self-pay options.</p>
-                    </div>
-                    <a href="contact.html" class="btn btn-secondary">Contact Us About Insurance</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <h3>Insurance FAQs</h3>
-                    <p>Answers to common questions about insurance coverage at our practice:</p>
-                    <ul>
-                        <li>We verify your insurance benefits before your appointment</li>
-                        <li>Co-payments are collected at the time of service</li>
-                        <li>Please bring your insurance card to every visit</li>
-                        <li>We'll help you understand your coverage and benefits</li>
-                        <li>Our staff can assist with filing claims and resolving billing issues</li>
-                    </ul>
-                    <a href="contact.html#billing" class="btn btn-outline">Billing Questions</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Need any of our services?</h2>
-                <p>Our team is ready to help with all your family's healthcare needs.</p>
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn btn-primary">Contact Us for an Appointment</a>
-                    <a href="healow.html" class="btn btn-outline">Access the Healow Portal</a>
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Need any of our services?</h2>
+                    <p>Our team is ready to help with all your family's healthcare needs.</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary">Contact Us for an Appointment</a>
+                        <a href="healow.html" class="btn btn-outline">Access the Healow Portal</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -591,9 +500,9 @@
                     <h3>Khatib Family Practice</h3>
                     <p>Offering compassionate, comprehensive medical care to adults (21+) in Bullhead City and surrounding communities with a quarter-century of healthcare expertise.</p>
                     <div class="contact">
-                        <p><i class="fas fa-phone"></i> (928) 763-9009</p>
-                        <p><i class="fas fa-fax"></i> (928) 758-7538</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:9287639009">(928) 763-9009</a></p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442</p>
                     </div>
                 </div>
                 <div class="footer-section links">
@@ -617,174 +526,16 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <div class="social-media">
+                     <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
+                     <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-
-    <!-- Page specific JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sticky Navigation Handler
-            const resourcesNav = document.querySelector('.resources-nav');
-            const resourcesIntro = document.querySelector('.resources-intro');
-
-            if (resourcesNav && resourcesIntro) {
-                function handleScroll() {
-                    const introBottom = resourcesIntro.getBoundingClientRect().bottom;
-                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-
-                    // Only make sticky after scrolling past the intro section
-                    if (introBottom <= headerHeight) {
-                        resourcesNav.classList.add('sticky');
-                    } else {
-                        resourcesNav.classList.remove('sticky');
-                    }
-                }
-
-                window.addEventListener('scroll', handleScroll);
-                // Initialize on page load
-                handleScroll();
-            }
-
-            // --- REMOVED DUPLICATE ACCORDION SETUP ---
-            // The global main.js script now handles this.
-            // function setupAccordion() { ... }
-            // setupAccordion();
-            // --- END REMOVAL ---
-
-            // Animate elements on scroll
-            const animateOnScroll = function() {
-                const sections = document.querySelectorAll('.service-detail, .resource-section, .resource-card');
-
-                sections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-
-                    // If section is in viewport
-                    if (sectionTop < windowHeight * 0.85) {
-                        section.style.opacity = '1';
-                    }
-                });
-            };
-
-            // Initialize animation on load
-            animateOnScroll();
-
-            // Continue to check on scroll
-            window.addEventListener('scroll', animateOnScroll);
-
-            // Smooth scroll for resource navigation
-            const resourceLinks = document.querySelectorAll('.resource-nav-item');
-
-            resourceLinks.forEach(link => {
-                // Skip links that don't point to page anchors
-                if(!link.getAttribute('href') || !link.getAttribute('href').startsWith('#')) return;
-
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-                        const navHeight = (resourcesNav && resourcesNav.classList.contains('sticky')) ? resourcesNav.offsetHeight : 0;
-                        const offset = headerHeight + navHeight + 20; // Additional 20px padding
-
-                        window.scrollTo({
-                            top: targetElement.offsetTop - offset,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-
-    <!-- Mobile Navigation Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const resourcesNav = document.querySelector('.resources-nav');
-            if (!resourcesNav) return; // Exit if nav doesn't exist
-
-            // Create and add the mobile navigation toggle button
-            const toggleButton = document.createElement('button');
-            toggleButton.className = 'resources-nav-toggle';
-            toggleButton.innerHTML = '<i class="fas fa-bars"></i> Navigation Menu';
-            toggleButton.setAttribute('aria-label', 'Toggle navigation menu');
-            toggleButton.setAttribute('aria-expanded', 'false'); // Initial state
-
-            // Create a container for the toggle button
-            const toggleContainer = document.createElement('div');
-            toggleContainer.className = 'resources-nav-toggle-container';
-            toggleContainer.appendChild(toggleButton);
-
-            // Insert the toggle at the beginning of the navigation
-            resourcesNav.insertBefore(toggleContainer, resourcesNav.firstChild);
-
-            const navContainer = resourcesNav.querySelector('.resources-nav-container');
-            if (!navContainer) return; // Exit if inner container doesn't exist
-
-            // Function to update navigation state based on window width
-            function updateNavState() {
-                const isMobile = window.innerWidth <= 768;
-                if (isMobile) {
-                    resourcesNav.classList.add('collapsed');
-                    navContainer.setAttribute('aria-hidden', 'true'); // Hide content from screen readers when collapsed
-                    toggleButton.setAttribute('aria-expanded', 'false');
-                    toggleButton.innerHTML = '<i class="fas fa-bars"></i> Show Navigation';
-                } else {
-                    resourcesNav.classList.remove('collapsed');
-                    navContainer.removeAttribute('aria-hidden'); // Make content accessible on desktop
-                    toggleButton.setAttribute('aria-expanded', 'true');
-                    // Optionally hide the button on desktop if desired
-                    // toggleContainer.style.display = 'none';
-                }
-            }
-
-            // Toggle navigation when button is clicked
-            toggleButton.addEventListener('click', function() {
-                const isCollapsed = resourcesNav.classList.toggle('collapsed');
-                const isExpanded = !isCollapsed;
-
-                toggleButton.setAttribute('aria-expanded', String(isExpanded));
-                navContainer.setAttribute('aria-hidden', String(isCollapsed)); // Update accessibility state
-
-                // Change toggle button text based on state
-                toggleButton.innerHTML = isCollapsed ?
-                    '<i class="fas fa-bars"></i> Show Navigation' :
-                    '<i class="fas fa-times"></i> Hide Navigation';
-            });
-
-            // Handle window resize
-            window.addEventListener('resize', updateNavState);
-
-            // Add click event listeners to navigation links for mobile
-            const navLinks = document.querySelectorAll('.resource-nav-item');
-            navLinks.forEach(link => {
-                // Skip links that don't point to page anchors or are external
-                 if(!link.getAttribute('href') || !link.getAttribute('href').startsWith('#')) return;
-
-                link.addEventListener('click', function() {
-                    // Auto-collapse the navigation after clicking a link on mobile
-                    if (window.innerWidth <= 768) {
-                        setTimeout(function() {
-                            resourcesNav.classList.add('collapsed');
-                            navContainer.setAttribute('aria-hidden', 'true');
-                            toggleButton.setAttribute('aria-expanded', 'false');
-                            toggleButton.innerHTML = '<i class="fas fa-bars"></i> Show Navigation';
-                        }, 300); // Small delay to allow for smooth scrolling
-                    }
-                });
-            });
-
-            // Initial setup
-            updateNavState();
-        });
-    </script>
+    <script src="../js/main.js" defer></script>
 </body>
 </html>

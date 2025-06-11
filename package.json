@@ -9,13 +9,9 @@
     "bs": "browser-sync start --config bs-config.js",
     "dev:sync": "concurrently \"npm run dev\" \"npm run bs\"",
     "lint": "eslint js/*.js",
-    "logs:clear": "node scripts/clear-logs.js",
     "build": "node scripts/build.js",
     "start:prod": "NODE_ENV=production node server.js",
-    "deploy:prepare": "npm run build && git add dist/* && git commit -m \"Update build for deployment\" && git push origin master",
-    "fix:images": "node scripts/fix-image-refs.js",
-    "fix:deploy": "node scripts/deploy-fix.js",
-    "deploy:fix": "npm run fix:deploy && npm run build && git add . && git commit -m \"Fix deployment issues\" && git push origin master"
+    "deploy:fix": "node scripts/deploy-fix.js"
   },
   "keywords": [
     "healthcare",
@@ -27,8 +23,8 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "chalk": "^4.1.2",                     
-    "clean-css": "5.3.3",                   
+    "chalk": "^4.1.2",
+    "clean-css": "5.3.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "csrf": "^3.1.0",
@@ -36,11 +32,11 @@
     "jsdom": "^25.0.1",
     "express": "^4.18.2",
     "express-session": "^1.18.1",
-    "glob": "^11.0.1",                      
+    "glob": "^11.0.1",
     "helmet": "^8.1.0",
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
-    "terser": "^5.39.0",                     
+    "terser": "^5.39.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

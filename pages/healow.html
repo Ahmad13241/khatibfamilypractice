@@ -1,3 +1,4 @@
+<!-- //path: pages/healow.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +18,17 @@
     <link rel="canonical" href="https://khatibfamilypractice.com/pages/healow.html" />
     
     <title>Patient Portal Access | Khatib Family Practice | Bullhead City, AZ</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/healow.css">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- PERFORMANCE FIX: Asynchronously load stylesheets -->
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/styles.css"></noscript>
+    <link rel="preload" href="../css/healow.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/healow.css"></noscript>
     
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
@@ -30,15 +40,48 @@
     <link rel="manifest" href="../images/favicon/site.webmanifest">
     
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+          onload="this.onload=null;this.rel='stylesheet'"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
           crossorigin="anonymous" 
           referrerpolicy="no-referrer">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+              integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+              crossorigin="anonymous" 
+              referrerpolicy="no-referrer">
+    </noscript>
           
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+
+    <!-- SEO FIX: Added Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Healow Patient Portal",
+      "url": "https://khatibfamilypractice.com/pages/healow.html",
+      "description": "Information and access to the Healow Patient Portal for patients of Khatib Family Practice in Bullhead City, AZ.",
+      "mainEntity": {
+        "@type": "Service",
+        "name": "Healow Patient Portal Service",
+        "description": "A secure online service for patients of Khatib Family Practice to manage their healthcare. Features include scheduling appointments, requesting refills, viewing lab results, and secure messaging.",
+        "provider": {
+          "@type": "MedicalBusiness",
+          "name": "Khatib Family Practice",
+          "url": "https://khatibfamilypractice.com"
+        },
+        "serviceType": "Patient Portal",
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://healow.com/apps/jsp/webview/index.jsp",
+          "description": "Access the patient portal online or via mobile app."
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <!-- Skip to content link for accessibility -->
@@ -344,10 +387,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>&copy; 2024 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                     <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
-                     <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                     <!-- ACCESSIBILITY FIX: Replaced non-functional <a> tags with <span> tags to remove them from tab order -->
+                     <span role="img" aria-label="Facebook (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></span>
+                     <span role="img" aria-label="LinkedIn (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></span>
                 </div>
             </div>
         </div>

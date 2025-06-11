@@ -1,3 +1,4 @@
+<!-- //path: pages/contact.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +18,18 @@
     <link rel="canonical" href="https://khatibfamilypractice.com/pages/contact.html" />
     
     <title>Contact Dr. Khatib | Schedule an Appointment in Bullhead City | Khatib Family Practice</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/contact.css">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- PERFORMANCE FIX: Asynchronously load stylesheets -->
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/styles.css"></noscript>
+    <link rel="preload" href="../css/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/contact.css"></noscript>
+    
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
@@ -27,12 +38,17 @@
     <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
+    
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    </noscript>
     
     <!-- Schema.org structured data for ContactPage -->
     <script type="application/ld+json">
@@ -193,7 +209,7 @@
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
                                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="tel">
-                                <span class="input-hint">Format: 123-456-7890</span>
+                                <span class="input-hint">Format: 928-555-1234</span>
                             </div>
                         </div>
                         
@@ -349,10 +365,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>&copy; 2024 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                     <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
-                     <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                     <!-- ACCESSIBILITY FIX: Replaced non-functional <a> tags with <span> tags to remove them from tab order -->
+                     <span role="img" aria-label="Facebook (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></span>
+                     <span role="img" aria-label="LinkedIn (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></span>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+<!-- //path: pages/testimonials.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +18,18 @@
     <link rel="canonical" href="https://khatibfamilypractice.com/pages/testimonials.html" />
     
     <title>Patient Testimonials | Dr. Nadim Khatib | Khatib Family Practice Bullhead City</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/testimonials.css">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- PERFORMANCE FIX: Asynchronously load stylesheets -->
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/styles.css"></noscript>
+    <link rel="preload" href="../css/testimonials.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/testimonials.css"></noscript>
+
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
@@ -27,12 +38,77 @@
     <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
+    
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+
+    <!-- SEO FIX: Added Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Patient Testimonials for Dr. Nadim Khatib",
+      "url": "https://khatibfamilypractice.com/pages/testimonials.html",
+      "description": "A collection of patient reviews and testimonials for Dr. Nadim Khatib of Khatib Family Practice in Bullhead City, AZ.",
+      "mainEntity": [
+        {
+          "@type": "Review",
+          "reviewBody": "Dr Khatib and his wife, are just the best ever. Staff is also great... Always takes time to talk to you and help you understand what is going on with you.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Doris K."
+          },
+          "itemReviewed": {
+            "@type": "Physician",
+            "name": "Dr. Nadim Khatib",
+            "image": "https://khatibfamilypractice.com/images/dr-khatib-professional.webp",
+            "address": "2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442"
+          }
+        },
+        {
+          "@type": "Review",
+          "reviewBody": "I appreciate Dr. Khatib's attention to detail... listens carefully to all my concerns and answers my questions clearly. His explanations of medical conditions are thorough and easy to understand.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Denice B."
+          },
+          "itemReviewed": {
+            "@type": "Physician",
+            "name": "Dr. Nadim Khatib"
+          }
+        },
+        {
+          "@type": "Review",
+          "reviewBody": "Dr. Khatib takes time to listen to my concerns and thoroughly explains everything. His staff is friendly and appointments are never rushed. I completely trust his decisions.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Monica B."
+          },
+          "itemReviewed": {
+            "@type": "Physician",
+            "name": "Dr. Nadim Khatib"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Skip to content link for accessibility -->
@@ -313,10 +389,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>&copy; 2024 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                     <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
-                     <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                     <!-- ACCESSIBILITY FIX: Replaced non-functional <a> tags with <span> tags to remove them from tab order -->
+                     <span role="img" aria-label="Facebook (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></span>
+                     <span role="img" aria-label="LinkedIn (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></span>
                 </div>
             </div>
         </div>

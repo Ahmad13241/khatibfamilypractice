@@ -1,3 +1,4 @@
+<!-- //path: index.html -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -486,11 +487,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>© 2024 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                    <!-- Social media links are disabled as they are not set up -->
-                    <a aria-label="Khatib Family Practice on Facebook" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
-                    <a aria-label="Khatib Family Practice on LinkedIn" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- ACCESSIBILITY FIX: Replaced non-functional <a> tags with <span> tags to remove them from tab order -->
+                    <span role="img" aria-label="Facebook (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></span>
+                    <span role="img" aria-label="LinkedIn (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></span>
                 </div>
             </div>
         </div>
@@ -503,5 +504,3 @@
     <script src="js/mapLoader.js" defer></script>
 </body>
 </html>
-
-

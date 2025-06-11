@@ -1,3 +1,5 @@
+<!-- //path: index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,8 +38,8 @@
     a:hover{color:var(--primary-dark)}
     img{max-width:100%;height:auto}
     .container{width:100%;max-width:var(--container-width);margin:0 auto;padding:0 var(--spacing-md)}
-    header{width:100%;z-index:100;background:var(--white);transition:all .3s ease-in-out}
-    .top-info-bar{background-color:var(--primary-color);color:var(--white);padding:var(--spacing-xs) 0}
+    header{width:100%;z-index:1000;background:var(--white);transition:all .3s ease-in-out;position:relative}
+    .top-info-bar{background-color:var(--primary-dark);color:var(--white);padding:var(--spacing-xs) 0}
     .contact-details,.portal-access{display:flex;align-items:center}
     .top-info-bar .container{display:flex;justify-content:space-between;align-items:center}
     .contact-item{color:var(--white);font-size:.9rem;display:flex;align-items:center;margin-right:var(--spacing-md);text-decoration:none}
@@ -45,8 +47,8 @@
     .main-navigation{padding:var(--spacing-sm) 0;border-bottom:1px solid rgba(0,0,0,.1);background-color:var(--white)}
     .nav-wrapper{display:flex;justify-content:space-between;align-items:center}
     .practice-logo{display:flex;align-items:center}
-    .skip-to-content{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background-color:var(--primary-color);color:var(--white);padding:.75rem 1.5rem;border-radius:var(--border-radius);font-weight:500;box-shadow:var(--shadow-md);transition:transform .2s ease-out}
-    .skip-to-content:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;overflow:visible;outline:3px solid var(--secondary-dark);outline-offset:3px;transform:translateY(0)}
+    .skip-to-content{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:99999;background-color:var(--primary-color);color:var(--white);padding:.75rem 1.5rem;border-radius:var(--border-radius);font-weight:600;box-shadow:var(--shadow-lg);text-decoration:underline;transition:transform .2s ease-out,opacity .2s ease-out}
+    .skip-to-content:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;overflow:visible;transform:translateY(0);opacity:1;outline:3px solid var(--secondary-dark) !important;outline-offset:3px !important}
     </style>
     
     <!-- Non-critical CSS loaded asynchronously -->
@@ -84,10 +86,7 @@
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     </noscript>
-    
-    <!-- CSS Loader utility to handle asynchronous CSS loading -->
-    <!-- Mark as dev-only -->
-    
+        
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -246,8 +245,8 @@
                     <h2>Your Dedicated Adult Primary Care Physician in Bullhead City, Serving the Tri-State Area</h2>
                     <p>Since 1998, Dr. Nadim Khatib has provided exceptional, personalized medical care focused on adults (21+). Our patient-centered model ensures residents of Bullhead City, Laughlin, Fort Mohave, and Mohave Valley receive the time, individualized attention, and comprehensive healthcare they deserve from a trusted family doctor.</p>
                     <div class="hero-buttons">
-                        <a href="pages/contact.html" class="btn btn-primary">Want an appointment? Contact us!</a>
-                        <a href="pages/about.html" class="btn btn-outline">Learn More About Us</a>
+                        <a href="pages/contact.html" class="btn btn-primary">Schedule Your Consultation Today</a>
+                        <a href="pages/about.html" class="btn btn-outline">Learn More About Dr. Khatib</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -381,6 +380,22 @@
                             <p class="source">Healthgrades Review</p>
                         </div>
                     </article>
+                    <article class="testimonial-card" aria-labelledby="testimonial-author-3">
+                        <div class="testimonial-content">
+                            <p>"Dr Khatib and his wife, are just the best ever. Staff is also great, if you need a great Dr. Khatib, is for you. Always takes time to talk to you and help you understand what is going on with you."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <p class="name" id="testimonial-author-3">- Doris Krader, Bullhead City, AZ</p>
+                            <div class="rating" aria-label="Rated 5 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <p class="source">Google Review</p>
+                        </div>
+                    </article>
                 </div>
                 <div class="testimonial-controls">
                     <a href="pages/testimonials.html" class="btn btn-secondary">View All Testimonials</a>
@@ -396,7 +411,7 @@
                     <p>Conveniently located in Bullhead City to serve the entire Tri-State area including Laughlin, Fort Mohave, and Mohave Valley</p>
                 </div>
                 <div class="location-container">
-                    <div class="map-container" data-map-processed="false">
+                    <div class="map-container">
                         <p class="map-description visually-hidden">Map showing Khatib Family Practice located at 2755 Silver Creek Road, Suite 109, Bullhead City, AZ 86442.</p>
                         <div class="map-placeholder" 
                              role="button" 
@@ -471,11 +486,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <p>© 2024 Khatib Family Practice. All Rights Reserved.</p>
                 <div class="social-media">
-                    <!-- TODO: Add actual social media links when available -->
-                    <a href="#" aria-label="Khatib Family Practice on Facebook" target="_blank" rel="noopener" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Khatib Family Practice on LinkedIn" target="_blank" rel="noopener" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- ACCESSIBILITY FIX: Replaced non-functional <a> tags with <span> tags to remove them from tab order -->
+                    <span role="img" aria-label="Facebook (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-facebook-f"></i></span>
+                    <span role="img" aria-label="LinkedIn (not active)" style="pointer-events: none; opacity: 0.5;"><i class="fab fa-linkedin-in"></i></span>
                 </div>
             </div>
         </div>
@@ -483,8 +498,6 @@
 
     <!-- Main JavaScript -->
     <!-- Map Loader for lazy loading Google Maps -->
-    <!-- Development-only scripts, build process should remove these -->
         <script src="js/main.bundle.js" defer></script>
 </body>
 </html>
-

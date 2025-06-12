@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   logPerformance("DOM Content Loaded", performance.now());
 
   // --- Feature Flags / Config ---
-  const SMOOTH_SCROLL_OFFSET_FIXED = 100; 
-  const SMOOTH_SCROLL_OFFSET_NORMAL = 100; 
+  const SMOOTH_SCROLL_OFFSET_FIXED = 100;
+  const SMOOTH_SCROLL_OFFSET_NORMAL = 100;
 
   // --- Element Selectors ---
   const body = document.body;
@@ -38,13 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (IS_DEVELOPMENT) console.warn("Mobile menu elements not found.");
       return;
     }
-    // Ensure navMenu has an ID for aria-controls, set by HTML now
-    // if (navMenu && !navMenu.id) {
-    //     const navMenuId = `nav-menu-list-${Math.random().toString(36).substring(2, 9)}`;
-    //     navMenu.id = navMenuId;
-    //     if (mobileToggle) mobileToggle.setAttribute('aria-controls', navMenuId);
-    // }
-
 
     // Helper function to toggle menu state
     const toggleMenu = (open) => {
@@ -53,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
       mobileToggle.classList.toggle("active", isActive);
       menuBackdrop.classList.toggle("active", isActive);
       body.classList.toggle("menu-open", isActive);
-      mobileToggle.setAttribute("aria-expanded", String(isActive)); 
-      updateHeaderHeight(); 
+      mobileToggle.setAttribute("aria-expanded", String(isActive));
+      updateHeaderHeight();
     };
 
     // Toggle on button click
@@ -85,14 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-     navMenu.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        if (link && navMenu.classList.contains('active')) {
-            const href = link.getAttribute('href');
-            if (!href || !href.startsWith('#') || href.includes('healow.html')) { 
-                 toggleMenu(false);
-            }
+    navMenu.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && navMenu.classList.contains('active')) {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#') || href.includes('healow.html')) {
+          toggleMenu(false);
         }
+      }
     });
   }
 
@@ -112,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!header) return;
     let lastScrollY = window.scrollY;
     let ticking = false;
-    const headerHeightThreshold = 50; 
+    const headerHeightThreshold = 50;
 
     const handleScroll = () => {
       lastScrollY = window.scrollY;
@@ -137,70 +130,68 @@ document.addEventListener("DOMContentLoaded", function () {
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;
       const href = link.getAttribute("href");
-      if (href.length <= 1 || href === "#") return; 
+      if (href.length <= 1 || href === "#") return;
 
       let targetElement;
       try {
         targetElement = document.querySelector(href);
       } catch (err) {
         if (IS_DEVELOPMENT) console.warn(`Invalid selector for smooth scroll: ${href}`);
-        return; 
+        return;
       }
 
       if (targetElement) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const menuWasClosed = (() => {
-            if (navMenu && navMenu.classList.contains("active")) {
-                navMenu.classList.remove("active");
-                if (mobileToggle) mobileToggle.classList.remove("active");
-                if (menuBackdrop) menuBackdrop.classList.remove("active");
-                body.classList.remove("menu-open");
-                if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
-                return true; 
-            }
-            return false; 
+          if (navMenu && navMenu.classList.contains("active")) {
+            navMenu.classList.remove("active");
+            if (mobileToggle) mobileToggle.classList.remove("active");
+            if (menuBackdrop) menuBackdrop.classList.remove("active");
+            body.classList.remove("menu-open");
+            if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
+            return true;
+          }
+          return false;
         })();
 
         setTimeout(() => {
-            const headerOffset = header && header.classList.contains("fixed")
-                ? SMOOTH_SCROLL_OFFSET_FIXED
-                : SMOOTH_SCROLL_OFFSET_NORMAL;
-            
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          const headerOffset = header && header.classList.contains("fixed")
+            ? SMOOTH_SCROLL_OFFSET_FIXED
+            : SMOOTH_SCROLL_OFFSET_NORMAL;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-            });
-            
-            // After scrolling, set focus to the target element for accessibility
-            // Ensure the target element is focusable, then focus it.
-            if (!targetElement.hasAttribute('tabindex')) {
-                 targetElement.setAttribute('tabindex', '-1'); // Make non-interactive elements focusable programmatically
-            }
-            targetElement.focus({ preventScroll: true }); // preventScroll ensures it doesn't jump again
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            logPerformance("Smooth Scroll to", performance.now(), href);
-        }, menuWasClosed ? 100 : 0); 
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+
+          if (!targetElement.hasAttribute('tabindex')) {
+            targetElement.setAttribute('tabindex', '-1');
+          }
+          targetElement.focus({ preventScroll: true });
+
+          logPerformance("Smooth Scroll to", performance.now(), href);
+        }, menuWasClosed ? 100 : 0);
       }
     });
   }
 
   function setupImageHandling() {
     const images = document.querySelectorAll("img:not([data-no-lazy])");
-    const placeholderSrc = getBasePath() + "images/placeholder.jpg"; 
+    const placeholderSrc = getBasePath() + "images/placeholder.jpg";
 
     images.forEach((img) => {
       img.setAttribute("loading", "lazy");
-      img.classList.add("content-image", "image-loading"); 
+      img.classList.add("content-image", "image-loading");
 
       img.addEventListener("load", function () {
         this.classList.remove("image-loading");
         this.classList.add("loaded");
         logPerformance("Image Loaded", performance.now(), img.src);
-      }, { once: true }); 
+      }, { once: true });
 
       img.addEventListener("error", function () {
         if (IS_DEVELOPMENT) console.warn(`Failed to load image: ${this.src}. Attempting fallback.`);
@@ -213,15 +204,15 @@ document.addEventListener("DOMContentLoaded", function () {
         let usePlaceholder = true;
 
         if (/\.(jpg|jpeg)$/i.test(filenameWithExt)) {
-            const webpSrc = getBasePath() + `images/${filename}.webp`;
-            if (IS_DEVELOPMENT) console.log(`Attempting WebP fallback for ${filenameWithExt}: ${webpSrc}`);
+          const webpSrc = getBasePath() + `images/${filename}.webp`;
+          if (IS_DEVELOPMENT) console.log(`Attempting WebP fallback for ${filenameWithExt}: ${webpSrc}`);
         }
 
         if (usePlaceholder && this.src !== placeholderSrc) {
-            this.src = placeholderSrc;
-            this.alt = `Placeholder image for ${this.alt || 'content image'}`; 
+          this.src = placeholderSrc;
+          this.alt = `Placeholder image for ${this.alt || 'content image'}`;
         } else if (!usePlaceholder) {
-            this.alt = `Alternative image loaded for ${this.alt || 'content image'}`;
+          this.alt = `Alternative image loaded for ${this.alt || 'content image'}`;
         }
 
 
@@ -231,21 +222,21 @@ document.addEventListener("DOMContentLoaded", function () {
             // CSS should style .service-image > img.placeholder-fallback
           }
         }
-      }, { once: true }); 
+      }, { once: true });
 
       if (img.complete && img.naturalHeight > 0) {
-         img.dispatchEvent(new Event('load'));
-      } else if (img.complete && img.naturalHeight === 0 && img.src) { 
-         img.dispatchEvent(new Event('error'));
+        img.dispatchEvent(new Event('load'));
+      } else if (img.complete && img.naturalHeight === 0 && img.src) {
+        img.dispatchEvent(new Event('error'));
       }
     });
   }
 
   function preloadImages() {
     const criticalImages = [
-      "LOGO.webp", 
-      "courtyard-of-the-building.webp", 
-      "dr-khatib-professional.webp", 
+      "LOGO.webp",
+      "courtyard-of-the-building.webp",
+      "dr-khatib-professional.webp",
     ];
     const basePath = getBasePath();
 
@@ -260,79 +251,76 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function setupAccordion() {
-    const accordionItems = document.querySelectorAll(".accordion-item"); 
+    const accordionItems = document.querySelectorAll(".accordion-item");
 
     if (accordionItems.length === 0) {
-        if (IS_DEVELOPMENT) console.warn("No accordion items found.");
-        return;
+      if (IS_DEVELOPMENT) console.warn("No accordion items found.");
+      return;
     }
     if (IS_DEVELOPMENT) console.log(`Initializing ${accordionItems.length} accordion items`);
 
     accordionItems.forEach((item, index) => {
-        const header = item.querySelector(".accordion-header");
-        const content = item.querySelector(".accordion-content");
+      const header = item.querySelector(".accordion-header");
+      const content = item.querySelector(".accordion-content");
 
-        if (!header || !content) {
-            if (IS_DEVELOPMENT) console.warn("Accordion item missing header or content", item);
-            return;
+      if (!header || !content) {
+        if (IS_DEVELOPMENT) console.warn("Accordion item missing header or content", item);
+        return;
+      }
+
+      const baseId = header.id || `accordion-${Math.random().toString(36).substring(2, 9)}`;
+      if (!header.id) header.id = `${baseId}-header`;
+      if (!content.id) content.id = `${baseId}-content`;
+
+      header.setAttribute("role", "button");
+      header.setAttribute("tabindex", "0");
+      header.setAttribute("aria-controls", content.id);
+
+      const isActive = item.classList.contains("active");
+      header.setAttribute("aria-expanded", String(isActive));
+      content.setAttribute("role", "region");
+      content.setAttribute("aria-labelledby", header.id);
+      content.setAttribute("aria-hidden", String(!isActive));
+
+      if (!isActive) {
+        content.style.display = 'none';
+      } else {
+        content.style.display = 'block';
+      }
+
+
+      header.addEventListener("click", function (e) {
+        e.preventDefault();
+        const currentItem = this.closest(".accordion-item");
+        if (!currentItem) return;
+
+        const isActiveAfterToggle = currentItem.classList.toggle("active");
+        this.setAttribute("aria-expanded", String(isActiveAfterToggle));
+
+        const currentContent = currentItem.querySelector('.accordion-content');
+        if (currentContent) {
+          currentContent.style.display = isActiveAfterToggle ? 'block' : 'none';
+          currentContent.setAttribute('aria-hidden', String(!isActiveAfterToggle));
         }
 
-        // Ensure IDs are unique and set for ARIA
-        const baseId = header.id || `accordion-${Math.random().toString(36).substring(2, 9)}`;
-        if (!header.id) header.id = `${baseId}-header`;
-        if (!content.id) content.id = `${baseId}-content`;
-        
-        header.setAttribute("role", "button"); // Already in HTML, good to ensure
-        header.setAttribute("tabindex", "0");  // Already in HTML
-        header.setAttribute("aria-controls", content.id);
-
-        const isActive = item.classList.contains("active");
-        header.setAttribute("aria-expanded", String(isActive));
-        content.setAttribute("role", "region");
-        content.setAttribute("aria-labelledby", header.id);
-        content.setAttribute("aria-hidden", String(!isActive)); 
-        
-        if (!isActive) { // If not active, explicitly hide with JS for robustness
-            content.style.display = 'none'; 
-        } else {
-            content.style.display = 'block';
+        if (IS_DEVELOPMENT) {
+          console.log(
+            `Toggled accordion: ${this.querySelector("span")?.textContent || "FAQ Item"
+            } - active: ${isActiveAfterToggle}`
+          );
         }
-
-
-        header.addEventListener("click", function (e) {
-            e.preventDefault();
-            const currentItem = this.closest(".accordion-item");
-            if (!currentItem) return;
-
-            // Toggle the current item
-            const isActiveAfterToggle = currentItem.classList.toggle("active");
-            this.setAttribute("aria-expanded", String(isActiveAfterToggle));
-            
-            const currentContent = currentItem.querySelector('.accordion-content');
-            if (currentContent) {
-                currentContent.style.display = isActiveAfterToggle ? 'block' : 'none';
-                currentContent.setAttribute('aria-hidden', String(!isActiveAfterToggle));
-            }
-
-            if (IS_DEVELOPMENT) {
-              console.log(
-                `Toggled accordion: ${
-                  this.querySelector("span")?.textContent || "FAQ Item"
-                } - active: ${isActiveAfterToggle}`
-              );
-            }
-            logUserAction("FAQ Accordion Toggle", {
-                question: this.querySelector("span")?.textContent || "FAQ Item",
-                state: isActiveAfterToggle ? "expanded" : "collapsed"
-            });
+        logUserAction("FAQ Accordion Toggle", {
+          question: this.querySelector("span")?.textContent || "FAQ Item",
+          state: isActiveAfterToggle ? "expanded" : "collapsed"
         });
+      });
 
-        header.addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              this.click(); 
-            }
-        });
+      header.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.click();
+        }
+      });
     });
   }
 
@@ -340,21 +328,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!contactForm) return;
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                if (IS_DEVELOPMENT) console.log("Contact form intersected, attaching listener.");
-                attachFormListener();
-                observer.unobserve(contactForm); 
-            }
-        });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (IS_DEVELOPMENT) console.log("Contact form intersected, attaching listener.");
+          attachFormListener();
+          observer.unobserve(contactForm);
+        }
+      });
     }, { threshold: 0.1 });
 
     observer.observe(contactForm);
 
     function attachFormListener() {
-        contactForm.addEventListener("submit", function (e) {
-            logUserAction("Form Submission Attempt", { formId: "contact-form" });
-        });
+      contactForm.addEventListener("submit", function (e) {
+        logUserAction("Form Submission Attempt", { formId: "contact-form" });
+      });
     }
   }
 
@@ -368,36 +356,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!mapPlaceholder) return;
 
-     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                if (IS_DEVELOPMENT) console.log("Map container intersected, setting up logging.");
-                logUserAction("Map Visible", { action: "map-view" });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (IS_DEVELOPMENT) console.log("Map container intersected, setting up logging.");
+          logUserAction("Map Visible", { action: "map-view" });
 
-                const loadMapAction = () => {
-                    logUserAction("Map Interaction", { action: "map-click-or-enter" });
-                };
+          const loadMapAction = () => {
+            logUserAction("Map Interaction", { action: "map-click-or-enter" });
+          };
 
-                mapPlaceholder.addEventListener("click", loadMapAction, { once: true });
-                mapPlaceholder.addEventListener("keydown", (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        mapPlaceholder.click(); // Trigger the click event which mapLoader also listens to
-                    }
-                }, { once: true }); // Ensure keydown also only triggers once for loading
-
-                observer.unobserve(mapContainer); 
+          mapPlaceholder.addEventListener("click", loadMapAction, { once: true });
+          mapPlaceholder.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              mapPlaceholder.click(); // Trigger the click event which mapLoader also listens to
             }
-        });
-    }, { threshold: 0.1 }); 
+          }, { once: true }); // Ensure keydown also only triggers once for loading
+
+          observer.unobserve(mapContainer);
+        }
+      });
+    }, { threshold: 0.1 });
 
     observer.observe(mapContainer);
   }
 
+  /**
+   * FIX: Correctly identifies the active navigation link by comparing absolute URLs.
+   * This is more robust than the previous string-based comparison.
+   */
   function setupActiveNavLinks() {
     if (!navMenu) return;
-    const currentLocation = window.location.pathname.replace(/\/$/, ""); 
+
     const navLinks = navMenu.querySelectorAll(".nav-link");
+    // Get the current page's absolute URL and clean it up.
+    const currentPageUrl = new URL(window.location.href);
+    const currentPath = currentPageUrl.pathname.replace(/\/$/, '').replace(/\/index\.html$/, '');
 
     navLinks.forEach((link) => {
       const item = link.closest(".nav-item");
@@ -406,97 +401,120 @@ document.addEventListener("DOMContentLoaded", function () {
       const href = link.getAttribute("href");
       if (!href) return;
 
+      // Create an absolute URL for the link to compare apples to apples.
       const linkUrl = new URL(href, window.location.origin);
-      let linkPath = linkUrl.pathname.replace(/\/$/, ""); 
+      const linkPath = linkUrl.pathname.replace(/\/$/, '').replace(/\/index\.html$/, '');
 
-      // Special handling for relative paths from /pages/ to index.html
-      if (href === "../index.html" && (currentLocation === "" || currentLocation.endsWith("/index.html"))) {
-          linkPath = currentLocation === "" ? "" : "/index.html"; // Normalize to match root or index.html
-      } else if (href === "index.html" && (currentLocation === "" || currentLocation.endsWith("/index.html"))) {
-          linkPath = currentLocation === "" ? "" : "/index.html";
-      }
+      // Deactivate all first
+      item.classList.remove("active");
+      link.removeAttribute('aria-current');
 
-
-      let isActive = false;
-      if (linkPath === currentLocation) {
-          isActive = true;
-      } else if ((currentLocation === "" || currentLocation.endsWith("/index.html")) && linkPath.endsWith("/index.html")) {
-          // This handles cases where currentLocation might be just "/" from server
-           isActive = true;
-      }
-
-
-      item.classList.toggle("active", isActive);
-      if (isActive) {
-          link.setAttribute('aria-current', 'page');
-      } else {
-          link.removeAttribute('aria-current');
+      // Check if the cleaned paths match.
+      if (linkPath === currentPath) {
+        item.classList.add("active");
+        link.setAttribute('aria-current', 'page');
       }
     });
   }
 
   function setupLinkClickLogging() {
-    if (!IS_DEVELOPMENT && typeof KLogger === 'undefined') return; 
+    if (!IS_DEVELOPMENT && typeof KLogger === 'undefined') return;
 
     document.body.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        if (!link || !link.href) return; 
+      const link = e.target.closest('a');
+      if (!link || !link.href) return;
 
-        const isNavLink = link.closest('.nav-menu');
-        const isFooterLink = link.closest('footer');
-        const isPortalButton = link.classList.contains('portal-button');
-        const isPageAnchor = link.getAttribute('href').startsWith('#') && link.getAttribute('href').length > 1;
-        const isHealowRelated = link.href.includes('healow.html') || link.href.includes('healow.com');
+      const isNavLink = link.closest('.nav-menu');
+      const isFooterLink = link.closest('footer');
+      const isPortalButton = link.classList.contains('portal-button');
+      const isPageAnchor = link.getAttribute('href').startsWith('#') && link.getAttribute('href').length > 1;
+      const isHealowRelated = link.href.includes('healow.html') || link.href.includes('healow.com');
 
 
-        if (isNavLink && !isPageAnchor && !isHealowRelated) {
-            logUserAction("Navigation Click", {
-                linkText: link.textContent?.trim(),
-                href: link.getAttribute("href"),
-            });
-        } else if (isFooterLink && !isPageAnchor && !isHealowRelated) {
-             logUserAction("Footer Link Click", {
-                 href: link.getAttribute("href"),
-                 linkText: link.textContent?.trim(),
-             });
-        }
+      if (isNavLink && !isPageAnchor && !isHealowRelated) {
+        logUserAction("Navigation Click", {
+          linkText: link.textContent?.trim(),
+          href: link.getAttribute("href"),
+        });
+      } else if (isFooterLink && !isPageAnchor && !isHealowRelated) {
+        logUserAction("Footer Link Click", {
+          href: link.getAttribute("href"),
+          linkText: link.textContent?.trim(),
+        });
+      }
     });
   }
 
-   function setupHealowLinkNavigation() {
-       document.body.addEventListener('click', (e) => {
-           const healowLink = e.target.closest('a[href*="healow.html"], a[href*="healow.com"], .healow-portal-link');
+  function setupHealowLinkNavigation() {
+    document.body.addEventListener('click', (e) => {
+      const healowLink = e.target.closest('a[href*="healow.html"], a[href*="healow.com"], .healow-portal-link');
 
-           if (healowLink) {
-               e.preventDefault(); 
-               e.stopPropagation();
+      if (healowLink) {
+        e.preventDefault();
+        e.stopPropagation();
 
-               const href = healowLink.href; 
-               const isExternal = href.includes('healow.com'); 
+        const href = healowLink.href;
+        const isExternal = href.includes('healow.com');
 
-               if (IS_DEVELOPMENT) console.log(`Healow link clicked: ${href}`);
-               logUserAction("Healow Link Navigation", { href: href });
+        if (IS_DEVELOPMENT) console.log(`Healow link clicked: ${href}`);
+        logUserAction("Healow Link Navigation", { href: href });
 
-               let menuWasClosed = false;
-               if (navMenu && navMenu.classList.contains("active")) {
-                   navMenu.classList.remove("active");
-                   if (mobileToggle) mobileToggle.classList.remove("active");
-                   if (menuBackdrop) menuBackdrop.classList.remove("active");
-                   body.classList.remove("menu-open");
-                   if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
-                   menuWasClosed = true;
-               }
+        let menuWasClosed = false;
+        if (navMenu && navMenu.classList.contains("active")) {
+          navMenu.classList.remove("active");
+          if (mobileToggle) mobileToggle.classList.remove("active");
+          if (menuBackdrop) menuBackdrop.classList.remove("active");
+          body.classList.remove("menu-open");
+          if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
+          menuWasClosed = true;
+        }
 
-               setTimeout(() => {
-                   if (isExternal) {
-                       window.open(href, '_blank', 'noopener,noreferrer'); 
-                   } else {
-                       window.location.href = href; 
-                   }
-               }, menuWasClosed ? 100 : 0); 
-           }
-       });
-   }
+        setTimeout(() => {
+          if (isExternal) {
+            window.open(href, '_blank', 'noopener,noreferrer');
+          } else {
+            window.location.href = href;
+          }
+        }, menuWasClosed ? 100 : 0);
+      }
+    });
+  }
+
+  /**
+   * FIX: Adds functionality for the new resources page mobile navigation toggle.
+   */
+  function setupResourcesNavToggle() {
+    const toggleButton = document.querySelector('.resources-nav-toggle');
+    const resourcesNav = document.querySelector('.resources-nav');
+
+    if (!toggleButton || !resourcesNav) {
+      return; // Only run on the resources page
+    }
+
+    // Initial state setup for mobile
+    if (window.innerWidth <= 768) {
+      resourcesNav.classList.add('collapsed');
+      toggleButton.setAttribute('aria-expanded', 'false');
+    }
+
+    toggleButton.addEventListener('click', () => {
+      const isCollapsed = resourcesNav.classList.toggle('collapsed');
+      toggleButton.setAttribute('aria-expanded', String(!isCollapsed));
+
+      // Update button text/icon for clarity
+      const icon = toggleButton.querySelector('i');
+      const text = toggleButton.querySelector('span');
+      if (isCollapsed) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        text.textContent = 'Page Sections';
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+        text.textContent = 'Close Sections';
+      }
+    });
+  }
 
   function setupServiceCardEnhancements() {
     // CSS :hover is sufficient
@@ -510,24 +528,24 @@ document.addEventListener("DOMContentLoaded", function () {
         (entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('fade-in-visible'); 
+              entry.target.classList.add('fade-in-visible');
               sectionObserver.unobserve(entry.target);
             }
           });
         },
         {
-          threshold: 0.1, 
-          rootMargin: '0px 0px -20px 0px' 
+          threshold: 0.1,
+          rootMargin: '0px 0px -20px 0px'
         }
       );
 
       sections.forEach(section => {
-        section.classList.add('fade-in-section'); 
+        section.classList.add('fade-in-section');
         sectionObserver.observe(section);
       });
     } else {
       sections.forEach(section => {
-        section.classList.add('fade-in-visible'); 
+        section.classList.add('fade-in-visible');
       });
     }
   }
@@ -536,11 +554,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function getBasePath() {
     const path = window.location.pathname;
     // More robust check for pages directory
-    if (path.includes("/pages/")) { 
-        return "../";
+    if (path.includes("/pages/")) {
+      return "../";
     }
-    return ""; 
-}
+    return "";
+  }
 
 
   function logPerformance(label, value, details = "") {
@@ -560,23 +578,24 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  updateHeaderHeight(); 
-  window.addEventListener("resize", updateHeaderHeight, { passive: true }); 
+  updateHeaderHeight();
+  window.addEventListener("resize", updateHeaderHeight, { passive: true });
 
   setupMobileMenu();
   setupFixedHeader();
   setupSmoothScrolling();
-  preloadImages(); 
-  setupImageHandling(); 
+  preloadImages();
+  setupImageHandling();
   setupAccordion();
-  setupContactForm(); 
-  setupFeatureItemHovers(); 
-  setupMapInteractionLogging(); 
+  setupContactForm();
+  setupFeatureItemHovers();
+  setupMapInteractionLogging();
   setupActiveNavLinks();
-  setupLinkClickLogging(); 
-  setupHealowLinkNavigation(); 
-  setupServiceCardEnhancements(); 
-  setupSectionAnimations(); 
+  setupLinkClickLogging();
+  setupHealowLinkNavigation();
+  setupServiceCardEnhancements();
+  setupSectionAnimations();
+  setupResourcesNavToggle(); // FIX: Initialize the new function
 
 
   if (IS_DEVELOPMENT) {

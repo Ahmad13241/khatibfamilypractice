@@ -1,10 +1,441 @@
-...
-<div class="footer-bottom">
-    <p>&copy; 2024 Khatib Family Practice. All Rights Reserved.</p>
-    <div class="social-media">
-        <span role="img" aria-label="Facebook (not active)" class="social-icon"><i class="fab fa-facebook-f"></i></span>
-        <span role="img" aria-label="LinkedIn (not active)" class="social-icon"><i
-                class="fab fa-linkedin-in"></i></span>
-    </div>
-</div>
-...
+<!-- //path: pages/about.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3TLLF2PM7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-D3TLLF2PM7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Learn about Dr. Nadim Khatib, MD, a board-certified family medicine physician providing personalized adult healthcare in Bullhead City, AZ, and the surrounding Tri-State area since 1998.">
+
+    <link rel="canonical" href="https://khatibfamilypractice.com/pages/about.html" />
+
+    <title>About Dr. Nadim Khatib | Board-Certified Family Doctor in Bullhead City, AZ</title>
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/about.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../images/favicon/site.webmanifest">
+
+    <!-- FIX: Use a standard link for Font Awesome for reliability -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "name": "Dr. Nadim Khatib",
+      "image": "https://khatibfamilypractice.com/images/dr-khatib-professional.webp",
+      "description": "Board Certified Family Medicine Physician serving Bullhead City, Laughlin, Fort Mohave, and Mohave Valley since 1998 with a focus on personalized patient care.",
+      "medicalSpecialty": "Family Medicine",
+      "medicalCredential": {
+        "@type": "MedicalCredential",
+        "credentialCategory": "Board Certification",
+        "recognizingAuthority": {
+          "@type": "Organization",
+          "name": "American Board of Family Medicine"
+        }
+      },
+      "knowsLanguage": ["English"],
+      "isAcceptingNewPatients": true,
+      "memberOf": {
+        "@type": "MedicalOrganization",
+        "name": "Khatib Family Practice"
+      },
+      "affiliation": [
+        "Western Arizona Regional Medical Center",
+        "Valley View Medical Center"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2755 Silver Creek Road, Suite 109",
+        "addressLocality": "Bullhead City",
+        "addressRegion": "AZ",
+        "postalCode": "86442",
+        "addressCountry": "US"
+      },
+      "telephone": "(928) 763-9009",
+      "faxNumber": "(928) 758-7538",
+      "email": "info@khatibfamilypractice.com",
+      "availableService": [
+        "Adult Medicine",
+        "Preventive Care",
+        "Chronic Disease Management",
+        "Wellness Exams",
+        "Health Screenings"
+      ],
+      "areaServed": [
+        "Bullhead City, AZ",
+        "Laughlin, NV",
+        "Fort Mohave, AZ",
+        "Mohave Valley, AZ"
+      ],
+      "sameAs": "https://khatibfamilypractice.com/pages/about.html"
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- Add menu backdrop element -->
+    <div class="menu-backdrop"></div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="top-info-bar">
+            <div class="container">
+                <div class="contact-details">
+                    <a href="tel:9287639009" class="contact-item">
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                        <span>(928) 763-9009</span>
+                    </a>
+                    <a href="https://maps.google.com/?q=2755+Silver+Creek+Road+Suite+109+Bullhead+City+AZ+86442"
+                        target="_blank" rel="noopener" class="contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>2755 Silver Creek Rd, Suite 109, Bullhead City</span>
+                    </a>
+                </div>
+                <div class="portal-access">
+                    <a href="https://healow.com/apps/jsp/webview/index.jsp" class="portal-button" target="_blank"
+                        rel="noopener">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
+                        <span>Patient Portal</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-navigation">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="../index.html" class="practice-logo">
+                        <img src="../images/LOGO.webp" alt="Khatib Family Practice Logo" width="180" height="60">
+                        <span class="visually-hidden">Khatib Family Practice</span>
+                    </a>
+
+                    <button class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu-list"
+                        aria-label="Toggle navigation menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <ul class="nav-menu" id="nav-menu-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item active"><a href="about.html" class="nav-link" aria-current="page">About</a>
+                        </li>
+                        <li class="nav-item"><a href="resources.html" class="nav-link">Patient Resources</a></li>
+                        <li class="nav-item"><a href="healow.html" class="nav-link">Healow Portal Service</a></li>
+                        <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Doctor Profile Section -->
+        <section class="doctor-profile">
+            <div class="container">
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <picture>
+                            <source srcset="../images/dr-khatib-professional.webp" type="image/webp">
+                            <img src="../images/dr-khatib-professional.webp"
+                                alt="Dr. Nadim Khatib, MD, Board Certified Family Medicine Physician at Khatib Family Practice."
+                                class="doctor-img" loading="lazy" width="500" height="500">
+                        </picture>
+                        <div class="doctor-image-caption">
+                            <span>Dr. Nadim Khatib, MD</span>
+                        </div>
+                    </div>
+                    <div class="doctor-details">
+                        <h1>Meet Dr. Nadim Khatib, MD | Your Family Medicine Physician in Bullhead City</h1>
+                        <p class="credentials">Board Certified Family Medicine Physician Serving Bullhead City & the
+                            Tri-State Area</p>
+
+                        <div class="doctor-info-grid">
+                            <div class="info-card">
+                                <h3><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education & Training</h3>
+                                <ul class="info-list">
+                                    <li><strong>Medical Degree:</strong> University of Tishreen, Faculty of Medicine
+                                        (1989)</li>
+                                    <li><strong>Residency:</strong> Mercy Family Practice Program</li>
+                                    <li><strong>Board Certification:</strong> American Board of Family Medicine</li>
+                                </ul>
+                            </div>
+
+                            <div class="info-card">
+                                <h3><i class="fas fa-hospital" aria-hidden="true"></i> Hospital Affiliations</h3>
+                                <ul class="info-list">
+                                    <li>Western Arizona Regional Medical Center</li>
+                                    <li>Valley View Medical Center</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="experience-summary">
+                            <h3><i class="fas fa-star" aria-hidden="true"></i> Experience</h3>
+                            <p>Dr. Khatib has established himself as a trusted healthcare provider in the Bullhead City
+                                region, providing exceptional care to patients from Bullhead City, Laughlin, Fort
+                                Mohave, and Mohave Valley since 1998. His emphasis is on preventive medicine and
+                                individualized primary care for adult patients throughout the community.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Philosophy Section -->
+        <section class="philosophy">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Philosophy</h2>
+                    <p>Patient-centered care is the foundation of our practice throughout Bullhead City and surrounding
+                        communities</p>
+                </div>
+                <div class="philosophy-content">
+                    <div class="philosophy-text">
+                        <p>At Khatib Family Practice, we deliver thorough, attentive adult primary care to patients
+                            across Bullhead City, Laughlin, Fort Mohave, and Mohave Valley. Our approach centers on
+                            building enduring healthcare partnerships. Unlike high-volume clinics, our model ensures
+                            residents here receive genuinely tailored medicine and the focus required for effective care
+                            in the Tri-State area.</p>
+                        <p>We believe exceptional healthcare requires time—time to listen, understand your unique
+                            situation, and develop the right approach. By maintaining a select patient roster, we create
+                            space for meaningful connections, leading to better health outcomes for our patients right
+                            here in the Bullhead City community and surrounding areas.</p>
+                    </div>
+                    <div class="values">
+                        <h3>Our Core Values</h3>
+                        <ul class="values-list">
+                            <li><i class="fas fa-heartbeat" aria-hidden="true"></i> <span>Compassionate Care</span> -
+                                Treating patients with kindness and understanding</li>
+                            <li><i class="fas fa-user-md" aria-hidden="true"></i> <span>Medical Excellence</span> -
+                                Providing high-quality, evidence-based care</li>
+                            <li><i class="fas fa-comments" aria-hidden="true"></i> <span>Open Communication</span> -
+                                Ensuring patients understand their health and treatment options</li>
+                            <li><i class="fas fa-clock" aria-hidden="true"></i> <span>Accessibility</span> - Being
+                                available when our patients need us</li>
+                            <li><i class="fas fa-hands-helping" aria-hidden="true"></i> <span>Community Focus</span> -
+                                Serving the Bullhead City area with dedication</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Practice Section -->
+        <section class="our-practice">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Practice</h2>
+                    <p>A welcoming environment designed for focused, attentive care</p>
+                </div>
+                <div class="practice-features">
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Comfortable Environment</h3>
+                        <p>Our cozy office setting creates a relaxed atmosphere where patients can discuss health
+                            concerns without feeling rushed or processed through a medical assembly line.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Thorough Understanding</h3>
+                        <p>Dr. Khatib invests time to develop a complete picture of your health history, family
+                            background, lifestyle factors, and goals—creating a foundation for more accurate diagnoses
+                            and effective treatment.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Continuity of Care</h3>
+                        <p>You'll see the same physician at every visit, eliminating the need to repeatedly explain your
+                            medical history. This consistency leads to better coordination, fewer medical errors, and
+                            more tailored care.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <h3>The Personalized Care Advantage</h3>
+                        <p>By design, we see fewer patients each day than typical practices. This enables us to offer
+                            longer appointments, minimal waiting, and a truly individualized approach. Staff members
+                            know you by name, and Dr. Khatib remains accessible for your healthcare needs.</p>
+                    </div>
+                </div>
+                <div class="office-gallery">
+                    <h3>Our Office and Facility</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item" role="group" aria-labelledby="caption-exterior">
+                            <picture>
+                                <source srcset="../images/outside-office.webp" type="image/webp">
+                                <img src="../images/outside-office.webp"
+                                    alt="Exterior view of Khatib Family Practice building at 2755 Silver Creek Road, Suite 109, with clear signage."
+                                    class="gallery-image" loading="lazy" width="400" height="250">
+                            </picture>
+                            <figcaption class="gallery-caption" id="caption-exterior">
+                                <p>Office Exterior</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="gallery-item" role="group" aria-labelledby="caption-reception">
+                            <picture>
+                                <source srcset="../images/reception-room.webp" type="image/webp">
+                                <img src="../images/reception-room.webp"
+                                    alt="Bright and welcoming reception area at Khatib Family Practice with comfortable seating."
+                                    class="gallery-image" loading="lazy" width="400" height="250">
+                            </picture>
+                            <figcaption class="gallery-caption" id="caption-reception">
+                                <p>Reception Area</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="gallery-item" role="group" aria-labelledby="caption-exam">
+                            <picture>
+                                <source srcset="../images/examination-office.webp" type="image/webp">
+                                <img src="../images/examination-office.webp"
+                                    alt="Clean and modern examination room at Khatib Family Practice, equipped for patient consultations."
+                                    class="gallery-image" loading="lazy" width="400" height="250">
+                            </picture>
+                            <figcaption class="gallery-caption" id="caption-exam">
+                                <p>Examination Room</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="gallery-item" role="group" aria-labelledby="caption-waiting">
+                            <picture>
+                                <source srcset="../images/reception-room-2.webp" type="image/webp">
+                                <img src="../images/reception-room-2.webp"
+                                    alt="Comfortable patient waiting area in Khatib Family Practice with ample seating."
+                                    class="gallery-image" loading="lazy" width="400" height="250">
+                            </picture>
+                            <figcaption class="gallery-caption" id="caption-waiting">
+                                <p>Patient Waiting Area</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="gallery-item" role="group" aria-labelledby="caption-courtyard">
+                            <picture>
+                                <source srcset="../images/courtyard-of-the-building.webp" type="image/webp">
+                                <img src="../images/courtyard-of-the-building.webp"
+                                    alt="View of the tranquil courtyard outside the Khatib Family Practice medical building."
+                                    class="gallery-image" loading="lazy" width="400" height="250">
+                            </picture>
+                            <figcaption class="gallery-caption" id="caption-courtyard">
+                                <p>Courtyard View</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Want to become a patient?</h2>
+                    <p>We're accepting new patients (21+) and would be honored to be your family's healthcare provider.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary">Want an appointment? Contact us!</a>
+                        <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>Khatib Family Practice</h3>
+                    <p>Serving the Bullhead City community and surrounding areas with quality-focused adult medicine
+                        since 1998.</p>
+                    <div class="contact">
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:9287639009">(928) 763-9009</a>
+                        </p>
+                        <p><i class="fas fa-fax" aria-hidden="true"></i> (928) 758-7538</p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 2755 Silver Creek Road, Suite 109,
+                            Bullhead City, AZ 86442</p>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="resources.html">Patient Resources</a></li>
+                        <li><a href="healow.html">Healow Portal Service</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section resources">
+                    <h3>Patient Resources</h3>
+                    <ul>
+                        <li><a href="resources.html#new-patients">New Patient Forms (21+)</a></li>
+                        <li><a href="resources.html#insurance">Insurance Information</a></li>
+                        <li><a href="healow.html">healow Patient Portal Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Khatib Family Practice. All Rights Reserved.</p>
+                <div class="social-media">
+                    <span role="img" aria-label="Facebook (not active)" class="social-icon"><i
+                            class="fab fa-facebook-f"></i></span>
+                    <span role="img" aria-label="LinkedIn (not active)" class="social-icon"><i
+                            class="fab fa-linkedin-in"></i></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js" defer></script>
+</body>
+
+</html>

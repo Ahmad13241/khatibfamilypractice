@@ -1,26 +1,31 @@
-# Decap CMS Configuration for Khatib Family Practice Blog
-# This file defines the structure of the content management system.
+# Decap CMS Configuration - V3
+# This version includes the Editorial Workflow for better content management.
 
-# The backend specifies how to connect to your repository.
-# Netlify's Git Gateway allows the CMS to work with your Netlify-hosted repo.
+# Specifies how to connect to your repository via Netlify.
 backend:
   name: git-gateway
-  branch: main # Or 'master' if that is your default branch
+  # --- IMPORTANT ---
+  # Change this to 'master' if your GitHub default branch is named 'master'.
+  branch: main
 
-# This is required for the editor's media library to work.
+# This is where the editor's media library will save images.
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
+# This enables the "Workflow" tab in the CMS, allowing for draft/review/publish states.
+# It's a more robust way to manage content and can help resolve some permission issues.
+publish_mode: editorial_workflow
+
 # Collections define the types of content you can create.
 collections:
-  - name: "blog" # The collection's internal name
-    label: "Blog" # The name displayed in the CMS UI
-    folder: "_posts" # The folder where new blog post files will be stored in your code
-    create: true # IMPORTANT: This allows you to create new posts. This is why the button was missing.
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename format for new posts
-    fields: # The fields for each blog post
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
+  - name: "blog" # Internal name, used in routes.
+    label: "Blog Posts" # Display name in the CMS UI.
+    folder: "_posts" # The folder in your repository where blog posts are stored.
+    create: true # This allows the "New Blog Post" button to appear.
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template for new posts.
+    fields: # The fields for each document.
+      - { label: "Title", name: "title", widget: "string", hint: "The main headline of the blog post." }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "YYYY-MM-DD" }
       - { label: "Author", name: "author", widget: "string", default: "Dr. Nadim Khatib" }
-      - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Featured Image", name: "image", widget: "image", hint: "Upload a main image for this post. It will appear at the top." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "The main content of the article. Use the toolbar for formatting." }

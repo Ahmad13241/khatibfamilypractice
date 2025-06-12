@@ -1,0 +1,26 @@
+# Decap CMS Configuration for Khatib Family Practice Blog
+# This file defines the structure of the content management system.
+
+# The backend specifies how to connect to your repository.
+# Netlify's Git Gateway allows the CMS to work with your Netlify-hosted repo.
+backend:
+  name: git-gateway
+  branch: main # Or 'master' if that is your default branch
+
+# This is required for the editor's media library to work.
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# Collections define the types of content you can create.
+collections:
+  - name: "blog" # The collection's internal name
+    label: "Blog" # The name displayed in the CMS UI
+    folder: "_posts" # The folder where new blog post files will be stored in your code
+    create: true # IMPORTANT: This allows you to create new posts. This is why the button was missing.
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename format for new posts
+    fields: # The fields for each blog post
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "Dr. Nadim Khatib" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Body", name: "body", widget: "markdown" }

@@ -1,0 +1,224 @@
+/* --- Blog Listing Page --- */
+.blog-hero {
+    padding: 4rem 0;
+    background: linear-gradient(to right, var(--light-color), #e9ecef);
+    text-align: center;
+}
+
+.blog-hero h1 {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+}
+
+.blog-hero p {
+    font-size: 1.2rem;
+    color: var(--light-text);
+    max-width: 700px;
+    margin: 1rem auto 0;
+}
+
+.blog-listing {
+    padding: 4rem 0;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.blog-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.blog-card-img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.blog-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-card-content h3 {
+    font-size: 1.4rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.75rem;
+}
+
+.blog-card-meta {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-bottom: 1rem;
+}
+
+.blog-card-meta span {
+    margin-right: 1rem;
+}
+
+.blog-card-excerpt {
+    color: var(--text-color);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.blog-card-content .btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+/* --- Single Blog Post Page --- */
+.post-header {
+    padding: 4rem 0;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    text-align: center;
+}
+
+.post-header h1 {
+    color: var(--white);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.post-meta {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.post-meta span {
+    margin: 0 0.75rem;
+}
+
+.post-content-area {
+    padding: 4rem 0;
+    display: flex;
+    gap: 3rem;
+}
+
+.post-main-content {
+    flex: 3;
+    max-width: 75%;
+}
+
+.post-featured-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.post-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.post-body h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.post-body p {
+    margin-bottom: 1.5rem;
+}
+
+.post-body ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-body blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--light-color);
+    border-left: 5px solid var(--primary-color);
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.post-sidebar {
+    flex: 1;
+    max-width: 25%;
+}
+
+.sidebar-widget {
+    background-color: var(--light-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 2rem;
+}
+
+.sidebar-widget h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.recent-posts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.recent-posts-list li {
+    margin-bottom: 1rem;
+}
+
+.recent-posts-list a {
+    color: var(--dark-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.recent-posts-list a:hover {
+    color: var(--secondary-color);
+}
+
+@media (max-width: 992px) {
+    .post-content-area {
+        flex-direction: column;
+    }
+
+    .post-main-content,
+    .post-sidebar {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .post-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}

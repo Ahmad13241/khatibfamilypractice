@@ -9,8 +9,8 @@ backend:
   branch: main
 
 # This is where the editor's media library will save images.
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "images/blog" # Changed to a dedicated blog image folder
+public_folder: "/images/blog"
 
 # This enables the "Workflow" tab in the CMS, allowing for draft/review/publish states.
 # It's a more robust way to manage content and can help resolve some permission issues.
@@ -27,5 +27,17 @@ collections:
       - { label: "Title", name: "title", widget: "string", hint: "The main headline of the blog post." }
       - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "YYYY-MM-DD" }
       - { label: "Author", name: "author", widget: "string", default: "Dr. Nadim Khatib" }
-      - { label: "Featured Image", name: "image", widget: "image", hint: "Upload a main image for this post. It will appear at the top." }
+      - label: "Featured Image"
+        name: "image"
+        widget: "object"
+        hint: "Upload a main image for this post. It will appear at the top."
+        fields:
+          - { label: "Image", name: "src", widget: "image" }
+          - { label: "Alt Text", name: "alt", widget: "string", hint: "Descriptive text for the image, crucial for SEO and accessibility." }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "A short, 1-2 sentence summary of the post for the blog listing page. Keep it engaging to encourage clicks." }
+      - { label: "Meta Description", name: "meta_description", widget: "string", hint: "A 155-160 character description for search engine results. This is very important for SEO." }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        hint: "Add relevant keywords or topics (e.g., Preventive Care, Diabetes, Health Tips)."
       - { label: "Body", name: "body", widget: "markdown", hint: "The main content of the article. Use the toolbar for formatting." }

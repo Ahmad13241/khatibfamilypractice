@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/blog.css">
 
-    <!-- Favicon, Fonts, and other head elements (same as other pages) -->
+    <!-- Favicon, Fonts, and other head elements -->
     <link rel="icon" href="../images/favicon/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,13 +22,17 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
+
+    <!-- CollectionPage Structured Data -->
+    <script type="application/ld+json">
+    {{COLLECTION_PAGE_SCHEMA}}
+    </script>
 </head>
 
 <body>
     <a href="#main-content" class="skip-to-content">Skip to content</a>
     <div class="menu-backdrop"></div>
     <header>
-        <!-- Header content (same as other pages, with active nav link updated) -->
         <div class="top-info-bar">
             <div class="container">
                 <div class="contact-details">
@@ -79,62 +84,38 @@
 
         <section class="blog-listing">
             <div class="container">
-                <div class="blog-grid">
-                    <!-- This card will be a template for future posts -->
-                    <article class="blog-card">
-                        <img src="../images/blog/annual-exam.webp" alt="Doctor listening to a patient's heartbeat."
-                            class="blog-card-img">
-                        <div class="blog-card-content">
-                            <h3>The Importance of Annual Physicals for Adults in Bullhead City</h3>
-                            <div class="blog-card-meta">
-                                <span><i class="fas fa-calendar-alt"></i> June 12, 2025</span>
-                                <span><i class="fas fa-user"></i> Dr. Nadim Khatib</span>
-                            </div>
-                            <p class="blog-card-excerpt">Annual physicals are a cornerstone of preventive healthcare,
-                                yet many adults skip them. Learn why this yearly check-up is so vital for your long-term
-                                health...</p>
-                            <a href="blog-post-1.html" class="btn btn-primary">Read More</a>
-                        </div>
-                    </article>
-
-                    <!-- Placeholder card 2 -->
-                    <article class="blog-card">
-                        <img src="../images/blog/placeholder-2.webp" alt="A person checking their blood sugar levels."
-                            class="blog-card-img">
-                        <div class="blog-card-content">
-                            <h3>Managing Diabetes in the Arizona Heat</h3>
-                            <div class="blog-card-meta">
-                                <span><i class="fas fa-calendar-alt"></i> Coming Soon</span>
-                                <span><i class="fas fa-user"></i> Dr. Nadim Khatib</span>
-                            </div>
-                            <p class="blog-card-excerpt">High temperatures can pose unique challenges for individuals
-                                managing diabetes. Discover key strategies for staying safe and healthy...</p>
-                            <a href="#" class="btn btn-outline" disabled>Read More</a>
-                        </div>
-                    </article>
-
-                    <!-- Placeholder card 3 -->
-                    <article class="blog-card">
-                        <img src="../images/blog/placeholder-3.webp" alt="A collection of heart-healthy foods."
-                            class="blog-card-img">
-                        <div class="blog-card-content">
-                            <h3>Heart Health Tips for the Tri-State Community</h3>
-                            <div class="blog-card-meta">
-                                <span><i class="fas fa-calendar-alt"></i> Coming Soon</span>
-                                <span><i class="fas fa-user"></i> Dr. Nadim Khatib</span>
-                            </div>
-                            <p class="blog-card-excerpt">Cardiovascular health is crucial. Here are practical tips for
-                                diet, exercise, and lifestyle adjustments to protect your heart...</p>
-                            <a href="#" class="btn btn-outline" disabled>Read More</a>
-                        </div>
-                    </article>
+                <div class="blog-grid" id="blog-posts-container">
+                    {{BLOG_POSTS_GRID}}
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <!-- Footer content (same as other pages) -->
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>Khatib Family Practice</h3>
+                    <p>Serving Bullhead City, Laughlin, Fort Mohave, and Mohave Valley with quality-focused adult
+                        medicine since 1998.</p>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="resources.html">Patient Resources</a></li>
+                        <li><a href="healow.html">Healow Portal Service</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Khatib Family Practice. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="../js/main.js" defer></script>

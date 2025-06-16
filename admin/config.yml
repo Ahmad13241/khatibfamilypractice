@@ -9,8 +9,8 @@ backend:
   branch: main
 
 # This is where the editor's media library will save images.
-media_folder: "images/blog" # Changed to a dedicated blog image folder
-public_folder: "/images/blog"
+media_folder: "images" # Store all images in the main images folder
+public_folder: "/images"
 
 # This enables the "Workflow" tab in the CMS, allowing for draft/review/publish states.
 # It's a more robust way to manage content and can help resolve some permission issues.

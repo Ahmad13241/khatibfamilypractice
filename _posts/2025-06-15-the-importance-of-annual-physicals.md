@@ -1,6 +1,6 @@
 ---
 title: The Importance of Annual Physicals for Adults in Bullhead City
-date: 2025-06-12
+date: 2025-06-15
 author: Dr. Nadim Khatib
 image:
   src: annual-exam.webp # **CHANGE HERE**: Just the filename
@@ -14,7 +14,7 @@ tags:
   - Health Screening
 ---
 
-As a primary care physician serving the Bullhead City, Laughlin, and Fort Mohave communities for over two decades, I’ve seen firsthand the profound impact of preventive medicine. A cornerstone of this proactive approach is the annual physical examination. While it may seem like a routine visit, this yearly check-up is one of the most powerful tools we have to protect your long-term health and well-being.
+As a [primary care physician](../about.html) serving the Bullhead City, Laughlin, and Fort Mohave communities for over two decades, I’ve seen firsthand the profound impact of preventive medicine. A cornerstone of this proactive approach is the annual physical examination. While it may seem like a routine visit, this yearly check-up is one of the most powerful tools we have to protect your long-term health and well-being.
 
 ## What is an Annual Physical?
 An annual physical is more than just a quick check of your vital signs. It’s a comprehensive assessment of your overall health. It provides a crucial opportunity for us to establish a baseline, identify potential risks, and address any health concerns you may have in a low-stress setting. Think of it as a yearly strategy session for your health.
@@ -26,10 +26,10 @@ During your physical at our Bullhead City office, we will typically cover severa
 *   **Health History Review:** We’ll discuss any changes in your health, lifestyle, or family history since your last visit.
 *   **Vital Signs Check:** This includes blood pressure, heart rate, respiration rate, and temperature.
 *   **Physical Examination:** A head-to-toe check to assess the health of your various body systems.
-*   **Preventive Screenings:** Based on your age, gender, and risk factors, we may recommend screenings for cholesterol, diabetes, and certain types of cancer.
+*   **Preventive Screenings:** Based on your age, gender, and risk factors, we may recommend [preventive screenings](../resources.html#preventive-care) for cholesterol, diabetes, and certain types of cancer. This is a core part of our [chronic disease management](../resources.html#chronic-disease) strategy.
 *   **Medication Review:** We'll review all your current medications, including prescriptions, over-the-counter drugs, and supplements, to avoid potential interactions.
 
 ## Why It's Especially Important in Our Community
 Living in the Tri-State area comes with its own unique health considerations, from managing chronic conditions in the desert heat to staying active year-round. Your annual physical is the perfect time to discuss these local factors and create a personalized health plan that works for you. By building a strong, long-term relationship, we can better navigate your healthcare journey together.
 
-Don’t wait for a problem to arise. Be proactive about your health. If you haven’t had a physical in over a year, I encourage you to schedule one today. It’s an investment in your most valuable asset—your health.
+Don’t wait for a problem to arise. Be proactive about your health. If you haven’t had a physical in over a year, I encourage you to [schedule one today](../contact.html). It’s an investment in your most valuable asset—your health.

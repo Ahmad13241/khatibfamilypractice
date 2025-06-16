@@ -84,7 +84,15 @@ async function generateBlogPages() {
         let output = postTemplate;
 
         const canonicalUrl = `https://khatibfamilypractice.com${post.url}`;
-        const imageUrl = `https://khatibfamilypractice.com${post.image.src}`;
+
+        // --- FIX START ---
+        // Correctly construct image paths regardless of input
+        const imageName = path.basename(post.image.src); // Ensures we only have the filename
+        const absoluteImageUrl = `/images/blog/${imageName}`;
+        const canonicalImageUrl = `https://khatibfamilypractice.com${absoluteImageUrl}`;
+        // Path from /pages/blog/post.html to /images/blog/image.webp is ../../images/blog/image.webp
+        const featuredImageSrc = `../../images/blog/${imageName}`;
+        // --- FIX END ---
 
         const articleSchema = {
             "@context": "https://schema.org",
@@ -92,7 +100,7 @@ async function generateBlogPages() {
             "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
             "headline": post.title,
             "description": post.meta_description,
-            "image": imageUrl,
+            "image": canonicalImageUrl, // Use corrected canonical URL
             "author": { "@type": "Person", "name": post.author },
             "publisher": {
                 "@type": "Organization",
@@ -111,12 +119,12 @@ async function generateBlogPages() {
             .replace(/{{META_DESCRIPTION}}/g, post.meta_description)
             .replace(/{{OG_TITLE}}/g, post.title)
             .replace(/{{OG_DESCRIPTION}}/g, post.excerpt)
-            .replace(/{{OG_IMAGE}}/g, imageUrl)
+            .replace(/{{OG_IMAGE}}/g, canonicalImageUrl) // Use corrected URL
             .replace(/{{OG_URL}}/g, canonicalUrl)
             .replace(/{{ARTICLE_SCHEMA}}/g, JSON.stringify(articleSchema, null, 2))
             .replace(/{{POST_PUBLISH_DATE}}/g, post.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }))
             .replace(/{{POST_AUTHOR}}/g, post.author)
-            .replace(/{{FEATURED_IMAGE_SRC}}/g, `..${post.image.src}`) // Relative path from pages/blog/
+            .replace(/{{FEATURED_IMAGE_SRC}}/g, featuredImageSrc) // Use corrected relative path
             .replace(/{{FEATURED_IMAGE_ALT}}/g, post.image.alt)
             .replace(/{{POST_BODY}}/g, post.body)
             .replace(/{{TAGS_LIST}}/g, tagsListHtml)
@@ -127,10 +135,17 @@ async function generateBlogPages() {
     console.log(chalk.green(`  ✓ Generated ${posts.length} individual blog pages.`));
 
     // Generate blog listing page
-    const blogGrid = posts.map(post => `
+    const blogGrid = posts.map(post => {
+        // --- FIX START ---
+        // Correctly construct image paths for the blog listing page
+        const imageName = path.basename(post.image.src);
+        // Path from /pages/blog.html to /images/blog/image.webp is ../images/blog/image.webp
+        const cardImageSrc = `../images/blog/${imageName}`;
+        // --- FIX END ---
+        return `
         <article class="blog-card">
             <a href="blog/${post.slug}.html" class="blog-card-link-wrapper">
-                <img src="..${post.image.src}" alt="${post.image.alt}" class="blog-card-img" loading="lazy">
+                <img src="${cardImageSrc}" alt="${post.image.alt}" class="blog-card-img" loading="lazy">
                 <div class="blog-card-content">
                     <h3>${post.title}</h3>
                     <div class="blog-card-meta">
@@ -142,7 +157,7 @@ async function generateBlogPages() {
                 </div>
             </a>
         </article>
-    `).join("");
+    `}).join("");
 
     const collectionPageSchema = {
         "@context": "https://schema.org",

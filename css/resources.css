@@ -1,15 +1,4 @@
-:root {
-    --primary-color: #2c5282;
-    --primary-dark: #1a365d;
-    --secondary-color: #38b2ac;
-    --secondary-dark: #2c9c96;
-    --accent-color: #f6e9d7;
-    --dark-color: #2d3748;
-    --light-color: #f7fafc;
-    --text-color: #333333;
-    --light-text: #4a5568;
-    --white: #ffffff;
-}
+/* Uses global CSS variables from styles.css */
 
 .resources-intro {
     position: relative;
@@ -528,32 +517,7 @@
     margin-bottom: 0.8rem;
 }
 
-.download-link {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.8rem 1.2rem;
-    background-color: var(--light-color);
-    border-radius: 5px;
-    color: var(--dark-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-.download-link:hover {
-    background-color: #e9ecef;
-    transform: translateX(5px);
-}
-
-.download-link i {
-    margin-right: 0.8rem;
-    color: var(--secondary-color);
-    transition: transform 0.3s ease;
-}
-
-.download-link:hover i {
-    transform: translateY(-2px);
-}
+/* download-link base moved to styles.css */
 
 .insurance-intro {
     text-align: center;
@@ -606,36 +570,18 @@
     margin-right: 1rem;
 }
 
+/* Use shared CTA base; keep page-specific spacing if desired */
 .cta-section {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    padding: 4rem 0;
-    color: white;
-    text-align: center;
     margin-top: 3rem;
 }
 
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
+/* cta-content base from styles.css */
 
-.cta-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
+/* headings base from styles.css */
 
-.cta-content p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
+/* paragraph base from styles.css */
 
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
+/* buttons container base from styles.css */
 
 .cta-buttons .btn-primary {
     background-color: var(--secondary-color);
@@ -674,27 +620,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* animations centralized in styles.css */
 
 @keyframes slideDown {
     from {

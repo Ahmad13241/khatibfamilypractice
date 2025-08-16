@@ -603,10 +603,8 @@
 }
 
 .cta-section {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    /* Uses shared CTA base styles from styles.css; keep spacing overrides */
     padding: 5rem 0;
-    position: relative;
-    overflow: hidden;
     margin-top: 5rem;
 }
 
@@ -621,23 +619,17 @@
 }
 
 .cta-content {
-    color: white;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
     opacity: 0;
     animation: fadeInUp 0.8s ease 0.3s forwards;
 }
 
 .cta-content h2 {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
 }
 
 .cta-content p {
     font-size: 1.2rem;
     margin-bottom: 2.5rem;
-    opacity: 0.9;
 }
 
 .cta-buttons {
@@ -652,7 +644,6 @@
     border-radius: 50px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
 }
 
 .cta-buttons .btn-primary {
@@ -680,87 +671,23 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    font-weight: 500;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
+/* btn base styles come from styles.css */
 
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-}
+/* keep hover overrides only; base btn-primary from styles.css */
 
 .btn-primary:hover {
-    background-color: var(--primary-dark);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn-outline {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-}
+/* btn-outline base from styles.css */
 
 .btn-outline:hover {
-    background-color: var(--primary-color);
-    color: white;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+/* keyframes now centralized in styles.css */
 
 @media (max-width: 992px) {
     .doctor-card {

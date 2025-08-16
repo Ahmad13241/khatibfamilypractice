@@ -392,10 +392,8 @@
 }
 
 .cta-section {
+    /* extend shared CTA base; override gradient for healow brand */
     background: linear-gradient(135deg, var(--healow-primary) 0%, var(--primary-color) 100%);
-    padding: var(--spacing-xl) 0;
-    color: white;
-    margin-top: var(--spacing-xl);
 }
 
 .cta-content {

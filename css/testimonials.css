@@ -1,28 +1,4 @@
-:root {
-    --primary-color: #2c5282;
-    --primary-dark: #1a365d;
-    --secondary-color: #38b2ac;
-    --secondary-dark: #2c9c96;
-    --accent-color: #f6e9d7;
-    --dark-color: #2d3748;
-    --light-color: #f7fafc;
-    --text-color: #333333;
-    --light-text: #4a5568;
-    --white: #ffffff;
-    --secondary-light: #4fd1cc;
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
-    --spacing-xxl: 5rem;
-    --border-radius: 4px;
-    --border-radius-lg: 8px;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --primary-rgb: 44, 82, 130;
-}
+/* Uses global variables from styles.css */
 
 .testimonial-hero {
     background-color: var(--primary-color);
@@ -133,15 +109,7 @@
     font-weight: 500;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
+/* animations centralized in styles.css */
 
 .rating-overview-section {
     padding: var(--spacing-xl) 0;
@@ -1113,17 +1081,7 @@
     }
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* animations centralized in styles.css */
 
 .rating-card,
 .testimonial-card,
@@ -1196,38 +1154,18 @@
     color: var(--primary-color);
 }
 
+/* Use shared CTA base; keep spacing via variables */
 .cta-section {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    padding: var(--spacing-xl) 0;
-    color: var(--white);
-    text-align: center;
     margin-top: var(--spacing-xl);
 }
 
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
+/* cta-content base from styles.css */
 
-.cta-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--white);
-}
+/* heading base from styles.css */
 
-.cta-content p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    color: var(--white);
-}
+/* paragraph base from styles.css */
 
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
+/* buttons container base from styles.css */
 
 .cta-buttons .btn-primary {
     background-color: var(--secondary-color);

@@ -10,6 +10,7 @@
     "dev:sync": "concurrently \"npm run dev\" \"npm run bs\"",
     "lint": "eslint js/*.js",
     "build": "node scripts/build.js",
+    "fix:images": "node scripts/fix-image-refs.js",
     "start:prod": "NODE_ENV=production node server.js",
     "deploy:fix": "node scripts/deploy-fix.js"
   },

@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function setupImageHandling() {
     const images = document.querySelectorAll("img:not([data-no-lazy])");
-    const placeholderSrc = getBasePath() + "images/placeholder.jpg";
+    const placeholderSrc = getBasePath() + "images/LOGO.webp";
 
     images.forEach((img) => {
       img.setAttribute("loading", "lazy");
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (usePlaceholder && this.src !== placeholderSrc) {
           this.src = placeholderSrc;
-          this.alt = `Placeholder image for ${this.alt || 'content image'}`;
+          this.alt = `${this.alt || 'content image'} (placeholder)`;
         } else if (!usePlaceholder) {
           this.alt = `Alternative image loaded for ${this.alt || 'content image'}`;
         }
@@ -553,11 +553,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getBasePath() {
     const path = window.location.pathname;
-    // More robust check for pages directory
-    if (path.includes("/pages/")) {
-      return "../";
-    }
-    return "";
+    const segments = path.split('/').filter(Boolean);
+    const isFile = segments.length > 0 && segments[segments.length - 1].includes('.');
+    const dirDepth = isFile ? (segments.length - 1) : segments.length;
+    return dirDepth > 0 ? "../".repeat(dirDepth) : "";
   }
 
 

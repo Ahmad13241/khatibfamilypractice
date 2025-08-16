@@ -22,6 +22,7 @@ const PAGES_DIR = path.join(ROOT_DIR, "pages");
 const BLOG_TEMPLATE_PATH = path.join(PAGES_DIR, "blog", "blog-post-template.html");
 const BLOG_LIST_TEMPLATE_PATH = path.join(PAGES_DIR, "blog.html");
 const BLOG_OUTPUT_DIR = path.join(DIST_DIR, "pages", "blog");
+const PARTIALS_DIR = path.join(ROOT_DIR, "partials");
 
 console.log(chalk.blue("Starting production build process..."));
 
@@ -37,6 +38,7 @@ fs.mkdirSync(path.join(DIST_DIR, "pages"), { recursive: true });
 fs.mkdirSync(path.join(DIST_DIR, "images"), { recursive: true });
 fs.mkdirSync(path.join(DIST_DIR, "forms"), { recursive: true });
 fs.mkdirSync(BLOG_OUTPUT_DIR, { recursive: true }); // Ensure blog output directory exists
+fs.mkdirSync(path.join(DIST_DIR, "partials"), { recursive: true });
 
 // --- Blog Generation Function ---
 async function generateBlogPages() {
@@ -177,6 +179,29 @@ async function generateBlogPages() {
 
     fs.writeFileSync(path.join(DIST_DIR, "pages", "blog.html"), listOutput);
     console.log(chalk.green("  ✓ Generated blog listing page."));
+}
+
+// --- Inject partials into HTML files ---
+function injectPartials(htmlContent, pagePathFromRoot) {
+    // Determine base prefix (e.g., '', '../', '../../') for this page
+    const segments = pagePathFromRoot.split(path.sep).filter(Boolean);
+    const isFile = segments.length > 0 && segments[segments.length - 1].includes('.')
+    const depth = isFile ? (segments.length - 1) : segments.length;
+    const base = depth > 0 ? '../'.repeat(depth) : '';
+
+    // Load partials once
+    const head = fs.readFileSync(path.join(PARTIALS_DIR, 'head.html'), 'utf8');
+    const header = fs.readFileSync(path.join(PARTIALS_DIR, 'header.html'), 'utf8');
+    const footer = fs.readFileSync(path.join(PARTIALS_DIR, 'footer.html'), 'utf8');
+
+    // Replace tokens
+    let out = htmlContent
+        .replace(/{{>\s*head\s*}}/gi, head)
+        .replace(/{{>\s*header\s*}}/gi, header)
+        .replace(/{{>\s*footer\s*}}/gi, footer)
+        .replace(/{{BASE}}/g, base);
+
+    return out;
 }
 
 
@@ -335,6 +360,10 @@ function processHtmlFiles(directory) {
     htmlFiles.forEach(htmlFile => {
         console.log(chalk.cyan(`  Processing HTML: ${path.relative(DIST_DIR, htmlFile)}`));
         let content = fs.readFileSync(htmlFile, "utf-8");
+
+        // Inject partials (head/header/footer) using simple include tokens
+        const relFromRoot = path.relative(DIST_DIR, htmlFile);
+        content = injectPartials(content, relFromRoot);
 
         const relativePath = path.relative(path.dirname(htmlFile), DIST_DIR);
         let prefix = relativePath ? (relativePath.replace(/\\/g, '/') + '/').replace(/^\.\//, '') : '';

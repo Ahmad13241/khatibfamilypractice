@@ -1,15 +1,7 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3TLLF2PM7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-D3TLLF2PM7');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
@@ -20,13 +12,48 @@
 
     <title>Khatib Family Practice | Dr. Nadim Khatib | Bullhead City Doctor</title>
 
-    <!-- NEW: Add the Netlify Identity Widget script here -->
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3TLLF2PM7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D3TLLF2PM7');
+    </script>
+
+    <!-- Netlify Identity (optional for CMS) -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- Preconnect to external domains to establish early connections -->
+    <!-- Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+
 
     <!-- Critical CSS inlined for faster rendering -->
     <style>
@@ -218,29 +245,7 @@
     <noscript>
         </noscript>
 
-    <!-- Favicon -->
-    <link rel="icon" href="images/favicon/favicon.ico">
-    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-    <link rel="manifest" href="images/favicon/site.webmanifest">
-
-    <!-- FIX: Use a standard link for Font Awesome for reliability -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Google Fonts loaded asynchronously -->
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
-            rel="stylesheet">
-    </noscript>
+    
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -344,7 +349,7 @@
 
     <!-- Header Section -->
     <header>
-        <div class="top-info-bar">
+                <div class="top-info-bar">
             <div class="container">
                 <div class="contact-details">
                     <a href="tel:9287639009" class="contact-item">
@@ -383,8 +388,7 @@
                     </button>
 
                     <ul class="nav-menu" id="nav-menu-list">
-                        <li class="nav-item active"><a href="index.html" class="nav-link" aria-current="page">Home</a>
-                        </li>
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="pages/about.html" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="pages/resources.html" class="nav-link">Patient Resources</a></li>
                         <li class="nav-item"><a href="pages/healow.html" class="nav-link">Healow Portal Service</a></li>
@@ -395,6 +399,8 @@
                 </div>
             </div>
         </div>
+
+
     </header>
 
     <main id="main-content">
@@ -645,7 +651,7 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
+                <div class="container">
             <div class="footer-content">
                 <div class="footer-section about">
                     <h3>Khatib Family Practice</h3>
@@ -690,6 +696,8 @@
                 </div>
             </div>
         </div>
+
+
     </footer>
 
     <!-- Main JavaScript -->

@@ -85,6 +85,10 @@
     opacity: 1;
 }
 
+.doctor-image:focus-within::before {
+    opacity: 1;
+}
+
 .doctor-img {
     width: 100%;
     height: 100%;
@@ -100,6 +104,10 @@
     transform: scale(1.05);
 }
 
+.doctor-image:focus-within .doctor-img {
+    transform: scale(1.05);
+}
+
 .doctor-details {
     display: flex;
     flex-direction: column;
@@ -107,11 +115,13 @@
 }
 
 .doctor-details h1 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 1.4rem + 1.6vw, 2.5rem);
     color: var(--primary-color);
     margin-bottom: 0.5rem;
     position: relative;
     padding-bottom: 1rem;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
 }
 
 .doctor-details h1::after {
@@ -161,6 +171,11 @@
 }
 
 .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.info-card:focus-within {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
@@ -231,6 +246,26 @@
 .experience-summary p {
     color: var(--light-text);
     line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .doctor-card,
+    .philosophy .section-header,
+    .philosophy-text,
+    .values,
+    .office-gallery h3,
+    .gallery-grid {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .doctor-image,
+    .info-card,
+    .feature-card,
+    .gallery-item {
+        transition: none !important;
+    }
 }
 
 .philosophy {
@@ -595,6 +630,10 @@
     transform: translateY(0);
 }
 
+.gallery-item:focus-within .gallery-caption {
+    transform: translateY(0);
+}
+
 .gallery-caption p {
     color: white;
     margin: 0;
@@ -767,5 +806,9 @@
 }
 
 .doctor-image:hover .doctor-image-caption {
+    transform: translateY(0);
+}
+
+.doctor-image:focus-within .doctor-image-caption {
     transform: translateY(0);
 }

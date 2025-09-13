@@ -66,7 +66,7 @@
 
 .testimonial-hero h1 {
     color: var(--white);
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 1.5rem + 2vw, 3rem);
     margin-bottom: var(--spacing-md);
     position: relative;
     display: inline-block;
@@ -379,6 +379,11 @@
     box-shadow: var(--shadow-lg);
 }
 
+.testimonial-card:focus-within {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: var(--shadow-lg);
+}
+
 .testimonial-card:hover::before {
     height: 8px;
 }
@@ -615,6 +620,11 @@
     box-shadow: var(--shadow-lg);
 }
 
+.platform-card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
 .platform-card:hover::after {
     height: 8px;
 }
@@ -804,7 +814,7 @@
 
 @media (max-width: 992px) {
     .testimonial-hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 1.4rem + 1.6vw, 2.5rem);
     }
 
     .rating-cards {
@@ -819,6 +829,19 @@
     .testimonials-grid {
         grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
         gap: 2rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-content,
+    .testimonial-hero h1::after,
+    .testimonial-hero p,
+    .testimonial-card,
+    .platform-card,
+    .review-benefits {
+        animation: none !important;
+        transition: none !important;
     }
 }
 

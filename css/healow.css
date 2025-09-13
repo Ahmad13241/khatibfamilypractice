@@ -18,6 +18,7 @@
     color: var(--primary-dark);
     margin-bottom: var(--spacing-md);
     position: relative;
+    font-size: clamp(2rem, 1.4rem + 1.6vw, 2.6rem);
 }
 
 .hero-section.healow-hero h1::after {
@@ -100,6 +101,11 @@
 
 .app-preview-placeholder:hover {
     transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.app-preview-placeholder:focus-within {
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -211,6 +217,11 @@
 
 .step:hover {
     transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.step:focus-within {
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -405,7 +416,7 @@
 .cta-content h2 {
     color: white;
     margin-bottom: var(--spacing-md);
-    font-size: 2rem;
+    font-size: clamp(1.7rem, 1.2rem + 1.2vw, 2rem);
 }
 
 .cta-content p {
@@ -480,6 +491,17 @@
     .step h4,
     .step p {
         text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .app-preview-placeholder,
+    .feature-item,
+    .step,
+    .accordion-item,
+    .cta-section .btn {
+        transition: none !important;
     }
 }
 

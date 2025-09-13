@@ -14,7 +14,7 @@
 }
 
 .resources-intro .section-header h1 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 1.5rem + 1.8vw, 2.5rem);
     color: var(--primary-color);
     position: relative;
     margin-bottom: 1rem;
@@ -87,6 +87,7 @@
     z-index: 10;
     overflow: hidden;
     will-change: transform;
+    isolation: isolate;
 }
 
 .resource-nav-item::before {
@@ -185,6 +186,7 @@
     position: relative;
     overflow: hidden;
     background-color: rgba(246, 233, 215, 0.2);
+    backdrop-filter: saturate(110%) blur(0.5px);
 }
 
 .service-detail::before {
@@ -252,7 +254,9 @@
 
     .service-img {
         -webkit-transform: translateZ(0);
+        transform: translateZ(0);
         -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }
 
@@ -274,7 +278,7 @@
 }
 
 .service-text h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
     margin-bottom: 1.2rem;
     color: var(--primary-color);
     position: relative;
@@ -455,6 +459,11 @@
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
+.resource-card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
 .resource-icon {
     width: 70px;
     height: 70px;
@@ -562,6 +571,7 @@
     background-color: var(--light-color);
     border-radius: 5px;
     margin: 1.5rem 0;
+    gap: 0.75rem;
 }
 
 .insurance-contact i {

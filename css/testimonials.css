@@ -132,36 +132,7 @@
     pointer-events: none;
 }
 
-.section-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-}
-
-.section-header h2 {
-    font-size: 2.25rem;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
-    position: relative;
-    display: inline-block;
-}
-
-.section-header h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: var(--secondary-color);
-}
-
-.section-header p {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 1rem auto 0;
-}
+/* section-header styles are defined globally in styles.css */
 
 .rating-cards {
     display: grid;
@@ -368,31 +339,7 @@
     margin: 0 auto var(--spacing-xl);
 }
 
-.testimonials-grid-section .section-header h2 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    position: relative;
-    display: inline-block;
-    font-size: 2.5rem;
-}
-
-.testimonials-grid-section .section-header h2::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 2px;
-}
-
-.testimonials-grid-section .section-header p {
-    font-size: 1.1rem;
-    margin-top: var(--spacing-md);
-    line-height: 1.6;
-}
+/* Use global section-header styles for consistency */
 
 .testimonials-grid {
     display: grid;
@@ -1155,6 +1102,7 @@
 }
 
 /* Use shared CTA base; keep spacing via variables */
+/* CTA spacing override only */
 .cta-section {
     margin-top: var(--spacing-xl);
 }
@@ -1167,39 +1115,4 @@
 
 /* buttons container base from styles.css */
 
-.cta-buttons .btn-primary {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.8rem;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.cta-buttons .btn-primary:hover {
-    background-color: var(--secondary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.cta-buttons .btn-outline {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-    padding: 0.8rem 1.8rem;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.cta-buttons .btn-outline:hover {
-    background-color: white;
-    color: var(--primary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+/* CTA button styles centralized in styles.css */

@@ -12,15 +12,16 @@
 
     <title>About Dr. Nadim Khatib | Board-Certified Family Doctor in Bullhead City, AZ</title>
 
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
     {{> head}}
-    <!-- CSS -->
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/about.css">
+    <!-- Stylesheets loaded asynchronously with noscript fallback -->
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/styles.css">
+    </noscript>
+    <link rel="preload" href="../css/about.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/about.css">
+    </noscript>
 
 
 

@@ -571,6 +571,7 @@
 }
 
 /* Use shared CTA base; keep page-specific spacing if desired */
+/* CTA uses shared base styles; only keep spacing override */
 .cta-section {
     margin-top: 3rem;
 }
@@ -583,42 +584,7 @@
 
 /* buttons container base from styles.css */
 
-.cta-buttons .btn-primary {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.8rem;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.cta-buttons .btn-primary:hover {
-    background-color: var(--secondary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.cta-buttons .btn-outline {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-    padding: 0.8rem 1.8rem;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.cta-buttons .btn-outline:hover {
-    background-color: white;
-    color: var(--primary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+/* CTA button styles centralized in styles.css */
 
 /* animations centralized in styles.css */
 

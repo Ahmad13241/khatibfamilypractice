@@ -275,7 +275,6 @@ if (cssFilesToBundle.length > 0) {
     const minifiedCssOutput = new CleanCSS({
         level: 2,
         compatibility: 'ie10',
-        format: 'keep-breaks',
         inline: ['none']
     }).minify(cssSources);
 
@@ -291,6 +290,18 @@ if (cssFilesToBundle.length > 0) {
     const minifiedCssSize = minifiedCssOutput.styles.length;
     const cssReduction = originalCssSize > 0 ? (((originalCssSize - minifiedCssSize) / originalCssSize) * 100).toFixed(1) : "0.0";
     console.log(chalk.green(`  ✓ CSS bundled and minified to css/main.bundle.css (${cssReduction}% reduction)`));
+
+    // Remove individual CSS files from dist to keep only the bundle
+    cssFilesToBundle.forEach(file => {
+        if (path.basename(file) !== path.basename(cssBundlePath)) {
+            try {
+                fs.rmSync(file, { force: true });
+                // console.log(`  - Removed ${path.basename(file)}`);
+            } catch (err) {
+                console.warn(chalk.yellow(`  ! Could not remove ${path.basename(file)}: ${err.message}`));
+            }
+        }
+    });
 } else {
     console.warn(chalk.yellow("  ! No CSS files found to bundle."));
     fs.writeFileSync(cssBundlePath, "/* No CSS files found */");

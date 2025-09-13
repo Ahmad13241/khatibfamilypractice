@@ -889,6 +889,29 @@ main:focus {
     flex-wrap: wrap;
 }
 
+/* CTA-specific button overrides */
+.cta-section .btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+}
+
+.cta-section .btn-primary:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+}
+
+.cta-section .btn-outline {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.cta-section .btn-outline:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border-color: var(--white);
+}
+
 /* Shared component: download link */
 .download-link {
     display: inline-flex;

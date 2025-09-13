@@ -452,17 +452,7 @@
     margin-bottom: var(--spacing-lg);
 }
 
-.about-logo {
-    width: 100%;
-    max-width: 300px;
-    transition: transform 0.5s ease;
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-}
-
-.about-logo:hover {
-    transform: scale(1.05);
-}
+/* unused .about-logo removed to reduce bloat */
 
 .testimonials {
     padding: var(--spacing-xxl) 0;

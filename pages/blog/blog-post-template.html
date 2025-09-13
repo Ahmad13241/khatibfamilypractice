@@ -24,9 +24,15 @@
     <meta property="twitter:image" content="{{OG_IMAGE}}">
 
     {{> head}}
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/blog.css">
+    <!-- Stylesheets loaded asynchronously with noscript fallback -->
+    <link rel="preload" href="../../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../css/styles.css">
+    </noscript>
+    <link rel="preload" href="../../css/blog.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../css/blog.css">
+    </noscript>
 
     <!-- Favicon, Fonts, and other head elements provided via partial -->
 

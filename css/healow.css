@@ -421,6 +421,7 @@
     flex-wrap: wrap;
 }
 
+/* Healow-specific button overrides retained to supersede global */
 .cta-section .btn-primary {
     background-color: white;
     color: var(--healow-primary);

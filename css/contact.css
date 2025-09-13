@@ -37,24 +37,10 @@
     margin: 1rem auto;
 }
 
+/* H2 in section header inherits global styles; keep animation only */
 .contact-section .section-header h2 {
-    color: var(--primary-color);
-    position: relative;
-    margin-bottom: 1rem;
     opacity: 0;
     animation: fadeInUp 0.8s ease 0.2s forwards;
-}
-
-.contact-section .section-header h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--secondary-color);
-    border-radius: 2px;
 }
 
 .contact-intro {
@@ -555,22 +541,9 @@
 }
 
 /* Button base and outline styles come from styles.css */
-
 /* animations centralized in styles.css */
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
+/* removed unused pulse animation */
 
 @media (max-width: 992px) {
     .contact-methods {

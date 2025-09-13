@@ -646,46 +646,10 @@
     letter-spacing: 0.5px;
 }
 
-.cta-buttons .btn-primary {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-}
-
-.cta-buttons .btn-primary:hover {
-    background-color: var(--secondary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.cta-buttons .btn-outline {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-}
-
-.cta-buttons .btn-outline:hover {
-    background-color: white;
-    color: var(--primary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
 /* btn base styles come from styles.css */
 
 /* keep hover overrides only; base btn-primary from styles.css */
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* btn-outline base from styles.css */
-
-.btn-outline:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+/* hover effects handled globally */
 
 /* keyframes now centralized in styles.css */
 

@@ -4,8 +4,8 @@
  * to improve initial page load performance - CORRECTED VERSION
  */
 
-(function() {
-    document.addEventListener('DOMContentLoaded', function() {
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
         // Select the placeholders directly
         const mapPlaceholders = document.querySelectorAll('.map-placeholder');
 
@@ -15,11 +15,11 @@
         }
         // console.log(`MapLoader: Found ${mapPlaceholders.length} map placeholders.`);
 
-        mapPlaceholders.forEach(function(placeholder) {
+        mapPlaceholders.forEach(function (placeholder) {
             const container = placeholder.closest('.map-container');
 
             if (!container) {
-                console.warn("MapLoader: Found a placeholder without a .map-container parent.", placeholder);
+                console.warn('MapLoader: Found a placeholder without a .map-container parent.', placeholder);
                 return;
             }
 
@@ -42,15 +42,15 @@
     function setupMapLoading(container, placeholder) {
         // Check if required data attributes exist on the placeholder
         if (!placeholder.dataset.mapSrc) {
-             console.warn("MapLoader: Placeholder is missing data-map-src attribute.", placeholder);
-             return;
+            console.warn('MapLoader: Placeholder is missing data-map-src attribute.', placeholder);
+            return;
         }
 
         if ('IntersectionObserver' in window) {
             // Use intersection observer for modern browsers
             const observer = new IntersectionObserver(
-                function(entries) {
-                    entries.forEach(function(entry) {
+                function (entries) {
+                    entries.forEach(function (entry) {
                         if (entry.isIntersecting) {
                             // console.log("MapLoader: Map container intersecting, loading map.", container);
                             loadMap(container, placeholder);
@@ -66,7 +66,7 @@
         } else {
             // Fallback for browsers that don't support IntersectionObserver: Load on click
             // console.log("MapLoader: IntersectionObserver not supported, using click fallback.", placeholder);
-            placeholder.addEventListener('click', function() {
+            placeholder.addEventListener('click', function () {
                 // console.log("MapLoader: Placeholder clicked, loading map.", container);
                 loadMap(container, placeholder);
             }, { once: true }); // Remove listener after first click
@@ -84,7 +84,7 @@
         const mapSandbox = placeholder.dataset.mapSandbox || 'allow-scripts allow-same-origin allow-popups'; // Default sandbox
 
         if (!mapSrc) {
-            console.error("MapLoader: Cannot load map, data-map-src is missing.", placeholder);
+            console.error('MapLoader: Cannot load map, data-map-src is missing.', placeholder);
             return;
         }
 
@@ -108,11 +108,14 @@
         container.classList.add('map-loaded'); // Add class to indicate map is loaded
 
         // Log map interaction if the logging function exists
-        if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-            KLogger.logUserAction('Map Interaction', { action: 'map-load-triggered' });
-        } else if (typeof logUserAction === 'function') {
-            // Fallback if KLogger isn't defined but a global logUserAction is
-            logUserAction('Map Interaction', { action: 'map-load-triggered' });
+        try {
+            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
+                window.KLogger.logUserAction('Map Interaction', { action: 'map-load-triggered' });
+            } else if (typeof window.logUserAction === 'function') {
+                window.logUserAction('Map Interaction', { action: 'map-load-triggered' });
+            }
+        } catch (err) {
+            // Swallow logging errors silently in production
         }
     }
 })(); 

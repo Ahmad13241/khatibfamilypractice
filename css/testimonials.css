@@ -345,27 +345,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     gap: 2.5rem;
-    margin: var(--spacing-xl) 0 var(--spacing-lg);
-    position: relative;
-    z-index: 1;
-}
-
-.testimonial-card {
-    background-color: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.testimonial-card::before {
-    content: '';
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;

@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Removed setupFeatureItemHovers - handled purely via CSS
+
 
   function setupMapInteractionLogging() {
     if (!mapContainer) return;
@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function setupLinkClickLogging() {
-    if (!IS_DEVELOPMENT && (typeof window === 'undefined' || typeof window.KLogger === 'undefined')) return;
+    if (!IS_DEVELOPMENT) return;
 
     document.body.addEventListener('click', (e) => {
       const link = e.target.closest('a');
@@ -523,7 +523,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   }
 
-  // Removed setupServiceCardEnhancements - handled via CSS
 
   function setupSectionAnimations() {
     if (!sections.length) return;
@@ -566,17 +565,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   function logPerformance(label, value, details = '') {
-    if (IS_DEVELOPMENT && typeof window !== 'undefined' && window.KLogger && typeof window.KLogger.logPerformance === 'function') {
-      window.KLogger.logPerformance(label, Math.round(value), 'ms', details);
-    } else if (IS_DEVELOPMENT) {
+    if (IS_DEVELOPMENT) {
       console.debug(`Performance: ${label} - ${Math.round(value)}ms`, details);
     }
   }
 
   function logUserAction(action, data) {
-    if (IS_DEVELOPMENT && typeof window !== 'undefined' && window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-      window.KLogger.logUserAction(action, data);
-    } else if (IS_DEVELOPMENT) {
+    if (IS_DEVELOPMENT) {
       console.info(`User Action: ${action}`, data);
     }
   }

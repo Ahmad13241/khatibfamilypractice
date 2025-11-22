@@ -189,17 +189,26 @@ function injectPartials(htmlContent, pagePathFromRoot) {
     const depth = isFile ? (segments.length - 1) : segments.length;
     const base = depth > 0 ? '../'.repeat(depth) : '';
 
-    // Load partials once
-    const head = fs.readFileSync(path.join(PARTIALS_DIR, 'head.html'), 'utf8');
-    const header = fs.readFileSync(path.join(PARTIALS_DIR, 'header.html'), 'utf8');
-    const footer = fs.readFileSync(path.join(PARTIALS_DIR, 'footer.html'), 'utf8');
+    // Load all partials from the partials directory
+    const partialFiles = fs.readdirSync(PARTIALS_DIR).filter(file => file.endsWith('.html'));
+    const partials = {};
+
+    partialFiles.forEach(file => {
+        const name = path.basename(file, '.html');
+        partials[name] = fs.readFileSync(path.join(PARTIALS_DIR, file), 'utf8');
+    });
 
     // Replace tokens
-    let out = htmlContent
-        .replace(/{{>\s*head\s*}}/gi, head)
-        .replace(/{{>\s*header\s*}}/gi, header)
-        .replace(/{{>\s*footer\s*}}/gi, footer)
-        .replace(/{{BASE}}/g, base);
+    let out = htmlContent;
+
+    // Replace all partials
+    Object.keys(partials).forEach(name => {
+        const regex = new RegExp(`{{>\\s*${name}\\s*}}`, 'gi');
+        out = out.replace(regex, partials[name]);
+    });
+
+    // Handle BASE token
+    out = out.replace(/{{BASE}}/g, base);
 
     return out;
 }

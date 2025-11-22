@@ -46,14 +46,14 @@ module.exports = {
   },
 
   // Scripts to inject in all pages
-  snippetOptions: {
-    rule: {
-      match: /<\/body>/i,
-      fn: function (snippet, match) {
-        return '<script src="/js/logger.js"></script>' + snippet + match;
-      },
-    },
-  },
+  // snippetOptions: {
+  //   rule: {
+  //     match: /<\/body>/i,
+  //     fn: function (snippet, match) {
+  //       return '<script src="/js/logger.js"></script>' + snippet + match;
+  //     },
+  //   },
+  // },
 
   // Customize rewrite rules as needed
   rewriteRules: [

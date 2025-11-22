@@ -29,9 +29,6 @@
                 return;
             }
 
-            // --- REMOVED: Code block that looked for an existing iframe ---
-            // --- This block was incorrect for the current HTML structure ---
-
             // Directly set up the loading mechanism for the container
             setupMapLoading(container, placeholder);
             container.classList.add('map-loading-setup'); // Mark as processed
@@ -108,14 +105,8 @@
         container.classList.add('map-loaded'); // Add class to indicate map is loaded
 
         // Log map interaction if the logging function exists
-        try {
-            if (window.KLogger && typeof window.KLogger.logUserAction === 'function') {
-                window.KLogger.logUserAction('Map Interaction', { action: 'map-load-triggered' });
-            } else if (typeof window.logUserAction === 'function') {
-                window.logUserAction('Map Interaction', { action: 'map-load-triggered' });
-            }
-        } catch (err) {
-            // Swallow logging errors silently in production
+        if (typeof window.logUserAction === 'function') {
+            window.logUserAction('Map Interaction', { action: 'map-load-triggered' });
         }
     }
-})(); 
+})();

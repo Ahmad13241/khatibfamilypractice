@@ -476,6 +476,16 @@ section {
 }
 
 /* Independent Difference */
+.independent-difference {
+    position: relative;
+    padding: var(--spacing-xxl) 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/images/courtyard-of-the-building.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Parallax effect */
+}
+
 .difference-grid {
     display: grid;
     gap: var(--spacing-lg);

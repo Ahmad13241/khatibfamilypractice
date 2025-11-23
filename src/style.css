@@ -1425,3 +1425,42 @@ details[open] .faq-content {
     font-weight: 600;
     margin-top: 0.25rem;
 }
+
+/* Location Section - Premium Background */
+.location {
+    position: relative;
+    padding: var(--spacing-xxl) 0;
+    background-image: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url('/images/new-waiting-room.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Parallax effect */
+    color: var(--color-white);
+    text-align: center;
+}
+
+.location h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+}
+
+.location p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.address-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: var(--radius-lg);
+    display: inline-block;
+    margin-top: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-xl);
+    transition: transform 0.3s ease;
+}
+
+.address-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-secondary);
+}

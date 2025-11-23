@@ -1047,6 +1047,7 @@ details[open] .faq-content {
     margin-top: var(--spacing-xl);
     border: 4px solid var(--color-white);
 }
+
 /* Testimonials Section */
 .testimonials {
     padding: var(--spacing-xl) 0;
@@ -1085,9 +1086,26 @@ details[open] .faq-content {
     color: var(--color-primary);
 }
 
-.trust-badge:nth-child(1) .trust-icon { color: #4285F4; } /* Google Blue */
-.trust-badge:nth-child(2) .trust-icon { color: #FF1A1A; } /* Yelp Red */
-.trust-badge:nth-child(3) .trust-icon { color: #F59E0B; } /* Healthgrades Orange */
+.trust-badge:nth-child(1) .trust-icon {
+    color: #4285F4;
+}
+
+/* Google Blue */
+.trust-badge:nth-child(2) .trust-icon {
+    color: #FF1A1A;
+}
+
+/* Yelp Red */
+.trust-badge:nth-child(3) .trust-icon {
+    color: #6001D2;
+}
+
+/* Yahoo Purple */
+.trust-badge:nth-child(4) .trust-icon {
+    color: var(--color-success);
+}
+
+/* Recommended Green */
 
 .trust-info {
     display: flex;
@@ -1125,17 +1143,21 @@ details[open] .faq-content {
     gap: var(--spacing-lg);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-xl); /* Bottom padding for shadow */
+    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-xl);
+    /* Bottom padding for shadow */
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .testimonials-track::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
+    /* Chrome/Safari */
 }
 
 .testimonial-card-premium {
-    flex: 0 0 350px; /* Fixed width for cards */
+    flex: 0 0 350px;
+    /* Fixed width for cards */
     scroll-snap-align: center;
     background: var(--color-white);
     padding: var(--spacing-lg);
@@ -1150,7 +1172,8 @@ details[open] .faq-content {
 
 @media (max-width: 768px) {
     .testimonial-card-premium {
-        flex: 0 0 85vw; /* Wider on mobile */
+        flex: 0 0 85vw;
+        /* Wider on mobile */
     }
 }
 

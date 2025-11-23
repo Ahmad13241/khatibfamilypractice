@@ -27,7 +27,7 @@ const footerTemplate = `
     <div class="footer-grid">
       <div class="footer-col">
         <h3>Khatib Family Practice</h3>
-        <p>Personalized Adult Primary Care (21+) serving Bullhead City and the Tri-State area since 1998.</p>
+        <p>Personalized Adult Primary Care (21+) serving Bullhead City, Mohave County, and the Tri-State area since 1998. Your trusted Medical Clinic 86442.</p>
       </div>
       <div class="footer-col">
         <h3>Quick Links</h3>

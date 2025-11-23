@@ -33,6 +33,7 @@ const footerTemplate = `
         <a href="/">Home</a>
         <a href="/src/pages/about.html">About Us</a>
         <a href="/src/pages/services.html">Services</a>
+        <a href="/src/pages/resources.html">Patient Resources</a>
         <a href="/src/pages/contact.html">Contact</a>
       </div>
       <div class="footer-col">
@@ -49,7 +50,7 @@ const footerTemplate = `
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; ${new Date().getFullYear()} Khatib Family Practice. All rights reserved.</p>
+      <p>&copy; ${new Date().getFullYear()} Khatib Family Practice. All rights reserved. | <a href="/src/pages/privacy.html" style="display:inline; color: inherit; text-decoration: underline;">Privacy Policy</a></p>
     </div>
   </div>
 `;

@@ -40,6 +40,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/style.css">
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -140,32 +142,48 @@
                         <p>Tailored healthcare services for your unique needs.</p>
                     </div>
                     <div class="services-grid">
-                        <div class="service-card">
-                            <div class="service-icon"><i class="fas fa-user-md"></i>🩺</div>
-                            <h3>Adult Medicine</h3>
-                            <p>Personalized healthcare for adults 21+ focused on your specific needs and health goals.
-                            </p>
-                            <a href="/src/pages/services.html" class="btn btn-outline">Learn More</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon"><i class="fas fa-heartbeat"></i>❤️</div>
-                            <h3>Preventive Care</h3>
-                            <p>Proactive health management through screenings, vaccinations, and lifestyle guidance.</p>
-                            <a href="/src/pages/services.html" class="btn btn-outline">Learn More</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon"><i class="fas fa-notes-medical"></i>📋</div>
-                            <h3>Chronic Disease</h3>
-                            <p>Consistent, coordinated care for long-term health conditions like diabetes and
-                                hypertension.</p>
-                            <a href="/src/pages/services.html" class="btn btn-outline">Learn More</a>
-                        </div>
+                        <article class="service-card-premium">
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <h3>Adult Medicine</h3>
+                                <p>Personalized healthcare for adults 21+ focused on your specific needs and health
+                                    goals.</p>
+                                <a href="/src/pages/services.html" class="btn btn-outline"
+                                    style="margin-top: auto;">Learn More</a>
+                            </div>
+                        </article>
+                        <article class="service-card-premium">
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <h3>Preventive Care</h3>
+                                <p>Proactive health management through screenings, vaccinations, and lifestyle guidance.
+                                </p>
+                                <a href="/src/pages/services.html" class="btn btn-outline"
+                                    style="margin-top: auto;">Learn More</a>
+                            </div>
+                        </article>
+                        <article class="service-card-premium">
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-notes-medical"></i>
+                                </div>
+                                <h3>Chronic Disease</h3>
+                                <p>Consistent, coordinated care for long-term health conditions like diabetes and
+                                    hypertension.</p>
+                                <a href="/src/pages/services.html" class="btn btn-outline"
+                                    style="margin-top: auto;">Learn More</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
 
             <!-- The Independent Difference Section -->
-            <section class="independent-difference" style="background-color: #f0f4f8; padding: 4rem 0;"
+            <section class="independent-difference" style="background-color: var(--color-surface); padding: 4rem 0;"
                 aria-labelledby="difference-heading">
                 <div class="container">
                     <div class="section-header">
@@ -176,43 +194,40 @@
                         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
                         <div class="diff-card"
                             style="background: white; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border-left: 5px solid var(--color-primary);">
-                            <h3 style="color: var(--color-primary);">Dr. Khatib's Practice</h3>
-                            <ul style="list-style: none; margin-top: 1rem;">
-                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
-                                    <span aria-hidden="true">✅</span>
-                                    <span><strong>You are the Boss:</strong> We answer to our patients, not corporate
-                                        shareholders or insurance quotas. Your health is our only priority.</span>
-                                </li>
-                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
-                                    <span aria-hidden="true">✅</span>
-                                    <span><strong>Continuity of Care:</strong> You see Dr. Khatib every visit. No
-                                        rotating roster of providers who don't know your history.</span>
-                                </li>
-                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
-                                    <span aria-hidden="true">✅</span>
-                                    <span><strong>Time to Listen:</strong> Unhurried appointments (30+ mins) to truly
-                                        understand your health concerns and answer every question.</span>
-                                </li>
+                            <h3 style="color: var(--color-primary); margin-bottom: 1.5rem;">Dr. Khatib's Practice</h3>
+                            <ul class="feature-list">
+                                <li><strong>You are the Boss:</strong> We answer to our patients, not corporate
+                                    shareholders or insurance quotas. Your health is our only priority.</li>
+                                <li><strong>Continuity of Care:</strong> You see Dr. Khatib every visit. No
+                                    rotating roster of providers who don't know your history.</li>
+                                <li><strong>Time to Listen:</strong> Unhurried appointments (30+ mins) to truly
+                                    understand your health concerns and answer every question.</li>
                             </ul>
                         </div>
                         <div class="diff-card"
                             style="background: #fff; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); opacity: 0.9;">
-                            <h3 style="color: #555;">Corporate Clinics</h3>
-                            <ul style="list-style: none; margin-top: 1rem; color: #555;">
-                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
-                                    <span aria-hidden="true">❌</span>
-                                    <span><strong>Profit First:</strong> Decisions are often driven by bottom-line
-                                        metrics, volume targets, and administrative bureaucracy.</span>
+                            <h3 style="color: #555; margin-bottom: 1.5rem;">Corporate Clinics</h3>
+                            <ul class="feature-list" style="list-style: none; padding: 0;">
+                                <li
+                                    style="position: relative; padding-left: 2rem; margin-bottom: 0.75rem; color: #555;">
+                                    <i class="fas fa-times"
+                                        style="position: absolute; left: 0; top: 4px; color: var(--color-error); width: 20px; text-align: center;"></i>
+                                    <strong>Profit First:</strong> Decisions are often driven by bottom-line
+                                    metrics, volume targets, and administrative bureaucracy.
                                 </li>
-                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
-                                    <span aria-hidden="true">❌</span>
-                                    <span><strong>High Turnover:</strong> You might see a different provider every time
-                                        you visit, leading to fragmented care.</span>
+                                <li
+                                    style="position: relative; padding-left: 2rem; margin-bottom: 0.75rem; color: #555;">
+                                    <i class="fas fa-times"
+                                        style="position: absolute; left: 0; top: 4px; color: var(--color-error); width: 20px; text-align: center;"></i>
+                                    <strong>High Turnover:</strong> You might see a different provider every time
+                                    you visit, leading to fragmented care.
                                 </li>
-                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
-                                    <span aria-hidden="true">❌</span>
-                                    <span><strong>Rushed Visits:</strong> 15-minute slots that leave little time for
-                                        questions, often feeling like an assembly line.</span>
+                                <li
+                                    style="position: relative; padding-left: 2rem; margin-bottom: 0.75rem; color: #555;">
+                                    <i class="fas fa-times"
+                                        style="position: absolute; left: 0; top: 4px; color: var(--color-error); width: 20px; text-align: center;"></i>
+                                    <strong>Rushed Visits:</strong> 15-minute slots that leave little time for
+                                    questions, often feeling like an assembly line.
                                 </li>
                             </ul>
                         </div>
@@ -221,32 +236,32 @@
             </section>
 
             <!-- About Section -->
-            <section class="about-preview" style="background-color: var(--color-surface);">
+            <section class="about-preview">
                 <div class="container">
-                    <div class="about-grid"
-                        style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;">
-                        <div class="about-image">
+                    <div class="doctor-profile-premium">
+                        <div class="doctor-image-container">
                             <img src="/images/reception-room.webp" alt="Welcome to Khatib Family Practice"
-                                style="border-radius: var(--radius-lg); box-shadow: var(--shadow-xl);">
+                                loading="lazy">
                         </div>
                         <div class="about-text">
                             <h2>Meet Dr. Nadim Khatib</h2>
                             <p>Since 1998, Dr. Nadim Khatib has provided exceptional, personalized medical care to the
                                 Bullhead City community. Unlike high-volume clinics, our practice focuses on fostering
                                 meaningful, long-term doctor-patient relationships.</p>
-                            <ul style="list-style: none; margin-bottom: 2rem;">
-                                <li style="margin-bottom: 0.5rem;">✅ Board Certified Family Medicine Physician</li>
-                                <li style="margin-bottom: 0.5rem;">✅ Serving Bullhead City for over 25 years</li>
-                                <li style="margin-bottom: 0.5rem;">✅ Personalized attention and unhurried visits</li>
+                            <ul class="feature-list">
+                                <li>Board Certified Family Medicine Physician</li>
+                                <li>Serving Bullhead City for over 25 years</li>
+                                <li>Personalized attention and unhurried visits</li>
                             </ul>
-                            <a href="/src/pages/about.html" class="btn btn-primary">Read Full Bio</a>
+                            <a href="/src/pages/about.html" class="btn btn-primary" style="margin-top: 1.5rem;">Read
+                                Full Bio</a>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Testimonials Section -->
-            <section class="testimonials">
+            <section class="testimonials" style="background-color: var(--color-surface);">
                 <div class="container">
                     <div class="section-header">
                         <h2>Patient Stories</h2>
@@ -255,20 +270,23 @@
                     <div class="testimonials-grid"
                         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                         <div class="testimonial-card"
-                            style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md);">
-                            <p>"Dr. Khatib takes time to listen to my concerns and thoroughly explains everything. His
+                            style="background: var(--color-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                            <p style="font-style: italic; margin-bottom: 1rem;">"Dr. Khatib takes time to listen to my
+                                concerns and thoroughly explains everything. His
                                 staff is friendly and appointments are never rushed."</p>
                             <p><strong>- Monica and James Bray</strong></p>
                         </div>
                         <div class="testimonial-card"
-                            style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md);">
-                            <p>"I appreciate Dr. Khatib's attention to detail. Appointment scheduling is easy, he
+                            style="background: var(--color-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                            <p style="font-style: italic; margin-bottom: 1rem;">"I appreciate Dr. Khatib's attention to
+                                detail. Appointment scheduling is easy, he
                                 listens and explains conditions clearly."</p>
                             <p><strong>- Denice B.</strong></p>
                         </div>
                         <div class="testimonial-card"
-                            style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md);">
-                            <p>"Dr Khatib and his wife, are just the best ever. Staff is also great. Always takes time
+                            style="background: var(--color-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                            <p style="font-style: italic; margin-bottom: 1rem;">"Dr Khatib and his wife, are just the
+                                best ever. Staff is also great. Always takes time
                                 to talk to you."</p>
                             <p><strong>- Doris Krader</strong></p>
                         </div>

@@ -40,7 +40,12 @@
     <link rel="preload" as="image" href="/images/courtyard-of-the-building.webp">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+            rel="stylesheet">
+    </noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         media="print" onload="this.media='all'">
     <noscript>
@@ -175,12 +180,11 @@
                                     More</a>
                             </div>
                         </article>
-                        <article class="service-card-premium reveal">
-                            <div class="card-image">
-                                <img src="/images/family-medicine.webp" alt="Family Medicine" loading="lazy"
-                                    width="1024" height="1024">
-                            </div>
-                            <div class="card-content">
+                        <article class="service-card-premium">
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
                                 <h3>Family Medicine</h3>
                                 <p>Comprehensive care for all ages, focusing on long-term health and well-being.</p>
                                 <a href="/src/pages/services.html" class="btn btn-outline"

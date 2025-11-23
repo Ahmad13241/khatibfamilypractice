@@ -11,8 +11,9 @@
     <meta name="description"
         content="Dr. Nadim Khatib is an independent, Board Certified Family Physician in Bullhead City, AZ. Personalized care for adults (21+) vs corporate chains. Call (928) 763-9009." />
     <meta name="keywords"
-        content="Private Doctor Bullhead City, Independent Primary Care, Family Doctor near me, Dr Nadim Khatib, Internal Medicine Bullhead City, Best Doctor Laughlin" />
+        content="Private Doctor Bullhead City, Independent Primary Care, Family Doctor near me, Dr Nadim Khatib, Internal Medicine Bullhead City, Best Doctor Laughlin, Fort Mohave Doctor, Medicare Doctor Bullhead City" />
     <meta name="author" content="Khatib Family Practice" />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://khatibfamilypractice.com/" />
 
     <!-- Open Graph / Facebook -->
@@ -20,8 +21,18 @@
     <meta property="og:url" content="https://khatibfamilypractice.com/" />
     <meta property="og:title" content="Best Private Doctor Bullhead City | Khatib Family Practice" />
     <meta property="og:description"
-        content="Choose independent care. Dr. Khatib offers personalized medical attention for adults 21+ in Bullhead City. Not a corporate clinic." />
+        content="Choose independent care. Dr. Khatib offers personalized medical attention for adults 21+ in Bullhead City. Not a corporate clinic. Experience the difference." />
     <meta property="og:image" content="https://khatibfamilypractice.com/images/dr-khatib-professional.webp" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Khatib Family Practice" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://khatibfamilypractice.com/" />
+    <meta name="twitter:title" content="Best Private Doctor Bullhead City | Khatib Family Practice" />
+    <meta name="twitter:description"
+        content="Choose independent care. Dr. Khatib offers personalized medical attention for adults 21+ in Bullhead City." />
+    <meta name="twitter:image" content="https://khatibfamilypractice.com/images/dr-khatib-professional.webp" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +51,7 @@
       "@id": "https://khatibfamilypractice.com",
       "url": "https://khatibfamilypractice.com",
       "telephone": "+1-928-763-9009",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "2755 Silver Creek Road, Suite 109",
@@ -53,25 +65,43 @@
         "latitude": 35.0769306,
         "longitude": -114.5728412
       },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "08:00",
-        "closes": "17:00"
-      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
       "sameAs": [
         "https://www.facebook.com/khatibfamilypractice",
         "https://www.healthgrades.com/physician/dr-nadim-khatib-y3s6d"
       ],
-      "priceRange": "$$",
-      "description": "Independent Board Certified Family Medicine Physician serving Bullhead City, Laughlin, and Fort Mohave. Personalized adult primary care.",
-      "medicalSpecialty": "Family Medicine"
+      "description": "Independent Board Certified Family Medicine Physician serving Bullhead City, Laughlin, and Fort Mohave. Personalized adult primary care focusing on long-term health relationships.",
+      "medicalSpecialty": [
+        "Family Medicine",
+        "Internal Medicine",
+        "Primary Care"
+      ],
+      "availableService": [
+        {
+            "@type": "MedicalProcedure",
+            "name": "Adult Medicine"
+        },
+        {
+            "@type": "MedicalProcedure",
+            "name": "Preventive Care"
+        },
+        {
+            "@type": "MedicalProcedure",
+            "name": "Chronic Disease Management"
+        }
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Bullhead City"
+      },
+      "isAcceptingNewPatients": true
     }
     </script>
 </head>
@@ -135,10 +165,11 @@
             </section>
 
             <!-- The Independent Difference Section -->
-            <section class="independent-difference" style="background-color: #f0f4f8; padding: 4rem 0;">
+            <section class="independent-difference" style="background-color: #f0f4f8; padding: 4rem 0;"
+                aria-labelledby="difference-heading">
                 <div class="container">
                     <div class="section-header">
-                        <h2>The Independent Difference</h2>
+                        <h2 id="difference-heading">The Independent Difference</h2>
                         <p>Why choosing a private practice matters for your health.</p>
                     </div>
                     <div class="difference-grid"
@@ -147,24 +178,42 @@
                             style="background: white; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border-left: 5px solid var(--color-primary);">
                             <h3 style="color: var(--color-primary);">Dr. Khatib's Practice</h3>
                             <ul style="list-style: none; margin-top: 1rem;">
-                                <li style="margin-bottom: 1rem;">✅ <strong>You are the Boss:</strong> We answer to our
-                                    patients, not corporate shareholders or insurance quotas.</li>
-                                <li style="margin-bottom: 1rem;">✅ <strong>Continuity of Care:</strong> You see Dr.
-                                    Khatib every visit, not a rotating roster of providers.</li>
-                                <li style="margin-bottom: 1rem;">✅ <strong>Time to Listen:</strong> Unhurried
-                                    appointments to truly understand your health concerns.</li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
+                                    <span aria-hidden="true">✅</span>
+                                    <span><strong>You are the Boss:</strong> We answer to our patients, not corporate
+                                        shareholders or insurance quotas. Your health is our only priority.</span>
+                                </li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
+                                    <span aria-hidden="true">✅</span>
+                                    <span><strong>Continuity of Care:</strong> You see Dr. Khatib every visit. No
+                                        rotating roster of providers who don't know your history.</span>
+                                </li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
+                                    <span aria-hidden="true">✅</span>
+                                    <span><strong>Time to Listen:</strong> Unhurried appointments (30+ mins) to truly
+                                        understand your health concerns and answer every question.</span>
+                                </li>
                             </ul>
                         </div>
                         <div class="diff-card"
-                            style="background: #fff; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); opacity: 0.8;">
-                            <h3 style="color: #666;">Corporate Clinics</h3>
-                            <ul style="list-style: none; margin-top: 1rem; color: #666;">
-                                <li style="margin-bottom: 1rem;">❌ <strong>Profit First:</strong> Decisions often
-                                    driven by bottom-line metrics, not patient needs.</li>
-                                <li style="margin-bottom: 1rem;">❌ <strong>High Turnover:</strong> You might see a
-                                    different provider every time you visit.</li>
-                                <li style="margin-bottom: 1rem;">❌ <strong>Rushed Visits:</strong> 15-minute slots that
-                                    leave little time for questions.</li>
+                            style="background: #fff; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); opacity: 0.9;">
+                            <h3 style="color: #555;">Corporate Clinics</h3>
+                            <ul style="list-style: none; margin-top: 1rem; color: #555;">
+                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
+                                    <span aria-hidden="true">❌</span>
+                                    <span><strong>Profit First:</strong> Decisions are often driven by bottom-line
+                                        metrics, volume targets, and administrative bureaucracy.</span>
+                                </li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
+                                    <span aria-hidden="true">❌</span>
+                                    <span><strong>High Turnover:</strong> You might see a different provider every time
+                                        you visit, leading to fragmented care.</span>
+                                </li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 0.5rem;">
+                                    <span aria-hidden="true">❌</span>
+                                    <span><strong>Rushed Visits:</strong> 15-minute slots that leave little time for
+                                        questions, often feeling like an assembly line.</span>
+                                </li>
                             </ul>
                         </div>
                     </div>

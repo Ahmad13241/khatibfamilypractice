@@ -55,43 +55,44 @@ const footerTemplate = `
 `;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject Header
-    const headerElement = document.getElementById('main-header');
-    if (headerElement) {
-        headerElement.innerHTML = headerTemplate;
+  // Inject Header
+  const headerElement = document.getElementById('main-header');
+  if (headerElement) {
+    headerElement.innerHTML = headerTemplate;
 
-        // Highlight active link
-        const currentPath = window.location.pathname;
-        const navLinks = headerElement.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('active');
-            }
-        });
-    }
+    // Highlight active link
+    const currentPath = window.location.pathname;
+    const navLinks = headerElement.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('active');
+      }
+    });
+  }
 
-    // Inject Footer
-    const footerElement = document.getElementById('main-footer');
-    if (footerElement) {
-        footerElement.innerHTML = footerTemplate;
-    }
+  // Inject Footer
+  const footerElement = document.getElementById('main-footer');
+  if (footerElement) {
+    footerElement.innerHTML = footerTemplate;
+  }
 
-    // Mobile Menu Toggle
-    const mobileToggle = document.querySelector('.mobile-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+  // Mobile Menu Toggle
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navMenu = document.querySelector('.nav-menu');
 
-    if (mobileToggle && navMenu) {
-        mobileToggle.addEventListener('click', () => {
-            const isVisible = navMenu.style.display === 'flex';
-            navMenu.style.display = isVisible ? 'none' : 'flex';
-            navMenu.style.flexDirection = 'column';
-            navMenu.style.position = 'absolute';
-            navMenu.style.top = '100%';
-            navMenu.style.left = '0';
-            navMenu.style.width = '100%';
-            navMenu.style.backgroundColor = 'white';
-            navMenu.style.padding = '1rem';
-            navMenu.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-        });
-    }
+  if (mobileToggle && navMenu) {
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('is-open');
+
+      // Update aria-expanded
+      const isExpanded = navMenu.classList.contains('is-open');
+      mobileToggle.setAttribute('aria-expanded', isExpanded);
+
+      // Change icon
+      const icon = mobileToggle.querySelector('.hamburger');
+      if (icon) {
+        icon.textContent = isExpanded ? '✕' : '☰';
+      }
+    });
+  }
 });

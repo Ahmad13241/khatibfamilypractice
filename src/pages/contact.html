@@ -81,64 +81,55 @@
                             </div>
                         </div>
 
-                        <!-- Appointment Widget -->
+                        <!-- Message Widget -->
                         <div class="contact-form-wrapper">
-                            <form name="appointment" method="POST" data-netlify="true"
+                            <form name="contact" method="POST" data-netlify="true"
                                 class="contact-form-premium appointment-widget">
-                                <h2 style="margin-bottom: 0.5rem;">Request Appointment</h2>
-                                <p style="margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--color-text-light);">We
-                                    will confirm your time via phone.</p>
+                                <h2 style="margin-bottom: 0.5rem; font-size: 2rem; color: var(--color-primary);">Have a
+                                    question?</h2>
+                                <p
+                                    style="margin-bottom: 2rem; font-size: 1.1rem; color: var(--color-text); line-height: 1.6;">
+                                    Send us a message and we will call you back shortly.
+                                </p>
 
-                                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-row"
+                                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                                     <div class="form-group">
-                                        <label for="firstName" class="form-label">First Name</label>
+                                        <label for="firstName" class="form-label"
+                                            style="font-size: 1.1rem; font-weight: 600; color: var(--color-text);">First
+                                            Name</label>
                                         <input type="text" id="firstName" name="firstName" required class="form-input"
-                                            placeholder="Jane">
+                                            placeholder="Jane" style="padding: 1rem; font-size: 1.1rem;">
                                     </div>
                                     <div class="form-group">
-                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <label for="lastName" class="form-label"
+                                            style="font-size: 1.1rem; font-weight: 600; color: var(--color-text);">Last
+                                            Name</label>
                                         <input type="text" id="lastName" name="lastName" required class="form-input"
-                                            placeholder="Doe">
+                                            placeholder="Doe" style="padding: 1rem; font-size: 1.1rem;">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="phone" class="form-label">Phone Number</label>
+                                <div class="form-group" style="margin-top: 1.5rem;">
+                                    <label for="phone" class="form-label"
+                                        style="font-size: 1.1rem; font-weight: 600; color: var(--color-text);">Phone
+                                        Number</label>
                                     <input type="tel" id="phone" name="phone" required class="form-input"
-                                        placeholder="(928) 555-0123">
+                                        placeholder="(928) 555-0123" style="padding: 1rem; font-size: 1.1rem;">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Patient Status</label>
-                                    <div class="radio-group" style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
-                                        <label
-                                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                            <input type="radio" name="patientStatus" value="new" required> New Patient
-                                        </label>
-                                        <label
-                                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                            <input type="radio" name="patientStatus" value="existing"> Existing Patient
-                                        </label>
-                                    </div>
+                                <div class="form-group" style="margin-top: 1.5rem;">
+                                    <label for="message" class="form-label"
+                                        style="font-size: 1.1rem; font-weight: 600; color: var(--color-text);">Message</label>
+                                    <textarea id="message" name="message" rows="4" class="form-textarea"
+                                        placeholder="How can we help you today?"
+                                        style="padding: 1rem; font-size: 1.1rem;"></textarea>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="preferredTime" class="form-label">Preferred Time</label>
-                                    <select id="preferredTime" name="preferredTime" class="form-input">
-                                        <option value="">Any Availability</option>
-                                        <option value="morning">Morning (8am - 12pm)</option>
-                                        <option value="afternoon">Afternoon (1pm - 5pm)</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="reason" class="form-label">Reason for Visit</label>
-                                    <textarea id="reason" name="reason" rows="3" class="form-textarea"
-                                        placeholder="Briefly describe your symptoms or reason for visit..."></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">Request
-                                    Appointment</button>
+                                <button type="submit" class="btn btn-primary"
+                                    style="width: 100%; margin-top: 2rem; padding: 1.25rem; font-size: 1.25rem; font-weight: 600;">
+                                    Send Message
+                                </button>
                             </form>
                         </div>
                     </div>

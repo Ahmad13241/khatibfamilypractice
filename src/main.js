@@ -4,7 +4,7 @@ import './style.css';
 const headerTemplate = `
   <div class="container header-container">
     <a href="/" class="logo">
-      <img src="/images/LOGO.webp" alt="Khatib Family Practice Logo">
+      <img src="/images/LOGO.webp" alt="Khatib Family Practice Logo" width="500" height="312">
       <span>Khatib Family Practice</span>
     </a>
     <button class="mobile-toggle" aria-label="Toggle Menu">

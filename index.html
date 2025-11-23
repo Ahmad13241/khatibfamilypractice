@@ -37,10 +37,15 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="/images/courtyard-of-the-building.webp">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <link rel="stylesheet" href="/src/style.css">
 
     <!-- JSON-LD Schema -->
@@ -153,7 +158,8 @@
                                 <p>Personalized healthcare for adults 21+ focused on your specific needs and health
                                     goals.</p>
                                 <a href="/src/pages/services.html" class="btn btn-outline"
-                                    style="margin-top: auto;">Learn More</a>
+                                    style="margin-top: auto;">Learn
+                                    More</a>
                             </div>
                         </article>
                         <article class="service-card-premium">
@@ -165,7 +171,21 @@
                                 <p>Proactive health management through screenings, vaccinations, and lifestyle guidance.
                                 </p>
                                 <a href="/src/pages/services.html" class="btn btn-outline"
-                                    style="margin-top: auto;">Learn More</a>
+                                    style="margin-top: auto;">Learn
+                                    More</a>
+                            </div>
+                        </article>
+                        <article class="service-card-premium reveal">
+                            <div class="card-image">
+                                <img src="/images/family-medicine.webp" alt="Family Medicine" loading="lazy"
+                                    width="1024" height="1024">
+                            </div>
+                            <div class="card-content">
+                                <h3>Family Medicine</h3>
+                                <p>Comprehensive care for all ages, focusing on long-term health and well-being.</p>
+                                <a href="/src/pages/services.html" class="btn btn-outline"
+                                    style="margin-top: auto;">Learn
+                                    More</a>
                             </div>
                         </article>
                         <article class="service-card-premium">
@@ -177,7 +197,8 @@
                                 <p>Consistent, coordinated care for long-term health conditions like diabetes and
                                     hypertension.</p>
                                 <a href="/src/pages/services.html" class="btn btn-outline"
-                                    style="margin-top: auto;">Learn More</a>
+                                    style="margin-top: auto;">Learn
+                                    More</a>
                             </div>
                         </article>
                     </div>
@@ -233,7 +254,8 @@
                     <div class="doctor-profile-premium">
                         <div class="doctor-image-container">
                             <img src="/images/dr-khatib-professional.webp"
-                                alt="Dr. Nadim Khatib - Board Certified Family Physician" loading="lazy">
+                                alt="Dr. Nadim Khatib - Board Certified Family Physician" loading="lazy" width="2684"
+                                height="3774">
                         </div>
                         <div class="about-text">
                             <h2>Meet Dr. Nadim Khatib</h2>

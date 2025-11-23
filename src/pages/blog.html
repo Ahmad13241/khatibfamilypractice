@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Tips & News | Khatib Family Practice</title>
+    <meta name="description"
+        content="Expert health advice and practice updates from Dr. Nadim Khatib. Serving Bullhead City with trusted medical information." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header id="main-header"></header>
+
+        <main id="main-content">
+            <div class="page-header">
+                <div class="container">
+                    <h1>Health Hub</h1>
+                    <p>Expert insights for a healthier life in Bullhead City.</p>
+                </div>
+            </div>
+
+            <section class="blog-feed">
+                <div class="container">
+                    <div class="blog-grid">
+                        <!-- Article 1 -->
+                        <article class="blog-card reveal">
+                            <div class="blog-image">
+                                <div class="blog-placeholder"
+                                    style="background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%); height: 200px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-sun" style="font-size: 3rem; color: var(--color-secondary);"></i>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <span class="blog-category">Summer Health</span>
+                                <h3>Managing Diabetes in the Arizona Heat</h3>
+                                <p>High temperatures can affect blood sugar levels. Learn how to stay safe and hydrated
+                                    this summer.</p>
+                                <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Article 2 -->
+                        <article class="blog-card reveal" style="transition-delay: 0.1s;">
+                            <div class="blog-image">
+                                <div class="blog-placeholder"
+                                    style="background: linear-gradient(135deg, #fff1f2 0%, #fff 100%); height: 200px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-heart" style="font-size: 3rem; color: #e11d48;"></i>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <span class="blog-category">Heart Health</span>
+                                <h3>The Importance of Regular Blood Pressure Checks</h3>
+                                <p>Why "silent" hypertension is a risk and how regular visits can save your life.</p>
+                                <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Article 3 -->
+                        <article class="blog-card reveal" style="transition-delay: 0.2s;">
+                            <div class="blog-image">
+                                <div class="blog-placeholder"
+                                    style="background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%); height: 200px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-apple-alt"
+                                        style="font-size: 3rem; color: var(--color-success);"></i>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <span class="blog-category">Nutrition</span>
+                                <h3>Simple Diet Changes for Better Energy</h3>
+                                <p>Small adjustments to your daily meals that can have a big impact on how you feel.</p>
+                                <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer id="main-footer"></footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

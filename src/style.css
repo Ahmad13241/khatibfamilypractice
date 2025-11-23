@@ -839,25 +839,31 @@ details[open] .faq-content {
 
 .doctor-image-container {
     position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
 }
 
 .doctor-image-container::before {
     content: '';
     position: absolute;
-    top: 20px;
-    left: -20px;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    border: 2px solid var(--color-secondary);
-    border-radius: var(--radius-lg);
-    z-index: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(10, 37, 64, 0.6));
+    z-index: 1;
 }
 
 .doctor-image-container img {
-    position: relative;
-    z-index: 1;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-xl);
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.doctor-image-container:hover img {
+    transform: scale(1.03);
 }
 
 .credential-grid {
@@ -868,46 +874,44 @@ details[open] .faq-content {
 }
 
 .credential-item {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-md);
     background: var(--color-surface);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.credential-item:hover {
+    background: var(--color-white);
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-sm);
 }
 
 .credential-item i {
+    font-size: 1.5rem;
     color: var(--color-secondary);
-    font-size: 1.25rem;
-    margin-top: 4px;
 }
 
 .philosophy-quote {
-    font-size: 1.5rem;
     font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--color-primary);
     text-align: center;
-    margin: var(--spacing-xl) auto;
     max-width: 800px;
+    margin: 0 auto var(--spacing-lg);
     position: relative;
-    padding: 0 var(--spacing-xl);
-}
-
-.philosophy-quote::before,
-.philosophy-quote::after {
-    content: '"';
-    font-size: 4rem;
-    color: var(--color-surface-alt);
-    position: absolute;
-    font-family: serif;
+    padding: var(--spacing-lg);
 }
 
 .philosophy-quote::before {
-    top: -20px;
-    left: 0;
-}
+    content: '"';
+    font-size: 4rem;
 
-.philosophy-quote::after {
-    bottom: -40px;
-    right: 0;
-}
+    .philosophy-quote::after {
+        bottom: -40px;
+        right: 0;
+    }

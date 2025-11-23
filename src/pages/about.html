@@ -34,11 +34,11 @@
             <section class="doctor-profile" aria-labelledby="doctor-bio-heading">
                 <div class="container">
                     <div class="doctor-profile-premium">
-                        <div class="doctor-image-container">
+                        <div class="doctor-image-container reveal">
                             <img src="/images/dr-khatib-professional.webp" alt="Portrait of Dr. Nadim Khatib"
                                 loading="lazy">
                         </div>
-                        <div class="doctor-bio">
+                        <div class="doctor-bio reveal">
                             <h2 id="doctor-bio-heading">A Legacy of Care in Bullhead City</h2>
                             <p>For over 25 years, Dr. Nadim Khatib has been a pillar of the Bullhead City medical
                                 community. Unlike transient providers in corporate clinics, Dr. Khatib has made this
@@ -51,30 +51,30 @@
 
                             <h3>Education & Credentials</h3>
                             <div class="credential-grid">
-                                <div class="credential-item">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <div>
-                                        <strong>Medical Degree</strong><br>
-                                        University of Tishreen (1989)
+                                <div class="credential-card">
+                                    <div class="credential-icon">
+                                        <i class="fas fa-graduation-cap"></i>
                                     </div>
+                                    <h4>Medical Degree</h4>
+                                    <p>University of Tishreen (1989)</p>
                                 </div>
-                                <div class="credential-item">
-                                    <i class="fas fa-hospital"></i>
-                                    <div>
-                                        <strong>Residency</strong><br>
-                                        Mercy Family Practice Program
+                                <div class="credential-card">
+                                    <div class="credential-icon">
+                                        <i class="fas fa-hospital"></i>
                                     </div>
+                                    <h4>Residency</h4>
+                                    <p>Mercy Family Practice Program</p>
                                 </div>
-                                <div class="credential-item">
-                                    <i class="fas fa-certificate"></i>
-                                    <div>
-                                        <strong>Board Certification</strong><br>
-                                        American Board of Family Medicine (Since 1998)
+                                <div class="credential-card">
+                                    <div class="credential-icon">
+                                        <i class="fas fa-certificate"></i>
                                     </div>
+                                    <h4>Board Certification</h4>
+                                    <p>American Board of Family Medicine (Since 1998)</p>
                                 </div>
                             </div>
 
-                            <h3>Hospital Affiliations</h3>
+                            <h3 style="margin-top: 2rem;">Hospital Affiliations</h3>
                             <p>Dr. Khatib maintains active privileges at top local hospitals, ensuring continuity of
                                 care if you ever need hospitalization:</p>
                             <ul class="feature-list">
@@ -88,11 +88,11 @@
 
             <section class="philosophy" style="background-color: var(--color-surface);">
                 <div class="container">
-                    <div class="section-header">
+                    <div class="section-header reveal">
                         <h2>Our Philosophy</h2>
                         <p>Why we choose to remain an independent private practice.</p>
                     </div>
-                    <div class="philosophy-content">
+                    <div class="philosophy-content reveal">
                         <blockquote class="philosophy-quote">
                             "We believe exceptional healthcare requires time—time to listen, understand your unique
                             situation, and develop the right approach."
@@ -118,27 +118,39 @@
 
             <section class="gallery">
                 <div class="container">
-                    <div class="section-header">
+                    <div class="section-header reveal">
                         <h2>Our Office</h2>
+                        <p>A welcoming environment designed for your comfort.</p>
                     </div>
-                    <div class="gallery-grid"
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                        <img src="/images/outside-office.webp" alt="Office Exterior"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
-                            onmouseover="this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.transform='scale(1)'">
-                        <img src="/images/reception-room.webp" alt="Reception Area"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
-                            onmouseover="this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.transform='scale(1)'">
-                        <img src="/images/examination-office.webp" alt="Exam Room"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
-                            onmouseover="this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.transform='scale(1)'">
-                        <img src="/images/courtyard-of-the-building.webp" alt="Courtyard"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
-                            onmouseover="this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.transform='scale(1)'">
+                    <div class="gallery-grid reveal">
+                        <div class="gallery-item">
+                            <img src="/images/reception-room.webp" alt="Reception Area" loading="lazy">
+                            <div class="gallery-caption">
+                                <h3>Reception Area</h3>
+                                <p>Warm and welcoming waiting room.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/images/examination-office.webp" alt="Exam Room" loading="lazy">
+                            <div class="gallery-caption">
+                                <h3>Examination Room</h3>
+                                <p>Modern and private examination suites.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/images/outside-office.webp" alt="Office Exterior" loading="lazy">
+                            <div class="gallery-caption">
+                                <h3>Office Exterior</h3>
+                                <p>Conveniently located with ample parking.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/images/courtyard-of-the-building.webp" alt="Courtyard" loading="lazy">
+                            <div class="gallery-caption">
+                                <h3>Courtyard</h3>
+                                <p>Peaceful outdoor environment.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -16,6 +16,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -31,80 +33,79 @@
 
             <section class="services-list" aria-label="Medical Services">
                 <div class="container">
-                    <!-- Adult Medicine -->
-                    <div class="service-detail"
-                        style="margin-bottom: 4rem; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;">
-                        <div class="service-text">
-                            <div class="service-icon"
-                                style="font-size: 3rem; color: var(--color-secondary); margin-bottom: 1rem;"
-                                aria-hidden="true">🩺</div>
-                            <h2>Adult Medicine & Primary Care</h2>
-                            <p>As your primary care home in Bullhead City, we provide comprehensive medical services for
-                                adults 21 and older. We focus on treating the whole person, not just symptoms.</p>
-                            <ul style="list-style: none; margin-top: 1rem;">
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Annual Physicals & Wellness Exams:</strong>
-                                    Comprehensive check-ups to monitor your overall health.</li>
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Acute Illness Care:</strong> Same-day or
-                                    next-day appointments for flu, infections, and minor injuries.</li>
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Geriatric Care:</strong> Specialized
-                                    attention for the unique needs of seniors in our community.</li>
-                            </ul>
-                        </div>
-                        <div class="service-img">
-                            <img src="/images/premium-adult-care.webp" alt="Doctor consulting with an adult patient"
-                                style="border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-                        </div>
-                    </div>
+                    <div class="services-grid">
+                        <!-- Adult Medicine -->
+                        <article class="service-card-premium">
+                            <div class="service-card-image">
+                                <img src="/images/premium-adult-care.webp" alt="Doctor consulting with an adult patient"
+                                    loading="lazy">
+                            </div>
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-stethoscope"></i>
+                                </div>
+                                <h2>Adult Medicine & Primary Care</h2>
+                                <p>As your primary care home in Bullhead City, we provide comprehensive medical services
+                                    for
+                                    adults 21 and older. We focus on treating the whole person, not just symptoms.</p>
+                                <ul class="feature-list">
+                                    <li><strong>Annual Physicals & Wellness Exams:</strong>
+                                        Comprehensive check-ups to monitor your overall health.</li>
+                                    <li><strong>Acute Illness Care:</strong> Same-day or
+                                        next-day appointments for flu, infections, and minor injuries.</li>
+                                    <li><strong>Geriatric Care:</strong> Specialized
+                                        attention for the unique needs of seniors in our community.</li>
+                                </ul>
+                            </div>
+                        </article>
 
-                    <!-- Preventive Care -->
-                    <div class="service-detail"
-                        style="margin-bottom: 4rem; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;">
-                        <div class="service-img" style="order: 2;">
-                            <img src="/images/premium-preventive.webp" alt="Medical equipment for preventive screenings"
-                                style="border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-                        </div>
-                        <div class="service-text" style="order: 1;">
-                            <div class="service-icon"
-                                style="font-size: 3rem; color: var(--color-secondary); margin-bottom: 1rem;"
-                                aria-hidden="true">❤️</div>
-                            <h2>Preventive Care & Screenings</h2>
-                            <p>Proactive healthcare is the key to longevity. We help you stay ahead of health issues
-                                with rigorous preventive measures tailored to your age and risk factors.</p>
-                            <ul style="list-style: none; margin-top: 1rem;">
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Health Screenings:</strong> Regular
-                                    monitoring of blood pressure, cholesterol, and blood sugar.</li>
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Immunizations:</strong> Flu shots,
-                                    pneumonia vaccines, and shingles protection.</li>
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Cancer Screenings:</strong> Referrals and
-                                    coordination for mammograms, colonoscopies, and other essential tests.</li>
-                            </ul>
-                        </div>
-                    </div>
+                        <!-- Preventive Care -->
+                        <article class="service-card-premium">
+                            <div class="service-card-image">
+                                <img src="/images/premium-preventive.webp"
+                                    alt="Medical equipment for preventive screenings" loading="lazy">
+                            </div>
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-heart-pulse"></i>
+                                </div>
+                                <h2>Preventive Care & Screenings</h2>
+                                <p>Proactive healthcare is the key to longevity. We help you stay ahead of health issues
+                                    with rigorous preventive measures tailored to your age and risk factors.</p>
+                                <ul class="feature-list">
+                                    <li><strong>Health Screenings:</strong> Regular
+                                        monitoring of blood pressure, cholesterol, and blood sugar.</li>
+                                    <li><strong>Immunizations:</strong> Flu shots,
+                                        pneumonia vaccines, and shingles protection.</li>
+                                    <li><strong>Cancer Screenings:</strong> Referrals and
+                                        coordination for mammograms, colonoscopies, and other essential tests.</li>
+                                </ul>
+                            </div>
+                        </article>
 
-                    <!-- Chronic Disease -->
-                    <div class="service-detail"
-                        style="margin-bottom: 4rem; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;">
-                        <div class="service-text">
-                            <div class="service-icon"
-                                style="font-size: 3rem; color: var(--color-secondary); margin-bottom: 1rem;"
-                                aria-hidden="true">📋</div>
-                            <h2>Chronic Disease Management</h2>
-                            <p>Living with a chronic condition requires a partner who understands your history. We
-                                provide consistent, coordinated care to help you live your best life.</p>
-                            <ul style="list-style: none; margin-top: 1rem;">
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Diabetes Management:</strong> Personalized
-                                    plans to control blood sugar and prevent complications.</li>
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Hypertension & Heart Health:</strong>
-                                    Monitoring and treatment to protect your cardiovascular system.</li>
-                                <li style="margin-bottom: 0.5rem;">✅ <strong>Respiratory Care:</strong> Management of
-                                    Asthma, COPD, and other breathing conditions.</li>
-                            </ul>
-                        </div>
-                        <div class="service-img">
-                            <img src="/images/premium-chronic-care.webp"
-                                alt="Patient discussing chronic care management"
-                                style="border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-                        </div>
+                        <!-- Chronic Disease -->
+                        <article class="service-card-premium">
+                            <div class="service-card-image">
+                                <img src="/images/premium-chronic-care.webp"
+                                    alt="Patient discussing chronic care management" loading="lazy">
+                            </div>
+                            <div class="service-card-content">
+                                <div class="service-card-icon">
+                                    <i class="fas fa-notes-medical"></i>
+                                </div>
+                                <h2>Chronic Disease Management</h2>
+                                <p>Living with a chronic condition requires a partner who understands your history. We
+                                    provide consistent, coordinated care to help you live your best life.</p>
+                                <ul class="feature-list">
+                                    <li><strong>Diabetes Management:</strong> Personalized
+                                        plans to control blood sugar and prevent complications.</li>
+                                    <li><strong>Hypertension & Heart Health:</strong>
+                                        Monitoring and treatment to protect your cardiovascular system.</li>
+                                    <li><strong>Respiratory Care:</strong> Management of
+                                        Asthma, COPD, and other breathing conditions.</li>
+                                </ul>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -115,29 +116,17 @@
                         <h2>Insurance & Payment</h2>
                         <p>We accept most major insurance plans.</p>
                     </div>
-                    <div class="insurance-grid"
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
-                        <div class="insurance-item"
-                            style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-                            Medicare</div>
-                        <div class="insurance-item"
-                            style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-                            Blue Cross Blue Shield</div>
-                        <div class="insurance-item"
-                            style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-                            Aetna</div>
-                        <div class="insurance-item"
-                            style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-                            United Healthcare</div>
-                        <div class="insurance-item"
-                            style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-                            Cigna</div>
-                        <div class="insurance-item"
-                            style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-                            Humana</div>
+                    <div class="insurance-grid-premium">
+                        <div class="insurance-card">Medicare</div>
+                        <div class="insurance-card">Blue Cross Blue Shield</div>
+                        <div class="insurance-card">Aetna</div>
+                        <div class="insurance-card">United Healthcare</div>
+                        <div class="insurance-card">Cigna</div>
+                        <div class="insurance-card">Humana</div>
                     </div>
-                    <p style="text-align: center; margin-top: 2rem;">We also offer affordable self-pay options. Please
-                        call us at (928) 763-9009 for more details.</p>
+                    <p style="text-align: center; margin-top: 2rem; color: var(--color-text-light);">We also offer
+                        affordable self-pay options. Please
+                        call us at <strong>(928) 763-9009</strong> for more details.</p>
                 </div>
             </section>
         </main>

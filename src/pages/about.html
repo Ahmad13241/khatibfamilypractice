@@ -16,6 +16,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -31,11 +33,10 @@
 
             <section class="doctor-profile" aria-labelledby="doctor-bio-heading">
                 <div class="container">
-                    <div class="about-grid"
-                        style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start;">
-                        <div class="doctor-image">
+                    <div class="doctor-profile-premium">
+                        <div class="doctor-image-container">
                             <img src="/images/dr-khatib-professional.webp" alt="Portrait of Dr. Nadim Khatib"
-                                style="border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); width: 100%;">
+                                loading="lazy">
                         </div>
                         <div class="doctor-bio">
                             <h2 id="doctor-bio-heading">A Legacy of Care in Bullhead City</h2>
@@ -48,32 +49,36 @@
                                 advocating for your health above all else.</p>
 
                             <h3>Education & Credentials</h3>
-                            <ul style="list-style: none; margin-bottom: 2rem;">
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="fas fa-graduation-cap" style="color: var(--color-secondary);"
-                                        aria-hidden="true"></i>
-                                    <span><strong>Medical Degree:</strong> University of Tishreen (1989)</span>
-                                </li>
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="fas fa-hospital" style="color: var(--color-secondary);"
-                                        aria-hidden="true"></i>
-                                    <span><strong>Residency:</strong> Mercy Family Practice Program - Excellence in
-                                        Family Medicine</span>
-                                </li>
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="fas fa-certificate" style="color: var(--color-secondary);"
-                                        aria-hidden="true"></i>
-                                    <span><strong>Board Certification:</strong> American Board of Family Medicine
-                                        (Diplomate since 1998)</span>
-                                </li>
-                            </ul>
+                            <div class="credential-grid">
+                                <div class="credential-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <div>
+                                        <strong>Medical Degree</strong><br>
+                                        University of Tishreen (1989)
+                                    </div>
+                                </div>
+                                <div class="credential-item">
+                                    <i class="fas fa-hospital"></i>
+                                    <div>
+                                        <strong>Residency</strong><br>
+                                        Mercy Family Practice Program
+                                    </div>
+                                </div>
+                                <div class="credential-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <div>
+                                        <strong>Board Certification</strong><br>
+                                        American Board of Family Medicine (Since 1998)
+                                    </div>
+                                </div>
+                            </div>
 
                             <h3>Hospital Affiliations</h3>
                             <p>Dr. Khatib maintains active privileges at top local hospitals, ensuring continuity of
                                 care if you ever need hospitalization:</p>
-                            <ul style="margin-bottom: 2rem; padding-left: 1.5rem; list-style-type: disc;">
-                                <li>Western Arizona Regional Medical Center</li>
-                                <li>Valley View Medical Center</li>
+                            <ul class="feature-list">
+                                <li><strong>Western Arizona Regional Medical Center</strong></li>
+                                <li><strong>Valley View Medical Center</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -83,21 +88,28 @@
             <section class="philosophy" style="background-color: var(--color-surface);">
                 <div class="container">
                     <div class="section-header">
-                        <h2>Our Philosophy: Independent & Patient-Centered</h2>
+                        <h2>Our Philosophy</h2>
                         <p>Why we choose to remain an independent private practice.</p>
                     </div>
-                    <div class="philosophy-content" style="max-width: 800px; margin: 0 auto;">
-                        <p>In an era where healthcare is increasingly dominated by large corporate entities, Khatib
-                            Family Practice stands apart. <strong>We are proudly independent.</strong> This means our
-                            loyalty lies solely with you, the patient—not with a hospital system, an insurance
-                            conglomerate, or corporate shareholders.</p>
-                        <p>Dr. Khatib believes that exceptional healthcare requires the freedom to make decisions based
-                            purely on medical necessity and your personal values. By maintaining a private practice, we
-                            preserve the sanctity of the doctor-patient relationship, ensuring you receive unhurried,
-                            personalized attention that is becoming rare in modern medicine.</p>
-                        <p>We believe exceptional healthcare requires time—time to listen, understand your unique
-                            situation, and develop the right approach. By maintaining a select patient roster, we create
-                            space for meaningful connections, leading to better health outcomes.</p>
+                    <div class="philosophy-content">
+                        <blockquote class="philosophy-quote">
+                            "We believe exceptional healthcare requires time—time to listen, understand your unique
+                            situation, and develop the right approach."
+                        </blockquote>
+                        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                            <p>In an era where healthcare is increasingly dominated by large corporate entities, Khatib
+                                Family Practice stands apart. <strong>We are proudly independent.</strong> This means
+                                our
+                                loyalty lies solely with you, the patient—not with a hospital system, an insurance
+                                conglomerate, or corporate shareholders.</p>
+                            <p>Dr. Khatib believes that exceptional healthcare requires the freedom to make decisions
+                                based
+                                purely on medical necessity and your personal values. By maintaining a private practice,
+                                we
+                                preserve the sanctity of the doctor-patient relationship, ensuring you receive
+                                unhurried,
+                                personalized attention that is becoming rare in modern medicine.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -110,13 +122,21 @@
                     <div class="gallery-grid"
                         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
                         <img src="/images/outside-office.webp" alt="Office Exterior"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%;">
+                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
+                            onmouseover="this.style.transform='scale(1.02)'"
+                            onmouseout="this.style.transform='scale(1)'">
                         <img src="/images/reception-room.webp" alt="Reception Area"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%;">
+                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
+                            onmouseover="this.style.transform='scale(1.02)'"
+                            onmouseout="this.style.transform='scale(1)'">
                         <img src="/images/examination-office.webp" alt="Exam Room"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%;">
+                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
+                            onmouseover="this.style.transform='scale(1.02)'"
+                            onmouseout="this.style.transform='scale(1)'">
                         <img src="/images/courtyard-of-the-building.webp" alt="Courtyard"
-                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%;">
+                            style="border-radius: var(--radius-md); height: 200px; object-fit: cover; width: 100%; transition: transform 0.3s ease;"
+                            onmouseover="this.style.transform='scale(1.02)'"
+                            onmouseout="this.style.transform='scale(1)'">
                     </div>
                 </div>
             </section>

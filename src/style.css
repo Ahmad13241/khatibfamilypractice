@@ -530,14 +530,384 @@ footer {
     background: linear-gradient(135deg, var(--color-surface) 0%, #e0f2fe 100%);
     padding: var(--spacing-xxl) 0 var(--spacing-xl);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
 }
 
 .page-header h1 {
     margin-bottom: var(--spacing-sm);
+    position: relative;
+    z-index: 1;
 }
 
 .page-header p {
     font-size: 1.25rem;
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Premium Service Card */
+.service-card-premium {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.service-card-premium:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(0, 180, 216, 0.2);
+}
+
+.service-card-image {
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+.service-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.service-card-premium:hover .service-card-image img {
+    transform: scale(1.05);
+}
+
+.service-card-content {
+    padding: var(--spacing-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-surface) 0%, #e0f2fe 100%);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-md);
+    margin-top: -3rem;
+    position: relative;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--color-white);
+}
+
+.service-card-premium h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+}
+
+.service-card-premium p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+}
+
+/* Feature List (Replaces Checkmarks) */
+.feature-list {
+    list-style: none;
+    margin-top: auto;
+    padding: 0;
+}
+
+.feature-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.feature-list li::before {
+    content: '\f00c';
+    /* FontAwesome check */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+    background: rgba(0, 180, 216, 0.1);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-list li strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Resource Section */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.resource-card {
+    background: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-surface-alt);
+    transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.resource-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.resource-icon {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    background: rgba(0, 180, 216, 0.1);
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+}
+
+.download-link {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.download-link:hover {
+    background: var(--color-white);
+    border-color: var(--color-secondary);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.download-link i {
+    margin-right: var(--spacing-md);
+    color: var(--color-text-light);
+}
+
+.download-link:hover i {
+    color: var(--color-secondary);
+}
+
+/* Insurance Grid */
+.insurance-grid-premium {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.insurance-card {
+    background: var(--color-white);
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text);
+    border: 1px solid var(--color-surface-alt);
+    transition: all 0.3s ease;
+}
+
+.insurance-card:hover {
+    border-color: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: var(--color-primary);
+}
+
+/* FAQ Accordion */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--color-surface-alt);
+    overflow: hidden;
+}
+
+.faq-summary {
+    padding: var(--spacing-md) var(--spacing-lg);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--color-primary);
+    list-style: none;
+    transition: background-color 0.2s ease;
+}
+
+.faq-summary:hover {
+    background-color: var(--color-surface);
+}
+
+.faq-summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    font-weight: 400;
+    transition: transform 0.3s ease;
+}
+
+details[open] .faq-summary::after {
+    transform: rotate(45deg);
+}
+
+.faq-content {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    border-top: 1px solid transparent;
+}
+
+details[open] .faq-content {
+    border-top-color: var(--color-surface-alt);
+    padding-top: var(--spacing-md);
+    animation: slideDown 0.3s ease-out;
+}
+
+/* About Page Specifics */
+.doctor-profile-premium {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+@media (min-width: 992px) {
+    .doctor-profile-premium {
+        grid-template-columns: 400px 1fr;
+    }
+}
+
+.doctor-image-container {
+    position: relative;
+}
+
+.doctor-image-container::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-secondary);
+    border-radius: var(--radius-lg);
+    z-index: 0;
+}
+
+.doctor-image-container img {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+}
+
+.credential-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.credential-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    background: var(--color-surface);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+}
+
+.credential-item i {
+    color: var(--color-secondary);
+    font-size: 1.25rem;
+    margin-top: 4px;
+}
+
+.philosophy-quote {
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    text-align: center;
+    margin: var(--spacing-xl) auto;
+    max-width: 800px;
+    position: relative;
+    padding: 0 var(--spacing-xl);
+}
+
+.philosophy-quote::before,
+.philosophy-quote::after {
+    content: '"';
+    font-size: 4rem;
+    color: var(--color-surface-alt);
+    position: absolute;
+    font-family: serif;
+}
+
+.philosophy-quote::before {
+    top: -20px;
+    left: 0;
+}
+
+.philosophy-quote::after {
+    bottom: -40px;
+    right: 0;
 }

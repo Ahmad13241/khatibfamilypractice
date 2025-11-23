@@ -16,6 +16,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -31,87 +33,114 @@
 
             <section class="resources-content">
                 <div class="container">
-                    <div class="resources-grid" style="display: grid; grid-template-columns: 1fr; gap: 4rem;">
+                    <div class="resource-grid">
 
                         <!-- New Patient Forms -->
-                        <div class="resource-section">
-                            <h2><i class="fas fa-file-alt" style="color: var(--color-secondary);"></i> Patient Forms
-                            </h2>
-                            <p>Save time at your first appointment by downloading and completing these forms in advance.
-                            </p>
-                            <div class="forms-list" style="display: grid; gap: 1rem; margin-top: 1.5rem;">
-                                <a href="#" class="btn btn-outline"
-                                    style="justify-content: flex-start; text-transform: none;">
-                                    <i class="fas fa-download" style="margin-right: 10px;"></i> New Patient Registration
-                                    Packet (PDF)
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <div class="resource-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h2>Patient Forms</h2>
+                            </div>
+                            <p style="margin-bottom: 1.5rem; color: var(--color-text-light);">Save time at your first
+                                appointment by downloading and completing these forms in advance.</p>
+                            <div class="forms-list">
+                                <a href="#" class="download-link">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>New Patient Registration Packet (PDF)</span>
                                 </a>
-                                <a href="#" class="btn btn-outline"
-                                    style="justify-content: flex-start; text-transform: none;">
-                                    <i class="fas fa-download" style="margin-right: 10px;"></i> Medical History Form
-                                    (PDF)
+                                <a href="#" class="download-link">
+                                    <i class="fas fa-file-medical"></i>
+                                    <span>Medical History Form (PDF)</span>
                                 </a>
-                                <a href="#" class="btn btn-outline"
-                                    style="justify-content: flex-start; text-transform: none;">
-                                    <i class="fas fa-download" style="margin-right: 10px;"></i> HIPAA Privacy Notice
-                                    (PDF)
+                                <a href="#" class="download-link">
+                                    <i class="fas fa-user-shield"></i>
+                                    <span>HIPAA Privacy Notice (PDF)</span>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Insurance Information -->
-                        <div class="resource-section">
-                            <h2><i class="fas fa-id-card" style="color: var(--color-secondary);"></i> Insurance &
-                                Payment</h2>
-                            <p>We accept most major insurance plans. If you do not see your provider listed, please call
-                                our office to verify coverage.</p>
-
-                            <div class="insurance-list"
-                                style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-lg); margin-top: 1.5rem;">
-                                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Accepted Plans</h3>
-                                <ul
-                                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; list-style: none;">
-                                    <li>✅ Medicare</li>
-                                    <li>✅ Blue Cross Blue Shield</li>
-                                    <li>✅ Aetna</li>
-                                    <li>✅ United Healthcare</li>
-                                    <li>✅ Cigna</li>
-                                    <li>✅ Humana</li>
-                                    <li>✅ Tricare</li>
-                                    <li>✅ Arizona Medicaid (AHCCCS)</li>
-                                </ul>
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <div class="resource-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <h2>Insurance & Payment</h2>
                             </div>
-                            <p style="margin-top: 1.5rem; font-size: 0.9rem;"><strong>Self-Pay Patients:</strong> We
-                                offer competitive cash pricing for patients without insurance. Please contact our office
-                                for a fee schedule.</p>
+                            <p style="margin-bottom: 1.5rem; color: var(--color-text-light);">We accept most major
+                                insurance plans. If you do not see your provider listed, please call our office.</p>
+
+                            <div class="insurance-grid-premium" style="margin-bottom: 1.5rem;">
+                                <div class="insurance-card">Medicare</div>
+                                <div class="insurance-card">BCBS</div>
+                                <div class="insurance-card">Aetna</div>
+                                <div class="insurance-card">UHC</div>
+                                <div class="insurance-card">Cigna</div>
+                                <div class="insurance-card">Humana</div>
+                                <div class="insurance-card">Tricare</div>
+                                <div class="insurance-card">AHCCCS</div>
+                            </div>
+                            <p
+                                style="font-size: 0.9rem; color: var(--color-text-light); border-top: 1px solid var(--color-surface-alt); padding-top: 1rem;">
+                                <strong>Self-Pay Patients:</strong> We offer competitive cash pricing for patients
+                                without insurance. Please contact our office for a fee schedule.
+                            </p>
                         </div>
 
-                        <!-- FAQs -->
-                        <div class="resource-section">
-                            <h2><i class="fas fa-question-circle" style="color: var(--color-secondary);"></i> Frequently
-                                Asked Questions</h2>
+                    </div>
 
-                            <div class="faq-item" style="margin-bottom: 1.5rem;">
-                                <h3 style="font-size: 1.1rem; color: var(--color-primary);">What should I bring to my
-                                    first appointment?</h3>
-                                <p>Please bring your photo ID, current insurance card, a list of current medications (or
-                                    the bottles themselves), and any recent medical records or test results.</p>
+                    <!-- FAQs -->
+                    <div class="faq-section" style="margin-top: 4rem;">
+                        <div class="section-header">
+                            <h2>Frequently Asked Questions</h2>
+                        </div>
+                        <div class="faq-container">
+                            <div class="faq-item">
+                                <details>
+                                    <summary class="faq-summary">What should I bring to my first appointment?</summary>
+                                    <div class="faq-content">
+                                        <p>Please bring your photo ID, current insurance card, a list of current
+                                            medications (or the bottles themselves), and any recent medical records or
+                                            test results from other providers.</p>
+                                    </div>
+                                </details>
                             </div>
 
-                            <div class="faq-item" style="margin-bottom: 1.5rem;">
-                                <h3 style="font-size: 1.1rem; color: var(--color-primary);">Do you offer same-day
-                                    appointments?</h3>
-                                <p>Yes, we reserve time daily for urgent care needs. Please call as early as possible to
-                                    secure a slot.</p>
+                            <div class="faq-item">
+                                <details>
+                                    <summary class="faq-summary">Do you offer same-day appointments?</summary>
+                                    <div class="faq-content">
+                                        <p>Yes, we reserve time daily for urgent care needs for our established
+                                            patients. Please call as early as possible (starting at 8:00 AM) to secure a
+                                            slot.</p>
+                                    </div>
+                                </details>
                             </div>
 
-                            <div class="faq-item" style="margin-bottom: 1.5rem;">
-                                <h3 style="font-size: 1.1rem; color: var(--color-primary);">How do I get a prescription
-                                    refill?</h3>
-                                <p>Please contact your pharmacy to request a refill. They will send us a request
-                                    electronically. Allow 48-72 hours for processing.</p>
+                            <div class="faq-item">
+                                <details>
+                                    <summary class="faq-summary">How do I get a prescription refill?</summary>
+                                    <div class="faq-content">
+                                        <p>The fastest way is to contact your pharmacy to request a refill. They will
+                                            send us a request electronically. Please allow 48-72 hours for processing,
+                                            so don't wait until you are completely out of medication.</p>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="faq-item">
+                                <details>
+                                    <summary class="faq-summary">Do you treat children?</summary>
+                                    <div class="faq-content">
+                                        <p>We specialize in adult medicine and primary care for patients aged 21 and
+                                            older. We can refer you to excellent local pediatricians for younger family
+                                            members.</p>
+                                    </div>
+                                </details>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>

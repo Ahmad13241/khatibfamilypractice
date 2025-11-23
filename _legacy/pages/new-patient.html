@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Become a new patient at Khatib Family Practice. Independent, personalized adult primary care in Bullhead City. Join our medical family today.">
+
+    <link rel="canonical" href="https://khatibfamilypractice.com/pages/new-patient.html" />
+
+    <title>New Patient Concierge | Khatib Family Practice | Bullhead City</title>
+
+    <!-- Preconnects are provided by the shared head partial -->
+
+    <!-- PERFORMANCE FIX: Asynchronously load stylesheets -->
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/styles.css">
+    </noscript>
+    <link rel="preload" href="../css/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/contact.css">
+    </noscript>
+
+    {{> head}}
+</head>
+
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- Add menu backdrop element -->
+    <div class="menu-backdrop"></div>
+
+    <!-- Header Section -->
+    <header>
+        {{> header}}
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="contact-section" style="background-color: var(--off-white);">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Welcome to the Family</h1>
+                    <p>Experience the difference of independent, personal care.</p>
+                </div>
+
+                <div class="contact-intro">
+                    <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                        We are currently accepting new patients (ages 21+) who value a direct relationship with their
+                        physician.
+                        Unlike corporate clinics, we don't treat you like a number. We treat you like family.
+                    </p>
+                </div>
+
+                <!-- Concierge Form -->
+                <div class="contact-form-wrapper"
+                    style="max-width: 600px; margin: 3rem auto; background: var(--white); padding: 3rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg);">
+                    <div class="section-header" style="margin-bottom: 2rem;">
+                        <h2>Request a Welcome Call</h2>
+                        <p>Fill out this simple form, and our staff will call you personally to schedule your first
+                            visit.</p>
+                    </div>
+
+                    <form id="new-patient-form" class="contact-form" data-netlify="true" name="new-patient"
+                        method="POST" netlify-honeypot="bot-field">
+
+                        <div class="form-group">
+                            <label for="name" style="font-size: 1.1rem;">Full Name <span
+                                    class="required">*</span></label>
+                            <input type="text" id="name" name="name" required aria-required="true" autocomplete="name"
+                                style="padding: 1rem;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" style="font-size: 1.1rem;">Phone Number <span
+                                    class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel"
+                                style="padding: 1rem;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="best-time" style="font-size: 1.1rem;">Best Time to Call</label>
+                            <select id="best-time" name="best-time" style="padding: 1rem;">
+                                <option value="Morning">Morning (8am - 12pm)</option>
+                                <option value="Afternoon">Afternoon (1pm - 5pm)</option>
+                                <option value="Anytime">Anytime</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group consent-check">
+                            <input type="checkbox" id="age-check" name="age-check" required aria-required="true">
+                            <label for="age-check">I confirm I am 21 years of age or older. <span
+                                    class="required">*</span></label>
+                        </div>
+
+                        <p class="form-hp" aria-hidden="true">
+                            <label>
+                                Don't fill this out if you're human: <input name="bot-field" tabindex="-1"
+                                    autocomplete="off" />
+                            </label>
+                        </p>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.2rem;">Request
+                            Call</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        {{> footer}}
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js" defer></script>
+</body>
+
+</html>

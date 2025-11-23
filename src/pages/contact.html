@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Khatib Family Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <header id="main-header"></header>
+        <main>
+            <section class="page-header">
+                <div class="container">
+                    <h1>Contact Us</h1>
+                    <p>We're here to help with your healthcare needs.</p>
+                </div>
+            </section>
+
+            <section class="contact-content">
+                <div class="container">
+                    <div class="contact-grid" style="display: grid; grid-template-columns: 1fr; gap: 4rem;">
+                        <!-- Contact Info -->
+                        <div class="contact-info">
+                            <h2>Get in Touch</h2>
+                            <p>Whether you're a new or existing patient, please contact us with any questions or to
+                                schedule an appointment.</p>
+
+                            <div class="info-item" style="margin-bottom: 2rem;">
+                                <h3><i class="fas fa-phone-alt"></i> Phone</h3>
+                                <p><a href="tel:+19287639009"
+                                        style="font-size: 1.25rem; font-weight: 600; color: var(--color-primary);">(928)
+                                        763-9009</a></p>
+                                <p>Fax: (928) 758-7538</p>
+                            </div>
+
+                            <div class="info-item" style="margin-bottom: 2rem;">
+                                <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                                <p>2755 Silver Creek Road, Suite 109<br>Bullhead City, AZ 86442</p>
+                            </div>
+
+                            <div class="info-item" style="margin-bottom: 2rem;">
+                                <h3><i class="fas fa-clock"></i> Office Hours</h3>
+                                <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</p>
+                                <p><strong>Lunch:</strong> 12:00 PM - 1:00 PM</p>
+                                <p><strong>Saturday - Sunday:</strong> Closed</p>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="contact-form-wrapper"
+                            style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-lg);">
+                            <h2>Send a Message</h2>
+                            <form name="contact" method="POST" data-netlify="true">
+                                <div class="form-group" style="margin-bottom: 1rem;">
+                                    <label for="name"
+                                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full
+                                        Name</label>
+                                    <input type="text" id="name" name="name" required
+                                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 1rem;">
+                                    <label for="email"
+                                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email
+                                        Address</label>
+                                    <input type="email" id="email" name="email" required
+                                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 1rem;">
+                                    <label for="phone"
+                                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Phone
+                                        Number</label>
+                                    <input type="tel" id="phone" name="phone"
+                                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 1rem;">
+                                    <label for="message"
+                                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
+                                    <textarea id="message" name="message" rows="5" required
+                                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--radius-sm);"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map -->
+            <section class="map-section" style="padding: 0;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2007300254736!2d-114.57284122403567!3d35.07693056624893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80cde15937b4af5f%3A0x44c38b6ed2b83eb2!2s2755%20Silver%20Creek%20Rd%20%23109%2C%20Bullhead%20City%2C%20AZ%2086442%2C%20USA!5e0!3m2!1sen!2sus!4v1710379642012!5m2!1sen!2sus"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+        </main>
+        <footer id="main-footer"></footer>
+    </div>
+    <script type="module" src="../main.js"></script>
+</body>
+
+</html>

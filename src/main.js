@@ -14,6 +14,7 @@ const headerTemplate = `
       <a href="/" class="nav-link">Home</a>
       <a href="/src/pages/about.html" class="nav-link">About Dr. Khatib</a>
       <a href="/src/pages/services.html" class="nav-link">Services</a>
+      <a href="/src/pages/resources.html" class="nav-link">Patient Resources</a>
       <a href="/src/pages/contact.html" class="nav-link">Contact</a>
       <a href="/src/pages/contact.html" class="btn btn-primary">Book Appointment</a>
     </nav>

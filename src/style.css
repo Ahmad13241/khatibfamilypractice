@@ -326,12 +326,13 @@ header {
     position: relative;
     padding: var(--spacing-xxl) 0 var(--spacing-xl);
     background-color: #f8fafc;
-    /* Premium Gradient Mesh */
+    /* Courtyard Background with Light Overlay */
     background-image:
-        radial-gradient(at 0% 0%, rgba(10, 37, 64, 0.05) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(0, 180, 216, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(233, 196, 106, 0.05) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(255, 255, 255, 0) 0px, transparent 50%);
+        linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%),
+        url('/images/courtyard-of-the-building.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: 90vh;
     display: flex;
     align-items: center;
@@ -479,11 +480,8 @@ section {
 .independent-difference {
     position: relative;
     padding: var(--spacing-xxl) 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/images/courtyard-of-the-building.webp');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    /* Parallax effect */
+    background-color: var(--color-surface);
+    /* Reverted to clean background */
 }
 
 .difference-grid {

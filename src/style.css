@@ -1047,3 +1047,171 @@ details[open] .faq-content {
     margin-top: var(--spacing-xl);
     border: 4px solid var(--color-white);
 }
+/* Testimonials Section */
+.testimonials {
+    padding: var(--spacing-xl) 0;
+    overflow: hidden;
+}
+
+/* Trust Indicators */
+.trust-indicators {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-xl);
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-surface-alt);
+    transition: transform 0.3s ease;
+}
+
+.trust-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-secondary);
+}
+
+.trust-icon {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.trust-badge:nth-child(1) .trust-icon { color: #4285F4; } /* Google Blue */
+.trust-badge:nth-child(2) .trust-icon { color: #FF1A1A; } /* Yelp Red */
+.trust-badge:nth-child(3) .trust-icon { color: #F59E0B; } /* Healthgrades Orange */
+
+.trust-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.trust-score {
+    font-weight: 800;
+    color: var(--color-text);
+    font-size: 1.1rem;
+}
+
+.trust-source {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.trust-count {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+}
+
+/* Testimonials Carousel */
+.testimonials-carousel-container {
+    position: relative;
+    padding: var(--spacing-md) 0;
+}
+
+.testimonials-track {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-xl); /* Bottom padding for shadow */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+
+.testimonials-track::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.testimonial-card-premium {
+    flex: 0 0 350px; /* Fixed width for cards */
+    scroll-snap-align: center;
+    background: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-surface-alt);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .testimonial-card-premium {
+        flex: 0 0 85vw; /* Wider on mobile */
+    }
+}
+
+.testimonial-card-premium:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-secondary);
+}
+
+.quote-icon {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    font-size: 2rem;
+    color: var(--color-surface-alt);
+    z-index: 0;
+}
+
+.stars {
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.review-text {
+    font-size: 1.05rem;
+    color: var(--color-text);
+    font-style: italic;
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+}
+
+.reviewer-info {
+    border-top: 1px solid var(--color-surface-alt);
+    padding-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.reviewer-name {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+}
+
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-success);
+    font-weight: 600;
+    margin-top: 0.25rem;
+}

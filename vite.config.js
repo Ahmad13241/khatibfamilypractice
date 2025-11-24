@@ -11,6 +11,8 @@ export default defineConfig({
                 contact: resolve(__dirname, 'src/pages/contact.html'),
                 resources: resolve(__dirname, 'src/pages/resources.html'),
                 privacy: resolve(__dirname, 'src/pages/privacy.html'),
+                blog: resolve(__dirname, 'src/pages/blog.html'),
+                blogPost1: resolve(__dirname, 'src/pages/blog/independent-vs-corporate-medicine-bullhead-city.html'),
             },
         },
     },

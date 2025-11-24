@@ -628,6 +628,8 @@ footer {
     flex-direction: column;
     height: 100%;
     position: relative;
+    overflow: visible;
+    margin-top: 3rem;
 }
 
 .service-card-premium:hover {

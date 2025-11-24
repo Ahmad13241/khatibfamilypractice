@@ -15,6 +15,7 @@ const headerTemplate = `
       <a href="/src/pages/about.html" class="nav-link">About Dr. Khatib</a>
       <a href="/src/pages/services.html" class="nav-link">Services</a>
       <a href="/src/pages/resources.html" class="nav-link">Patient Resources</a>
+      <a href="/src/pages/blog.html" class="nav-link">Health Hub</a>
       <a href="/src/pages/contact.html" class="nav-link">Contact</a>
       <a href="/src/pages/contact.html" class="btn btn-primary">Book Appointment</a>
     </nav>
@@ -35,6 +36,7 @@ const footerTemplate = `
         <a href="/src/pages/about.html">About Us</a>
         <a href="/src/pages/services.html">Services</a>
         <a href="/src/pages/resources.html">Patient Resources</a>
+        <a href="/src/pages/blog.html">Health Hub</a>
         <a href="/src/pages/contact.html">Contact</a>
       </div>
       <div class="footer-col">
